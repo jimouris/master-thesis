@@ -356,11 +356,11 @@ publications}\gdef\@lopfileinternal{#1}}
       {\bfseries
       \ifenglishfrontpage
 	  	  \@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst
-        \\
+        \hfil
 	  	  \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd
 	    \else
 	  	  \@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst
-        \\
+        \hfil
 	  	  \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd
 	    \fi}
       \linebreak\linebreak\linebreak
@@ -428,25 +428,33 @@ publications}\gdef\@lopfileinternal{#1}}
 
     {\bfseries
     \ifenglishcommitteepage
-    	\@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst
-      \\
-    	\@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd
+      \begin{center}
+        \begin{tabular}{l l}
+          \@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst & \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd \\
+          & \\
+          {\bfseries R.N.:} \@authorSnfst & {\bfseries R.N.:} \@authorSnsnd \\
+        \end{tabular}
+      \end{center}
     \else
-    	\@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst
-      \\
-      \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd
+      \begin{center}
+        \begin{tabular}{l l}
+          \@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst & \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd \\
+          & \\
+          {\bfseries Α.Μ.:} \@authorSnfst & {\bfseries Α.Μ.:} \@authorSnsnd \\
+        \end{tabular}
+      \end{center}
     \fi
     \vspace{2mm}
     }
-    \linebreak
+    % \linebreak
     {
     \ifenglishcommitteepage
     	{\bfseries R.N.:} \@authorSnfst
-      \\
+      \hfil
     	{\bfseries R.N.:} \@authorSnsnd
     \else
     	{\bfseries Α.Μ.:} \@authorSnfst
-      \\
+      \hfil
     	{\bfseries Α.Μ.:} \@authorSnsnd
     \fi
     }
