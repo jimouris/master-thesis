@@ -196,15 +196,35 @@ headsep=0.5cm,footskip=0.75cm,
 %
 % Commands for first, middle, and last name (greek and english versions)
 %
-\providecommand{\authorFirstGr}[1]{\gdef\@authorFirstGr{#1}}
-\providecommand{\authorFirstAbrGr}[1]{\gdef\@authorFirstAbrGr{#1}}
-\providecommand{\authorMiddleGr}[1]{\gdef\@authorMiddleGr{#1}}
-\providecommand{\authorLastGr}[1]{\gdef\@authorLastGr{#1}}
-\providecommand{\authorFirstEn}[1]{\gdef\@authorFirstEn{#1}}
-\providecommand{\authorFirstAbrEn}[1]{\gdef\@authorFirstAbrEn{#1}}
-\providecommand{\authorMiddleEn}[1]{\gdef\@authorMiddleEn{#1}}
-\providecommand{\authorLastEn}[1]{\gdef\@authorLastEn{#1}}
-\providecommand{\authorSn}[1]{\gdef\@authorSn{#1}}
+% Greek Names
+\providecommand{\authorFirstGrfst}[1]{\gdef\@authorFirstGrfst{#1}}
+\providecommand{\authorFirstGrsnd}[1]{\gdef\@authorFirstGrsnd{#1}}
+
+\providecommand{\authorFirstAbrGrfst}[1]{\gdef\@authorFirstAbrGrfst{#1}}
+\providecommand{\authorFirstAbrGrsnd}[1]{\gdef\@authorFirstAbrGrsnd{#1}}
+
+\providecommand{\authorMiddleGrfst}[1]{\gdef\@authorMiddleGrfst{#1}}
+\providecommand{\authorMiddleGrsnd}[1]{\gdef\@authorMiddleGrsnd{#1}}
+
+\providecommand{\authorLastGrfst}[1]{\gdef\@authorLastGrfst{#1}}
+\providecommand{\authorLastGrsnd}[1]{\gdef\@authorLastGrsnd{#1}}
+
+% English Names
+\providecommand{\authorFirstEnfst}[1]{\gdef\@authorFirstEnfst{#1}}
+\providecommand{\authorFirstEnsnd}[1]{\gdef\@authorFirstEnsnd{#1}}
+
+\providecommand{\authorFirstAbrEnfst}[1]{\gdef\@authorFirstAbrEnfst{#1}}
+\providecommand{\authorFirstAbrEnsnd}[1]{\gdef\@authorFirstAbrEnsnd{#1}}
+
+\providecommand{\authorMiddleEnfst}[1]{\gdef\@authorMiddleEnfst{#1}}
+\providecommand{\authorMiddleEnsnd}[1]{\gdef\@authorMiddleEnsnd{#1}}
+
+\providecommand{\authorLastEnfst}[1]{\gdef\@authorLastEnfst{#1}}
+\providecommand{\authorLastEnsnd}[1]{\gdef\@authorLastEnsnd{#1}}
+
+\providecommand{\authorSnfst}[1]{\gdef\@authorSnfst{#1}}
+\providecommand{\authorSnsnd}[1]{\gdef\@authorSnsnd{#1}}
+
 
 %
 % Commands for the title of the thesis (greek and english versions)
@@ -335,9 +355,13 @@ publications}\gdef\@lopfileinternal{#1}}
 
       {\bfseries
       \ifenglishfrontpage
-	  	  \@authorFirstEn{} \@authorMiddleEn{} \@authorLastEn
+	  	  \@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst
+        \\
+	  	  \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd
 	    \else
-	  	  \@authorFirstGr{} \@authorMiddleGr{} \@authorLastGr
+	  	  \@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst
+        \\
+	  	  \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd
 	    \fi}
       \linebreak\linebreak\linebreak
       \linebreak\linebreak\linebreak
@@ -404,18 +428,26 @@ publications}\gdef\@lopfileinternal{#1}}
 
     {\bfseries
     \ifenglishcommitteepage
-    	\@authorFirstEn{} \@authorMiddleEn{} \@authorLastEn
+    	\@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst
+      \\
+    	\@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd
     \else
-    	\@authorFirstGr{} \@authorMiddleGr{} \@authorLastGr
+    	\@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst
+      \\
+      \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd
     \fi
     \vspace{2mm}
     }
     \linebreak
     {
     \ifenglishcommitteepage
-    	{\bfseries R.N.:} \@authorSn
+    	{\bfseries R.N.:} \@authorSnfst
+      \\
+    	{\bfseries R.N.:} \@authorSnsnd
     \else
-    	{\bfseries Α.Μ.:} \@authorSn
+    	{\bfseries Α.Μ.:} \@authorSnfst
+      \\
+    	{\bfseries Α.Μ.:} \@authorSnsnd
     \fi
     }
     \linebreak\linebreak\linebreak
@@ -687,7 +719,7 @@ publications}\gdef\@lopfileinternal{#1}}
 \else
 \fancyfoot[R]{{\fontsize{10pt}{10pt}\selectfont \thepage}}
 \fi
-\fancyfoot[LE,LO]{{\scriptsize \@authorFirstAbrEn{} \@authorLastEn{}}}
+\fancyfoot[LE,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{}, \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
 
 % needed redefinition, because commands like \chapter call
 % \thispagestyle{plain} automatically
@@ -699,7 +731,7 @@ publications}\gdef\@lopfileinternal{#1}}
   \else
   \fancyfoot[R]{{\fontsize{10pt}{10pt}\selectfont \thepage}}
   \fi
-  \fancyfoot[LE,LO]{{\scriptsize \@authorFirstAbrEn{} \@authorLastEn{}}}
+  \fancyfoot[LE,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{}, \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
 }
 \renewcommand{\headrulewidth}{0pt}
 
