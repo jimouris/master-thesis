@@ -1,0 +1,195 @@
+% demo.tex
+%
+% Enjoy, evolve, and share!
+%
+% Compile it as follows:
+%   latexmk
+%
+% Check file `dithesis.cls' for other configuration options.
+%
+\documentclass[inscr,ack]{dithesis}
+
+%\usepackage{graphicx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{import}
+\PassOptionsToPackage{hyphens}{url}\usepackage[hidelinks]{hyperref}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{listings}
+\usepackage[ruled,vlined,linesnumbered,noresetcount]{algorithm2e}
+\usepackage{pgfplots}
+\usepackage{textcomp}
+\usepackage{tabularx}
+\usepackage[bottom]{footmisc}
+
+\interfootnotelinepenalty=10000
+
+\newcolumntype{s}{>{\centering\arraybackslash}X}
+
+\hypersetup{
+    unicode=true,                     % non-Latin characters in bookmarks
+    pdffitwindow=true,                % page fit to window when opened
+    pdfnewwindow=true,                % links in new window
+    pdfkeywords={},                   % list of keywords
+    colorlinks=true,                  % false: boxed links; true: colored links
+    linkcolor=black,                  % color of internal links
+    citecolor=black,                  % color of links to bibliography
+    filecolor=black,                  % color of file links
+    urlcolor=black,                   % color of external links
+    pdftitle={},                      % title
+    pdfauthor={},                     % author
+    pdfsubject={}                     % subject of the document
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% User-specific configuration %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% User-specific configuration %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Required Metadata %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% First name, last name
+%
+\authorFirstGr{Θεμιστοκλής}
+\authorFirstAbrGr{Θ.} % abbreviation of first name
+\authorMiddleGr{Ν.}   % abbreviation of father's first name
+\authorLastGr{Μπερής}
+\authorFirstEn{Themistoklis}
+\authorFirstAbrEn{T.}
+\authorMiddleEn{N.}
+\authorLastEn{Beris}
+\authorSn{M1514}
+
+%
+% The title of the thesis
+%
+\titleEn{Modeling and Preserving Greek Government Decisions using Semantic Web Technologies and Permissionless Blockchains}
+\titleGr{Μοντελοποίηση και Διατήρηση Ελληνικών Κυβερνητικών Αποφάσεων με χρήση Τεχνολογιών Σημασιολογικού Ιστού και Μπλοκ Αλυσίδων}
+
+%
+% Month followed by Year
+%
+\dateGr{ΦΕΒΡΟΥΑΡΙΟΣ 2018}
+\dateEn{FEBRUARY 2018}
+
+%
+% Supervisor(s) info
+%
+\supervisorGr{Μανόλης Κουμπαράκης}{Καθηγητής}
+\supervisorEn{Manolis Koubarakis}{Professor}
+
+%
+% Abstract, synopsis, inscription, ack, and preface pages.
+%
+\abstractEn{
+We present a re-engineering of Diavgeia, the Greek government portal for open and transparent public administration. We study how decisions of Greek government institutions can be modeled using ontologies expressed in OWL and queried using SPARQL. We also discuss how to use the bitcoin blockchain, to enable government decisions to remain immutable. We provide an open source implementation, called DiavgeiaRedefined, that generates and visualizes the decisions inside a web browser, offers a SPARQL endpoint for retrieving and querying these decisions and provides citizens an automated tool for verifying correctness and detecting possible foul play by an adversary. We conclude with experimental results illustrating that our scheme is efficient and feasible.
+}
+\abstractGr{
+\begin{greek}
+Σε αυτή τη διπλωματική εργασία παρουσιάζουμε έναν ανασχεδιασμό της Διαύγειας, του ελληνικού κυβερνητικού προγράμματος για ανοικτή και διαφανή δημόσια διακυβέρνηση. Μελετάμε τον τρόπο με τον οποίο οι αποφάσεις των δημόσιων φορέων μπορούν να μοντελοποιηθούν χρησιμοποιώντας OWL οντολογίες και εξετάζουμε τον τρόπο με τον οποίο μπορούν να τεθούν SPARQL ερωτήματα πάνω σε αυτές. Με τη χρήση του bitcoin blockchain, αναγκάζουμε τις κυβερνητικές αποφάσεις να παραμείνουν αμετάβλητες. Παρέχουμε μια υλοποίηση ανοικτού λογισμικού, με ονομασία DiavgeiaRedefined, η οποία επιτρέπει τη δημιουργία και την οπτικοποίηση των αποφάσεων σε περιηγητή διαδικτύου, προσφέρει ένα SPARQL τερματικό για τη δημιουργία ερωτημάτων και παρέχει στους πολίτες ένα αυτοματοποιημένο λογισμικό επαλήθευσης ορθότητας των αποφάσεων, ανιχνεύοντας πιθανές ατιμίες ενός κακόβουλου χρήστη. Τέλος, παραθέτουμε πειραματικά αποτέλεσματα, καταλήγοντας ότι οι μηχανισμοί που χρησιμοποιούμε είναι αποτελεσματικοί.
+\end{greek}
+}
+\acksEn{
+  Firstly, I would like to thank professor Manolis Koubarakis for giving me the opportunity to work on this interesting project and be part of Knowledge Representation, Reasoning and Analytics research group (KR\&R). His suggestions about this project were of crucial importance. I would also like to thank the PhD student Dionysis Zindros for the fruitful blockchain-related conversations we had. Finally, I would like to thank the KR\&R team for their valuable suggestions regarding the Semantic Web technologies.
+}
+
+\inscriptionEn{\emph{This master thesis is dedicated to my family.}}
+
+%
+% Subject area and keywords
+%
+\subjectAreaGr{Σημασιολογικός Ιστός, Κρυπτογραφία}
+\subjectAreaEn{Semantic Web, Cryptography}
+\keywordsGr{ανοικτά διασυνδεδεμένα δεδομένα, blockchain, ανοικτή διακυβέρνηση, σημασιολογικός ιστός, bitcoin}
+\keywordsEn{linked open data, blockchain, open government, semantic web, bitcoin}
+
+%
+% Set the .bib file containing your paper publications (leave the extension out)
+%
+% This is optional, but it should be specified when option 'lop' is passed to
+% the document class.
+%
+% Then, inside the document environment, you may use the command '\nocitelop' to
+% site your papers, as you would traditionally do with the commands '\cite' or
+% '\nocite'.
+%
+% The papers are printed in reverse chronological order.
+%
+%\lopfile{mypapers/pubs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Required Metadata %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\frontmatter
+
+\mainmatter
+
+
+% add main chapters (should be given in capital letters)
+% \import{./}{introduction.tex}
+% \import{./}{relatedwork.tex}
+% \import{./}{backgrounddiavgeia.tex}
+% \import{./}{decisionsmodeling.tex}
+% \import{./}{bitcoin.tex}
+% \import{./}{evaluation.tex}
+% \import{./}{conclusionsfuturework.tex}
+
+\backmatter
+
+% abbreviations table
+\abbreviations
+\begin{center}
+	\renewcommand{\arraystretch}{1.5}
+	\begin{longtable}{ l @{\qquad} l }
+	\toprule
+  W3C    & World Wide Web Consortium \\
+	RDF    & Resource Description Framework \\
+	SPARQL & SPARQL Protocol and RDF Query Language \\
+	OWL    & Web Ontology Language \\
+  LOD    & Linked Open Data \\
+  CSV    & Comma-Separated Values \\
+  ELI    & European Legislation Identifier \\
+  L2TAP  & Linked Data Log to Transparency, Accountability and Privacy \\
+  CSA    & Coordination and Support Action \\
+  SCOOP4C & Stakeholder Community Once-Only Principle for Citizens \\
+  TOOP   & The Once - Only Principle Project \\
+  CEF    & Connecting Europe Facility \\
+  DSI    & Digital Service Infrastructure \\
+  ENLARGE & ENergies for Local Administrations to Renovate Governance in Europe \\
+  COSIE  & Co-creation of Service Innovation in Europe \\
+  ICT    & Information and Communication Technology\\
+  PDF    & Portable Document Format \\
+  URI    & Uniform Resource Identifier \\
+  ISA    & Interoperability Solutions for European Public Administrations \\
+  EC     & European Commision \\
+	\bottomrule
+	\end{longtable}
+\end{center}
+
+% manually include the bibliography
+\bibliographystyle{plain}
+\bibliography{references}
+% include it also in ToC (do sth on your own)
+\addcontentsline{toc}{chapter}{REFERENCES}
+
+\end{document}
