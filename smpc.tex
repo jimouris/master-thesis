@@ -6,13 +6,21 @@ Secure multi-party computation was introduced in 1982 by Andrew Yao.
 Its first form was that of secure two-party computation (2PC) with the so-called Millionaire's Problem \cite{yao1982protocols}.
 The problem states that there are two millionaires wishing to know who is richer.
 However, they should not find out any additional information about each other’s wealth.
-Here the two parties P1, P2 are the two millionaires.
-Their private inputs are each one’s wealth x1 and x2 respectively.
-The function which they wish to jointly compute can be formulated as f(x1, x2) = 1 if x1 < x2, and 0 otherwise.
+Here the two parties $P_1$, $P_2$ are the two millionaires.
+Their private inputs are each one’s wealth $x_1$ and $x_2$ respectively.
+The function which they wish to jointly compute can be formulated as 
 
-In the general case we have N parties P1, P2, …, PN with private inputs x1, x2, ..., xN respectively.
-The goal is to compute a function f(x1, x2, …, xN) and learn nothing more than what they would have if a seperate trusted party had collected their inputs, and computed function f for them.
+\begin{equation}
+  f(x_1, x_2)=\begin{cases}
+    1, & \text{if $x_1 < x_2$}.\\
+    0, & \text{otherwise}.
+  \end{cases}
+\end{equation}
 
-Another example for the two-party case is Oblivious Transfer (OT) with its simples flavour being 1–2 oblivious transfer or ``1 out of 2 oblivious transfer".
+In the general case we have N parties $P_1, P_2, \dots, P_N$ with private inputs $x_1, x_2, \dots, x_N$ respectively.
+The goal is to compute a function $f(x_1, x_2, \dots, x_N)$ and learn nothing more than what they would have if a seperate trusted party had collected their inputs, and computed function $f$ for them.
+
+Another example for the two-party case is Oblivious Transfer (OT) \cite{rabin2005exchange} with its simples flavour being 1-2 oblivious transfer or ``1 out of 2 oblivious transfer".
 Here we have two parties, the sender and the receiver.
-The sender has two messages, m0 and m1, and the receiver has a bit b. The receiver wishes to learn mb, without learning anything about m1-b and without the sender learning b.
+The sender has two messages, $m_0$ and $m_1$, and the receiver has a bit $b$.
+The receiver wishes to learn $m_b$, without learning anything about $m_{1-b}$ and without the sender learning $b$.

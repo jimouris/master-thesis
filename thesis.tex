@@ -49,6 +49,14 @@
     pdfauthor={},                     % author
     pdfsubject={}                     % subject of the document
 }
+
+\newcommand{\fixme}[1]{
+  \noindent 
+  \colorbox{yellow} {\scriptsize FIXME}
+  {\bf[}\textcolor{red}{#1}{\bf]} 
+  %\newline 
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -162,6 +170,9 @@ Integer nisi lacus, fringilla sit amet ipsum at, pulvinar luctus lectus. Pellent
 \import{./}{introduction.tex}
 \import{./}{preliminaries.tex}
 \import{./}{sharemind.tex}
+\import{./}{pp-algorithms.tex}
+\import{./}{evaluations.tex}
+\import{./}{conclusions.tex}
 
 
 \backmatter

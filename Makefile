@@ -1,7 +1,10 @@
 LATEX=xelatex
+BIBTEX=bibtex
 
 compile:
 	make clean 
+	$(LATEX) thesis.tex
+	$(BIBTEX) thesis.aux
 	$(LATEX) thesis.tex
 	$(LATEX) thesis.tex
 

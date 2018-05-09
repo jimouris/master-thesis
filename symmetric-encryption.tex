@@ -3,9 +3,8 @@ Symmetric-key algorithms are algorithms that use the same cryptographic keys for
 The keys represent a shared secret between two or more parties that can be used to maintain a private information channel.
 This requirement that both parties have access to the secret key is one of the main drawbacks of symmetric key encryption, in comparison to public-key encryption schemes that we expand in section \ref{s:public-key-encryption}.
 
-More formally, given a plaintext p and a secret key k a ciphertext c is produced such that:
-\texttt{c = enc(p, k),} and \texttt{p = dec(c, k) = dec(enc(p, k), k).}
-
+More formally, given a plaintext p and a secret key $k$ a ciphertext $c$ is produced such that:
+$c = enc(p, k), and p = dec(c, k) = dec(enc(p, k), k).$
 
 This form of encryption has been widely adopted by numerous applications, and can be applied either for data at rest (e.g. an encrypted database), or data in transit (e.g. TLS/SSL protocol).
 More specifically, the definition data at rest implies data that is stored physically in any digital form, while data in transit means data traversing the network.
