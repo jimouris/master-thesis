@@ -1,0 +1,18 @@
+\subsection{Secure Multi-party Computation (SMPC)}
+Secure multi-party computation (SMPC) or Secure Function Evaluation (SFE) is a field of cryptography aiming to create methods that enable distinct parties, to jointly compute a function over their private inputs.
+Only the outcome of that function is made public and the parties don’t learn anything more than their own input except whatever can be learned from the output of the function.
+
+Secure multi-party computation was introduced in 1982 by Andrew Yao.
+Its first form was that of secure two-party computation (2PC) with the so-called Millionaire's Problem [Yao82].
+The problem states that there are two millionaires wishing to know who is richer.
+However, they should not find out any additional information about each other’s wealth.
+Here the two parties P1, P2 are the two millionaires.
+Their private inputs are each one’s wealth x1 and x2 respectively.
+The function which they wish to jointly compute can be formulated as f(x1, x2) = 1 if x1 < x2, and 0 otherwise.
+
+In the general case we have N parties P1, P2, …, PN with private inputs x1, x2, ..., xN respectively.
+The goal is to compute a function f(x1, x2, …, xN) and learn nothing more than what they would have if a seperate trusted party had collected their inputs, and computed function f for them.
+
+Another example for the two-party case is Oblivious Transfer (OT) with its simples flavour being 1–2 oblivious transfer or ``1 out of 2 oblivious transfer".
+Here we have two parties, the sender and the receiver.
+The sender has two messages, m0 and m1, and the receiver has a bit b. The receiver wishes to learn mb, without learning anything about m1-b and without the sender learning b.

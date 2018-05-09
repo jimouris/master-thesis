@@ -1,0 +1,12 @@
+\section{Symmetric-Key Encryption}
+Symmetric-key algorithms are algorithms that use the same cryptographic keys for both encryption of plaintext and decryption of ciphertext.
+The keys represent a shared secret between two or more parties that can be used to maintain a private information channel.
+This requirement that both parties have access to the secret key is one of the main drawbacks of symmetric key encryption, in comparison to public-key encryption schemes that we expand in section \ref{ss:pke}.
+
+More formally, given a plaintext p and a secret key k a ciphertext c is produced such that:
+c = enc(p, k), and p = dec(c, k) = dec(enc(p, k), k). (1)
+
+This form of encryption has been widely adopted by numerous applications, and can be applied either for data at rest (e.g. an encrypted database), or data in transit (e.g. TLS/SSL protocol).
+More specifically, the definition data at rest implies data that is stored physically in any digital form, while data in transit means data traversing the network.
+There is also a third state of digital information, namely data in use, i.e. active data under constant change which is stored in a non-persistent digital state typically in computer random access memory (RAM), CPU caches, or CPU registers.
+Thus, the data in use can be exposed to security risks, including side-channel attacks [14], as well as hardware Trojans [2], [11], [12], which can leak sensitive information.

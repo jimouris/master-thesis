@@ -1,0 +1,4 @@
+Font Dependencies:
+  sudo apt-get install ttf-mscorefonts-installer
+  sudo apt-get install fonts-cmu
+  sudo fc-cache
