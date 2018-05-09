@@ -1,11 +1,11 @@
-\section{Homomorphic Encryption}
-Encryption's holy grail, is something called fully homomorphic encryption (FHE) [Gentry 2009], where the entire system works on encrypted data, and returns an encrypted result.
+\section{Homomorphic Encryption}\label{s:homomorphic-encryption}
+Encryption's holy grail, is something called fully homomorphic encryption (FHE)\cite{gentry2009fully}, where the entire system works on encrypted data, and returns an encrypted result.
 The only point in the process where data would be decrypted would be when the user wants to see the result, and that would presumably happen in the application or client software, not in the database server in the cloud.
 For instance, given E(a) and E(b) (the encryption of a and b), you can compute E(a+b) without knowing a, b nor the decryption key.
 There are a lot of FHE schemes, but unfortunately, they come along with a huge performance overhead.
 There is a lot of ongoing research, on how to process efficiently encrypted data.
 
-Since the appearance of the first FHE system in 2009 by Gentry et. al. there has been a tremendous expansion of homomorphic encryption schemes such as Helios (e-voting PHE based system)[x], Cryptoleq (Heterogeneous abstract machine for both encrypted and unencrypted computation based on PHE)[y], Sharemind (Secure computing platform)[z], and others.
+Since the appearance of the first FHE system in 2009 by Gentry et. al. there has been a tremendous expansion of homomorphic encryption schemes such as Helios (e-voting PHE based system)\cite{adida2008helios}, Cryptoleq (Heterogeneous abstract machine for both encrypted and unencrypted computation based on PHE)\cite{mazonka2016cryptoleq}, Sharemind (Secure computation platform)\cite{bogdanov2008sharemind, bogdanov2013sharemind}, and others.
 All those systems, perform manipulations directly on encrypted data without decrypting them, thus no information leakage is possible.
 When the result is eventually decrypted, it will be the same as applying the same manipulations on plaintexts.
 Using homomorphic operations requires special care to ensure that branching does not reveal any sensitive data by observing side-channel information (e.g. the branch target).
