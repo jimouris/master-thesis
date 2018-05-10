@@ -1,12 +1,15 @@
 \section{Asymmetric Encryption (Public-Key Cryptography)}\label{s:public-key-encryption}
 The major problem that traditional symmetric-key algorithms face is that they require the parties to exchange keys, or more specifically to agree to a secret common private key, prior to communicating.
-This could be done by some secure physical channel, such as paper key lists transported by a trusted courier.
+\fixme{This could be done by some secure physical channel, such as paper key lists transported by a trusted courier.
+}
 
+\fixme{
 In 1976 Whitfield Diffie and Martin Hellman proposed a method – Diffie-Hellman (DH) key exchange \cite{diffie1976new} – of securely exchanging cryptographic keys over a public channel.
 DH key exchange method uses pairs of keys, one public and one private, and allows two parties that have no prior knowledge of each other to jointly establish a shared secret key over an insecure channel.
 More specifically, the system proposed uses the public key for encryption and the private key for decryption.
 Thus, the encryption key could be shared to any party that wants to communicate with the owner of that public key.
 On the other hand, the decryption key should be kept secret and used by the recipient of the ciphertext to recover the original plaintext.
+}
 
 % must be changed!!!!
 \fixme{
@@ -23,4 +26,4 @@ Public key cryptography accomplishes two functions: authentication, where the pu
 }
 
 Some of the most widely used public key cryptosystems are the RSA (Rivest -- Shamir -- Adleman) \cite{rivest1978method}, the El Gamal \cite{elgamal1985public} and the Paillier \cite{paillier1999public} Cryptosystems.
-The importance of public-key Encryption schemes can also be understood by the plethora of schemes and algorithms that have been inspired from it, like the Digital Signature Algorithm and OpenPGP that serve varied purposes.
+\fixme{The importance of public-key Encryption schemes can also be understood by the plethora of schemes and algorithms that have been inspired from it, like the Digital Signature Algorithm and OpenPGP that serve varied purposes.}
