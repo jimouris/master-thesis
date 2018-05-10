@@ -356,11 +356,11 @@ publications}\gdef\@lopfileinternal{#1}}
       {\bfseries
       \ifenglishfrontpage
 	  	  \@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst
-        \\
+        \hfil
 	  	  \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd
 	    \else
 	  	  \@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst
-        \\
+        \hfil
 	  	  \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd
 	    \fi}
       \linebreak\linebreak\linebreak
@@ -407,54 +407,62 @@ publications}\gdef\@lopfileinternal{#1}}
 %
 \def\@committeepage{
     \begin{center}
-    \vspace*{1.5cm}
-    {\bfseries
-    \ifenglishcommitteepage
-    	MASTER THESIS
-    \else
-    	ΔΙΠΛΩΜΑΤΙΚΗ ΕΡΓΑΣΙΑ
-    \fi
-    }
-    \linebreak
+      \vspace*{1.5cm}
+      {\bfseries
+      \ifenglishcommitteepage
+      	MASTER THESIS
+      \else
+      	ΔΙΠΛΩΜΑΤΙΚΗ ΕΡΓΑΣΙΑ
+      \fi
+      }
+      \linebreak
 
-    {
-    \ifenglishcommitteepage
-    	\@titleEn
-    \else
-    	\@titleGr
-    \fi
-    }
-    \linebreak\linebreak\linebreak
+      {
+      \ifenglishcommitteepage
+      	\@titleEn
+      \else
+      	\@titleGr
+      \fi
+      }
+      \linebreak\linebreak\linebreak
 
-    {\bfseries
-    \ifenglishcommitteepage
-    	\@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst
-      \\
-    	\@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd
-    \else
-    	\@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst
-      \\
-      \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd
-    \fi
-    \vspace{2mm}
-    }
-    \linebreak
-    {
-    \ifenglishcommitteepage
-    	{\bfseries R.N.:} \@authorSnfst
-      \\
-    	{\bfseries R.N.:} \@authorSnsnd
-    \else
-    	{\bfseries Α.Μ.:} \@authorSnfst
-      \\
-    	{\bfseries Α.Μ.:} \@authorSnsnd
-    \fi
-    }
-    \linebreak\linebreak\linebreak
-    \linebreak\linebreak\linebreak
-    \linebreak\linebreak\linebreak
-    \linebreak\linebreak\linebreak
-    \linebreak\linebreak
+      {\bfseries
+      \ifenglishcommitteepage
+        \begin{center}
+          \begin{tabular}{@{}clc@{}}
+            \@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst & & \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd \\
+            & & \\
+            {\bfseries R.N.:} {\normalfont \@authorSnfst} & & {\bfseries R.N.:} {\normalfont \@authorSnsnd} \\
+          \end{tabular}
+        \end{center}
+      \else
+        \begin{center}
+          \begin{tabular}{@{}clc@{}}
+            \@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst & & \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd \\
+            & & \\
+            {\bfseries Α.Μ.:} {\normalfont \@authorSnfst} & & {\bfseries Α.Μ.:} {\normalfont \@authorSnsnd} \\
+          \end{tabular}
+        \end{center}
+      \fi
+      \vspace{8cm}
+      }
+      % \linebreak
+      % {
+      % \ifenglishcommitteepage
+      % 	{\bfseries R.N.:} \@authorSnfst
+      %   \hfil
+      % 	{\bfseries R.N.:} \@authorSnsnd
+      % \else
+      % 	{\bfseries Α.Μ.:} \@authorSnfst
+      %   \hfil
+      % 	{\bfseries Α.Μ.:} \@authorSnsnd
+      % \fi
+      % }
+      % \linebreak\linebreak\linebreak
+      % \linebreak\linebreak\linebreak
+      % \linebreak\linebreak\linebreak
+      % \linebreak\linebreak\linebreak
+      % \linebreak\linebreak
     \end{center}
 
     {
@@ -719,7 +727,7 @@ publications}\gdef\@lopfileinternal{#1}}
 \else
 \fancyfoot[R]{{\fontsize{10pt}{10pt}\selectfont \thepage}}
 \fi
-\fancyfoot[LE,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{}, \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
+\fancyfoot[L,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{}, \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
 
 % needed redefinition, because commands like \chapter call
 % \thispagestyle{plain} automatically
@@ -731,7 +739,7 @@ publications}\gdef\@lopfileinternal{#1}}
   \else
   \fancyfoot[R]{{\fontsize{10pt}{10pt}\selectfont \thepage}}
   \fi
-  \fancyfoot[LE,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{}, \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
+  \fancyfoot[L,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{}, \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
 }
 \renewcommand{\headrulewidth}{0pt}
 
