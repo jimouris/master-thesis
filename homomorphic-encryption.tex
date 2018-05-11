@@ -4,16 +4,16 @@ Some encryption schemes are inherently ``malleable", which means that it is poss
 Homomorphic encryption is a malleable encryption scheme that allows operations directly on encrypted data so that the results after decryption would correspond to applying matching operations on unencrypted data.
 For example, having an encryption mechanism $Enc$, the product of any two ciphertexts is equal to a ciphertext of the sum of the two corresponding plaintexts ($M_1$ and $M_2$), as follows:
 \begin{equation}\label{eq:homomorphic}
-  Enc(M_1) \times Enc(M_2) = Enc(M_1 + M_2)
+  Enc(M_1) \otimes Enc(M_2) = Enc(M_1 + M_2)
 \end{equation}
 
 
 Homomorphic encryption enables outsourcing computations to a third party, as for example on the cloud.
 Cloud computing is designed to deal with difficult operations and with computationally demanding algorithms.
 However, if user's data are unencrypted they can be exposed to attacks from both the cloud provider and third parties.
-Even if the data are stored \texttt{(data at rest)} and transferred \texttt{(data in transit)} securely, when they are in use they can be exposed to security risks, such as side-channel attacks \cite{zhang2012cross} and hardware Trojans \cite{becker2013stealthy, tsoutsos2014advanced}.
-\texttt{Data at rest} implies data that is stored physically in any digital form, while \texttt{data in transit} means data traversing the network.
-Active data under constant change which is stored in a non-persistent digital state typically in computer random access memory (RAM), CPU caches, or CPU registers are called \texttt{data in use}.
+Even if the data are stored \textit{(data at rest)} and transferred \textit{(data in transit)} securely, when they are in use they can be exposed to security risks, such as side-channel attacks \cite{zhang2012cross} and hardware Trojans \cite{becker2013stealthy, tsoutsos2014advanced}.
+\textit{Data at rest} implies data that is stored physically in any digital form, while \textit{data in transit} means data traversing the network.
+Active data under constant change which is stored in a non-persistent digital state typically in computer random access memory (RAM), CPU caches, or CPU registers are called \textit{data in use}.
 
 
 It is possible, to construct an entire system to work over encrypted data, manipulating and returning encrypted results.
@@ -49,6 +49,7 @@ RSA (Rivest -- Shamir -- Adleman) is one of the first public-key cryptosystems a
 In such a cryptosystem, the encryption key is public and it is different from the decryption key which is kept secret (private).
 In RSA, this asymmetry is based on the practical difficulty of the factorization of the product of two large prime numbers, the ``factoring problem".
 }
+Plain RSA encryption is multiplicatively homomorphic.
 
 
 \subsubsection{ElGamal Cryptosystem}\label{ss:elgamal}
@@ -60,6 +61,7 @@ In cryptography, the ElGamal encryption system is an asymmetric key encryption a
 ElGamal encryption can be defined over any cyclic group \texttt{G}.
 Its security depends upon the difficulty of a certain problem in \texttt{G} related to computing discrete logarithms.
 }
+ElGamal encryption is multiplicatively homomorphic.
 
 
 \subsubsection{Paillier Cryptosystem}\label{ss:paillier}
@@ -68,7 +70,7 @@ The Paillier cryptosystem is a probabilistic asymmetric algorithm for public key
 The problem of computing n-th residue classes is believed to be computationally difficult.
 The decisional composite residuosity assumption is the intractability hypothesis upon which this cryptosystem is based.
 }
-
+Paillier encryption is additively homomorphic.
 
 
 \subsection{Fully Homomorphic Encryption}\label{ss:fhe}
