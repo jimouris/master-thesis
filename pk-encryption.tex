@@ -16,13 +16,14 @@ More formally, given a plaintext $P$,a public key $PubKey$, and a private key $P
 
 Where $Enc$ and $Dec$ are the \textit{Encryption} and \textit{Decryption} algorithms respectively.
 
-\fixme{
-In 1976 Whitfield Diffie and Martin Hellman proposed a method – Diffie-Hellman (DH) key exchange \cite{diffie1976new} – of securely exchanging cryptographic keys over a public channel.
+If Alice wants to send a message to Bob, she needs Bob's public key which could be publicly available (e.g. on Bob's website).
+Alice encrypts her message with Bob's public key and sends the resulted ciphertext to Bob. Bob then needs his private key which is only in his possession in order to decrypt the ciphertext Alice sent and retrieve the original message.
+If Bob wishes to reply, he needs Alice's public key etc.
+Generally, the public (encryption) key could be shared to any party that wants to communicate with the owner of that public key, while the private (decryption) key should be kept secret and used by the recipient of the ciphertext to recover the original plaintext.
+
+The ability for two users to establish a shared secret over an insecure communication channel, despite having no prior communication or information exchange was first proposed in 1976 by Whitfield Diffie and Martin Hellman.
+That method is named Diffie-Hellman (DH) key exchange \cite{diffie1976new} after its authors.
 DH key exchange method uses pairs of keys, one public and one private, and allows two parties that have no prior knowledge of each other to jointly establish a shared secret key over an insecure channel.
-More specifically, the system proposed uses the public key for encryption and the private key for decryption.
-Thus, the encryption key could be shared to any party that wants to communicate with the owner of that public key.
-On the other hand, the decryption key should be kept secret and used by the recipient of the ciphertext to recover the original plaintext.
-}
 
 % must be changed!!!!
 \fixme{
