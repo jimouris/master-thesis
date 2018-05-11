@@ -1,5 +1,13 @@
 \section{Homomorphic Encryption}\label{s:homomorphic-encryption}
 
+Some encryption schemes are inherently ``malleable", which means that it is possible to transform a ciphertext into another ciphertext which decrypts to a related plaintext.
+Homomorphic encryption is a malleable encryption scheme that allows operations directly on encrypted data so that the results after decryption would correspond to applying matching operations on unencrypted data.
+For example, having an encryption mechanism $Enc$, the product of any two ciphertexts is equal to a ciphertext of the sum of the two corresponding plaintexts ($M_1$ and $M_2$), as follows:
+\begin{equation}\label{eq:homomorphic}
+  Enc(M_1) \times Enc(M_2) = Enc(M_1 + M_2)
+\end{equation}
+
+
 Homomorphic encryption enables outsourcing computations to a third party, as for example on the cloud.
 Cloud computing is designed to deal with difficult operations and with computationally demanding algorithms.
 However, if user's data are unencrypted they can be exposed to attacks from both the cloud provider and third parties.
@@ -11,26 +19,12 @@ Active data under constant change which is stored in a non-persistent digital st
 It is possible, to construct an entire system to work over encrypted data, manipulating and returning encrypted results.
 This system would be based on homomorphic encryption, which allows to apply a function to the ciphertexts that corresponds to another function on the plaintexts, and in general enables computation on encrypted data.
 The final results can then be obtained by a single decryption.
-For instance, given $E(a)$ and $E(b)$ (the encryption of $a$ and $b$), you can compute $E(a+b)$ without knowing $a$, $b$ nor the decryption key.
-The only point in the process where data would be decrypted is when the user wants to see the result, and that would presumably happen in the application or client software, not in the database server in the cloud.
-
-
-Homomorphic encryption enables computation on data without ever having access to the unencrypted data, rendering the host incapable of leaking any type of information.
-There is not a sole type of homomorphic encryption, different schemes have been proposed for different types of applications.
-The first was invented in \cite{gentry2009fully} and it is called Fully homomorphic encryption (FHE).
-Its appearance sparked the academic interest and there arise a lot of FHE schemes, but unfortunately, they come along with a huge performance overhead.
-This overhead has been a concern, despite the wide range of applications that can benefit from FHE schemes, there are not many that leverage FHE.
-
-
-Another type of homomorphic encryption is partial homomorphic encryption (PHE).
-There is a lot of ongoing research, on how to process efficiently encrypted data.
-The tremendous expansion in homomorphic encryption applications after 2009 -- when Gentry \textit{et. al.} introduced the first FHE scheme -- include applications such as Helios (e-voting PHE based system) \cite{adida2008helios}, Cryptoleq (Heterogeneous abstract machine for both encrypted and unencrypted computation based on PHE) \cite{mazonka2016cryptoleq}, and others.
-All those systems, perform manipulations directly on encrypted data without decrypting them, thus no information leakage is possible.
-When the result is eventually decrypted, it will be the same as applying the same manipulations on plaintexts.
-Using homomorphic operations requires special care to ensure that branching does not reveal any sensitive data by observing side-channel information (e.g. the branch target).
+For instance, given $Enc(M_1)$ and $Enc(M_2)$ (the encryption of $M_1$ and $M_2$), you can compute $Enc(M_1 + M_2)$ without knowing $M_1$, $M_2$ nor the decryption key.
+The only point in the process where data would be decrypted is when the user wants to see the result, and that would presumably happen in the application or client software, not in the database server in the cloud, rendering the host incapable of leaking any type of information.
 
 
 One challenge that homomorphic encryption schemes, and in general every encrypted computation framework, face is the inability to make runtime decisions based on encrypted data.
+Using homomorphic operations requires special care to ensure that branching does not reveal any sensitive data by observing side-channel information (e.g. the branch target).
 For instance, the host is unable to perform operations like ``\texttt{if (x > 0) return;}" when \texttt{x} is an encrypted variable.
 This is known as the ``termination problem", introduced in \cite{brenner2011secret}, since performing runtime branch decisions is not possible and therefore rendering the algorithms implemented on top of those systems by design more complex.
 
@@ -40,11 +34,16 @@ Some work has been done in \cite{mouris2018terminator} by developing benchmarks 
 Those benchmarks avoid termination problems while maintaining data privacy.
 
 
-Below we delve into the three more widely used cryptosystems based on homomorphic encryption, RSA, El Gamal and Paillier.
+There is not a sole type of homomorphic encryption, different schemes have been proposed for different types of applications.
 
 
+\subsection{Partially Homomorphic Encryption}\label{ss:phe}
+The most widely used type of homomorphic encryption is partially homomorphic encryption (PHE), with schemes like RSA, ElGamal, Benaloh and Paillier.
+PHE has been expanded with applications such as Helios (e-voting PHE based system) \cite{adida2008helios}, Cryptoleq (Heterogeneous abstract machine for both encrypted and unencrypted computation based on PHE) \cite{mazonka2016cryptoleq}, and others.
+All those systems, perform manipulations directly on encrypted data without decrypting them, thus no information leakage is possible.
+When the result is eventually decrypted, it will be the same as applying the same manipulations on plaintexts.
 
-\subsection{RSA Cryptosystem}\label{ss:rsa}
+\subsubsection{RSA Cryptosystem}\label{ss:rsa}
 \fixme{
 RSA (Rivest -- Shamir -- Adleman) is one of the first public-key cryptosystems and is widely used for secure data transmission.
 In such a cryptosystem, the encryption key is public and it is different from the decryption key which is kept secret (private).
@@ -52,7 +51,7 @@ In RSA, this asymmetry is based on the practical difficulty of the factorization
 }
 
 
-\subsection{El Gamal Cryptosystem}\label{ss:elgamal}
+\subsubsection{ElGamal Cryptosystem}\label{ss:elgamal}
 \fixme{
 In cryptography, the ElGamal encryption system is an asymmetric key encryption algorithm for public-key cryptography which is based on the Diffie–Hellman key exchange.
 }
@@ -63,13 +62,20 @@ Its security depends upon the difficulty of a certain problem in \texttt{G} rela
 }
 
 
-
-\subsection{Paillier Cryptosystem}\label{ss:paillier}
+\subsubsection{Paillier Cryptosystem}\label{ss:paillier}
 \fixme{
 The Paillier cryptosystem is a probabilistic asymmetric algorithm for public key cryptography.
 The problem of computing n-th residue classes is believed to be computationally difficult.
 The decisional composite residuosity assumption is the intractability hypothesis upon which this cryptosystem is based.
 }
 
+
+
+\subsection{Fully Homomorphic Encryption}\label{ss:fhe}
+Another form of homomorphic encryption is Fully homomorphic encryption (FHE), first invented by Gentry in \cite{gentry2009fully}.
+Due to the fact that FHE enables \textit{arbitrary computation} on ciphertexts, is far more powerful than PHE and its appearance sparked the academic interest.
+Consecutively a lot of FHE schemes arise, but unfortunately they come along with a huge performance overhead.
+This overhead has been a concern and this is the reason that there are not many applications that leverage FHE, despite the wide range of that can benefit from FHE schemes.
+Some implementations are the HElib \cite{halevi2014algorithms} and the TFHE \cite{chillotti2016faster}.
 
 
