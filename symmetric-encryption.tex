@@ -5,12 +5,12 @@ Symmetric-key algorithms are algorithms that use the same key for both encryptio
 The keys represent a shared secret between two or more parties that can be used to maintain a private information channel.
 The requirement that both parties have access to the secret key is one of the main drawbacks of symmetric key encryption, in comparison to public-key encryption schemes that we expand in section \ref{s:public-key-encryption}.
 
-More formally, given a plaintext $p$ and a secret key $k$, a ciphertext $c$ is produced such that:
+More formally, given a plaintext $P$ and a secret key $K$, a ciphertext $C$ is produced such that:
 \begin{equation}
   \label{eq:symmetric-key-encryption}
   \begin{aligned}
-    c = enc(p, k)\\
-    p = dec(c, k) = dec(enc(p, k), k)
+    C = Enc(P, K)\\
+    P = Dec(C, K) = Dec(Enc(P, K), K)
   \end{aligned}
   \end{equation}
-Where $enc$ and $dec$ are the \textit{Encryption} and \textit{Decryption} algorithms respectively.
+Where $Enc$ and $Dec$ are the \textit{Encryption} and \textit{Decryption} algorithms respectively.
