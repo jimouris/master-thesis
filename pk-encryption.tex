@@ -2,6 +2,19 @@
 The major problem that traditional symmetric-key algorithms face is that they require the parties to exchange keys, or more specifically to agree to a secret common private key, prior to communicating.
 This needs a secure (physical or digital) communication channel accessible even for a short period of time, in order for the secret key to be exchanged. Such a channel could be a piece of paper delivered by hand or by a trusted courier, or a short in person communication.
 
+An asymmetric or public-key cryptosystem is one where different keys are employed for the operations in the cryptosystem (e.g., encryption and decryption), and where one of the keys can be made public without compromising the secrecy of the other key \cite{Kaliski2011}. That way there is no need for a secure channel or prior agreement.
+
+In the classic model such an encryption scheme involves a \textit{public key} which is used for encryption and a \textit{private key} which is used for decryption.
+More formally, given a plaintext $P$,a public key $PubKey$, and a private key $PrivKey$ we can produce a ciphertext $C$ such that:
+\begin{equation}
+  \label{eq:public-key-encryption}
+  \begin{aligned}
+    C = Enc(P, PubKey)\\
+    P = Dec(C, PrivKey)
+  \end{aligned}
+  \end{equation}
+
+Where $Enc$ and $Dec$ are the \textit{Encryption} and \textit{Decryption} algorithms respectively.
 
 \fixme{
 In 1976 Whitfield Diffie and Martin Hellman proposed a method – Diffie-Hellman (DH) key exchange \cite{diffie1976new} – of securely exchanging cryptographic keys over a public channel.
