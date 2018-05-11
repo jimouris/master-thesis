@@ -1,14 +1,16 @@
 \section{Symmetric-Key Encryption}\label{s:symmetric-key-encryption}
 The simplest form of encryption, is the use of a symmetric key scheme. Such a scheme utilizes a secret key which is used to perform the mathematical operations of both encrypting and decrypting of a message.
-The communicating parties must have the same key in order to communicate securely.
-Symmetric-key algorithms are algorithms that use the same cryptographic keys for both encryption of plaintext and decryption of ciphertext.
+The communicating parties must share the same key in order to communicate securely.
+Symmetric-key algorithms are algorithms that use the same key for both encryption of the plaintext and decryption of the ciphertext.
 The keys represent a shared secret between two or more parties that can be used to maintain a private information channel.
-This requirement that both parties have access to the secret key is one of the main drawbacks of symmetric key encryption, in comparison to public-key encryption schemes that we expand in section \ref{s:public-key-encryption}.
+The requirement that both parties have access to the secret key is one of the main drawbacks of symmetric key encryption, in comparison to public-key encryption schemes that we expand in section \ref{s:public-key-encryption}.
 
 More formally, given a plaintext $p$ and a secret key $k$, a ciphertext $c$ is produced such that:
-$c = enc(p, k)$, and $p = dec(c, k) = dec(enc(p, k), k).$
-
-This form of encryption has been widely adopted by numerous applications, and can be applied either for data at rest (e.g. an encrypted database), or data in transit (e.g. TLS/SSL protocol).
-More specifically, the definition data at rest implies data that is stored physically in any digital form, while data in transit means data traversing the network.
-There is also a third state of digital information, namely data in use, i.e. active data under constant change which is stored in a non-persistent digital state typically in computer random access memory (RAM), CPU caches, or CPU registers.
-Thus, the data in use can be exposed to security risks, including side-channel attacks [...], as well as hardware Trojans [...], which can leak sensitive information.
+\begin{equation}
+  \label{eq:t}
+  \begin{aligned}
+    c = enc(p, k)\\
+    p = dec(c, k) = dec(enc(p, k), k)
+  \end{aligned}
+  \end{equation}
+Where $enc$ and $dec$ are the \textit{Encryption} and \textit{Decryption} algorithms respectively.
