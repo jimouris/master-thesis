@@ -1,0 +1,24 @@
+\begin{algorithm}[H]
+\caption{Privacy Preserving 1D Histogram Computation}\label{a:1d-histogram}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
+\Require ${\color{darkred}{array}}, {\color{darkred}{min}}, {\color{darkred}{max}}, {\color{darkred}{output}}, {\color{darkred}{cell\_width}}, {\color{darkred}{bitmap}}, {\color{darkred}{eq}}$
+
+\Procedure{1D\_Histogram}{${\color{darkred}{array}}[N], cells, {\color{darkred}{min}}, {\color{darkred}{max}}$}
+    \State ${\color{darkred}{output}}[0, \dots, N] \gets [\widetilde{0},\dots,\widetilde{0}]$
+
+    \State ${\color{darkred}{cell\_width}} \gets ({\color{darkred}{max}} \hminus {\color{darkred}{min}}) \hdiv cells $\Comment{\small{${\color{darkred}{cell\_width}}$ gets a float value}}
+
+    \State ${\color{darkred}{bitmap}} \gets ({\color{darkred}{array}} \hminus {\color{darkred}{min}}) \hdiv {\color{darkred}{cell\_width}} $\Comment{\small{SIMD operation}}
+
+    % D uint64[[1]] eq = (uint64)(bitmap == j) + ((bitmap == cells) * (uint64)(j == cells-1));
+
+    \For{$j \in \{0, \dots, cells-1\}$}
+        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{bitmap}} \heq j) \hplus (({\color{darkred}{bitmap}} \heq cells) \hmul (j == cells - 1)) $\Comment{\small{SIMD operation}}
+
+        \State ${\color{darkred}{output}}[j] \gets sum({\color{darkred}{eq}})$\Comment{\small{SIMD operation to sum array eq}}
+    \EndFor
+    \State \textbf{return} {${\color{darkred}{output}}$}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

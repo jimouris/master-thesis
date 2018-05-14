@@ -25,7 +25,9 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{listings}
-\usepackage[ruled,vlined,linesnumbered,noresetcount]{algorithm2e}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+% \usepackage[ruled,vlined,linesnumbered,noresetcount]{algorithm2e}
 \usepackage{pgfplots}
 \usepackage{textcomp}
 \usepackage{tabularx}
@@ -57,6 +59,17 @@
   {\bf[}\textcolor{red}{#1}{\bf]}
   %\newline
 }
+
+\definecolor{darkred}{rgb}{0.7, 0.0, 0.00}
+
+% Notations
+\newcommand{\hplus}{\;\hat{+}\;}
+\newcommand{\hminus}{\;\hat{-}\;}
+\newcommand{\hdiv}{\hat{\div}}
+\newcommand{\hdivv}{\hat{\div_2}}
+\newcommand{\uminus}{\hat{-}}
+\newcommand{\hmul}{\star}
+\newcommand{\heq}{\;\hat{=}\;}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
