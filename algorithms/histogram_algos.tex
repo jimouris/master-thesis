@@ -4,7 +4,7 @@
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
 \Require ${\color{darkred}{array}}, {\color{darkred}{histogram}}, {\color{darkred}{eq}}$
 
-\Procedure{1D\_Histogram\_Categorical}{${\color{darkred}{array}}[N]$}
+\Procedure{1DimHistogramCategorical}{${\color{darkred}{array}}[N]$}
     \For{$i \in \{0, \dots, N-1\}$}
         \State ${\color{darkred}{eq}} \gets ({\color{darkred}{array}} \heq i)$\Comment{\small{\texttt{SIMD}; array eq contains $\enc{1}$ where $array[j] \heq i$, $\enc{0}$ otherwise, $j \in \{0, \dots, N-1\}$}}
 
@@ -29,6 +29,9 @@
 \end{algorithm}
 
 
+{ \scshape First Letter}
+\textsc{Sicurezza dei Sistemi e delle  Reti Informatiche}
+
 
 \begin{algorithm}[H]
 \caption{Privacy Preserving 1D Histogram for Numerical Values (Specified Cells)}\label{a:1d-histogram-numerical}
@@ -36,7 +39,7 @@
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
 \Require ${\color{darkred}{array}}, {\color{darkred}{min}}, {\color{darkred}{max}}, {\color{darkred}{histogram}}, {\color{darkred}{cell\_width}}, {\color{darkred}{cell\_map}}, {\color{darkred}{eq}}$
 
-\Procedure{1D\_Histogram\_Numerical}{${\color{darkred}{array}}[N], cells, {\color{darkred}{min}}, {\color{darkred}{max}}$}
+\Procedure{1DimHistogramNumerical}{${\color{darkred}{array}}[N], cells, {\color{darkred}{min}}, {\color{darkred}{max}}$}
 
     \State ${\color{darkred}{cell\_width}} \gets ({\color{darkred}{max}} \hminus {\color{darkred}{min}}) \hdiv cells $\Comment{\small{${\color{darkred}{cell\_width}}$ gets a float value}}
 
@@ -60,7 +63,7 @@
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
 \Require ${\color{darkred}{array}}, {\color{darkred}{mins}}, {\color{darkred}{maxs}}, {\color{darkred}{histograms}}, {\color{darkred}{cell\_widths}}, {\color{darkred}{cell\_map}}, {\color{darkred}{eq}}$
 
-\Procedure{MultiDimensional\_Histogram\_Numerical}{${\color{darkred}{array}}[N][M], cells[H], {\color{darkred}{mins}}[H], {\color{darkred}{maxs}}[H]$}
+\Procedure{MultDimHistogramNum}{${\color{darkred}{array}}[N][M], cells[H], {\color{darkred}{mins}}[H], {\color{darkred}{maxs}}[H]$}
     \For{$i \in \{0, \dots, cells-1\}$}
 
     \EndFor

@@ -20,7 +20,7 @@
             \If {$examples(v_i)$ is empty}
                 \State Then below this new branch add a leaf node with label = most common target value in the examples
             \Else
-                \State below this new branch add the subtree ID3\_Textbook$(examples(v_i),$ $class\_attribute,$ $attributes - \{A\})$
+                \State below this new branch add the subtree \textsc{ID3\_Textbook}$(examples(v_i),$ $class\_attribute,$ $attributes - \{A\})$
             \EndIf
         \EndFor
     \EndIf
@@ -41,7 +41,7 @@
 
 \Procedure{ID3}{${\color{darkred}{examples}}, {\color{darkred}{attributes}}$}
     \State Create a ${\color{darkred}{root}}$ node for the tree
-    \If {{\color{darkblue}{Declassify}}$(\textsc{AllExamplesSame}(examples))$}
+    \If {{\color{darkblue}{\textsc{Declassify}}}$(\textsc{AllExamplesSame}(examples))$}
         \State \textbf{return} the single-node tree ${\color{darkred}{root}}$, with label = +
         \State \textbf{return} the single-node tree ${\color{darkred}{root}}$, with label = -
     \ElsIf {number of predicting attributes is empty}
@@ -54,7 +54,7 @@
             \State Add a new tree branch below ${\color{darkred}{root}}$, corresponding to the test ${\color{darkred}{A}} = v_i$
             \State Let ${\color{darkred}{examples}}(v_i)$ be the subset of examples that have the value $v_i$ for ${\color{darkred}{A}}$
 
-            \If {{\color{darkblue}{Declassify}}$(\textsc{Sum}({\color{darkred}{examples}}(v_i)) \heq \enc{0})$}
+            \If {{\color{darkblue}{\textsc{Declassify}}}$(\textsc{Sum}({\color{darkred}{examples}}(v_i)) \heq \enc{0})$}
                 \State ${\color{darkred}{branch}} \gets \textsc{MostCommonLabel}({\color{darkred}{examples}}))$ add a leaf
             \Else
                 \State ${\color{darkred}{branch}} \gets \textsc{ID3}({\color{darkred}{examples}}(v_i),$ ${\color{darkred}{attributes}} - \{A\})$ add the subtree
