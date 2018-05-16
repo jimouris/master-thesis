@@ -1,0 +1,68 @@
+\begin{algorithm}[H]
+\caption{ID3 Textbook Algorithm}\label{a:id3-simple}
+\begin{algorithmic}[1]
+
+\Procedure{ID3\_Textbook}{$examples, class\_attribute, attributes$}
+    \State Create a $root$ node for the tree
+    \If {all examples are positive}
+        \State \textbf{return} the single-node tree $root$, with label = +
+    \ElsIf {all examples are negative}
+        \State \textbf{return} the single-node tree $root$, with label = -
+    \ElsIf {number of predicting attributes is empty}
+        \State \textbf{return} the single-node tree $root$ with label = most common value of the target attribute in the examples
+    \Else
+        \State $A$ $\gets$ The Attribute that best classifies examples
+        \State Decision Tree attribute for $root = A$
+    
+        \For{each possible value $v_i$ of $A$}
+            \State Add a new tree branch below $root$, corresponding to the test $A = v_i$
+            \State Let $examples(v_i)$ be the subset of examples that have the value $v_i$ for $A$
+            \If {$examples(v_i)$ is empty}
+                \State Then below this new branch add a leaf node with label = most common target value in the examples
+            \Else
+                \State below this new branch add the subtree ID3\_Textbook$(examples(v_i),$ $class\_attribute,$ $attributes - \{A\})$
+            \EndIf
+        \EndFor
+    \EndIf
+\EndProcedure
+
+\end{algorithmic}
+\end{algorithm}
+
+
+
+\begin{algorithm}[H]
+\caption{Privacy Preserving ID3 Algorithm}\label{a:id3-pp}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
+\Require ${\color{darkred}{examples}}, {\color{darkred}{attributes}}, {\color{darkred}{eq}}$
+\renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
+\Require $class\_attribute, possible\_values$
+
+\Procedure{ID3}{${\color{darkred}{examples}}, {\color{darkred}{attributes}}$}
+    \State Create a ${\color{darkred}{root}}$ node for the tree
+    \If {{\color{darkblue}{Declassify}}$(\textsc{AllExamplesSame}(examples))$}
+        \State \textbf{return} the single-node tree ${\color{darkred}{root}}$, with label = +
+        \State \textbf{return} the single-node tree ${\color{darkred}{root}}$, with label = -
+    \ElsIf {number of predicting attributes is empty}
+        \State \textbf{return} the single-node tree ${\color{darkred}{root}} = \textsc{MostCommonLabel}({\color{darkred}{examples}}))$
+    \Else
+        \State ${\color{darkred}{A}} \gets$ The Attribute that best classifies examples
+        \State Decision Tree attribute for ${\color{darkred}{root}} = {\color{darkred}{A}}$
+    
+        \For{each possible value $v_i$ of ${\color{darkred}{A}}$}
+            \State Add a new tree branch below ${\color{darkred}{root}}$, corresponding to the test ${\color{darkred}{A}} = v_i$
+            \State Let ${\color{darkred}{examples}}(v_i)$ be the subset of examples that have the value $v_i$ for ${\color{darkred}{A}}$
+            
+            \If {{\color{darkblue}{Declassify}}$(\textsc{Sum}({\color{darkred}{examples}}(v_i)) \heq \enc{0})$}
+                \State ${\color{darkred}{branch}} \gets \textsc{MostCommonLabel}({\color{darkred}{examples}}))$ add a leaf
+            \Else
+                \State ${\color{darkred}{branch}} \gets \textsc{ID3}({\color{darkred}{examples}}(v_i),$ ${\color{darkred}{attributes}} - \{A\})$ add the subtree
+            \EndIf
+        \EndFor
+    \EndIf
+\EndProcedure
+
+\end{algorithmic}
+\end{algorithm}
+
