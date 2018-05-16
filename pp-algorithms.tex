@@ -1,4 +1,9 @@
 \chapter{Privacy Preserving Algorithms}\label{c:pp-algorithms}
 
+\section{Notation}\label{s:notation}
+Our notation for encrypted values and for operations between encrypted variables consists of a variation of the classical mathematical operations.
+Namely, $\enc{X}$ corresponds to the encryption of $X$, while $\hplus$ , $\hminus$ , $\hmul$ and $\hdiv$ represent homomorphic addition, subtraction, multiplication and division respectively.
+In a like manner, $\heq$ represents private equality and returns an encryption of one (that is $\enc{1}$) if the operands map to equal plaintexts, or an encryption of zero ($\enc{0}$) otherwise.
+
 \input{histograms}
 \input{id3}

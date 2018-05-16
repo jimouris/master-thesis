@@ -1,24 +1,54 @@
 \begin{algorithm}[H]
-\caption{Privacy Preserving 1D Histogram Computation}\label{a:1d-histogram}
+\caption{Privacy Preserving 1D Histogram Computation}\label{a:1d-histogram-simple}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
-\Require ${\color{darkred}{array}}, {\color{darkred}{min}}, {\color{darkred}{max}}, {\color{darkred}{output}}, {\color{darkred}{cell\_width}}, {\color{darkred}{bitmap}}, {\color{darkred}{eq}}$
+\Require ${\color{darkred}{array}}, {\color{darkred}{histogram}}, {\color{darkred}{eq}}$
 
-\Procedure{1D\_Histogram}{${\color{darkred}{array}}[N], cells, {\color{darkred}{min}}, {\color{darkred}{max}}$}
-    \State ${\color{darkred}{output}}[0, \dots, N] \gets [\widetilde{0},\dots,\widetilde{0}]$
+\Procedure{1D\_Histogram\_Simple}{${\color{darkred}{array}}[N]$}
+    \For{$i \in \{0, \dots, N-1\}$}
+        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{array}} \heq i)$\Comment{\small{\texttt{SIMD}; array eq contains $\enc{1}$ where $array[j] \heq i$, $\enc{0}$ otherwise, $j \in \{0, \dots, N-1\}$}}
+
+        \State ${\color{darkred}{histogram}}[i] \gets 
+        \textsc{Sum}({\color{darkred}{eq}})$\Comment{\small{\texttt{SIMD} operation to sum eq array}}
+    \EndFor
+    \State \textbf{return} {${\color{darkred}{histogram}}$}
+\EndProcedure
+
+\begin{spacing}{0.5}
+\end{spacing}
+
+\Require ${\color{darkred}{array}}, {\color{darkred}{histogram}}$
+\Procedure{Sum}{${\color{darkred}{array}}[N]$}\Comment{\small{Compute and return the sum of an array}}
+    \For{$i \in \{0, \dots, N-1\}$}
+        \State ${\color{darkred}{histogram}} \gets {\color{darkred}{histogram}} \hplus{\color{darkred}{array}}[i]$
+    \EndFor
+    \State \textbf{return} {${\color{darkred}{histogram}}$}
+\EndProcedure
+
+\end{algorithmic}
+\end{algorithm}
+
+
+ 
+\begin{algorithm}[H]
+\caption{Privacy Preserving 1D Histogram Computation for Specific Cells}\label{a:1d-histogram}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
+\Require ${\color{darkred}{array}}, {\color{darkred}{min}}, {\color{darkred}{max}}, {\color{darkred}{histogram}}, {\color{darkred}{cell\_width}}, {\color{darkred}{cell\_map}}, {\color{darkred}{eq}}$
+
+\Procedure{1D\_Histogram\_Cells}{${\color{darkred}{array}}[N], cells, {\color{darkred}{min}}, {\color{darkred}{max}}$}
 
     \State ${\color{darkred}{cell\_width}} \gets ({\color{darkred}{max}} \hminus {\color{darkred}{min}}) \hdiv cells $\Comment{\small{${\color{darkred}{cell\_width}}$ gets a float value}}
 
-    \State ${\color{darkred}{bitmap}} \gets ({\color{darkred}{array}} \hminus {\color{darkred}{min}}) \hdiv {\color{darkred}{cell\_width}} $\Comment{\small{SIMD operation}}
+    \State ${\color{darkred}{cell\_map}} \gets ({\color{darkred}{array}} \hminus {\color{darkred}{min}}) \hdiv {\color{darkred}{cell\_width}} $\Comment{\small{\texttt{SIMD}; ${\color{darkred}{cell\_map}}$ has $N$ elements, each corresponds to an index ${\color{darkred}{idx}}$ where $\enc{0} \leq {\color{darkred}{idx}} \leq \enc{cells}$ }}
 
-    % D uint64[[1]] eq = (uint64)(bitmap == j) + ((bitmap == cells) * (uint64)(j == cells-1));
+    \For{$i \in \{0, \dots, cells-1\}$}
+        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{cell\_map}} \heq i) \hplus (({\color{darkred}{cell\_map}} \heq cells) \hmul (i == cells - 1)) $\Comment{\small{\texttt{SIMD}; similar to line 3 alg. \ref{a:1d-histogram-simple}, grouping elements to corresponding cell indexes}}
 
-    \For{$j \in \{0, \dots, cells-1\}$}
-        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{bitmap}} \heq j) \hplus (({\color{darkred}{bitmap}} \heq cells) \hmul (j == cells - 1)) $\Comment{\small{SIMD operation}}
-
-        \State ${\color{darkred}{output}}[j] \gets sum({\color{darkred}{eq}})$\Comment{\small{SIMD operation to sum array eq}}
+        \State ${\color{darkred}{histogram}}[i] \gets 
+        \textsc{Sum}({\color{darkred}{eq}})$\Comment{\small{\texttt{SIMD} operation to sum eq array}}
     \EndFor
-    \State \textbf{return} {${\color{darkred}{output}}$}
+    \State \textbf{return} {${\color{darkred}{histogram}}$}
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
