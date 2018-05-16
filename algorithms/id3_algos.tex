@@ -13,7 +13,7 @@
     \Else
         \State $A$ $\gets$ The Attribute that best classifies examples
         \State Decision Tree attribute for $root = A$
-    
+
         \For{each possible value $v_i$ of $A$}
             \State Add a new tree branch below $root$, corresponding to the test $A = v_i$
             \State Let $examples(v_i)$ be the subset of examples that have the value $v_i$ for $A$
@@ -32,7 +32,7 @@
 
 
 \begin{algorithm}[H]
-\caption{Privacy Preserving ID3 Algorithm}\label{a:id3-pp}
+\caption{\fixme{Privacy Preserving ID3 Algorithm}}\label{a:id3-pp}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
 \Require ${\color{darkred}{examples}}, {\color{darkred}{attributes}}, {\color{darkred}{eq}}$
@@ -49,11 +49,11 @@
     \Else
         \State ${\color{darkred}{A}} \gets$ The Attribute that best classifies examples
         \State Decision Tree attribute for ${\color{darkred}{root}} = {\color{darkred}{A}}$
-    
+
         \For{each possible value $v_i$ of ${\color{darkred}{A}}$}
             \State Add a new tree branch below ${\color{darkred}{root}}$, corresponding to the test ${\color{darkred}{A}} = v_i$
             \State Let ${\color{darkred}{examples}}(v_i)$ be the subset of examples that have the value $v_i$ for ${\color{darkred}{A}}$
-            
+
             \If {{\color{darkblue}{Declassify}}$(\textsc{Sum}({\color{darkred}{examples}}(v_i)) \heq \enc{0})$}
                 \State ${\color{darkred}{branch}} \gets \textsc{MostCommonLabel}({\color{darkred}{examples}}))$ add a leaf
             \Else
