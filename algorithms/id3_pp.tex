@@ -1,0 +1,40 @@
+\begin{algorithm}[H]
+\caption{Privacy Preserving ID3 Algorithm \fixme{Many more fixes}}\label{a:id3-pp}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
+\Require ${\color{darkred}{examples}}, {\color{darkred}{attributes}}, {\color{darkred}{eq}}$
+\renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
+\Require $class\_attribute, possible\_values$
+
+\Procedure{ID3}{${\color{darkred}{examples}}, {\color{darkred}{attributes}}$}
+    \State ${\color{darkred}{all\_same}} \gets \textsc{AllExamplesSame}({\color{darkred}{examples}})$
+    
+    \If {{\color{darkblue}{\textsc{Declassify}}}$({\color{darkred}{all\_same}})$}
+        \State \textbf{return} ${\color{darkred}{examples}}[0][class\_attribute]$
+    \ElsIf {$\textsc{Length}({\color{darkred}{attributes}}) = 0$}
+        \State \textbf{return} $\textsc{MostCommonLabel}({\color{darkred}{examples}})$
+    \EndIf
+  
+    \State ${\color{darkred}{A}} \gets$ The Attribute that best classifies examples
+    \State Decision Tree attribute for ${\color{darkred}{root}} \gets {\color{darkred}{A}}$
+    
+    \State ${\color{darkred}{branches}} \gets {\color{darkred}{\{\}}}$
+
+    \For{each possible value $v_i$ of ${\color{darkred}{A}}$}
+        \State Add a new tree branch below ${\color{darkred}{root}}$, corresponding to the test ${\color{darkred}{A}} \gets v_i$
+        \State Let ${\color{darkred}{examples}}[v_i]$ be the subset of examples that have the value $v_i$ for ${\color{darkred}{A}}$
+
+        \If {{\color{darkblue}{\textsc{Declassify}}}$(\textsc{Sum}({\color{darkred}{examples}}[v_i]) \heq \enc{0})$}
+            \State ${\color{darkred}{branch}} \gets \textsc{MostCommonLabel}({\color{darkred}{examples}}))$ add a leaf
+        \Else
+            \State ${\color{darkred}{branch}} \gets \textsc{ID3}({\color{darkred}{examples}}[v_i],$ ${\color{darkred}{attributes}} - \{A\})$ add the subtree
+        \EndIf
+        \State ${\color{darkred}{branches}} \gets {\color{darkred}{branches}} \cup {\color{darkred}{branch}}$
+    \EndFor
+    \State \textbf{return} ${\color{darkred}{branches}}$
+      
+\EndProcedure
+
+\end{algorithmic}
+\end{algorithm}
+

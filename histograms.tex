@@ -1,3 +1,31 @@
 \section{Privacy Preserving Histograms}\label{s:histograms}
+Despite the challenges presented in section \ref{s:challenges}, the majority of algorithms can be transformed to their privacy preserving equivalent.
+However, this is not a straightforward translation and in the most cases it adds a complexity overhead to every algorithm that depends its control flow decisions in private data.
 
-\import{./}{algorithms/histogram_algos.tex}
+Histograms is a practical and notable example of algorithms that are widely used and the complexity of their privacy preserving version remains in computationaly feasible levels, compairing to the textbook algorithm.
+% A histogram is generally a form of classifing and representing data in some categories of a specific range.
+
+\fixme{what is a histogram?}
+
+
+\fixme{in which cases is a histogram useful?}
+
+
+
+
+In algorithm \ref{a:1d-histogram-categorical} we present the privacy preserving algorithm of an one-dimensional (1D) histogram over categorical values.
+
+\import{./}{algorithms/1d_hist_categorical.tex}
+
+\fixme{explain the algorithm}
+
+
+
+In algorithm \ref{a:1d-histogram-numerical} we present the privacy preserving algorithm of an one-dimensional (1D) histogram over numerical values.
+
+\import{./}{algorithms/1d_hist_numerical.tex}
+
+\fixme{explain the algorithm}
+
+
+\import{./}{algorithms/multdim_hist_numerical.tex}
