@@ -17,12 +17,13 @@
 \begin{spacing}{0.5}
 \end{spacing}
 
-\Require ${\color{darkred}{array}}, {\color{darkred}{histogram}}$
+\Require ${\color{darkred}{array}}, {\color{darkred}{sum}}$
 \Procedure{Sum}{${\color{darkred}{array}}[N]$}\Comment{\small{Compute and return the sum of an array}}
+    \State ${\color{darkred}{sum}} \gets \enc{0}$
     \For{$i \in \{0, \dots, N-1\}$}
-        \State ${\color{darkred}{histogram}} \gets {\color{darkred}{histogram}} \hplus{\color{darkred}{array}}[i]$
+        \State ${\color{darkred}{sum}} \gets {\color{darkred}{sum}} \hplus{\color{darkred}{array}}[i]$
     \EndFor
-    \State \textbf{return} {${\color{darkred}{histogram}}$}
+    \State \textbf{return} {${\color{darkred}{sum}}$}
 \EndProcedure
 
 \end{algorithmic}
