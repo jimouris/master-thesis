@@ -13,8 +13,7 @@
     \For{$i \in \{0, \dots, cells-1\}$}
         \State ${\color{darkred}{eq}} \gets ({\color{darkred}{cell\_map}} \heq i) \hplus (({\color{darkred}{cell\_map}} \heq cells) \hmul (i == cells - 1)) $\Comment{\small{\texttt{SIMD}; similar to line 3 alg. \ref{a:1d-histogram-categorical}, grouping elements to corresponding cell indexes}}
 
-        \State ${\color{darkred}{histogram}}[i] \gets
-        \textsc{Sum}({\color{darkred}{eq}})$\Comment{\small{\texttt{SIMD} operation to sum eq array}}
+        \State ${\color{darkred}{histogram}}[i] \gets \textsc{Sum}({\color{darkred}{eq}})$
     \EndFor
     \State \textbf{return} {${\color{darkred}{histogram}}$}
 \EndProcedure
