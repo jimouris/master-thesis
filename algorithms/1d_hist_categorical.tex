@@ -4,9 +4,9 @@
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
 \Require ${\color{darkred}{array}}, {\color{darkred}{histogram}}, {\color{darkred}{eq}}$
 
-\Procedure{1DimHistogramCategorical}{${\color{darkred}{array}}[N]$}
-    \For{$i \in \{0, \dots, N-1\}$}
-        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{array}} \heq i)$\Comment{\small{\texttt{SIMD}; array eq contains $\enc{1}$ where $array[j] \heq i$, $\enc{0}$ otherwise, $j \in \{0, \dots, N-1\}$}}
+\Procedure{1DimHistogramCategorical}{${\color{darkred}{array}}[N], P$}
+    \For{$i \in \{0, \dots, P-1\}$}\Comment{\small{$P$ is the number of the different (possible) values in $array$}}
+        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{array}} \heq i)$\Comment{\small{\texttt{SIMD}; array eq contains $\enc{1}$ where $array[j] \heq i$, $\enc{0}$ otherwise, $j \in \{0, \dots, P-1\}$}}
 
         \State ${\color{darkred}{histogram}}[i] \gets
         \textsc{Sum}({\color{darkred}{eq}})$\Comment{\small{\texttt{SIMD} operation to sum eq array}}
