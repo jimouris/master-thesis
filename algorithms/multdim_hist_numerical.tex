@@ -2,13 +2,49 @@
 \caption{Privacy Preserving Multi-Dimensional Histogram for Numerical Values (Specified Cells) \fixme{Add body to this algorithm}}\label{a:multidim-histogram-numerical}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
-\Require ${\color{darkred}{array}}, {\color{darkred}{mins}}, {\color{darkred}{maxs}}, {\color{darkred}{histograms}}, {\color{darkred}{cell\_widths}}, {\color{darkred}{cell\_map}}, {\color{darkred}{eq}}$
+\Require ${\color{darkred}{array}}, {\color{darkred}{mins}}, {\color{darkred}{maxs}}, {\color{darkred}{min}}, {\color{darkred}{max}}, {\color{darkred}{column}}, {\color{darkred}{positions}}, {\color{darkred}{histogram}}, {\color{darkred}{cell\_width}}, {\color{darkred}{cell\_map}}, {\color{darkred}{eq}}$
 
-\Procedure{MultDimHistogramNum}{${\color{darkred}{array}}[N][M], cells[H], {\color{darkred}{mins}}[H], {\color{darkred}{maxs}}[H]$}
-    \For{$i \in \{0, \dots, cells-1\}$}
+\Procedure{MultDimHistogramNum}{${\color{darkred}{array}}[N][M], attributes[A], cells\_per\_attribute[A], {\color{darkred}{mins}}[M], {\color{darkred}{maxs}}[M]$}
+    \State
+    ${\color{darkred}{positions(N)}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $
+
+    \For{$a \in \{0, \dots, A-1\}$}
+
+      \State $attribute \gets attributes[a]$
+
+      \State $number\_of\_cells \gets cells\_per\_attribute[a]$
+
+      \State ${\color{darkred}{max}} \gets {\color{darkred}{maxs[attribute]}}$
+
+      \State ${\color{darkred}{min}} \gets {\color{darkred}{mins[attribute]}}$
+
+      \State ${\color{darkred}{cell\_width}} \gets ({\color{darkred}{max}} \hminus {\color{darkred}{min}}) \hdiv number\_of\_cells$
+
+      \State ${\color{darkred}{column}} \gets {\color{darkred}{array[:,attribute]}}$
+
+      \State ${\color{darkred}{cell\_map}} \gets ({\color{darkred}{column}} \hminus {\color{darkred}{min}}) \hdiv cell\_width$
+
+      \State ${\color{darkred}{cell\_map}} \gets {\color{darkred}{cell\_map}} \hminus ({\color{darkred}{cell\_map}} \heq number\_of\_cells)$
+
+      \State $prod \gets product(cells\_per\_attribute[a+1:])$
+
+      \State ${\color{darkred}{positions}} \gets {\color{darkred}{positions}} \hplus {\color{darkred}{cell\_map}} \hmul prod$
 
     \EndFor
-    \State \textbf{return} {${\color{darkred}{histograms}}$}
+
+    \State $length \gets product(cells\_per\_attribute)$
+
+    \State ${\color{darkred}{histogram(length)}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$
+
+    \For{$j \in \{0, \dots, length-1\}$}
+
+      \State ${\color{darkred}{eq}} \gets {\color{darkred}{positions}} \heq j$
+
+      \State ${\color{darkred}{histogram[}}j{\color{darkred}{]}} \gets sum({\color{darkred}{eq}})$
+
+    \EndFor
+
+    \State \textbf{return} {${\color{darkred}{histogram}}$}
 
 \EndProcedure
 \end{algorithmic}
