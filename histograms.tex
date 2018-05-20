@@ -29,3 +29,12 @@ In algorithm \ref{a:1d-histogram-numerical} we present the privacy preserving al
 
 
 \import{./}{algorithms/multdim_hist_numerical.tex}
+
+The algorithm computing a private multi-dimensional histogram is similar to the one regarding one-dimensional histograms but also addresses the issue of having a histogram of arbitrarily many dimensions.
+In case we had a known number of dimensions the simplest solution would be to use nested loops, as many as the histogram dimensions.
+Since the number of dimensions is not known, we have to think of something else.
+We represent the multi-dimensional histogram as a serialized version with an one-dimensional array (a vector) instead of using a multi-dimensional array (a matrix).
+For example a 2-dimensional $3 \times 4$ histogram will be represented as a vector whose length is $ 12 $ ($= 3 \cdot 4$), and a $3 \times 4 \times 5$ 3-dimensional histogram wit a vector of length $ 60 $ ($= 3 \cdot 4 \cdot 5$)
+
+When it comes to indexing if we wish to access the 2-dimensional $N \times M$ histogram represented as an one-dimensional at row $ i $ and column $ j $, instead of using $h[i][j]$ we use $h[i \cdot M + j]$.
+Similarly, for the 3-dimensional $L \times N \times M$ histogram, $h[i][j][k]$ becomes $h[i \cdot N \cdot M + j \cdot M + k]$. So there needs to be a computation of a single index based on the multiple dimension indexes. In algorithm \ref{a:multidim-histogram-numerical}, the \texttt{positions} vector holds this index for each record of the provided array, as can bee seen in lines $ 12 $ and $ 13 $
