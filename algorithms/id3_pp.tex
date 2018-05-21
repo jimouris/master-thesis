@@ -4,13 +4,13 @@
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
 \Require ${\color{darkred}{examples}}, {\color{darkred}{attributes}}, {\color{darkred}{eq}}$
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
-\Require $class\_attribute, possible\_values$
+\Require $classAttribute, possibleValues$
 
 \Procedure{ID3}{${\color{darkred}{examples}}, {\color{darkred}{attributes}}$}
-    \State ${\color{darkred}{all\_same}} \gets \textsc{AllExamplesSame}({\color{darkred}{examples}})$
+    \State ${\color{darkred}{allSame}} \gets \textsc{AllExamplesSame}({\color{darkred}{examples}})$
     
-    \If {{\color{darkblue}{\textsc{Declassify}}}$({\color{darkred}{all\_same}})$}
-        \State \textbf{return} ${\color{darkred}{examples}}[0][class\_attribute]$
+    \If {{\color{darkblue}{\textsc{Declassify}}}$({\color{darkred}{allSame}})$}
+        \State \textbf{return} ${\color{darkred}{examples}}[0][classAttribute]$
     \ElsIf {$\textsc{Length}({\color{darkred}{attributes}}) = 0$}
         \State \textbf{return} $\textsc{MostCommonLabel}({\color{darkred}{examples}})$
     \EndIf

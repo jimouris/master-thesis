@@ -2,16 +2,16 @@
 \caption{Privacy Preserving 1D Histogram for Numerical Values (Specified Cells)}\label{a:1d-histogram-numerical}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
-\Require ${\color{darkred}{array}}, {\color{darkred}{min}}, {\color{darkred}{max}}, {\color{darkred}{histogram}}, {\color{darkred}{cell\_width}}, {\color{darkred}{cell\_map}}, {\color{darkred}{eq}}$
+\Require ${\color{darkred}{array}}, {\color{darkred}{min}}, {\color{darkred}{max}}, {\color{darkred}{histogram}}, {\color{darkred}{cellWidth}}, {\color{darkred}{cellMap}}, {\color{darkred}{eq}}$
 
 \Procedure{1DimHistogramNumerical}{${\color{darkred}{array}}[N], cells, {\color{darkred}{min}}, {\color{darkred}{max}}$}
 
-    \State ${\color{darkred}{cell\_width}} \gets ({\color{darkred}{max}} \hminus {\color{darkred}{min}}) \hdiv cells $\Comment{\small{${\color{darkred}{cell\_width}}$ gets a float value}}
+    \State ${\color{darkred}{cellWidth}} \gets ({\color{darkred}{max}} \hminus {\color{darkred}{min}}) \hdiv cells $\Comment{\small{${\color{darkred}{cellWidth}}$ gets a float value}}
 
-    \State ${\color{darkred}{cell\_map}} \gets ({\color{darkred}{array}} \hminus {\color{darkred}{min}}) \hdiv {\color{darkred}{cell\_width}} $\Comment{\small{\texttt{SIMD}; ${\color{darkred}{cell\_map}}$ has $N$ elements, each corresponds to an index ${\color{darkred}{idx}}$ where $\enc{0} \leq {\color{darkred}{idx}} \leq \enc{cells}$ }}
+    \State ${\color{darkred}{cellMap}} \gets ({\color{darkred}{array}} \hminus {\color{darkred}{min}}) \hdiv {\color{darkred}{cellWidth}} $\Comment{\small{\texttt{SIMD}; ${\color{darkred}{cellMap}}$ has $N$ elements,\par\hfill each corresponds to an index ${\color{darkred}{idx}}$ where $\enc{0} \leq {\color{darkred}{idx}} \leq \enc{cells}$ }}
 
     \For{$i \in \{0, \dots, cells-1\}$}
-        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{cell\_map}} \heq i) \hplus (({\color{darkred}{cell\_map}} \heq cells) \hmul (i == cells - 1)) $\Comment{\small{\texttt{SIMD}; similar to line 3 alg. \ref{a:1d-histogram-categorical}, grouping elements to corresponding cell indexes}}
+        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{cellMap}} \heq i) \hplus (({\color{darkred}{cellMap}} \heq cells) \hmul (i == cells - 1)) $\Comment{\small{\texttt{SIMD}; similar to line 3 \par\hfill alg. \ref{a:1d-histogram-categorical}, grouping elements to corresponding cell indexes}}
 
         \State ${\color{darkred}{histogram}}[i] \gets \textsc{Sum}({\color{darkred}{eq}})$
     \EndFor
