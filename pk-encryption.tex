@@ -1,4 +1,4 @@
-\section{Asymmetric-Key Encryption (Public-Key Cryptography)}\label{s:public-key-encryption}
+\section{Asymmetric-Key Encryption (Public-Key Encryption)}\label{s:public-key-encryption}
 The major problem that traditional symmetric-key algorithms face is that they require the parties to exchange keys, or more specifically to agree to a secret common private key, prior to communicating.
 This needs a secure (physical or digital) communication channel accessible even for a short period of time, in order for the secret key to be exchanged. Such a channel could be a piece of paper delivered by hand or by a trusted courier, or a short in person communication.
 
@@ -23,9 +23,7 @@ Generally, the public (encryption) key could be shared to any party that wants t
 
 The ability for two users to establish a shared secret over an insecure communication channel, despite having no prior communication or information exchange was first proposed in 1976 by Whitfield Diffie and Martin Hellman.
 That method is named Diffie-Hellman (DH) key exchange \cite{diffie1976new} after its authors.
-DH key exchange method uses pairs of keys, one public and one private, and allows two parties that have no prior knowledge of each other to jointly establish a shared secret key over an insecure channel.
 
-% must be changed!!!!
 \fixme{
 More formally, a public key cryptosystem is made up of three algorithms:
 A Key Generation algorithm that is given a security parameter η and returns the public and private keys.
