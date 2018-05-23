@@ -4,6 +4,8 @@ This needs a secure (physical or digital) communication channel accessible even 
 
 An asymmetric or public-key cryptosystem is one where different keys are employed for the operations in the cryptosystem (e.g., encryption and decryption), and where one of the keys can be made public without compromising the secrecy of the other key \cite{Kaliski2011}. That way there is no need for a secure channel or prior agreement.
 
+Usually three algorithms are needed to define a public key cryptosystem. These are a \textit{Key Generation} algorithm which produces the public and private keys (based on a security parameter $\eta$), an \textit{Encryption} and a \textit{Decryption} algorithm.
+
 In the classic model such an encryption scheme involves a \textit{public key} which is used for encryption and a \textit{private key} which is used for decryption.
 More formally, given a plaintext $P$, a public key $PubKey$, and a private key $PrivKey$ we can produce a ciphertext $C$ such that:
 \begin{equation}
@@ -22,16 +24,30 @@ If Bob wishes to reply, he needs Alice's public key etc.
 Generally, the public (encryption) key could be shared to any party that wants to communicate with the owner of that public key, while the private (decryption) key should be kept secret and used by the recipient of the ciphertext to recover the original plaintext.
 
 The ability for two users to establish a shared secret over an insecure communication channel, despite having no prior communication or information exchange was first proposed in 1976 by Whitfield Diffie and Martin Hellman.
-That method is named Diffie-Hellman (DH) key exchange \cite{diffie1976new} after its authors.
+That method is named Diffie-Hellman (DH) key exchange \cite{diffie1976new} after its authors. The security of the algorithm is based on the difficulty of solving the Discrete Log Problem (DLP). The DLP is stated as follows: Given $g, p$ and $g^k \pmod{p}$, find $ k $.
 
-\fixme{
-More formally, a public key cryptosystem is made up of three algorithms:
-A Key Generation algorithm that is given a security parameter η and returns the public and private keys.
-An Encryption algorithm that is given a message, some randomness and the public key and returns the encrypted message.
-As we shall see in 2.1.3 any deterministic public key cryptosystem cannot be secure.
-To this end, randomness is essential to a public key encryption function.
-A Decryption algorithm that given the ciphertext and the private key recovers the plaintext.
-}
+
+One if the first and most widely adopted public key cryptosystem is RSA \cite{rivest1978method} named after its authors Rivest, Shamir and Adleman. The algorithm's difficulty reduces to the difficulty of factoring the product of two large prime numbers.
+\begin{itemize}
+  \item \textit{Key Generation}
+  \begin{itemize}
+    \item Randomly select two large primes $ p $ and $ q $.
+    \item Calculate modulus $n = p \cdot q$.
+    \item Calculate $\phi(n) = (p-1) \cdot (q-1)$.
+    \item Randomly select $e : gcd(e,\phi(n)) = 1$.
+    \item Calculate reverse $d  = e ^ {-1} \pmod{\phi(n)}$.\\
+    $d \cdot e = 1 \pmod{\phi(n)}$.
+    \item The public key is $(n, e)$, while the private key is $ d $. $p, q$ and $\phi(n)$ must also be kept private.
+  \end{itemize}
+  \item \textit{Encryption}
+  \begin{itemize}
+    \item Given a plaintext message $ m $, we get a ciphertext $c = m ^ e \pmod{n}$
+  \end{itemize}
+  \item \textit{Decryption}
+  \begin{itemize}
+    \item Given a ciphertext $ c $, we get back the plaintext $ m $ as follows: $c^d \pmod{n} = m^{ed} \pmod{n} = m$.
+  \end{itemize}
+\end{itemize}
 
 \fixme{
 Public key cryptography accomplishes two functions: authentication, where the public key verifies that a holder of the paired private key sent the message, and encryption, where only the paired private key holder can decrypt the message encrypted with the public key.
