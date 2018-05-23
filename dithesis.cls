@@ -636,6 +636,9 @@ publications}\gdef\@lopfileinternal{#1}}
     \lstlistoflistings
     \thispagestyle{empty}
 
+    \listofalgorithms
+    \thispagestyle{empty}
+
     % preface page (english version only, OPTIONAL)
     \ifprefacepage
 	    \@preface
