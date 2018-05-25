@@ -24,7 +24,7 @@ If Bob wishes to reply, he needs Alice's public key etc.
 Generally, the public (encryption) key could be shared to any party that wants to communicate with the owner of that public key, while the private (decryption) key should be kept secret and used by the recipient of the ciphertext to recover the original plaintext.
 
 The ability for two users to establish a shared secret over an insecure communication channel, despite having no prior communication or information exchange was first proposed in 1976 by Whitfield Diffie and Martin Hellman.
-That method is named Diffie-Hellman (DH) key exchange \cite{diffie1976new} after its authors. The security of the algorithm is based on the difficulty of solving the Discrete Log Problem (DLP). The DLP is stated as follows: Given $g, p$ and $g^k \pmod{p}$, find $ k $.
+That method is named Diffie-Hellman (DH) key exchange \cite{diffie1976new} after its authors. The security of the algorithm is based on the difficulty of solving the Discrete Log Problem (DLP). The DLP is stated as follows: Given $g, p$ and $g^k \pmod{p}$, find $k$.
 
 Some of the most widely used public key cryptosystems are the RSA (Rivest -- Shamir -- Adleman) \cite{rivest1978method}, the El Gamal \cite{elgamal1985public} and the Paillier \cite{paillier1999public} Cryptosystems.
 
@@ -35,21 +35,21 @@ One if the first and most widely adopted public key cryptosystem is RSA . The al
 \begin{itemize}
   \item \textit{Key Generation}
   \begin{itemize}
-    \item Randomly select two large primes $ p $ and $ q $.
+    \item Randomly select two large primes $p$ and $q$.
     \item Calculate modulus $n = p \cdot q$.
     \item Calculate $\phi(n) = (p-1) \cdot (q-1)$.
     \item Randomly select $e : gcd(e,\phi(n)) = 1$.
     \item Calculate reverse $d  = e ^ {-1} \pmod{\phi(n)}$.\\
     $d \cdot e = 1 \pmod{\phi(n)}$.
-    \item The public key is $(n, e)$, while the private key is $ d $. $p, q$ and $\phi(n)$ must also be kept private.
+    \item The public key is $(n, e)$, while the private key is $d$. $p, q$ and $\phi(n)$ must also be kept private.
   \end{itemize}
   \item \textit{Encryption}
   \begin{itemize}
-    \item Given a plaintext message $ m $, we get a ciphertext $c = m ^ e \pmod{n}$
+    \item Given a plaintext message $m$, we get a ciphertext $c = m ^ e \pmod{n}$.
   \end{itemize}
   \item \textit{Decryption}
   \begin{itemize}
-    \item Given a ciphertext $ c $, we get back the plaintext $ m $ as follows: $c^d \pmod{n} = m^{ed} \pmod{n} = m$.
+    \item Given a ciphertext $c$, we get back the plaintext $m$ as follows: $c^d \pmod{n} = m^{ed} \pmod{n} = m$.
   \end{itemize}
 \end{itemize}
 
@@ -60,15 +60,15 @@ The ElGamal encryption system is a public-key cryptosystem based on the Diffie-H
 \begin{itemize}
   \item \textit{Key Generation}
   \begin{itemize}
-    \item Select two large primes $ p $ and $ q : q \mid (p - 1)$.
-    \item Select a generator $ g $ of group $\mathbb{G}$ which is a large enough order-$ q $ subgroup of the multiplicative group $\mathbb{Z}_{p}^{*}$ of integers between $ 1 $ and $p - 1$.
+    \item Select two large primes $p$ and $ q : q \mid (p - 1)$.
+    \item Select a generator $g$ of group $\mathbb{G}$ which is a large enough order-$q$ subgroup of the multiplicative group $\mathbb{Z}_{p}^{*}$ of integers between $1$ and $p - 1$.
     \item Randomly select $ x \in_{R} \mathbb{Z}_{q}$.
     \item Calculate $y = g^{x} \pmod{p}$.
-    \item The public key is $ y $, while the private key is $ x $.
+    \item The public key is $y$, while the private key is $x$.
   \end{itemize}
   \item \textit{Encryption}
   \begin{itemize}
-    \item Given a plaintext message $ m $, we get a ciphertext $c$ as follows.
+    \item Given a plaintext message $m$, we get a ciphertext $c$ as follows.
     \item Randomly select $r \in_{R} \mathbb{Z}_{q}$.
     \item Calculate $G = g^{r} \pmod{p}$.
     \item Calculate $M = m \cdot y^{r} \pmod{p}$.
@@ -76,7 +76,7 @@ The ElGamal encryption system is a public-key cryptosystem based on the Diffie-H
   \end{itemize}
   \item \textit{Decryption}
   \begin{itemize}
-    \item Given a ciphertext $ c = (G,M)$, we get back the plaintext $ m $ as follows: $m = M/G^{x}\pmod{p}$.
+    \item Given a ciphertext $c = (G,M)$, we get back the plaintext $m$ as follows: \\$m = M/G^{x}\pmod{p}$.
   \end{itemize}
 \end{itemize}
 
@@ -86,29 +86,22 @@ The Pallier cryptosystem is a public-key cryptosystem that relies its security u
 \begin{itemize}
   \item \textit{Key Generation}
   \begin{itemize}
-    \item Randomly and independently select two large primes $ p $ and $ q :gcd(p-1, q-1) = 1$ If both primes have the same length this property holds.
+    \item Randomly and independently select two large primes $p$ and \\$ q :gcd(p-1, q-1) = 1$ If both primes have the same length this property holds.
     \item Calculate the RSA modulus $n = p \cdot q$.
-    \item Calculate $ \lambda = lcm(p-1, q-1)$
-    \item Select generator $g \in \mathbb{Z}_{n^{2}}^{*}$ such that the order of $ g $ is a non zero multiple of $ n $
-    \item Calculate $ \mu = (L(g^{\lambda} \pmod{n^{2}}))^{-1} \pmod{n}$, where $L(x) = \frac{x-1}{n}$
+    \item Calculate $\lambda = lcm(p-1, q-1)$.
+    \item Select generator $g \in \mathbb{Z}_{n^{2}}^{*}$ such that the order of $g$ is a non zero multiple of $n$.
+    \item Calculate $\mu = (L(g^{\lambda} \pmod{n^{2}}))^{-1} \pmod{n}$, where $L(x) = \frac{x-1}{n}$.
     \item The public key is $ (n,g) $, while the private key is $ (\lambda, \mu) $.
   \end{itemize}
   \item \textit{Encryption}
   \begin{itemize}
-    \item Given a plaintext message $ m $, we get a ciphertext $c$ as follows.
-    \item Encode $ m $ into $\mathbb{Z}_{n}$.
+    \item Given a plaintext message $m$, we get a ciphertext $c$ as follows.
+    \item Encode $m$ into $\mathbb{Z}_{n}$.
     \item Randomly select $ r \in_{R} \mathbb{Z}_{n}^{*}$.
-    \item Return $c = g^{m} \cdot r^{n} \pmod{n^{2}}$
+    \item Return $c = g^{m} \cdot r^{n} \pmod{n^{2}}$.
   \end{itemize}
   \item \textit{Decryption}
   \begin{itemize}
-    \item Given a ciphertext $ c \in \mathbb{Z}_{n^{2}}$, we get back the plaintext $ m $ as follows: $m = L(c^{\lambda} \pmod{n^{2}}) \cdot \mu \pmod{n}$.
+    \item Given a ciphertext $c \in \mathbb{Z}_{n^{2}}$, we get back the plaintext $m$ as follows: \\$m = L(c^{\lambda} \pmod{n^{2}}) \cdot \mu \pmod{n}$.
   \end{itemize}
 \end{itemize}
-
-\fixme{
-Public key cryptography accomplishes two functions: authentication, where the public key verifies that a holder of the paired private key sent the message, and encryption, where only the paired private key holder can decrypt the message encrypted with the public key.
-}
-
-
-\fixme{The importance of public-key Encryption schemes can also be understood by the plethora of schemes and algorithms that have been inspired from it, like the Digital Signature Algorithm and OpenPGP that serve varied purposes.}
