@@ -1,23 +1,44 @@
 \chapter{Privacy Preserving Algorithms}\label{c:pp-algorithms}
 
+\section{Challenges in Privacy Preserving Algorithms}\label{s:challenges}
+A private computation scheme allows the user to compute any arbitrary function, while revealing no information to any individual server about the identity of that function.
+Computation over encrypted data can be utilized in a wide variety of use-cases.
+For instance, the problem of how to use encrypted database fields in search queries, or the problem of testing for membership in a set.
+Another very commonly used for a lot of real world applications is the private set intersection, i.e. \textit{``Department of homeland security (DHS) wants to check its list of terrorist suspects against the passenger manifest of a flight operated by a foreign airline.
+Neither party is willing to reveal its information, however, if there is a (non-empty) intersection, DHS will not give the flight permission to land.".}
+
+
+Despite the variety of applications that encrypted computation can assist, the translation of any function to its privacy preserving equivalent is not a trivial process.
+As mentioned in section \ref{s:homomorphic-encryption}, termination problems are introduced and the avoidance of them is an not straightforward.
+First, one has to identify the corresponding termination channels that needs protection against side-channels and leakage; that is, any branch decision which is based on encrypted data (\textit{i.e.} \texttt{if ($\enc{X}$) then statement}).
+Consecutively, they have to translate the termination channels using oblivious computation in the encrypted domain.
+Commonly, the \texttt{if} statement is replaced by a loop over all possible values and an oblivious selection of the desired value.
+Early termination conditions, in general, eventually leak sensitive information, which is why the execution time should only depend on the length of the inputs, not their plaintext values (\textit{i.e.}, execution requires maximum iterations independent of the input).
+Below we examine the privacy preserving equivalents of some simple and widely used algorithm in order to clarify the termination problems and the translation process.
+
+
+\import{./}{algorithms/sum.tex}
+\fixme{explain the algorithm \ref{a:sum}}
+
+
+\import{./}{algorithms/max.tex}
+\fixme{explain the algorithm \ref{a:max}}
+
+
+\import{./}{algorithms/pir.tex}
+\fixme{explain the algorithm \ref{a:pir}}
+
+
+
+Motivated by privacy concerns and from the challenges that arise in securing any function, in this thesis we concetrate on developing algorithms for aggregation statistics and classification over medical data.  
+
+
 \section{Notation}\label{s:notation}
 Our notation for encrypted values and for operations between encrypted variables consists of a variation of the classical mathematical operations.
 Namely, $\enc{X}$ corresponds to the encryption of $X$, while $\hplus$ , $\hminus$ , $\hmul$ and $\hdiv$ represent homomorphic addition, subtraction, multiplication and division respectively.
 In a like manner, $\heq$ represents private equality and returns an encryption of one (that is $\enc{1}$) if the operands map to equal plaintexts, or an encryption of zero ($\enc{0}$) otherwise.
 
 
-\section{Challenges in Privacy Preserving Algorithms}\label{s:challenges}
-\fixme{Describe again the problem with PP algorithms, no if statements, worst case etc.}
-
-Add some examples:
-
-\fixme{Sum of array example, textbook and PP}
-
-\fixme{Max of array example, textbook and PP}
-
-\fixme{Something more elaborate, textbook and PP}
-
-
-
 \input{histograms}
+
 \input{id3}
