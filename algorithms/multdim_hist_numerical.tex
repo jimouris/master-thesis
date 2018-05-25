@@ -5,8 +5,7 @@
 \Require ${\color{darkred}{array}}, {\color{darkred}{mins}}, {\color{darkred}{maxs}}, {\color{darkred}{min}}, {\color{darkred}{max}}, {\color{darkred}{column}}, {\color{darkred}{positions}}, {\color{darkred}{histogram}}, {\color{darkred}{cellWidth}}, {\color{darkred}{eq}} ,$\par
 \hspace{1.2cm}${\color{darkred}{cellMap}}$
 
-\Procedure{MultDimHistogramNum}{${\color{darkred}{array}}[N][M], attributes[A], $\par\hspace{6.4cm}$cellsPerAttribute[A], {\color{darkred}{mins}}[M], {\color{darkred}{maxs}}[M]$} 
-% \Procedure{MultDimHistogramNum}{${\color{darkred}{array}}[N][M], attributes[A], $\par\hfill$cellsPerAttribute[A], {\color{darkred}{mins}}[M], {\color{darkred}{maxs}}[M]$} 
+\Procedure{MultDimHistogramNumerical}{${\color{darkred}{array}}[N][M], attributes[A], $\par\hfill$cellsPerAttribute[A], {\color{darkred}{mins}}[M], {\color{darkred}{maxs}}[M]$} 
     \State
     ${\color{darkred}{positions}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $\Comment{\small{${\color{darkred}{positions}}$ is an array initialized with $\enc{0}$}}
     
@@ -50,17 +49,6 @@
     \State \textbf{return} {${\color{darkred}{histogram}}$}
 \EndProcedure
 
-\begin{spacing}{0.5}
-\end{spacing}
-
-\Require ${\color{darkred}{array}}, {\color{darkred}{product}}$
-\Procedure{Product}{${\color{darkred}{array}}[N]$}\Comment{\small{Compute and return the product of an array}}
-    \State ${\color{darkred}{product}} \gets \enc{1}$
-    \For{$i \in \{0, \dots, N-1\}$}
-        \State ${\color{darkred}{product}} \gets {\color{darkred}{product}} \hmul {\color{darkred}{array}}[i]$
-    \EndFor
-    \State \textbf{return} {${\color{darkred}{product}}$}
-\EndProcedure
 
 \end{algorithmic}
 \end{algorithm}
