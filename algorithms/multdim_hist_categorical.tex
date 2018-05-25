@@ -1,0 +1,53 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Privacy Preserving Multi-Dimensional Histogram for Categorical Values\fixme{Add more comments}}\label{a:multidim-histogram-categorical}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
+\Require ${\color{darkred}{array}}, {\color{darkred}{column}}, {\color{darkred}{positions}}, {\color{darkred}{histogram}}, {\color{darkred}{eq}}$
+
+
+\Procedure{MultDimHistogramCategorical}{${\color{darkred}{array}}[N][M], attributes[A], Ps[A]$} 
+    \State
+    ${\color{darkred}{positions}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $\Comment{\small{${\color{darkred}{positions}}$ is an array initialized with $\enc{0}$}}
+    
+    \For{$a \in \{0, \dots, A-1\}$}
+
+      \State $attribute \gets attributes[a]$
+
+      \State ${\color{darkred}{column}} \gets {\color{darkred}{array}}[:, attribute]$
+
+      \State $prod \gets \textsc{Product}(Ps[a+1:])$
+
+      \State ${\color{darkred}{positions}} \gets {\color{darkred}{positions}} \hplus {\color{darkred}{column}} \hmul prod$
+
+    \EndFor
+
+    \State $length \gets \textsc{Product}(Ps)$
+
+    \State ${\color{darkred}{histogram}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$\Comment{\small{${\color{darkred}{histogram}}$ is an array initialized with $\enc{0}$}}
+    
+
+    \For{$j \in \{0, \dots, length-1\}$}
+
+      \State ${\color{darkred}{eq}} \gets {\color{darkred}{positions}} \heq j$\Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ gets either $\enc{0}$ or $\enc{1}$}}
+
+      \State ${\color{darkred}{histogram}}[j] \gets \textsc{Sum}({\color{darkred}{eq}})$
+
+    \EndFor
+
+    \State \textbf{return} {${\color{darkred}{histogram}}$}
+\EndProcedure
+
+\begin{spacing}{0.5}
+\end{spacing}
+
+\Require ${\color{darkred}{array}}, {\color{darkred}{product}}$
+\Procedure{Product}{${\color{darkred}{array}}[N]$}\Comment{\small{Compute and return the product of an array}}
+    \State ${\color{darkred}{product}} \gets \enc{1}$
+    \For{$i \in \{0, \dots, N-1\}$}
+        \State ${\color{darkred}{product}} \gets {\color{darkred}{product}} \hmul {\color{darkred}{array}}[i]$
+    \EndFor
+    \State \textbf{return} {${\color{darkred}{product}}$}
+\EndProcedure
+
+\end{algorithmic}
+\end{algorithm}
