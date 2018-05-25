@@ -80,6 +80,32 @@ The ElGamal encryption system is a public-key cryptosystem based on the Diffie-H
   \end{itemize}
 \end{itemize}
 
+\subsection{Paillier}
+The Pallier cryptosystem is a public-key cryptosystem that relies its security upon the decisional composite residuosity assumption \cite{paillier1999public}.
+
+\begin{itemize}
+  \item \textit{Key Generation}
+  \begin{itemize}
+    \item Randomly and independently select two large primes $ p $ and $ q :gcd(p-1, q-1) = 1$ If both primes have the same length this property holds.
+    \item Calculate the RSA modulus $n = p \cdot q$.
+    \item Calculate $ \lambda = lcm(p-1, q-1)$
+    \item Select generator $g \in \mathbb{Z}_{n^{2}}^{*}$ such that the order of $ g $ is a non zero multiple of $ n $
+    \item Calculate $ \mu = (L(g^{\lambda} \pmod{n^{2}}))^{-1} \pmod{n}$, where $L(x) = \frac{x-1}{n}$
+    \item The public key is $ (n,g) $, while the private key is $ (\lambda, \mu) $.
+  \end{itemize}
+  \item \textit{Encryption}
+  \begin{itemize}
+    \item Given a plaintext message $ m $, we get a ciphertext $c$ as follows.
+    \item Encode $ m $ into $\mathbb{Z}_{n}$.
+    \item Randomly select $ r \in_{R} \mathbb{Z}_{n}^{*}$.
+    \item Return $c = g^{m} \cdot r^{n} \pmod{n^{2}}$
+  \end{itemize}
+  \item \textit{Decryption}
+  \begin{itemize}
+    \item Given a ciphertext $ c \in \mathbb{Z}_{n^{2}}$, we get back the plaintext $ m $ as follows: $m = L(c^{\lambda} \pmod{n^{2}}) \cdot \mu \pmod{n}$.
+  \end{itemize}
+\end{itemize}
+
 \fixme{
 Public key cryptography accomplishes two functions: authentication, where the public key verifies that a holder of the paired private key sent the message, and encryption, where only the paired private key holder can decrypt the message encrypted with the public key.
 }
