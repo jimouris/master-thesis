@@ -2,15 +2,15 @@
 
 Some encryption schemes are inherently ``malleable", which means that it is possible to transform a ciphertext into another ciphertext which decrypts to a related plaintext.
 Homomorphic encryption is a malleable encryption scheme that allows operations directly on encrypted data so that the results after decryption would correspond to applying matching operations on unencrypted data.
-For example, having an encryption mechanism $Enc$, the product of any two ciphertexts is equal to a ciphertext of the sum of the two corresponding plaintexts ($M_1$ and $M_2$), as follows:
+For example, having an encryption mechanism $Enc$, the product of any two ciphertexts is equal to a ciphertext of the sum of the two corresponding plaintexts ($M_1$ and $M_2$). Or more generally the application of a function to the ciphertexts corresponds to another function on the plaintexts, as follows:
 \begin{equation}\label{eq:homomorphic}
-  Enc(M_1) \otimes Enc(M_2) = Enc(M_1 + M_2)
+  Enc(M_1) \otimes Enc(M_2) = Enc(M_1 \oplus M_2)
 \end{equation}
 
 
 Homomorphic encryption enables outsourcing computations to a third party, as for example on the cloud.
 Cloud computing is designed to deal with difficult operations and with computationally demanding algorithms.
-However, if user's data are unencrypted they can be exposed to attacks from both the cloud provider and third parties.
+However, if user's data are unencrypted they can be exposed to attacks from both the cloud provider and third parties (hackers, government agencies, data breaches, etc.).
 Even if the data are stored \textit{(data at rest)} and transferred \textit{(data in transit)} securely, when they are in use they can be exposed to security risks, such as side-channel attacks \cite{zhang2012cross} and hardware Trojans \cite{becker2013stealthy, tsoutsos2014advanced}.
 \textit{Data at rest} implies data that is stored physically in any digital form, while \textit{data in transit} means data traversing the network.
 Active data under constant change which is stored in a non-persistent digital state typically in computer random access memory (RAM), CPU caches, or CPU registers are called \textit{data in use}.
@@ -44,13 +44,13 @@ All those systems, perform manipulations directly on encrypted data without decr
 When the result is eventually decrypted, it will be the same as applying the same manipulations on plaintexts.
 
 \subsubsection{RSA Cryptosystem}\label{ss:rsa}
-\fixme{
-RSA (Rivest -- Shamir -- Adleman) is one of the first public-key cryptosystems and is widely used for secure data transmission.
-In such a cryptosystem, the encryption key is public and it is different from the decryption key which is kept secret (private).
-In RSA, this asymmetry is based on the practical difficulty of the factorization of the product of two large prime numbers, the ``factoring problem".
-}
-Plain RSA encryption is multiplicatively homomorphic.
+Plain RSA encryption is multiplicatively homomorphic. Consider the encryption algorithm described in section \ref{s:pk-rsa}. Given two ciphertexts $Enc(x_1)$ and $Enc(x_2)$ of plaintexts $x_1$ and $x_2$ respectively, we can see that the following holds.
 
+\begin{equation}
+Enc(x_1) \cdot Enc(x_2) = {x_1}^{e}\pmod{n} \cdot {x_2}^{e}\pmod{n} = ({x_1}\cdot{x_2})^{e}\pmod{n} = Enc({x_1}\cdot{x_2})
+\end{equation}
+
+So the product of the two ciphertexts corresponds to the ciphertext of the product of the two plaintexts.
 
 \subsubsection{ElGamal Cryptosystem}\label{ss:elgamal}
 \fixme{
