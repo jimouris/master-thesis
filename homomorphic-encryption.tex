@@ -43,6 +43,26 @@ PHE has been expanded with applications such as Helios (e-voting PHE based syste
 All those systems, perform manipulations directly on encrypted data without decrypting them, thus no information leakage is possible.
 When the result is eventually decrypted, it will be the same as applying the same manipulations on plaintexts.
 
+The two most common cases (but not the only ones) of partially homomorphic cryptosystems are \textit{additively homomorphic} and \textit{multiplicatively homomorphic}.
+\begin{itemize}
+  \item Additively homomorphic systems enable computation over ciphertexts (encrypted data) that result in the encryption of the sum (addition) of two plaintexts. More formally, a cryptosystem is considered to be additively homomorphic iff:
+
+  \begin{equation}\label{eq:additively-homomorphic}
+    Enc(M_1) \otimes Enc(M_2) = Enc(M_1 + M_2)
+  \end{equation}
+
+  for some operation $ \otimes $.
+  \item Multiplicatively homomorphic systems enable computation over ciphertexts that decrypt to the product (multiplication) of two plaintexts. More formally, a cryptosystem is considered to be multiplicatively homomorphic iff:
+
+  \begin{equation}\label{eq:multiplicatively-homomorphic}
+    Enc(M_1) \otimes Enc(M_2) = Enc(M_1 \cdot M_2)
+  \end{equation}
+
+  for some operation $ \otimes $.
+\end{itemize}
+
+Below we describe some widely known cryptosystems that are partially homomorphic.
+
 \subsubsection{RSA Cryptosystem}\label{ss:rsa}
 Plain RSA encryption is multiplicatively homomorphic. Consider the encryption algorithm described in section \ref{s:pk-rsa}. We know that $Enc(m) = {m_1}^{e}\pmod{n}$. Given two ciphertexts $Enc(m_1)$ and $Enc(m_2)$ of plaintexts $m_1$ and $m_2$ respectively,  we can see that the following holds.
 
