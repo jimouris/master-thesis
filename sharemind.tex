@@ -1,34 +1,22 @@
 \chapter{Sharemind: A Secure Computing Platform}\label{c:sharemind}
-
-% Sharemind (Secure computing platform) \cite{bogdanov2008sharemind, bogdanov2013sharemind}
-
-Sharemind is a novel database and application server that collects data in an encrypted form and uses techniques like homomorphic encryption, secure multi-party computation and hardware isolation to process it without leaking the private inputs even to the machine memory, providing end-to-end encrypted data processing.
-
-The idea of Sharemind is to provide a secure infrastructure that is able to host and evaluate privacy preserving algorithms.
-Sharemind consists of some servers (usually three), the computing nodes, that employ techniques like homomorphic encryption and secure multi-party computation in order to privately process the data.
-Data owners encrypt each record before they import it to the Sharemind Application Server cluster.
-Each host, computing node, is not able to decrypt the data, or even extract any information about them.
-Sharemind utilises secure computing technology to processes data without removing the protection.
-All intermediate and final results are also encrypted and only the user making the query can decrypt them.
-Hosts and selected third parties control what can be computed and what results can be released.
-
-
-
 
-Sharemind is a general purpose SMPC system, for privacy preserving data processing operating on additively secret-shared values.
-Sharemind provides an easily programmable and flexible platform that enables non-cryptographers to develop and test privacy preserving algorithms such as PPDM.
+Sharemind \cite{bogdanov2008sharemind, bogdanov2013sharemind} is a general purpose SMPC system, for privacy preserving data processing operating on additively secret-shared values.
+The idea of Sharemind is to provide a secure infrastructure that is able to host and evaluate privacy preserving algorithms.
+Sharemind provides an easily programmable and flexible platform that enables non\hyp cryptographers to develop and test privacy preserving algorithms such as Privacy Preserving Data Mining (PPDM).
 Sharemind is provably secure under the semi-honest (honest but curious) setting.
 
 Sharemind’s is deployed as a distributed computation platform, that can be used both for data storage and computation.
+The deployment model consists of (usually three) nodes, the computing nodes that use SMPC through secret sharing to privately process the data.
 Secret sharing guarantees data confidentiality during storage.
-All computations are done by dedicated computing nodes.
+All computations are done by the dedicated computing nodes.
 
-Data providers submit their private inputs by sending the corresponding shares to the computing nodes.
+Data providers submit their private inputs by sending the corresponding cryptographic shares to the computing nodes.
 The secret sharing scheme ensures that each share is a random bit string.
+Each host, computing node, is not able to decrypt the data, or even extract any information about them.
 Consequently, a node holding that share learns no extra information about the data input (secret), than if they did not hold that share.
 For that reason, data providers need not trust any of the computing nodes.
 Instead providers must trust that the nodes as a group obey a set of rules such as that they do not collude during the computations.
-In practice, the computing nodes will be servers run by independent entities, such as companies or government agencies.
+In practice, the computing nodes will be servers run by independent entities, such as companies or government agencies, ideally having conflicting interests.
 Data users want to analyze the information given by data providers.
 Answers to their queries are given through the Sharemind system, and not from data providers directly.
 
