@@ -3,6 +3,7 @@
 Sharemind \cite{bogdanov2008sharemind, bogdanov2013sharemind} is a general purpose SMPC system, for privacy preserving data processing operating on additively secret-shared values.
 The idea of Sharemind is to provide a secure infrastructure that is able to host and evaluate privacy preserving algorithms.
 Sharemind provides an easily programmable and flexible platform that enables non\hyp cryptographers to develop and test privacy preserving algorithms such as Privacy Preserving Data Mining (PPDM).
+It consists of the computation runtime environment and a programming library for creating private data processing applications
 Sharemind is provably secure under the semi-honest (honest but curious) setting.
 
 Sharemind’s is deployed as a distributed computation platform, that can be used both for data storage and computation.
@@ -27,3 +28,7 @@ The language uses a custom type system, which separates private / confidential d
 Apart from common data types, SecreC adds a security types which can be either public or private.
 Public values are processed as usual, whereas private values, which are in secret-shared form are processed using secure computation.
 
+The Sharemind framework provides a privacy preserving  instruction set which includes secure addition, multiplication and greater-than-or-equal comparison of two shared values.
+Multiplication of a shared value with a constant and extraction of its bits as shares is also possible.
+Bit extraction and arithmetic primitives are sufficient to construct any Boolean circuit with a linear overhead and thus the Sharemind framework is also Turing complete \cite{bogdanov2008sharemind}.
+Many data mining and statistical analysis algorithms use no other mathematical operations than the Sharemind's instruction set, thus it is sufficient for most applications.
