@@ -1,15 +1,34 @@
 \section{Privacy Preserving Histograms}\label{s:histograms}
-Despite the challenges presented in section \ref{s:challenges}, the majority of algorithms can be transformed to their privacy preserving equivalent.
-However, this is not a straightforward translation and in the most cases it adds a complexity overhead to every algorithm that depends its control flow decisions in private data.
+Despite the challenges presented in sections \ref{s:challenges} and \ref{s:simple-algorithms}, the majority of algorithms can be transformed to their privacy preserving equivalent.
+However, this is not a straightforward translation , as we examined in section \ref{s:simple-algorithms}, and in most cases it adds a complexity overhead to every algorithm that depends its control flow decisions in private data.
 
-Histograms is a practical and notable example of algorithms that are widely used and the complexity of their privacy preserving version remains in computationaly feasible levels, compairing to the textbook algorithm.
-% A histogram is generally a form of classifing and representing data in some categories of a specific range.
+Histograms is a practical and notable example of algorithms that are widely used and the complexity of their privacy preserving version remains in computationally feasible levels, comparing to the textbook algorithm.
+But first of all, what is a histogram?
 
-\fixme{what is a histogram?}
+As stated in \cite{ioannidis2003history}, histograms initially conceived as a visual aid to statistical approximations.
+Webster’s defines a histogram as ``a bar graph of a frequency distribution in which the widths of the bars are proportional to the classes into which the variable has been divided and the heights of the bars are proportional to the class frequencies".
+A histogram is generally a form of classifying and representing data in some categories of a specific range; the range is an individual ``base" element associated with each column.
+
+More specifically, a histogram on some attributes $\{A, B, \dots, Z\}$ is constructed by partitioning the data distribution of those attributes into some ranges which are mutually disjoint subsets called buckets and approximating the frequencies and values in each bucket.
+For the sake of simplicity let us suppose that the number of ranges ($\beta$) of all attributes are equal ($\beta \geq 1$).
+
+In figure \ref{f:simple-hist} we present two histograms, the first one-dimensional and the second two-dimensional on some random attributes.
+
+
+\begin{figure}[H]
+    \centering
+    \subfloat[1D Histogram]{\includegraphics[width=0.49\columnwidth]{figures/1d-simple-hist.png}}
+    \subfloat[2D Histogram / Heatmap]{\includegraphics[width=0.49\columnwidth]{figures/2d-simple-hist.png}}
+
+    \caption{(a) An one-dimensional histogram with $\beta = 6$
+    (b) A two-dimensional histogram with $\beta = 8$.}
+    \label{f:simple-hist}
+\end{figure}
+
+
 
 
 \fixme{in which cases is a histogram useful?}
-
 
 
 
