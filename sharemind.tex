@@ -26,10 +26,17 @@ The programmer of the privacy preserving applications does not necessarily know 
 Application are developed using the SecreC programming language.
 SecreC is an imperative domain specific language (DSL) that is syntactically similar to C.
 The language uses a custom type system, which separates private / confidential data from public.
-Apart from common data types, SecreC adds a security types which can be either public or private.
+% Apart from common data types, SecreC adds a security types which can be either public or private.
 Public values are processed as usual, whereas private values, which are in secret-shared form are processed using secure computation.
 
 The Sharemind framework provides a privacy preserving  instruction set which includes secure addition, multiplication and greater-than-or-equal comparison of two shared values.
 Multiplication of a shared value with a constant and extraction of its bits as shares is also possible.
 Bit extraction and arithmetic primitives are sufficient to construct any Boolean circuit with a linear overhead and thus the Sharemind framework is also Turing complete \cite{bogdanov2008sharemind}.
 Many data mining and statistical analysis algorithms use no other mathematical operations than the Sharemind's instruction set, thus it is sufficient for most applications.
+
+SecreC guarantees writing privacy-preserving algorithms without any knowledge of the underlying cryptographic protocol.
+In other words, SecreC distinguishes the application/business logic from the cryptographic protocol.
+
+\fixme{give SecreC example???}
+
+
