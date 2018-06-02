@@ -80,8 +80,8 @@ pd_shared3p uint64 max(pd_shared3p uint64 x, pd_shared3p uint64 y) {
 }
 
 void main(){
-  pd_shared3p uint64 x1 = 5;            // Private, secret-shared value for input party 1
-  pd_shared3p uint64 x2 = 8;            // Private, secret-shared value for input party 2
+  pd_shared3p uint64 x1 = 5;            // Private, secret-shared value of input party 1
+  pd_shared3p uint64 x2 = 8;            // Private, secret-shared value of input party 2
   pd_shared3p uint64 max = max(x1, x2); // Private result
   print(declassify(max));               // Result publishing
 }
