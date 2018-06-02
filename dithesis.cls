@@ -305,9 +305,14 @@ publications}\gdef\@lopfileinternal{#1}}
 % holding the table of abbreviations and acronyms. The table
 % should be set by the user.
 %
+% \providecommand{\abbreviations}{
+%   \chapter*{ABBREVIATIONS - ACRONYMS}
+%   \addcontentsline{toc}{chapter}{ABBREVIATIONS - ACRONYMS}
+% }
+
 \providecommand{\abbreviations}{
-  \chapter*{ABBREVIATIONS - ACRONYMS}
-  \addcontentsline{toc}{chapter}{ABBREVIATIONS - ACRONYMS}
+  \chapter*{Abbreviations - Acronyms}
+  \addcontentsline{toc}{chapter}{Abbreviations - Acronyms}
 }
 
 %
@@ -546,6 +551,7 @@ publications}\gdef\@lopfileinternal{#1}}
   \clearpage
 }
 
+
 %
 % Preface page (optional)
 %
@@ -578,6 +584,8 @@ publications}\gdef\@lopfileinternal{#1}}
 % Configure the frontmatter page
 %
 \renewcommand{\frontmatter}{
+    \pagenumbering{Roman}
+
     \pagestyle{empty}
     % frontpage - english version
     \englishfrontpagetrue
@@ -624,24 +632,31 @@ publications}\gdef\@lopfileinternal{#1}}
     \makeatother
 
     \pagestyle{empty}
-    % \addcontentsline{toc}{chapter}{\listfigurename}
+    \addcontentsline{toc}{chapter}{\listfigurename}
     \listoffigures
-    % \cleardoublepage
+    \thispagestyle{empty}
+    \cleardoublepage
     \endgroup
 
     % list of tables
-    % \addcontentsline{toc}{chapter}{\listtablename}
+    \addcontentsline{toc}{chapter}{\listtablename}
     \listoftables
     \thispagestyle{empty}
+    \cleardoublepage
+
+
+    \addcontentsline{toc}{chapter}{List of Algorithms}
+    \listofalgorithms
+    \thispagestyle{empty}
+    \cleardoublepage
+
 
     % list of listings
     % \addcontentsline{toc}{chapter}{\lstlistlistingname}
+    \addcontentsline{toc}{chapter}{List of Source Codes}
     \listoflistings
     \thispagestyle{empty}
-
-    % \addcontentsline{toc}{chapter}{List of Algorithms}
-    \listofalgorithms
-    \thispagestyle{empty}
+    \cleardoublepage
 
     % preface page (english version only, OPTIONAL)
     \ifprefacepage
@@ -720,7 +735,8 @@ publications}\gdef\@lopfileinternal{#1}}
 %
 % Rename Bibliography to References
 %
-\renewcommand{\bibname}{REFERENCES}
+\renewcommand{\bibname}{References}
+
 
 %
 % Set ToC depth
