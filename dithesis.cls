@@ -495,6 +495,7 @@ publications}\gdef\@lopfileinternal{#1}}
 %
 \def\@absEn{
   \chapter*{Abstract}
+  \addcontentsline{toc}{chapter}{Abstract}
   \thispagestyle{empty}
   \@abstractEn{}
   \vfill
@@ -546,6 +547,7 @@ publications}\gdef\@lopfileinternal{#1}}
 %
 \def\@acks{
   \chapter*{Acknowledgements}
+  \addcontentsline{toc}{chapter}{Acknowledgements}
   \thispagestyle{empty}
   \@acksEn{}
   \clearpage
