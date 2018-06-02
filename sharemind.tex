@@ -54,7 +54,20 @@ SecreC offers a special \texttt{declassify} operator through which is made possi
 An expression that is  \fixme{\texttt{declassif}\hyp ied} has its security type changed from private to public, and the secret\hyp shared value moves into the public execution environment.
 Since the use of the \texttt{declassify} operator is the only way for private data to become public, its use should be tracked in order to reason about data privacy and to avoid potential unwanted privacy leaks.
 As a rule of thumb, declassification of private data should occur ass little as possible.
-Ideally, declassification should be used only to publish the final results of an algorithm, or intermediate results that have low privacy risk i.e. do not reveal sensitive information.
+Ideally, declassification should be used only to publish the final results of an algorithm, or intermediate results that have low privacy risk \textit{i.e.} do not reveal sensitive information.
+
+Typically, if a decision (e.g a branch) is to be made over private data, that would require the data to be published, that is to be converted to the public security type.
+There is however an alternative solution to branching on private information.
+For instance, consider the following example:
+
+\texttt{if (x) a = b; else a = c; }
+
+One can rewrite the previous statement using with the following expression:
+
+\texttt{a = b * x + c * (1-x); }
+
+Using this technique a programmer can replace conditional statements on private data with such oblivious selection clauses.
+So the control flow dependencies are converted into data dependencies.
 
 
 \fixme{give SecreC example???}
