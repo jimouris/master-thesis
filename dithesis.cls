@@ -159,7 +159,7 @@ headsep=0.5cm,footskip=0.75cm,
 \RequirePackage{xifthen}
 
 %(e.g., abbreviations)
-%\RequirePackage[toc,page,titletoc]{appendix} % needed for configuring
+% \RequirePackage[toc,page,titletoc]{appendix} % needed for configuring
 %%appendices
 
 %
@@ -624,18 +624,22 @@ publications}\gdef\@lopfileinternal{#1}}
     \makeatother
 
     \pagestyle{empty}
+    % \addcontentsline{toc}{chapter}{\listfigurename}
     \listoffigures
-    \cleardoublepage
+    % \cleardoublepage
     \endgroup
 
     % list of tables
+    % \addcontentsline{toc}{chapter}{\listtablename}
     \listoftables
     \thispagestyle{empty}
 
     % list of listings
+    % \addcontentsline{toc}{chapter}{\lstlistlistingname}
     \listoflistings
     \thispagestyle{empty}
 
+    % \addcontentsline{toc}{chapter}{List of Algorithms}
     \listofalgorithms
     \thispagestyle{empty}
 
@@ -655,6 +659,7 @@ publications}\gdef\@lopfileinternal{#1}}
 \renewcommand{\mainmatter}{
 	% just set the style of the pages to be fancy
     \pagestyle{fancy}
+    \cleardoublepage\pagenumbering{arabic}
 }
 \renewcommand{\backmatter}{
 	% just set the style of the pages to be fancy
@@ -664,7 +669,26 @@ publications}\gdef\@lopfileinternal{#1}}
     % when a \chapter command is invoked, the command
     % \thispagestyle{plain} is invoked
     % (thanks to http://tex.stackexchange.com/a/19741)
-    %\patchcmd{\chapter}{plain}{empty}{}{}
+    % \patchcmd{\chapter}{plain}{empty}{}{}
+
+    \import{./}{abbreviations.tex}
+
+    % appendix
+    \begin{appendix}
+      % mark the beginning of the appendix
+      \appendixstartedtrue
+
+      % add appendix line to ToC
+      \phantomsection
+      \addcontentsline{toc}{chapter}{Appendices}
+
+      \import{./}{appendixA.tex}
+      \import{./}{appendixB.tex}
+    \end{appendix}
+    \bibliographystyle{plain}
+    \bibliography{./references.bib}
+    % include it also in ToC (do sth on your own)
+    \addcontentsline{toc}{chapter}{References}
 }
 
 %

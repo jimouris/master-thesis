@@ -17,6 +17,7 @@
 \usepackage{booktabs}
 \usepackage{lipsum}
 \usepackage{enumerate}
+\usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{import}
@@ -209,42 +210,5 @@ Integer nisi lacus, fringilla sit amet ipsum at, pulvinar luctus lectus. Pellent
 
 \backmatter
 
-% abbreviations table
-\abbreviations
-\begin{center}
-	\renewcommand{\arraystretch}{1.5}
-	\begin{longtable}{ l @{\qquad} l }
-	\toprule
-  $Enc$     & Encryption Algorithm \\
-  $Dec$     & Decryption Algorithm \\
-  $PubKey$  & Public Key \\
-  $PrivKey$ & Private Key \\
-  PKE       & Public Key Encryption \\
-  DH        & Diffie Hellman \\
-  RSA       & Rivest -- Shamir -- Adleman \\
-  HE        & Homomorphic Encryption \\
-  PHE       & Partially Homomorphic Encryption \\
-  FHE       & Fully Homomorphic Encryption \\
-  HElib     & Homomorphic Encryption Library, implementing the BGV scheme \\
-  BGV       & Brakerski -- Gentry -- Vaikuntanathan \\
-  TFHE      & Fast Fully Homomorphic Encryption over the Torus \\
-  SMPC, MPC & Secure Multi-party Computation \\
-  SFE       & SecureFunctionEvaluation \\
-  2PC       & Two-party Computation (Millionaire's Problem) \\
-  OT        & Oblivious Transfer \\
-  SPDZ      & Smart, Pastro, Damg{\aa}rd and Zakarias. SMPC protocol \\
-  PPDM      & Privacy Preserving Data Mining \\
-  DSL       & Domain Specific Language \\
-  SIMD      & Single Instruction Multiple Data \\
-
-	\bottomrule
-	\end{longtable}
-\end{center}
-
-% manually include the bibliography
-\bibliographystyle{plain}
-\bibliography{references}
-% include it also in ToC (do sth on your own)
-\addcontentsline{toc}{chapter}{REFERENCES}
 
 \end{document}
