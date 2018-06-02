@@ -75,15 +75,15 @@ Here we use \texttt{pd\_shared3p} as the security type, which stands for \textit
 
 \begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
 pd_shared3p uint64 max(pd_shared3p uint64 x, pd_shared3p uint64 y) {
-  pd_shared3p uint64 gt = (uint64)(x > y); // 1 if x > y, 0 otherwise
-  return x * gt + y * (1-gt); // Oblivious selection of the max value
+  pd_shared3p uint64 gt = (uint64)(x > y);  // 1 if x > y, 0 otherwise
+  return x * gt + y * (1-gt);               // Oblivious selection of the max value
 }
 
 void main(){
-  pd_shared3p uint64 x1 = 5; // Private, secret-shared value if input party 1
-  pd_shared3p uint64 x2 = 8;  // Private, secret-shared value if input party 2
+  pd_shared3p uint64 x1 = 5;            // Private, secret-shared value for input party 1
+  pd_shared3p uint64 x2 = 8;            // Private, secret-shared value for input party 2
   pd_shared3p uint64 max = max(x1, x2); // Private result
-  print(declassify(max)); // Result publishing
+  print(declassify(max));               // Result publishing
 }
 
 \end{minted}
