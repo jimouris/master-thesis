@@ -8,19 +8,19 @@ The problem states that there are two millionaires wishing to know who is richer
 However, they should not find out any additional information about each other’s wealth.
 Here the two parties $P_1$, $P_2$ are the two millionaires.
 Their private inputs are each one’s wealth $x_1$ and $x_2$ respectively.
-The function which they wish to jointly compute can be formulated as 
+The function which they wish to jointly compute can be formulated as
 
 \begin{equation}
   f(x_1, x_2)=\begin{cases}
-    1, & \text{if $x_1 < x_2$}.\\
-    0, & \text{otherwise}.
+    x_1, & \text{if $x_1 > x_2$}.\\
+    x_2, & \text{otherwise}.
   \end{cases}
 \end{equation}
 
 In the general case we have N parties $P_1, P_2, \dots, P_N$ with private inputs $x_1, x_2, \dots, x_N$ respectively.
-The goal is to compute a function $f(x_1, x_2, \dots, x_N)$ and learn nothing more than what they would have if a seperate trusted party had collected their inputs, and computed function $f$ for them.
+The goal is to compute a function $f(x_1, x_2, \dots, x_N)$ and learn nothing more than what they would have if a separate trusted party had collected their inputs, and computed function $f$ for them.
 
-Another example for the two-party case is Oblivious Transfer (OT) \cite{rabin2005exchange} with its simples flavour being 1-2 oblivious transfer or ``1 out of 2 oblivious transfer".
+Another example for the two-party case is Oblivious Transfer (OT) \cite{rabin2005exchange} with its simples flavor being 1-2 oblivious transfer or ``1 out of 2 oblivious transfer".
 Here we have two parties, the sender and the receiver.
 The sender has two messages, $m_0$ and $m_1$, and the receiver has a bit $b$.
 The receiver wishes to learn $m_b$, without learning anything about $m_{1-b}$ and without the sender learning $b$.
