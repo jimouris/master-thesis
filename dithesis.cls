@@ -700,6 +700,12 @@ publications}\gdef\@lopfileinternal{#1}}
       \import{./}{appendixA.tex}
       \import{./}{appendixB.tex}
     \end{appendix}
+
+    %
+    % Rename Bibliography to References
+    %
+    \renewcommand{\bibname}{References}
+
     \bibliographystyle{plain}
     \bibliography{./references.bib}
     % include it also in ToC (do sth on your own)
@@ -731,11 +737,6 @@ publications}\gdef\@lopfileinternal{#1}}
 
 % use capital letters for chapters in the ToC as well
 % TODO
-
-%
-% Rename Bibliography to References
-%
-\renewcommand{\bibname}{References}
 
 
 %
