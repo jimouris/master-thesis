@@ -1,8 +1,8 @@
-LATEX=xelatex
+LATEX=xelatex -shell-escape
 BIBTEX=bibtex
 
 compile:
-	make clean 
+	make clean
 	$(LATEX) thesis.tex
 	$(BIBTEX) thesis.aux
 	$(LATEX) thesis.tex

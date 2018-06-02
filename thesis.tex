@@ -36,7 +36,11 @@
 \usepackage{hyperref}
 \usepackage{hyphenat}
 \usepackage{subfig}
+\usepackage[newfloat]{minted}
 
+\SetupFloatingEnvironment{listing}{name=Source Code}
+\renewcommand*{\listlistingname}{List of Source Code}
+\renewcommand{\thelisting}{\arabic{lstnumber}}
 
 \interfootnotelinepenalty=10000
 

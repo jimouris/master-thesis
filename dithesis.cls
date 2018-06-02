@@ -633,7 +633,7 @@ publications}\gdef\@lopfileinternal{#1}}
     \thispagestyle{empty}
 
     % list of listings
-    \lstlistoflistings
+    \listoflistings
     \thispagestyle{empty}
 
     \listofalgorithms
