@@ -1,7 +1,11 @@
 \chapter{A Medical Case Study}\label{c:medical-study}
 
 In this thesis we primary focus to analyze medical data by using some of the aforementioned techniques from section \ref{c:preliminaries}.
-More specifically, we have developed algorithms for secure data aggregation / statistics and classification under the secure multi-party computation scenario.
+More specifically we have developed a complete system built around secure medical data analytics that could be beneficial to patients, doctors and researchers.
+
+The system can provide insights about some medical datasets that are imported into the system to anyone who wants to query them, without compromising individual patient's privacy.
+These analytics which include data aggregation / statistics and classification are implemented through privacy preserving algorithms under the secure multi-party computation scenario.
+
 In such a case, the computing nodes are not necessarily the ones that also provide the data.
 Indeed, in our study, the data providers are hospitals and the computing nodes are three different servers.
 When the medical data are transfered from the hospitals to the computing nodes, a secret sharing scheme is applied; thus it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
