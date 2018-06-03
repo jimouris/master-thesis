@@ -8,7 +8,7 @@ These analytics which include data aggregation / statistics and classification a
 
 In such a case, the computing nodes are not necessarily the ones that also provide the data.
 Indeed, in our study, the data providers are hospitals and the computing nodes are three different servers.
-When the medical data are transfered from the hospitals to the computing nodes, a secret sharing scheme is applied; thus it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
+When the medical data are transferred from the hospitals to the computing nodes, a secret sharing scheme is applied; thus it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
 As we examined in section \ref{s:smpc}, the only requirement of the three computing parties is not to collude.
 This should not be confused with trusted servers.
 They are only trusted not to collude.
@@ -20,14 +20,18 @@ Any third party or analyst, can query the cluster of nodes and request a computa
 
 
 \section{Our architecture \fixme{give a fancy name for the whole scheme.}}\label{s:architecture}
-Our architecture consists of the SMPC cluster and a server \fixme{find a name for that server!!} that handles all private computation requests, as well as \texttt{N} more servers that are hosted in the data providers' premises (in our case the hospitals).
+Our architecture consists of the SMPC cluster (the three computing nodes) and a proxy server, dubbed \textit{coordinator}, that handles all private computation requests, as well as \texttt{N} more servers that are hosted in the data providers' premises (in our case the hospitals).
+The \textit{coordinator} listens for requests for private computation, and when such a request arises, the coordinator communicates with the data providers (all \texttt{N} hospitals) requesting them securely import their data to the computing cluster.
+The data are secret shared to the three parties, thus it is impossible for any of the nodes or anyone listening in the communication channel to infer the slightest information about the patients.
+
 
 
 The detailed procedure is depicted in figure \ref{f:overview}.
-First, an analyst sends a request to the main server asking for a private computation, specifying an attribute and the hospitals from which the data will originate -- let us assume an aggregation over a field \texttt{X}, for hospitals \texttt{A} and \texttt{B}.
-Then, the server request from each selected hospital to import their data for attribute \texttt{X} to the SMPC cluster.
+First, an analyst sends a request to the \textit{coordinator} asking for a private computation, specifying an attribute and the hospitals from which the data will originate -- let us assume an aggregation over a field \texttt{X}, for hospitals \texttt{A} and \texttt{B}.
+Then, the main server request from each selected hospital (in our case \texttt{A} and \texttt{B}) to import their data for attribute \texttt{X} to the SMPC cluster.
 Consecutively, using an additive secret sharing protocol, the hospitals' servers securely import their data to the three computing nodes.
-The actual computation takes place after the import is complete, and finally the aggregation over attribute \texttt{X} is returned to the user through the server.
+The actual computation takes place after the import is complete, and finally the aggregation over attribute \texttt{X} is returned to the user through the \textit{coordinator}.
+
 
 
 
@@ -35,8 +39,21 @@ The actual computation takes place after the import is complete, and finally the
   \centering
   \includegraphics[width=\linewidth]{figures/overview.png}
   % \vspace{-0.2in}
-  \caption{An overview of the architecture of our study}\label{f:overview}
+  \caption{An overview of the architecture of our study \fixme{update to latest version: (not yet..)}}\label{f:overview}
 \end{figure}
+
+
+
+\section{Data Importing}\label{s:importing}
+The data importing is a procedure of high importance, since the patients data are transferred outside the hospitals to third party servers.
+It is easily misinterpreted that since the data are leaving the hospitals' premises, their privacy is being compromised.
+However, it has been elucidated in section \ref{s:secret-sharing} that secret sharing is a form of encryption, thus no information leakage is possible while data being in transit and in use in the SMPC cluster.
+
+
+
+\subsection{Data Importing On-the-Fly}\label{s:importing-otf}
+\fixme{Why importing on the fly?}
+
 
 
 
