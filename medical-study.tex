@@ -6,6 +6,9 @@ More specifically we have developed a complete system built around secure medica
 The system can provide insights about some medical datasets that are imported into the system to anyone who wants to query them, without compromising individual patient's privacy.
 These analytics which include data aggregation / statistics and classification are implemented through privacy preserving algorithms under the secure multi-party computation scenario.
 
+The system provides end to end work flow starting from the query selection from a user.
+Following is the secure data importing, the performing of privacy preserving data analytics algorithms upon those data and finally the visualization of the results to the end user through a friendly user interface (UI).
+
 \section{A Doctor's view}
 We consider the use case of a doctor working in a hospital that wants to examine the data stored in that hospital's datasets.
 She could possibly want to evaluate a treatment's outcome.
@@ -20,16 +23,23 @@ and differences in these treatments.
 Continuous monitoring of patient data is useful for any hospital.
 Provided with usable and informative tools a doctor could potentially make better diagnoses and take the appropriate action for each case.
 
-\section{A Patient's view}
-A patient querying the datasets can have an idea about how they are related to other patients in the dataset.
-This can enable them to track their health progress by comparing themselves to others and learn how to improve their outcomes if needed.
+\section{An Individual's view}
+An individual could also benefit from the insights provided by our system.
+We consider the case in which an individual with certain condition queries the available datasets looking for the same condition.
+The individual could locate the hospitals in which patients with the same condition are treated.
+Also, he could identify which hospitals in his area have the best outcome for patients with conditions similar to his.
+
+Another way an individual could be benefited from the privacy preserving medical data analytics is the use of a classification mechanism using a model trained over patient data.
+This way one could classify himself to a condition / disease or another chosen attribute for that matter, based on his own data.
 
 \section{A Researcher's view}
-A researcher can query the datasets to see if they suit their needs.
-They can discover if the datasets are providing enough utility / information and decide which ones to use for performing analysis on.
+We examine the case where an academic or industry researcher queries the datasets to see if they suit their research needs.
+They could discover if the datasets are providing enough utility / information and decide which ones to use for performing analysis on.
 
-The system provides end to end work flow starting from the query selection from a user.
-Following is the secure data importing, performing privacy preserving data analytics algorithms upon those data and finally provide a visualization of the results to the end user through a friendly user interface (UI).
+For example, studying aggregate statistical information of the datasets, one could find possible correlations of particular attributes or find patterns of treatments and conditions.
+
+A researcher could also study the relation between certain conditions and different hospitals, which is something that could provide valuable information.
+
 
 %%%%%%%%%%%%%%%%%%% This does not belong in this section. It is about architecture %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
