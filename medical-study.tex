@@ -58,10 +58,22 @@ A researcher could also study the relation between certain conditions and differ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Our architecture \fixme{give a fancy name for the whole scheme.}}\label{s:architecture}
-Our architecture consists of the SMPC cluster (the three computing nodes) and a proxy server, dubbed \textit{coordinator}, that handles all private computation requests, as well as \texttt{N} more servers that are hosted in the data providers' premises (in our case the hospitals).
-The \textit{coordinator} listens for requests for private computation, and when such a request arises, the coordinator communicates with the data providers (all \texttt{N} hospitals) requesting them securely import their data to the computing cluster.
-The data are secret shared to the three parties, thus it is impossible for any of the nodes or anyone listening in the communication channel to infer the slightest information about the patients.
+Our architecture consists of the \textit{SMPC cluster}, a proxy server, dubbed \textit{coordinator}, as well as \texttt{N} more servers that are hosted in the hospitals' premises and act as \textit{data providers}.
 
+The \textit{SMPC cluster} consists of three servers -- three computing nodes -- participating in the MPC protocol. In our case, these nodes do not provide the data for the computation.
+
+The \textit{data providers} are hospitals that provide medical dataset upon which the privacy preserving algorithms will execute.
+When the medical data are transferred from the hospitals to the computing nodes, they get secret\hyp shared.
+Thus, it is impossible for any of the three nodes, or anyone listening in the communication channel, to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
+
+As we examined in section \ref{s:smpc}, the computing nodes of the \textit{SMPC cluster} need not be trusted nodes. The only requirement of these nodes is not to collude.
+This should not be confused with trusted servers.
+A reasonable way to prevent collusion, is to deploy the computing nodes in premises of organizations having conflicting interests.
+
+The \textit{coordinator} handles all private computation requests.
+The server listens for requests for private query execution, and when such a request arises, the coordinator communicates with the data providers (all \texttt{N} hospitals) requesting them to securely import their data to the computing cluster.
+The data are then secret\hyp shared to the three nodes, with each node acquiring one share of the original value.
+Then the privacy preserving computation takes place in the SMPC cluster, and the results get visualized and served back to the requesting user through the \textit{coordinator} server.
 
 
 The detailed procedure is depicted in figure \ref{f:overview}.
