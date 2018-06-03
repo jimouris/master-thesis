@@ -6,13 +6,25 @@ More specifically we have developed a complete system built around secure medica
 The system can provide insights about some medical datasets that are imported into the system to anyone who wants to query them, without compromising individual patient's privacy.
 These analytics which include data aggregation / statistics and classification are implemented through privacy preserving algorithms under the secure multi-party computation scenario.
 
-\fixme{Maybe write 3 sections with three separate complete use cases}
+\section{A Doctor's view}
+We consider the use case of a doctor working in a hospital that wants to examine the data stored in that hospital's datasets.
+She could possibly want to evaluate a treatment's outcome.
+To achieve this the doctor should monitoring some particular datasets in order to have an overall view of the patients' condition over time.
+This could allow a comparison between previously treated patients and enable data\hyp driven cues for the treatment.
+For example a drug's effect could be evaluated that way.
 
-Doing so, a doctor can discover valuable information about datasets in the system such as how useful they are, what kind of information each dataset provides and have an enlightening view of the data in a human readable way.
+The doctor could also compare aggregate results from datasets between different hospitals.
+That way she could get an insight of how each patients' condition varies between different hospitals, which could indicate the different effect that different treatments have on patients and identify patterns
+and differences in these treatments.
 
+Continuous monitoring of patient data is useful for any hospital.
+Provided with usable and informative tools a doctor could potentially make better diagnoses and take the appropriate action for each case.
+
+\section{A Patient's view}
 A patient querying the datasets can have an idea about how they are related to other patients in the dataset.
 This can enable them to track their health progress by comparing themselves to others and learn how to improve their outcomes if needed.
 
+\section{A Researcher's view}
 A researcher can query the datasets to see if they suit their needs.
 They can discover if the datasets are providing enough utility / information and decide which ones to use for performing analysis on.
 
