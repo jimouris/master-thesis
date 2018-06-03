@@ -6,18 +6,34 @@ More specifically we have developed a complete system built around secure medica
 The system can provide insights about some medical datasets that are imported into the system to anyone who wants to query them, without compromising individual patient's privacy.
 These analytics which include data aggregation / statistics and classification are implemented through privacy preserving algorithms under the secure multi-party computation scenario.
 
-In such a case, the computing nodes are not necessarily the ones that also provide the data.
-Indeed, in our study, the data providers are hospitals and the computing nodes are three different servers.
-When the medical data are transferred from the hospitals to the computing nodes, a secret sharing scheme is applied; thus it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
-As we examined in section \ref{s:smpc}, the only requirement of the three computing parties is not to collude.
-This should not be confused with trusted servers.
-They are only trusted not to collude.
-A reasonable way to prevent collusion, is to deploy the computing nodes in premises of conflicting interests.
+\fixme{Maybe write 3 sections with three separate complete use cases}
 
+Doing so, a doctor can discover valuable information about datasets in the system such as how useful they are, what kind of information each dataset provides and have an enlightening view of the data in a human readable way.
 
-After gathering the patients' data -- in secret-shared form -- the computing nodes can evaluate any arbitrary function that is deployed with respect to the SMPC model.
-Any third party or analyst, can query the cluster of nodes and request a computation.
+A patient querying the datasets can have an idea about how they are related to other patients in the dataset.
+This can enable them to track their health progress by comparing themselves to others and learn how to improve their outcomes if needed.
 
+A researcher can query the datasets to see if they suit their needs.
+They can discover if the datasets are providing enough utility / information and decide which ones to use for performing analysis on.
+
+The system provides end to end work flow starting from the query selection from a user.
+Following is the secure data importing, performing privacy preserving data analytics algorithms upon those data and finally provide a visualization of the results to the end user through a friendly user interface (UI).
+
+%%%%%%%%%%%%%%%%%%% This does not belong in this section. It is about architecture %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% In such a case, the computing nodes are not necessarily the ones that also provide the data.
+% Indeed, in our study, the data providers are hospitals and the computing nodes are three different servers.
+% When the medical data are transferred from the hospitals to the computing nodes, a secret sharing scheme is applied; thus it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
+% As we examined in section \ref{s:smpc}, the only requirement of the three computing parties is not to collude.
+% This should not be confused with trusted servers.
+% They are only trusted not to collude.
+% A reasonable way to prevent collusion, is to deploy the computing nodes in premises of organizations having conflicting interests.
+%
+%
+% After gathering the patients' data -- in secret-shared form -- the computing nodes can evaluate any arbitrary function that is deployed with respect to the SMPC model.
+% Any third party or analyst, can query the cluster of nodes and request a computation.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Our architecture \fixme{give a fancy name for the whole scheme.}}\label{s:architecture}
 Our architecture consists of the SMPC cluster (the three computing nodes) and a proxy server, dubbed \textit{coordinator}, that handles all private computation requests, as well as \texttt{N} more servers that are hosted in the data providers' premises (in our case the hospitals).
