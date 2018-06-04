@@ -1,5 +1,5 @@
 \section{Secure Multi-party Computation (SMPC)}\label{s:smpc}
-Secure multi-party computation (SMPC) [...] or Secure Function Evaluation (SFE) is a field of cryptography aiming to create methods that enable distinct parties, to jointly compute a function over their private inputs.
+Secure multi-party computation (SMPC) \footnote{We are going to use the terms SMPC and MPC interchangeably.} [...] or Secure Function Evaluation (SFE) is a field of cryptography aiming to create methods that enable distinct parties, to jointly compute a function over their private inputs.
 Only the outcome of that function is made public and the parties don’t learn anything more than their own input except whatever can be learned from the output of the function.
 
 Secure multi-party computation was introduced in 1982 by Andrew Yao.
@@ -24,3 +24,5 @@ Another example for the two-party case is Oblivious Transfer (OT) \cite{rabin200
 Here we have two parties, the sender and the receiver.
 The sender has two messages, $m_0$ and $m_1$, and the receiver has a bit $b$.
 The receiver wishes to learn $m_b$, without learning anything about $m_{1-b}$ and without the sender learning $b$.
+
+\fixme{Elaborate more..}
