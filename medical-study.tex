@@ -11,26 +11,30 @@ Following is the secure data importing, the performing of privacy preserving dat
 
 \section{A Doctor's view}
 We consider the use case of a doctor working in a hospital that wants to examine the data stored in that hospital's datasets.
-She could possibly want to evaluate a treatment's outcome.
-To achieve this the doctor should monitoring some particular datasets in order to have an overall view of the patients' condition over time.
-This could allow a comparison between previously treated patients and enable data\hyp driven cues for the treatment.
-For example a drug's effect could be evaluated that way.
+He/She could possibly want to evaluate a treatment's outcome.
+To achieve this, the doctor should have monitored some particular datasets in order to have an overall view of the patients' condition over time.
+This could allow a comparison between previously treated patients and enable data-driven cues for the treatment.
+For example, a drug's effect could be evaluated that way.
 
 The doctor could also compare aggregate results from datasets between different hospitals.
-That way she could get an insight of how each patients' condition varies between different hospitals, which could indicate the different effect that different treatments have on patients and identify patterns
+That way he/she could get an insight of how each patients' condition varies between different hospitals, which could indicate the different effect that different treatments have on patients and identify patterns
 and differences in these treatments.
 
 Continuous monitoring of patient data is useful for any hospital.
 Provided with usable and informative tools a doctor could potentially make better diagnoses and take the appropriate action for each case.
 
+
 \section{An Individual's view}
 An individual could also benefit from the insights provided by our platform.
-We consider the case in which an individual with certain condition queries the available datasets looking for the same condition.
-The individual could locate the hospitals in which patients with the same condition are treated.
-Also, he could identify which hospitals in his area have the best outcome for patients with conditions similar to his.
+We consider the case in which an individual with a certain condition queries the available datasets looking for the same condition.
+\fixme{The individual could locate the hospitals in which patients with the same condition are treated.
+Also, he/she could identify which hospitals in his area have the best outcome for patients with conditions similar to his.
+\textbf{How is this possible?? doesn't this compromise patients' data??}}
+
 
 Another way an individual could be benefited from the privacy preserving medical data analytics is the use of a classification mechanism using a model trained over patient data.
 This way one could classify himself to a condition / disease or another chosen attribute for that matter, based on his own data.
+
 
 \section{A Researcher's view}
 We examine the case where an academic or industry researcher queries the datasets to see if they suit their research needs.
@@ -41,36 +45,18 @@ For example, studying aggregate statistical information of the datasets, one cou
 A researcher could also study the relation between certain conditions and different hospitals, which is something that could provide valuable information.
 
 
-%%%%%%%%%%%%%%%%%%% This does not belong in this section. It is about architecture %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% In such a case, the computing nodes are not necessarily the ones that also provide the data.
-% Indeed, in our study, the data providers are hospitals and the computing nodes are three different servers.
-% When the medical data are transferred from the hospitals to the computing nodes, a secret sharing scheme is applied; thus it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
-% As we examined in section \ref{s:smpc}, the only requirement of the three computing parties is not to collude.
-% This should not be confused with trusted servers.
-% They are only trusted not to collude.
-% A reasonable way to prevent collusion, is to deploy the computing nodes in premises of organizations having conflicting interests.
-%
-%
-% After gathering the patients' data -- in secret-shared form -- the computing nodes can evaluate any arbitrary function that is deployed with respect to the SMPC model.
-% Any third party or analyst, can query the cluster of nodes and request a computation.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Our architecture \fixme{give a fancy name for the whole scheme.}}\label{s:architecture}
 Our architecture consists of the \textit{SMPC cluster}, a proxy server, dubbed \textit{coordinator}, as well as \texttt{N} more servers that are hosted in the hospitals' premises and act as \textit{data providers}.
 
-The \textit{SMPC cluster} consists of three servers -- three computing nodes -- participating in the MPC protocol. In our case, these nodes do not provide the data for the computation.
+\textbf{SMPC cluster}: The \textit{SMPC cluster} consists of three servers -- three computing nodes -- participating in the SMPC protocol. In our case, these nodes do not provide the data for the computation.
 
-The \textit{data providers} are hospitals that provide medical dataset upon which the privacy preserving algorithms will execute.
+\textbf{Data providers}: The \textit{data providers} are hospitals that provide medical datasets upon which the privacy preserving algorithms will execute.
 When the medical data are transferred from the hospitals to the computing nodes, they get secret\hyp shared.
 Thus, it is impossible for any of the three nodes, or anyone listening in the communication channel, to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
 
-As we examined in section \ref{s:smpc}, the computing nodes of the \textit{SMPC cluster} need not be trusted nodes. The only requirement of these nodes is not to collude.
-This should not be confused with trusted servers.
-A reasonable way to prevent collusion, is to deploy the computing nodes in premises of organizations having conflicting interests.
 
-The \textit{coordinator} handles all private computation requests.
+\textbf{Coordinator}: The \textit{coordinator} handles all private computation requests.
 The server listens for requests for private query execution, and when such a request arises, the coordinator communicates with the data providers (all \texttt{N} hospitals) requesting them to securely import their data to the computing cluster.
 The data are then secret\hyp shared to the three nodes, with each node acquiring one share of the original value.
 Then the privacy preserving computation takes place in the SMPC cluster, and the results get visualized and served back to the requesting user through the \textit{coordinator} server.
@@ -84,13 +70,26 @@ The actual computation takes place after the import is complete, and finally the
 
 
 
-
-\begin{figure}[th]
+\begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/overview.png}
   % \vspace{-0.2in}
   \caption{An overview of the architecture of our study \fixme{update to latest version: (not yet..)}}\label{f:overview}
 \end{figure}
+
+
+
+\subsection{SMPC Cluster Privacy Guarantees}\label{s:smpc-privacy-guarantees}
+
+As we examined in section \ref{s:smpc}, the computing nodes of the \textit{SMPC cluster} do not need to be trusted nodes.
+The only requirement of these nodes is not to collude.
+This should not be confused with trusted servers.
+A reasonable way to prevent collusion, is to deploy the computing nodes in premises of organizations having conflicting interests.
+
+
+Since the actual data are transferred from the hospitals to the computing nodes in a secret shared form, it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
+However, meaningful computations can be applied due to the homomorphic properties that the shares have (section \ref{ss:secret-sharing-homomorphism}).
+The computing nodes can evaluate any arbitrary function that is deployed with respect to the SMPC model.
 
 
 
