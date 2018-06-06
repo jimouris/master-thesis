@@ -53,7 +53,6 @@ Our architecture consists of the \textit{SMPC cluster}, a proxy server, dubbed \
 
 \textbf{Data providers}: The \textit{data providers} are hospitals that provide medical datasets upon which the privacy preserving algorithms will execute.
 When the medical data are transferred from the hospitals to the computing nodes, they get secret\hyp shared.
-Thus, it is impossible for any of the three nodes, or anyone listening in the communication channel, to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
 
 
 \textbf{Coordinator}: The \textit{coordinator} handles all private computation requests.
@@ -87,16 +86,19 @@ This should not be confused with trusted servers.
 A reasonable way to prevent collusion, is to deploy the computing nodes in premises of organizations having conflicting interests.
 
 
-Since the actual data are transferred from the hospitals to the computing nodes in a secret shared form, it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
+Since the actual data are transferred from the hospitals to the computing nodes through secret\hyp sharing, it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
 However, meaningful computations can be applied due to the homomorphic properties that the shares have (section \ref{ss:secret-sharing-homomorphism}).
-The computing nodes can evaluate any arbitrary function that is deployed with respect to the SMPC model.
 
+The only information that gets published is the output of the privacy preserving computation.
+This is returned to the user who initiated the query via the \textit{coordinator} server.
 
 
 \section{Data Importing}\label{s:importing}
 The data importing is a procedure of high importance, since the patients data are transferred outside the hospitals to third party servers.
 It is easily misinterpreted that since the data are leaving the hospitals' premises, their privacy is being compromised.
-However, it has been elucidated in section \ref{s:secret-sharing} that secret sharing is a form of encryption, thus no information leakage is possible while data being in transit and in use in the SMPC cluster.
+However, it has been elucidated in section \ref{s:secret-sharing} that secret sharing is a form of encryption, thus no information leakage is possible while data being in use in the SMPC cluster.
+For transferring each share from the data providers to the corresponding SMPC computing nodes standard techniques -- such as symmetric encryption -- are used to protect data in transit.
+Data are also safe while at rest in the SMPC cluster as each node only stores a cryptographic share of a piece of data, so no information about the original data can be inferred.
 
 
 
