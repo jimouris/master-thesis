@@ -95,7 +95,7 @@ void main(){
 
 \section{Sharemind Infrastructure}
 Sharemind consists of three different kinds of parties, input parties, computing parties and result parties.
-The number of the input parties -- data providers -- as well as the result parties -- analysts/users -- is not restricted, however the computing parties are restricted be the SMPC protocol that is used; for instance in the aforementioned ``Millionaire problem" (\textit{Source Code} \ref{l:millionaires}) is used the \textit{pd\_shared3p}, which utilizes three nodes.
+The number of the input parties -- data providers -- as well as the result parties -- analysts/users -- is not restricted, however the computing parties are restricted by the SMPC protocol that is been used; for instance the aforementioned ``Millionaire problem" shown in (\textit{Source Code} \ref{l:millionaires}) uses the \textit{pd\_shared3p} security protocol, which utilizes three nodes.
 An input party can also be the result party, or one of the computing nodes.
 The data providers use secret sharing to distribute their confidential data between the computing nodes.
 The analysts make queries and initiate computations, that are performed by the computing nodes leveraging the homomorphic primitives of the secret shares.
