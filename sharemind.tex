@@ -73,6 +73,7 @@ An example of SecreC code can be found below.
 The problem at hand is Yao's millionaire problem \cite{yao1982protocols} as described in section \ref{s:smpc}.
 Here we use \texttt{pd\_shared3p} as the security type, which stands for \textit{\textbf{p}rotection \textbf{d}omain \textbf{shared 3 p}arties}, and corresponds to a private security type using secret\hyp sharing between three parties.
 
+{
 \begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
 pd_shared3p uint64 max(pd_shared3p uint64 x, pd_shared3p uint64 y) {
   pd_shared3p uint64 gt = (uint64)(x > y);  // 1 if x > y, 0 otherwise
@@ -85,8 +86,31 @@ void main(){
   pd_shared3p uint64 max = max(x1, x2); // Private result
   print(declassify(max));               // Result publishing
 }
-
 \end{minted}
-\captionof{listing}{Millionaire problem in SecreC}
+\captionof{listing}{Millionaire problem in SecreC}\label{l:millionaires}
+}
+
+
+
+
+\section{Sharemind Infrastructure}
+Sharemind consists of three different kinds of parties, input parties, computing parties and result parties.
+The number of the input parties -- data providers -- as well as the result parties -- analysts/users -- is not restricted, however the computing parties are restricted be the SMPC protocol that is used; for instance in the aforementioned ``Millionaire problem" (\textit{Source Code} \ref{l:millionaires}) is used the \textit{pd\_shared3p}, which utilizes three nodes.
+An input party can also be the result party, or one of the computing nodes.
+The data providers use secret sharing to distribute their confidential data between the computing nodes.
+The analysts make queries and initiate computations, that are performed by the computing nodes leveraging the homomorphic primitives of the secret shares.
+Finally, the analysts get the results of the private computation without anyone seeing the original confidential data.
+Sharemind's infrastructure is presented in figure \ref{f:sharemind} in more detail.
+
+
+\begin{figure}[th]
+  \centering
+  \includegraphics[width=\linewidth]{figures/sharemind_infrastructure.png}
+  \caption{An overview of the architecture of Sharemind}\label{f:sharemind}
+\end{figure}
+
+
+
+
 
 
