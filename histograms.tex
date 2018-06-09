@@ -12,25 +12,28 @@ A histogram is generally a form of classifying and representing data in some cat
 More specifically, a histogram on some attributes $\{A, B, \dots, Z\}$ is constructed by partitioning the data distribution of those attributes into some ranges which are mutually disjoint subsets called buckets and approximating the frequencies and values in each bucket.
 For the sake of simplicity let us suppose that the number of ranges ($\beta$) of all attributes are equal ($\beta \geq 1$).
 
-In figure \ref{f:simple-hist} we present two histograms, the first one-dimensional and the second two-dimensional on some random attributes.
+In figure \ref{f:simple-hist} we present two histograms, the first one-dimensional over the attribute ``Patient Age" and the second is a two-dimensional over the attributes ``Patient Age" and ``Heart rate".
+In both histograms $\beta = 4$, since the range of values for each attribute has been partitioned in four mutually disjoint subsets.
+In the 1-dimensional histogram \ref{f:simple-hist}.a the $y-axis$ corresponds to the total number of occurrences of values that belong to each bucket.
+In the 2-dimensional histogram \ref{f:simple-hist}.b since $y-axis$ corresponds to the ranges for the buckets for the second attribute, the occurrences are depicted with different colors.
 
 
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \subfloat[1D Histogram]{\includegraphics[width=0.49\columnwidth]{figures/1d-simple-hist.png}}
     \subfloat[2D Histogram / Heatmap]{\includegraphics[width=0.49\columnwidth]{figures/2d-simple-hist.png}}
 
-    \caption{(a) An one-dimensional histogram with $\beta = 6$
-    (b) A two-dimensional histogram with $\beta = 8$.}
+    \caption{(a) An one-dimensional histogram with $\beta = 4$
+    (b) A two-dimensional histogram with $\beta = 4$.}
     \label{f:simple-hist}
 \end{figure}
-
-
 
 
 \fixme{in which cases is a histogram useful?}
 
 
+
+\subsection{Agorithms for Privacy Preserving Histograms}\label{s:histogram-algos}
 
 In algorithm \ref{a:1d-histogram-categorical} we present the privacy preserving algorithm of an one-dimensional (1D) histogram over categorical values.
 
