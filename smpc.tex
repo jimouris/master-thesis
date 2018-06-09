@@ -1,6 +1,18 @@
 \section{Secure Multi-party Computation (SMPC)}\label{s:smpc}
-Secure multi-party computation (SMPC) \footnote{We are going to use the terms SMPC and MPC interchangeably.} [...] or Secure Function Evaluation (SFE) is a field of cryptography aiming to create methods that enable distinct parties, to jointly compute a function over their private inputs.
+Secure multi-party computation (SMPC) \footnote{We are going to use the terms SMPC and MPC interchangeably.} or Secure Function Evaluation (SFE) (in the two-party setting) is a field of cryptography aiming to create methods that enable distinct parties, to jointly compute a function over their private inputs.
 Only the outcome of that function is made public and the parties don’t learn anything more than their own input except whatever can be learned from the output of the function.
+
+There are two important requirements on any protocol for secure computation, namely \textit{privacy} and \textit{correctness} \cite{lindell2009secure}.
+The privacy requirement suggests that nothing but what is absolutely essential should be learned.
+More specifically, all parties should learn nothing more but the computation output.
+The correctness requirement states that every party should receive the correct computation output, that is an adversary should not be able to cause the result of the computation to be different than the outcome of the function the parties agreed to compute.
+
+Plenty of tasks can be modeled using SMPC.
+The tasks that can be modeled using SMPC include simple ones such as coin tossing, as well as far more complex such as electronic voting, electronic auctions, anonymous transactions, anonymous chatting and private information retrieval systems.
+
+Take electronic voting as an example.
+The privacy requirement ensures that no party can learn the individual votes of other parties, while still learning the election outcome.
+The correctness requirement ensures that no party can affect the outcome with means other than casting their one individual vote.
 
 Secure multi-party computation was introduced in 1982 by Andrew Yao.
 Its first form was that of secure two-party computation (2PC) with the so-called Millionaire's Problem \cite{yao1982protocols}.
