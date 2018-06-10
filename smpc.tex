@@ -2,6 +2,14 @@
 Secure multi-party computation (SMPC) \footnote{We are going to use the terms SMPC and MPC interchangeably.} or Secure Function Evaluation (SFE) (in the two-party setting) is a field of cryptography aiming to create methods that enable distinct parties, to jointly compute a function over their private inputs.
 Only the outcome of that function is made public and the parties don’t learn anything more than their own input except whatever can be learned from the output of the function.
 
+Secure multi-party computation was introduced in 1982 by Andrew Yao.
+Its first form was that of secure two-party computation (2PC) with the so-called Millionaire's Problem \cite{yao1982protocols}.
+The problem states that there are two millionaires wishing to know who is richer.
+However, they should not find out any additional information about each other’s wealth.
+
+In the general case we have N parties $P_1, P_2, \dots, P_N$ with private inputs $x_1, x_2, \dots, x_N$ respectively.
+The goal is to compute a function $f(x_1, x_2, \dots, x_N)$ and learn nothing more than what they would have if a separate trusted party had collected their inputs, computed function $f$ for them, and the return the result to all parties.
+
 There are two important requirements on any protocol for secure computation, namely \textit{privacy} and \textit{correctness} \cite{lindell2009secure}.
 The privacy requirement suggests that nothing but what is absolutely essential should be learned.
 More specifically, all parties should learn nothing more but the computation output.
@@ -15,10 +23,9 @@ The privacy requirement ensures that no party can learn the individual votes of 
 The correctness requirement ensures that no party can affect the outcome with means other than casting their one individual vote.
 Similarly, in the electronic auction example, the privacy requirement ensures that no party learns the bids of other parties while still learning the winning bid. The correctness requirement ensures that no party can bias the auction outcome and that in fact the winning party has places the highest bid.
 
-Secure multi-party computation was introduced in 1982 by Andrew Yao.
-Its first form was that of secure two-party computation (2PC) with the so-called Millionaire's Problem \cite{yao1982protocols}.
-The problem states that there are two millionaires wishing to know who is richer.
-However, they should not find out any additional information about each other’s wealth.
+\section{Millionaire's Problem}
+The first problem that was modeled using SMPC is the Millionaire's Problem introduced by Yao, and it is a basic building block for such secure computations.
+
 Here the two parties $P_1$, $P_2$ are the two millionaires.
 Their private inputs are each one’s wealth $x_1$ and $x_2$ respectively.
 The function which they wish to jointly compute can be formulated as
@@ -30,12 +37,30 @@ The function which they wish to jointly compute can be formulated as
   \end{cases}
 \end{equation}
 
-In the general case we have N parties $P_1, P_2, \dots, P_N$ with private inputs $x_1, x_2, \dots, x_N$ respectively.
-The goal is to compute a function $f(x_1, x_2, \dots, x_N)$ and learn nothing more than what they would have if a separate trusted party had collected their inputs, and computed function $f$ for them.
+A lot of solutions have been proposed to the Millionaire's problem starting with the one from Yao himself \cite{yao1982protocols} as well as multiple others including \cite{ioannidis2003efficient, lin2005efficient}.
 
-Another example for the two-party case is Oblivious Transfer (OT) \cite{rabin2005exchange} with its simples flavor being 1-2 oblivious transfer or ``1 out of 2 oblivious transfer".
-Here we have two parties, the sender and the receiver.
+\section{Oblivious Transfer}
+Another example for the two-party case and a basic building block of SMPC systems is Oblivious Transfer (OT) firstly introduced in 1981 by Michael O. Rabin \cite{rabin2005exchange}.
+Its simple flavor is 1-2 oblivious transfer or ``1 out of 2 oblivious transfer".
+
+
+In the 1-2 oblivious transfer case we have two parties, the sender $S$ and the receiver $R$.
 The sender has two messages, $m_0$ and $m_1$, and the receiver has a bit $b$.
 The receiver wishes to learn $m_b$, without learning anything about $m_{1-b}$ and without the sender learning $b$.
+
+A solution for the above problem has been implemented using the protocol of Even, Goldreich, and Lempel in \cite{even1985randomized}.
+Below we describe the otherwise generic protocol using RSA as en encryption scheme.
+
+\begin{itemize}
+  \item $S$ (who holds messages $m_0$ and $m_1$) generates an RSA key pair. Recall that the public key is $(n,e)$ and the private key is $d$.
+  \item $S$ randomly selects two values $x_0, x_1$.
+  \item $S$ sends $x_0, x_1, N, e$ to $R$.
+  \item $R$ picks $b \in \{0,1\}$
+  \item $R$ randomly selects a value $k$ and computes $v = x_b + k^e \pmod{n}$.
+  \item $R$ sends $v$ to $S$.
+  \item $S$ computes $k_0 = (v-x_0)^d \pmod{n}$ and $k_1 = (v-x_1)^d \pmod{n}$. One of $k_0, k_1$ will be equal to $k$ randomly selected be $R$.
+  \item $S$ sends to $m_0' = m_0 + k_0$ and $m_1' = m_1 + k_1$ to $R$.
+  \item $R$ can compute exactly one of the messages, as $m_b = m_b' - k$.
+\end{itemize}
 
 \fixme{Elaborate more..}
