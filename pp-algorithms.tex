@@ -61,7 +61,7 @@ However, it can obliviously update the value of max, based on an encrypted compa
 In the cases that the value of the $array$ is smaller than the current $max$ the $gt$ flag will have the value $\enc{0}$, otherwise $\enc{1}$.
 Thus the multiplexer operation in line 14 each time will "keep" the greatest value and set the variable $max$ to it.
 
-Both textbook algorithms' time complexity (algs. \ref{a:sum} and \ref{a:max}) is \bigo{n} and the transformation to their privacy preserving equivalents did not affect their complexity.
+Both textbook algorithms' time complexity (algorithms. \ref{a:sum} and \ref{a:max}) is \bigo{n} and the transformation to their privacy preserving equivalents did not affect their complexity.
 However, it is inevitably more computationally intensive, since the encrypted operations require many additional CPU cycles.
 
 \import{./}{algorithms/max.tex}
@@ -86,12 +86,12 @@ Motivated by privacy concerns and from the challenges that arise in securing any
 We have developed our algorithms for two different types of data, categorical and numerical.
 Variables in the former category are those that can take on one of a limited, and usually fixed, number of possible values.
 For instance, the country that a person lives in, or the blood type of a person.
-On the other hand, numerical variables can take any real number, without having any ristrictions.
+On the other hand, numerical variables can take any real number, without having any restrictions.
 
 Medical data, of course, appear in both ways, depending on the ``nature" of the attributes.
 One more reason that this distinction should be made is that even for the same attribute (for instance ``Age"), a doctor may either classify the exact age, or the birth date, or even classify the patient in one group (i.e. ``child" or ``adult").
 
-Due to these two different kinds of data that exist in medical datasets, we have separated our algorithms in two categories respectively, categorical and numerical. 
+Due to these two different kinds of data that exist in medical datasets, we have separated our algorithms in two categories respectively, categorical and numerical.
 
 
 \input{histograms}
