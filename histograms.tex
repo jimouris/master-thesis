@@ -33,33 +33,65 @@ In the 2-dimensional histogram \ref{f:simple-hist}.b since $y-axis$ corresponds 
 
 
 
-\subsection{Agorithms for Privacy Preserving Histograms}\label{s:histogram-algos}
+\subsection{Agorithms for Privacy Preserving Histograms}\label{ss:histogram-algos}
+Histograms are one of the simplest ways to visualise and easily understand data; rendering them very useful in many data analysis applications. 
+As we already mentioned, histograms consist of bars that are mutually disjoint and their heights are proportional to the counts of values in the corresponding ranges.
 
-In algorithm \ref{a:1d-histogram-categorical} we present the privacy preserving algorithm of an one-dimensional (1D) histogram over categorical values.
+\textbf{Challenges with Privacy-Preserving Histograms}: The textbook algorithm splits the dataset to buckets and consecutively for each item it increments the corresponing ``bucket-counter".
+Implementing this algorithm with respect to the privacy of the dataset introduces the problem that for each value it is not trivial to find the bucket that this specific value should be placed.
+
+As we mentioned in section \ref{s:two-types-of-data}, we have separated our algorithms in two major categories, for categorical and for numerical data.
+In the following subsections we delve into details for the privacy preserving algorithms for both categories.
+
+
+
+\fixme{Add somewhere text about vectorization. Probably in sharemind section.\\
+Vectorization is used so that a possible value or range is compared to every value in the input data at once.
+}
+
+
+\subsubsection{Privacy Preserving Histograms for Categorical Values}\label{sss:histogram-categorical}
+\textbf{One-Dimensional Histograms}: In algorithm \ref{a:1d-histogram-categorical} we present the privacy preserving algorithm of an one-dimensional (1D) histogram for categorical values.
+In simple words, categorical data means that the values are discrete.
+Hence, the second parameter in the algorithm (dubbed $P$) is the number of possible choices that exist in $array[N]$.
+The input data is given in the form of a private array/vector.
+
+The algorithm creates a boolean array of equal size as the input data, and then for each possible encrypted value of the dataset checks (line 3) and counts (line 4) its occurrences.
+Method {\fontfamily{lmss} $\textsc{Sum}$} is the same as in algorithm \ref{a:sum}.
+Finally, the counts are gathered into a vector and returned -- still encrypted -- to the user.
 
 \import{./}{algorithms/1d_hist_categorical.tex}
 
-\fixme{explain the algorithm}
 
 
+\textbf{Multi-Dimensional Histograms}: In algorithm \ref{a:multidim-histogram-categorical} we present the privacy preserving algorithm of multi-dimensional histograms for categorical values.
+As in algorithm \ref{a:1d-histogram-categorical}, here, the third parameter ($Ps$) is the number of possible choices that exist in $array$.
+However, since here the input data is a private array with multiple dimensions $array[N][M]$, the possible values should express the possible values for each dimension.
+Thus, it is an array of $A$ slots, where $A$ is the number of attributes.
 
-In algorithm \ref{a:1d-histogram-numerical} we present the privacy preserving algorithm of an one-dimensional (1D) histogram over numerical values.
-
-\import{./}{algorithms/1d_hist_numerical.tex}
-
-\fixme{explain the algorithm}
-
-
+Similarly to the 1D algorithm, the multi-dimensional one creates a boolean array of \fixme{explain the algorithm}
 
 \import{./}{algorithms/multdim_hist_categorical.tex}
 
+
+\textbf{Filtering the Histograms' Results}: In the preceding algorithms, the data 
+
+\fixme{Add filters explanation. Maybe code?}
+
+
+
+\subsubsection{Privacy Preserving Histograms for Numerical Values}\label{sss:histogram-numerical}
+
+In algorithm \ref{a:1d-histogram-numerical} we present the privacy preserving algorithm of an one-dimensional (1D) histogram over numerical values.
+
 \fixme{explain the algorithm}
 
+\import{./}{algorithms/1d_hist_numerical.tex}
 
 
-\import{./}{algorithms/multdim_hist_numerical.tex}
 
-The algorithm computing a private multi-dimensional histogram is similar to the one regarding one-dimensional histograms but also addresses the issue of having a histogram of arbitrarily many dimensions.
+
+The algorithm that computes a private multi-dimensional histogram is similar to the one regarding one-dimensional histograms but also addresses the issue of having a histogram of arbitrarily many dimensions.
 In case we had a known number of dimensions the simplest solution would be to use nested loops, as many as the histogram dimensions.
 Since the number of dimensions is not known, we have to think of something else.
 We represent the multi-dimensional histogram as a serialized version with an one-dimensional array (a vector) instead of using a multi-dimensional array (a matrix).
@@ -68,5 +100,9 @@ For example a 2-dimensional $3 \times 4$ histogram will be represented as a vect
 When it comes to indexing if we wish to access the 2-dimensional $N \times M$ histogram represented as an one-dimensional at row $ i $ and column $ j $, instead of using $h[i][j]$ we use $h[i \cdot M + j]$.
 Similarly, for the 3-dimensional $L \times N \times M$ histogram, $h[i][j][k]$ becomes $h[i \cdot N \cdot M + j \cdot M + k]$. So there needs to be a computation of a single index based on the multiple dimension indexes. In algorithm \ref{a:multidim-histogram-numerical}, the \texttt{positions} vector holds this index for each record of the provided array, as can bee seen in lines $ 12 $ and $ 13 $
 
+\import{./}{algorithms/multdim_hist_numerical.tex}
+
+
+Filters here are easily applied as in \ref{sss:histogram-categorical} ... \fixme{some exaplanation ..}
 
 
