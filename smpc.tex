@@ -1,5 +1,5 @@
 \section{Secure Multi-party Computation (SMPC)}\label{s:smpc}
-Secure multi-party computation (SMPC) \footnote{We are going to use the terms SMPC and MPC interchangeably.} or Secure Function Evaluation (SFE) (in the two-party setting) is a field of cryptography aiming to create methods that enable distinct parties, to jointly compute a function over their private inputs.
+Secure multi-party computation (SMPC)\footnote{Both SMPC and MPC abbreviations are used for secure multi-party computation; in this thesis we use them interchangeably.} or Secure Function Evaluation (SFE) (in the two-party setting) is a field of cryptography aiming to create methods that enable distinct parties, to jointly compute a function over their private inputs.
 Only the outcome of that function is made public and the parties don’t learn anything more than their own input except whatever can be learned from the output of the function.
 
 Secure multi-party computation was introduced in 1982 by Andrew Yao.
@@ -52,7 +52,7 @@ A solution for the above problem has been implemented using the protocol of Even
 Below we describe the otherwise generic protocol using RSA as en encryption scheme.
 
 \begin{itemize}
-  \item $S$ (who holds messages $m_0$ and $m_1$) generates an RSA key pair. Recall that the public key is $(n,e)$ and the private key is $d$.
+  \item $S$ (who holds messages $m_0$ and $m_1$) generates an RSA key pair. Recall from section \ref{ss:rsa} that the public key is $(n,e)$ and the private key is $d$.
   \item $S$ randomly selects two values $x_0, x_1$.
   \item $S$ sends $x_0, x_1, N, e$ to $R$.
   \item $R$ picks $b \in \{0,1\}$
@@ -80,8 +80,7 @@ This circuit takes as inputs the bitwise representation of $x$ and $y$ and has o
 The protocol is based on evaluating an encrypted version of this circuit.
 A simple description of Yao's protocol can be seen below. A complete description as well as security proof of this protocol can be found in \cite{lindell2009proof}.
 
-Let's assume without loss of generality that Alice is the so called \textit{garbled circuit generator
-}, or \textit{garbler}, and Bob the \textit{evaluator}. The circuit is known to both parties.
+Let's assume without loss of generality that Alice is the so called \textit{garbled circuit generator}, or \textit{garbler}, and Bob the \textit{evaluator}. The circuit is known to both parties.
 
 \subsubsection{Circuit Encoding}
 
