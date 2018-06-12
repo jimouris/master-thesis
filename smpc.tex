@@ -63,4 +63,71 @@ Below we describe the otherwise generic protocol using RSA as en encryption sche
   \item $R$ can compute exactly one of the messages, as $m_b = m_b' - k$.
 \end{itemize}
 
-\fixme{Elaborate more..}
+\subsection{Garbled Circuits}
+There are also generic constructions for building SMPC systems.
+Generic protocols implement secure computation for any probabilistic polynomial time function.
+One of the most commonly known such generic protocol is Garbled (or Encrypted) Circuits (GC).
+The most simple version of SMPC using Garbled Circuits can be found in the two-party case.
+The first protocol for such computations was introduced by Yao in \cite{yao1986generate}.
+
+Assume that we have two parties $P_1$ and $P_2$ with private inputs $x_1$ and $x_2$, respectively.
+They wish to compute function $f$ over their private inputs, and nothing more than $f(x,y)$ should be learned.
+
+The GC protocol works by expressing $f$ as an combinatorial circuit.
+The circuit contains logical gates that implement any function $g : \{0,1\} \times \{0,1\} \rightarrow \{0,1\}$.
+These include for instance simple \texttt{AND, OR, XOR} and \texttt{NOT} gates.
+This circuit takes as inputs the bitwise representation of $x$ and $y$ and has output the bitwise representation of the value $f(x,y)$.
+The protocol is based on evaluating an encrypted version of this circuit.
+A simple description of Yao's protocol can be seen below. A complete description as well as security proof of this protocol can be found in \cite{lindell2009proof}.
+
+Let's assume without loss of generality that $P_1$ is the so called \textit{garbler}, and $P_2$ the \textit{evaluator}. The circuit is known to both parties.
+
+\subsubsection{Circuit Encoding}
+
+\begin{itemize}
+  \item $P_1$ ``hardwires'' their input into the circuit. Thus the circuit now computes $f(x, \cdot)$.
+  \item $P_1$ assigns to each wire $i$ of the circuit two random string values $(W_i^0, W_i^1)$ which are called \textit{labels} that correspond to the Boolean values $0$, \texttt{false} and $1$, \texttt{true} respectively. These labels should be of adequate length (usually 128 bits) as they will be used as symmetric keys in an encryption scheme.
+  \item For each gate $g$ in the circuit $P_1$ prepares the truth table of $g$. In that truth table the values $0,1$ are replaced with the corresponding labels that were generated in the previous step. The output column is then encrypted \footnote{The notation $E_{K}(M)$ means an encryption of the value $M$ with key $K$.} using as keys the labels from the two input columns.
+  For example the transformation of the truth table of an \texttt{AND} gate with input wires $A,B$ and output wire $C$ can be seen below.
+
+  \begin{minipage}{0.2\textwidth}
+    \begin{center}
+      \begin{tabular}{ c c | c }
+       $A$ & $B$ & $C$ \\
+       \hline
+       $0$ & $0$ & $0$ \\
+       $0$ & $1$ & $0$ \\
+       $1$ & $0$ & $0$ \\
+       $1$ & $1$ & $1$ \\
+      \end{tabular}
+    \end{center}
+  \end{minipage}
+  $\xrightarrow[]{\text{becomes}}$
+  \begin{minipage}{0.2\textwidth}
+    \begin{center}
+      \begin{tabular}{ c c | c }
+       $A$ & $B$ & $C$ \\
+       \hline
+       $W_A^0$ & $W_B^0$ & $W_C^0$ \\
+       $W_A^0$ & $W_B^1$ & $W_C^0$ \\
+       $W_A^1$ & $W_B^0$ & $W_C^0$ \\
+       $W_A^1$ & $W_B^1$ & $W_C^1$ \\
+      \end{tabular}
+    \end{center}
+  \end{minipage}
+  $\xrightarrow[]{\text{becomes}}$
+  \begin{minipage}{0.2\textwidth}
+    \begin{center}
+      \begin{tabular}{ c c | c }
+       $A$ & $B$ & $C$ \\
+       \hline
+       $W_A^0$ & $W_B^0$ & $E_{W_A^0}(E_{W_B^0}(W_C^0))$ \\
+       $W_A^0$ & $W_B^1$ & $E_{W_A^0}(E_{W_B^1}(W_C^0))$ \\
+       $W_A^1$ & $W_B^0$ & $E_{W_A^1}(E_{W_B^0}(W_C^0))$ \\
+       $W_A^1$ & $W_B^1$ & $E_{W_A^1}(E_{W_B^1}(W_C^1))$ \\
+      \end{tabular}
+    \end{center}
+  \end{minipage}
+\end{itemize}
+
+
