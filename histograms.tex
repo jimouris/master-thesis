@@ -82,15 +82,26 @@ Similarly to the 1D algorithm, the multi-dimensional one creates a boolean array
 
 \subsubsection{Privacy Preserving Histograms for Numerical Values}\label{sss:histogram-numerical}
 
-In algorithm \ref{a:1d-histogram-numerical} we present the privacy preserving algorithm of an one-dimensional (1D) histogram over numerical values.
+\textbf{One-Dimensional Histograms}: In algorithm \ref{a:1d-histogram-numerical} we present the privacy preserving algorithm of one-dimensional (1D) histograms for numerical values.
+In contrast with the categorical data, numerical data are not discrete, which means that the buckets in which the histogram will separate the dataset should be fixed (the $\beta$ parameter, as mentioned in section \ref{s:histograms})
 
-\fixme{explain the algorithm}
+First and foremost, the input data is given in the form of a private array/vector of $N$ positions.
+The second parameter is open (since the final results will eventually disclose it), and is the number of buckets/cells that the algorithm will create, namely the $\beta$ factor. 
+The two last parameters are also encrypted and are the minimum and maximum values found in the dataset/array (first parameter of the algorithm).
+Those two parameters are necessary in order to determine for each element in the array in which cell should be placed.
+
+This algorithm is very similar and in accord with algorithm \ref{a:1d-histogram-categorical}, however does some extra steps.
+In lines 2 and 3, it first determines the width for each cell and then creates an array of $N$ elements that each one indicates the bucket that the element in the corresponding position of $array$ should be placed.
+Consecutively, the algorithm creates another boolean array of equal size as the input data, and then for each possible encrypted value of the $cellMap$ checks (line 5) and counts (line 6) its occurrences.
+Finally, the counts are gathered into a vector and returned -- still encrypted -- to the user.
+Line 5 of algorithm \ref{a:1d-histogram-numerical} is more complex than line 3 of algorithm \ref{a:1d-histogram-categorical}, since the former has to check some corner cases of data that belong to the last bucket.
 
 \import{./}{algorithms/1d_hist_numerical.tex}
 
 
 
-
+\textbf{Multi-Dimensional Histograms}: 
+\fixme{probably move most of them in the numerical multidimensional since it appears first...}
 The algorithm that computes a private multi-dimensional histogram is similar to the one regarding one-dimensional histograms but also addresses the issue of having a histogram of arbitrarily many dimensions.
 In case we had a known number of dimensions the simplest solution would be to use nested loops, as many as the histogram dimensions.
 Since the number of dimensions is not known, we have to think of something else.
