@@ -90,7 +90,36 @@ void main(){
 \captionof{listing}{Millionaire problem in SecreC}\label{l:millionaires}
 }
 
+Sharemind also supports vectorized operations.
 
+{
+\begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
+  void main(){
+    uint64 N = 5;
+    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5};
+    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10};
+    pd_shared3p uint64 c(N);
+    for (uint64 i = 0; i < N; i++){
+      c[i] = a[i] + b[i];
+    }
+    print(declassify(c));
+  }
+\end{minted}
+\captionof{listing}{Non-vectorized array addition in SecreC}\label{l:non_vectorized_addition}
+}
+
+{
+\begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
+  void main(){
+    uint64 N = 5;
+    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5};
+    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10};
+    pd_shared3p uint64 c(N) = a + b;
+    print(declassify(c));
+  }
+\end{minted}
+\captionof{listing}{Vectorized array addition in SecreC}\label{l:vectorized_addition}
+}
 
 
 \section{Sharemind Infrastructure}
