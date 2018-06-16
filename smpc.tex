@@ -160,6 +160,14 @@ Let's assume without loss of generality that Alice is the so called \textit{garb
   \item Either Alice will share her information about the original values of the output label(s) with Bob, or Bob will share the output to Alice and she could respond accordingly so that one or both of them learn the output.
 \end{itemize}
 
+\subsubsection{Overhead}
+This protocol inevitably inserts a notable overhead. An overview of the most substantial factors can be found below.
+
+\begin{itemize}
+  \item Alice and Bob involve in a 1 out of 2 oblivious transfer protocol for each input wire related with Bob's input. These oblivious transfers can dominate the computation overhead -- at least for relatively small circuits -- since they require modular exponentiations.
+  \item Alice sends to Bob a garbled truth table for every gate $g$ of the circuit. Thereby, this operation's cost is proportional to the circuit size.
+  \item Bob decrypts a constant number of encrypted values for each gate $g$ of the circuit. This is also linear with respect to the size of the circuit.
+\end{itemize}
 
 
 
