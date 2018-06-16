@@ -161,7 +161,7 @@ Let's assume without loss of generality that Alice is the so called \textit{garb
 \end{itemize}
 
 \subsubsection{Overhead}
-This protocol inevitably inserts a notable overhead. An overview of the most substantial factors can be found below.
+This protocol inevitably inserts a notable overhead. An overview of the most substantial factors as described in \cite{lindell2009secure} can be found below.
 
 \begin{itemize}
   \item Alice and Bob involve in a 1 out of 2 oblivious transfer protocol for each input wire related with Bob's input. These oblivious transfers can dominate the computation overhead -- at least for relatively small circuits -- since they require modular exponentiations.
@@ -169,8 +169,6 @@ This protocol inevitably inserts a notable overhead. An overview of the most sub
   \item Bob decrypts a constant number of encrypted values for each gate $g$ of the circuit. This is also linear with respect to the size of the circuit.
 \end{itemize}
 
+Multiple attempts have been made to improve the performance of Yao's protocol. Many optimizations have been introduced like the ones found in \cite{beaver1990round, naor1999privacy, kolesnikov2008improved, bellare2013efficient, zahur2015two}.
 
-
-
-
-
+Another generic protocol for Secure multi\hyp party computation can be constructed using \textit{Secret Sharing}, a technique which we will describe in section \ref{s:secret-sharing}.
