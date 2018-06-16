@@ -1,5 +1,5 @@
 \begin{algorithm}[H]\fontfamily{lmss}
-\caption{Textbook \& Private Iformation Retrieval}\label{a:pir}
+\caption{Textbook \& Private Information Retrieval}\label{a:pir}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
 
@@ -22,9 +22,9 @@
     \State ${\color{darkred}{sum}} \gets \enc{0}$
     \For{$i \in \{0, \dots, N-1\}$}
         \State ${\color{darkred}{value}} \gets {\color{darkred}{table}}[i][1]$
-    
+
         \State ${\color{darkred}{eq}} \gets ({\color{darkred}{table}}[i][0] \heq {\color{darkred}{key}})$\Comment{\small{${\color{darkred}{eq}}$ obliviously gets either $\enc{1}$ if $table[i][0] = key$, or $\enc{1}$ otherwise}}
-        
+
         \State ${\color{darkred}{sum}} \gets ({\color{darkred}{eq}} \hmul {\color{darkred}{value}}) \hplus ((\enc{1} \hminus {\color{darkred}{eq}}) \hmul {\color{darkred}{sum}})$\Comment{\small{Obliviously update the value of ${\color{darkred}{sum}}$}}
     \EndFor
     \State \textbf{return} {${\color{darkred}{sum}}$}
