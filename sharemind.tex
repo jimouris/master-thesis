@@ -90,7 +90,10 @@ void main(){
 \captionof{listing}{Millionaire problem in SecreC}\label{l:millionaires}
 }
 
-Sharemind also supports vectorized operations.
+Each SMPC operation in Sharemind is implemented as an assembly instruction. It also supports vectorized operations. This plays a significant role in the program's efficiency.
+With vectorized operations the same protocol is executed but using multiple inputs at once, in parallel.
+Using this SIMD (Single Input Multiple Data) the protocol performs all operations in parallel by packaging the values in a single communication message.
+This significantly reduces the communication overhead between the participating parties, which is usually a dominating factor in a protocol's performance.
 
 {
 \begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
