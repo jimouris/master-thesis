@@ -27,9 +27,8 @@ Provided with usable and informative tools a doctor could potentially make bette
 \section{An Individual's view}
 An individual could also benefit from the insights provided by our platform.
 We consider the case in which an individual with a certain condition queries the available datasets looking for the same condition.
-\fixme{The individual could locate the hospitals in which patients with the same condition are treated.
-Also, he/she could identify which hospitals in his area have the best outcome for patients with conditions similar to his.
-\textbf{How is this possible?? doesn't this compromise patients' data??}}
+The individual could locate the hospitals in which patients with the same condition are treated.
+Also, he/she could identify which hospitals in his area have the best outcome for patients with conditions similar to his/hers.
 
 
 Another way an individual could be benefited from the privacy preserving medical data analytics is the use of a classification mechanism using a model trained over patient data.
@@ -61,13 +60,50 @@ The data are then secret\hyp shared to the three nodes, with each node acquiring
 Then the privacy preserving computation takes place in the SMPC cluster, and the results get visualized and served back to the requesting user through the \textit{coordinator} server.
 
 
-The detailed procedure is depicted in figure \ref{f:overview}.
-First, an analyst sends a request to the \textit{coordinator} asking for a private computation, specifying an attribute and the hospitals from which the data will originate -- let us assume an aggregation over a field \texttt{X}, for hospitals \texttt{A} and \texttt{B}.
-Then, the main server request from each selected hospital (in our case \texttt{A} and \texttt{B}) to import their data for attribute \texttt{X} to the SMPC cluster.
-Consecutively, using an additive secret sharing protocol, the hospitals' servers securely import their data to the three computing nodes.
-The actual computation takes place after the import is complete, and finally the aggregation over attribute \texttt{X} is returned to the user through the \textit{coordinator}.
+\subsection{End-to-End Execution Flow}\label{ss:end-to-end-execution-flow}
 
+An overview of an end\hyp to\hyp end query execution can be found in the following sections.
 
+\subsubsection{Query Initiation}\label{sss:query-initiation}
+First, a user sends a request to the \textit{coordinator} asking for a private computation.
+This user can be an analyst / researcher, a doctor, or a patient.
+This request can specify any one of the supported privacy preserving computations.
+
+Users get informed about the available privacy preserving analytics algorithms through the \fixme{TheFancyName} User Interface (UI).
+The UI is responsible to inform the user about the supported computations, as well as the available datasets on which these computations can be executed.
+These datasets are populated from the hospitals that participate in the platform.
+
+The user's request includes the desired private computation to be executed, the selected attributes that are involved in this computation, as well as the selected datasets.
+
+\subsubsection{Data Import}\label{sss:data-import}
+
+After the coordinator server collects the user's private computation query, a data importing procedure takes place.
+
+The server will send an importing request to the hospitals that are specified in the user's query.
+The importing request will include the attributes indicated by the user that are participating in with the private computation.
+
+Upon receiving such an importing request, each hospital involved in this private computation will import a part of its dataset, that is associated with the participating attributes, into the SMPC cluster.
+The data to be imported will be secret\hyp shared between the nodes participating in the SMPC protocol, using an additive secret\hyp sharing protocol.
+
+The data importing is a procedure of high importance, since the patients' data are transferred outside the hospitals to third party servers.
+It is easily misinterpreted that since the data are leaving the hospitals' premises, their privacy is being compromised.
+However, it has been elucidated in section \ref{s:secret-sharing} that secret sharing is a form of encryption, thus no information leakage is possible while data being in use in the SMPC cluster.
+For transferring each share from the data providers to the corresponding SMPC computing nodes standard techniques -- such as symmetric encryption -- are used to protect data in transit.
+Data are also safe while at rest in the SMPC cluster as each node only stores a cryptographic share of a piece of data, so no information about the original data can be inferred.
+
+\subsubsection{Computation Execution}\label{sss:computation-execution}
+
+The next step after the data import is the actual private computation execution.
+The nodes participating in the SMPC protocol, execute the privacy preserving version of the analytics algorithm that the requesting user has selected.
+
+The algorithm is executed on encrypted (secret\hyp shared) data, thus the computing nodes have no access to the original data that still reside on the hospitals.
+The execution is oblivious as far as the data is concerned.
+Any data that gets published is explicitly defined in the privacy preserving algorithms and usually \footnote{Some data (e.g. those that will be included in the output) can be published before the algorithm terminates, without violating the prescribed privacy guarantees.} is only the computation output.
+
+\subsubsection{Result Publishing}\label{sss:computation-execution}
+\fixme{Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}
+
+The detailed procedure described above is depicted in figure \ref{f:overview}.
 
 \begin{figure}[t]
   \centering
@@ -93,12 +129,8 @@ The only information that gets published is the output of the privacy preserving
 This is returned to the user who initiated the query via the \textit{coordinator} server.
 
 
-\section{Data Importing}\label{s:importing}
-The data importing is a procedure of high importance, since the patients' data are transferred outside the hospitals to third party servers.
-It is easily misinterpreted that since the data are leaving the hospitals' premises, their privacy is being compromised.
-However, it has been elucidated in section \ref{s:secret-sharing} that secret sharing is a form of encryption, thus no information leakage is possible while data being in use in the SMPC cluster.
-For transferring each share from the data providers to the corresponding SMPC computing nodes standard techniques -- such as symmetric encryption -- are used to protect data in transit.
-Data are also safe while at rest in the SMPC cluster as each node only stores a cryptographic share of a piece of data, so no information about the original data can be inferred.
+% \section{Data Importing}\label{s:importing}
+
 
 
 
