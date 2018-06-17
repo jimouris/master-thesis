@@ -23,7 +23,7 @@ The privacy requirement ensures that no party can learn the individual votes of 
 The correctness requirement ensures that no party can affect the outcome with means other than casting their one individual vote.
 Similarly, in the electronic auction example, the privacy requirement ensures that no party learns the bids of other parties while still learning the winning bid. The correctness requirement ensures that no party can bias the auction outcome and that in fact the winning party has places the highest bid.
 
-\subsection{Millionaire's Problem}
+\subsection{Millionaire's Problem}\label{ss:millionaire}
 The first problem that was modeled using SMPC is the Millionaire's Problem introduced by Yao, and it is a basic building block for such secure computations.
 
 Here the two parties $P_1$, $P_2$ are the two millionaires.
@@ -39,7 +39,7 @@ The function which they wish to jointly compute can be formulated as
 
 A lot of solutions have been proposed to the Millionaire's problem starting with the one from Yao himself \cite{yao1982protocols} as well as multiple others including \cite{ioannidis2003efficient, lin2005efficient}.
 
-\subsection{Oblivious Transfer}
+\subsection{Oblivious Transfer}\label{ss:oblivious-transfer}
 Another example for the two-party case and a basic building block of SMPC systems is Oblivious Transfer (OT) firstly introduced in 1981 by Michael O. Rabin \cite{rabin2005exchange}.
 Its simple flavor is 1-2 oblivious transfer or ``1 out of 2 oblivious transfer".
 
@@ -63,7 +63,7 @@ Below we describe the otherwise generic protocol using RSA as en encryption sche
   \item $R$ can compute exactly one of the messages, as $m_b = m_b' - k$.
 \end{itemize}
 
-\subsection{Garbled Circuits}
+\subsection{Garbled Circuits}\label{ss:garbled-circuits}
 There are also generic constructions for building SMPC systems.
 Generic protocols implement secure computation for any probabilistic polynomial time function.
 One of the most commonly known such generic protocol is Garbled (or Encrypted) Circuits (GC).
@@ -82,7 +82,7 @@ A simple description of Yao's protocol can be seen below. A complete description
 
 Let's assume without loss of generality that Alice is the so called \textit{garbled circuit generator}, or \textit{garbler}, and Bob the \textit{evaluator}. The circuit is known to both parties.
 
-\subsubsection{Circuit Encoding}
+\subsubsection{Circuit Encoding}\label{sss:circuit-encoding}
 
 \begin{itemize}
   \item Alice ``hardwires'' her input into the circuit. Thus the circuit now computes $f(x, \cdot)$.
@@ -133,7 +133,7 @@ Let's assume without loss of generality that Alice is the so called \textit{garb
 
 \end{itemize}
 
-\subsubsection{Data Transfer}
+\subsubsection{Data Transfer}\label{sss:data-transfer}
 \begin{itemize}
   \item Alice sends the garbled truth table for every gate $g$ of the circuit to Bob.
   \item Alice also sends the randomly generated labels corresponding to her input.
@@ -145,7 +145,7 @@ Let's assume without loss of generality that Alice is the so called \textit{garb
   Bob will learn only $W_{b_4}^1$ and not $W_{b_4}^0$, while Alice will not learn the value of $b_4$.
 \end{itemize}
 
-\subsubsection{Circuit Evaluation}
+\subsubsection{Circuit Evaluation}\label{sss:circuit-evaluation}
 \begin{itemize}
   \item Bob now has the garbled truth tables for each gate of the circuit as well as all input labels. Having one garbled value / label per input wire and the truth table, Bob will try to decrypt every value in the output column of the table, but will succeed only once.
   The decryption will succeed only in the row for which Bob has the input labels so he can use them as keys in the decryption.
@@ -154,13 +154,13 @@ Let's assume without loss of generality that Alice is the so called \textit{garb
   \item Bob repeats the process for each gate $g$ of the circuit, until he reaches to the output gate(s) and acquires the output label(s).
 \end{itemize}
 
-\subsubsection{Output Revealing}
+\subsubsection{Output Revealing}\label{ss:output-revealing}
 \begin{itemize}
   \item Alice knows The Boolean value corresponding to the output label(s), so Bob and Alice communicate in order for them to learn the computation result.
   \item Either Alice will share her information about the original values of the output label(s) with Bob, or Bob will share the output to Alice and she could respond accordingly so that one or both of them learn the output.
 \end{itemize}
 
-\subsubsection{Overhead}
+\subsubsection{Overhead}\label{ss:overhead}
 This protocol inevitably inserts a notable overhead. An overview of the most substantial factors as described in \cite{lindell2009secure} can be found below.
 
 \begin{itemize}
