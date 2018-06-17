@@ -28,7 +28,7 @@ Multiplication of a shared value with a constant and extraction of its bits as s
 Bit extraction and arithmetic primitives are sufficient to construct any Boolean circuit with a linear overhead and thus the Sharemind framework is also Turing complete \cite{bogdanov2008sharemind}.
 Many data mining and statistical analysis algorithms use no other mathematical operations than the Sharemind's instruction set, thus it is sufficient for most applications.
 
-\section{SecreC}
+\section{SecreC}\label{s:secrec}
 
 The programmer of the privacy preserving applications does not necessarily know the underlying security protocols.
 Application are developed using the SecreC programming language \cite{jagomagis2010secrec}.
@@ -92,8 +92,11 @@ void main(){
 
 Each SMPC operation in Sharemind is implemented as an assembly instruction. It also supports vectorized operations. This plays a significant role in the program's efficiency.
 With vectorized operations the same protocol is executed but using multiple inputs at once, in parallel.
-Using this SIMD (Single Input Multiple Data) the protocol performs all operations in parallel by packaging the values in a single communication message.
+Using such SIMD (Single Input Multiple Data) instructions the protocol performs all operations in parallel by packaging the values in a single communication message.
+
 This significantly reduces the communication overhead between the participating parties, which is usually a dominating factor in a protocol's performance.
+So, developing applications with vectorization in mind, has a substantial contribution to the application's efficiency.
+We have tried to use vectorization as much as possible when developing our privacy preserving algorithms which we describe in chapter \ref{c:pp-algorithms}.
 
 {
 \begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
@@ -125,7 +128,7 @@ This significantly reduces the communication overhead between the participating 
 }
 
 
-\section{Sharemind Infrastructure}
+\section{Sharemind Infrastructure}\label{sharemind-infrastructure}
 Sharemind consists of three different kinds of parties, input parties, computing parties and result parties.
 The number of the input parties -- data providers -- as well as the result parties -- analysts/users -- is not restricted, however the computing parties are restricted by the SMPC protocol that is been used; for instance the aforementioned ``Millionaire problem" shown in (\textit{Source Code} \ref{l:millionaires}) uses the \textit{pd\_shared3p} security protocol, which utilizes three nodes.
 
