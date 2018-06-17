@@ -29,8 +29,6 @@ In the 2-dimensional histogram \ref{f:simple-hist}.b since $y-axis$ corresponds 
 \end{figure}
 
 
-\fixme{in which cases is a histogram useful?}
-
 
 
 \subsection{Algorithms for Privacy Preserving Histograms}\label{ss:histogram-algos}
@@ -40,8 +38,27 @@ As we already mentioned, histograms consist of bars that are mutually disjoint a
 \textbf{Challenges with Privacy-Preserving Histograms}: The textbook algorithm splits the dataset to buckets and consecutively for each item it increments the corresponding ``bucket-counter".
 Implementing this algorithm with respect to the privacy of the dataset introduces the problem that for each value it is not trivial to find the bucket that this specific value should be placed.
 
+For instance, let us suppose that we are constructing the histogram in figure \ref{f:simple-hist}.a.
+In this case $\beta = 4$, thus the algorithm should obliviously split the values into four disjoint buckets.
+The range of each bucket is computed considering the $\beta$ parameter, as well as the minimum and maximum age in the dataset.
+In this specific example, the minimum age is $18$, while the maximum is $83$.
+Having $\beta = 4$ results to bucket-range $(83 - 18) / 4 = 16.25$.
+Therefore, the ranges for attribute ``Patient Age" are formed as follows: $[18, 34.25), [34.25, 50.50), [50.50, 66.75), [66.75, 83]$.
+Consecutively, for each patient in the dataset the algorithm calculates the number of bucket that the patient belongs by dividing his/her value with the bucket-range; however, this index is encrypted.
+Finally, the algorithm iterates through all $\beta$ buckets and obliviously adding $\enc{1}$ if the bucket is the correct one, or $\enc{0}$ otherwise.
+
+
+
+\subsubsection{Privacy Preserving Histogram Computation: A Naive Approach}\label{sss:histogram-simple}
+The procedure described in \ref{ss:histogram-algos} is shown in algorithm \ref{a:1d-simple-histogram}.
+This algorithm iterates through all $N$ items and checks all possible cells for that item.
+When the correct cell is found, it increments the corresponding counter.
+
+\import{./}{algorithms/hist_simple.tex}
+
+This algorithm is straightforward and simple to understand, however, not very efficient.
+In the following subsections we delve into details for the privacy preserving algorithms that are based in the same idea, but leverage \texttt{SIMD} operations.
 As we mentioned in section \ref{s:two-types-of-data}, we have separated our algorithms in two major categories, for categorical and for numerical data.
-In the following subsections we delve into details for the privacy preserving algorithms for both categories.
 
 
 
