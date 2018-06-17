@@ -59,7 +59,7 @@ On the other hand, algorithm \ref{a:max} finds and returns the maximum number of
 In the private {\fontfamily{lmss}\textsc{Max}} algorithm, the host is not able to determine for each value of the array if it is greater from the current value of max.
 However, it can obliviously update the value of max, based on an encrypted comparison (alg. \ref{a:max} line 13, 14).
 In the cases that the value of the $array$ is smaller than the current $max$ the $gt$ flag will have the value $\enc{0}$, otherwise $\enc{1}$.
-Thus the multiplexer operation in line 14 each time will "keep" the greatest value and set the variable $max$ to it.
+Thus the multiplexer operation in line 14 each time will ``keep'' the greatest value and set the variable $max$ to it.
 
 Both textbook algorithms' time complexity (algorithms. \ref{a:sum} and \ref{a:max}) is \bigo{n} and the transformation to their privacy preserving equivalents did not affect their complexity.
 However, it is inevitably more computationally intensive, since the encrypted operations require many additional CPU cycles.
