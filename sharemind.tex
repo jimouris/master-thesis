@@ -98,17 +98,20 @@ This significantly reduces the communication overhead between the participating 
 So, developing applications with vectorization in mind, has a substantial contribution to the application's efficiency.
 We have tried to use vectorization as much as possible when developing our privacy preserving algorithms which we describe in chapter \ref{c:pp-algorithms}.
 
+Below you can see two versions of array addition in SecreC.
+The first one works with a typical loop on each of the array elements, while the second one works by performing an SIMD addition between two arrays.
+
 {
 \begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
   void main(){
     uint64 N = 5;
-    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5};
-    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10};
-    pd_shared3p uint64 c(N);
+    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5};        // Array definition of size N
+    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10};       // Array definition of size N
+    pd_shared3p uint64 c(N);                          // Array declaration of size N
     for (uint64 i = 0; i < N; i++){
-      c[i] = a[i] + b[i];
+      c[i] = a[i] + b[i];            // Element-wise addition with sequential access
     }
-    print(declassify(c));
+    print(declassify(c));                             // Result publishing
   }
 \end{minted}
 \captionof{listing}{Non-vectorized array addition in SecreC}\label{l:non_vectorized_addition}
@@ -118,15 +121,17 @@ We have tried to use vectorization as much as possible when developing our priva
 \begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
   void main(){
     uint64 N = 5;
-    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5};
-    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10};
-    pd_shared3p uint64 c(N) = a + b;
-    print(declassify(c));
+    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5};           // Array definition of size N
+    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10};          // Array definition of size N
+    pd_shared3p uint64 c(N) = a + b; // SIMD instruction of addition of the two arrays
+    print(declassify(c));                                // Result publishing
   }
 \end{minted}
 \captionof{listing}{Vectorized array addition in SecreC}\label{l:vectorized_addition}
 }
 
+The two example programs will have the same output but their performance will be different. The first program will perform $N$ message exchanges between the parties for the addition, while the second will perform just one.
+For large enough values of $N$, the performance difference is tremendous.
 
 \section{Sharemind Infrastructure}\label{sharemind-infrastructure}
 Sharemind consists of three different kinds of parties, input parties, computing parties and result parties.
