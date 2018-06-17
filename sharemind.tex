@@ -51,7 +51,7 @@ That way all data are of the private security type and the expression can be eva
 Sometimes however it is vital to open a secret.
 This could be done in order to gain some insight about an algorithm having good intentions in mind.
 SecreC offers a special \texttt{declassify} operator through which is made possible to publish private information.
-An expression that is  \fixme{\texttt{declassif}\hyp ied} has its security type changed from private to public, and the secret\hyp shared value moves into the public execution environment.
+An expression that is  declassified has its security type changed from private to public, and the secret\hyp shared value moves into the public execution environment.
 Since the use of the \texttt{declassify} operator is the only way for private data to become public, its use should be tracked in order to reason about data privacy and to avoid potential unwanted privacy leaks.
 As a rule of thumb, declassification of private data should occur ass little as possible.
 Ideally, declassification should be used only to publish the final results of an algorithm, or intermediate results that have low privacy risk \textit{i.e.} do not reveal sensitive information.
