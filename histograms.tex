@@ -17,16 +17,30 @@ In both histograms $\beta = 4$, since the range of values for each attribute has
 In the 1-dimensional histogram \ref{f:simple-hist}.a the $y-axis$ corresponds to the total number of occurrences of values that belong to each bucket.
 In the 2-dimensional histogram \ref{f:simple-hist}.b since $y-axis$ corresponds to the ranges for the buckets for the second attribute, the occurrences are depicted with different colors.
 
-
-\begin{figure}[h!]
+\begin{figure}[t]
     \centering
-    \subfloat[1D Histogram]{\includegraphics[width=0.49\columnwidth]{figures/1d-simple-hist.png}}
-    \subfloat[2D Histogram / Heatmap]{\includegraphics[width=0.49\columnwidth]{figures/2d-simple-hist.png}}
+    \subfloat[1D Numerical Histogram]{\includegraphics[width=0.49\columnwidth]{figures/1d-simple-hist.png}}
+    \subfloat[2D Numerical Histogram / Heatmap]{\includegraphics[width=0.49\columnwidth]{figures/2d-simple-hist.png}}
 
-    \caption{(a) An one-dimensional histogram with $\beta = 4$
+    \caption{(a) An one-dimensional histogram with $\beta = 4$,
     (b) A two-dimensional histogram with $\beta = 4$.}
     \label{f:simple-hist}
 \end{figure}
+
+\begin{figure}[t]
+    \centering
+    \subfloat[1D Categorical Histogram]{\includegraphics[width=0.49\columnwidth]{figures/AgeGroups.png}}
+    \subfloat[2D Categorical Histogram / Heatmap]{\includegraphics[width=0.49\columnwidth]{figures/AgeGroups_PopulationGroups.png}}
+
+    \caption{(a) One-dimensional histogram displaying age groups,
+    (b) A two-dimensional histogram displaying age groups with continental population groups.}
+    \label{f:simple-categorical-hist}
+\end{figure}
+
+Similarly, in figure \ref{f:simple-categorical-hist} we present two more histograms, but with categorical values.
+The attribute ``Age Groups" in \ref{f:simple-categorical-hist}.a is separated in four disjoint categories; ``Infant", ``Adolescent", ``Child" and ``Adult".
+In \ref{f:simple-categorical-hist}.b we present demographic information (attribute ``Continental Population Groups") in relation with ``Age Groups".
+
 
 
 
@@ -47,19 +61,24 @@ Therefore, the ranges for attribute ``Patient Age" are formed as follows: $[18, 
 Consecutively, for each patient in the dataset the algorithm calculates the number of bucket that the patient belongs by dividing his/her value with the bucket-range; however, this index is encrypted.
 Finally, the algorithm iterates through all $\beta$ buckets and obliviously adding $\enc{1}$ if the bucket is the correct one, or $\enc{0}$ otherwise.
 
+The aforementioned algorithm works for numerical values; however, the one for categorical values is very similar.
+Bucket-range is fixed to one, and $\beta$ equals to all different possible values in the dataset.
+Also, there is no notion of terms minimum and maximum in categorical values.
 
 
 \subsubsection{Privacy Preserving Histogram Computation: A Naive Approach}\label{sss:histogram-simple}
-The procedure described in \ref{ss:histogram-algos} is shown in algorithm \ref{a:1d-simple-histogram}.
-This algorithm iterates through all $N$ items and checks all possible cells for that item.
-When the correct cell is found, it increments the corresponding counter.
-
-\import{./}{algorithms/hist_simple.tex}
-
-This algorithm is straightforward and simple to understand, however, not very efficient.
-In the following subsections we delve into details for the privacy preserving algorithms that are based in the same idea, but leverage \texttt{SIMD} operations.
 As we mentioned in section \ref{s:two-types-of-data}, we have separated our algorithms in two major categories, for categorical and for numerical data.
+The procedure described in \ref{ss:histogram-algos} is shown in algorithms \ref{a:1d-simple-histogram-categorical} and \ref{a:1d-simple-histogram-numerical}.
+These algorithms iterate through all $N$ items and check all possible cells for that item.
+When the correct cell is found, they increment the corresponding counter.
+The former is tailored to categorical datasets, while the latter is tailored to numerical/continuous values.
 
+\import{./}{algorithms/hist_simple_categorical.tex}
+
+\import{./}{algorithms/hist_simple_numerical.tex}
+
+Both algorithms are straightforward and simple to understand, however, not very efficient.
+In the following subsections we delve into details for the privacy preserving algorithms that are based in the same idea, but leverage \texttt{SIMD} operations.
 
 
 \subsubsection{Privacy Preserving Histograms for Categorical Values}\label{sss:histogram-categorical}
