@@ -173,6 +173,11 @@ headsep=0.5cm,footskip=0.75cm,
 \setdefaultlanguage[variant=uk]{english}
 \setotherlanguage{greek}
 
+% List of figures numbering AI, section independent
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+
+
 %
 % Set font mamily Aria
 %
@@ -495,7 +500,7 @@ publications}\gdef\@lopfileinternal{#1}}
 %
 \def\@absEn{
   \chapter*{Abstract}
-  \addcontentsline{toc}{chapter}{Abstract}
+  % \addcontentsline{toc}{chapter}{Abstract}
   \thispagestyle{empty}
   \@abstractEn{}
   \vfill
@@ -547,7 +552,7 @@ publications}\gdef\@lopfileinternal{#1}}
 %
 \def\@acks{
   \chapter*{Acknowledgements}
-  \addcontentsline{toc}{chapter}{Acknowledgements}
+  % \addcontentsline{toc}{chapter}{Acknowledgements}
   \thispagestyle{empty}
   \@acksEn{}
   \clearpage
@@ -634,20 +639,20 @@ publications}\gdef\@lopfileinternal{#1}}
     \makeatother
 
     \pagestyle{empty}
-    \addcontentsline{toc}{chapter}{\listfigurename}
+    % \addcontentsline{toc}{chapter}{\listfigurename}
     \listoffigures
     \thispagestyle{empty}
     \cleardoublepage
     \endgroup
 
     % list of tables
-    \addcontentsline{toc}{chapter}{\listtablename}
+    % \addcontentsline{toc}{chapter}{\listtablename}
     \listoftables
     \thispagestyle{empty}
     \cleardoublepage
 
 
-    \addcontentsline{toc}{chapter}{List of Algorithms}
+    % \addcontentsline{toc}{chapter}{\listalgorithmname}
     \listofalgorithms
     \thispagestyle{empty}
     \cleardoublepage
@@ -655,7 +660,7 @@ publications}\gdef\@lopfileinternal{#1}}
 
     % list of listings
     % \addcontentsline{toc}{chapter}{\lstlistlistingname}
-    \addcontentsline{toc}{chapter}{List of Source Codes}
+    % \addcontentsline{toc}{chapter}{List of Source Codes}
     \listoflistings
     \thispagestyle{empty}
     \cleardoublepage
