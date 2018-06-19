@@ -436,7 +436,7 @@ publications}\gdef\@lopfileinternal{#1}}
         \begin{center}
           \begin{tabular}{@{}clc@{}}
             \@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst & & {\bfseries R.N.:} {\normalfont \@authorSnfst}  \\
-            & & \\
+            % & & \\
             \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd  & & {\bfseries R.N.:} {\normalfont \@authorSnsnd}  \\
           \end{tabular}
         \end{center}
@@ -444,7 +444,7 @@ publications}\gdef\@lopfileinternal{#1}}
         \begin{center}
           \begin{tabular}{@{}clc@{}}
               \@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst & & {\bfseries Α.Μ.:} {\normalfont \@authorSnfst}  \\
-              & & \\
+              % & & \\
               \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd  & & {\bfseries Α.Μ.:} {\normalfont \@authorSnsnd}  \\
           \end{tabular}
         \end{center}
