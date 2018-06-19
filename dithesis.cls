@@ -361,11 +361,11 @@ publications}\gdef\@lopfileinternal{#1}}
       {\bfseries
       \ifenglishfrontpage
 	  	  \@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst
-        \hfil
+        \vfil
 	  	  \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd
 	    \else
 	  	  \@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst
-        \hfil
+        \vfil
 	  	  \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd
 	    \fi}
       \linebreak\linebreak\linebreak
@@ -435,17 +435,17 @@ publications}\gdef\@lopfileinternal{#1}}
       \ifenglishcommitteepage
         \begin{center}
           \begin{tabular}{@{}clc@{}}
-            \@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst & & \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd \\
+            \@authorFirstEnfst{} \@authorMiddleEnfst{} \@authorLastEnfst & & {\bfseries R.N.:} {\normalfont \@authorSnfst}  \\
             & & \\
-            {\bfseries R.N.:} {\normalfont \@authorSnfst} & & {\bfseries R.N.:} {\normalfont \@authorSnsnd} \\
+            \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd  & & {\bfseries R.N.:} {\normalfont \@authorSnsnd}  \\
           \end{tabular}
         \end{center}
       \else
         \begin{center}
           \begin{tabular}{@{}clc@{}}
-            \@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst & & \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd \\
-            & & \\
-            {\bfseries Α.Μ.:} {\normalfont \@authorSnfst} & & {\bfseries Α.Μ.:} {\normalfont \@authorSnsnd} \\
+              \@authorFirstGrfst{} \@authorMiddleGrfst{} \@authorLastGrfst & & {\bfseries Α.Μ.:} {\normalfont \@authorSnfst}  \\
+              & & \\
+              \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd  & & {\bfseries Α.Μ.:} {\normalfont \@authorSnsnd}  \\
           \end{tabular}
         \end{center}
       \fi
