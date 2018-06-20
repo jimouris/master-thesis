@@ -1,7 +1,21 @@
 \section{Privacy Preserving ID3}\label{s:id3}
 
+\fixme{many things from \href{http://www.pinkas.net/PAPERS/id3-final.pdf}{http://www.pinkas.net/PAPERS/id3-final.pdf}}
+
 \import{./}{algorithms/id3_textbook.tex}
 
+
+\begin{equation}\label{eq:entropy}
+  H_C(T) = \sum_{i=1}^{l} - \frac{\mid T(c_i) \mid}{\mid T \mid} log{\frac{\mid T(c_i) \mid}{\mid T \mid}}
+\end{equation}
+
+\begin{equation}\label{eq:TgivenA}
+  H_C(T \mid A) = \sum_{j=1}^{m} - \frac{\mid T(a_j) \mid}{\mid T \mid} H_C(T(a_j))
+\end{equation}
+
+\begin{equation}\label{eq:gain}
+  Gain(A) = H_C(T) - H_C(T \mid A)
+\end{equation}
 
 \import{./}{algorithms/id3_pp.tex}
 
