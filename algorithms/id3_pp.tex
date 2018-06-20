@@ -1,4 +1,4 @@
-\begin{algorithm}[H]\fontfamily{lmss}
+\begin{algorithm}[t]\fontfamily{lmss}
 \caption{Privacy Preserving ID3 Algorithm \fixme{Many more fixes}}\label{a:id3-pp}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
@@ -8,16 +8,16 @@
 
 \Procedure{ID3}{${\color{darkred}{examples}}, {\color{darkred}{attributes}}$}
     \State ${\color{darkred}{allSame}} \gets \textsc{AllExamplesSame}({\color{darkred}{examples}})$
-    
+
     \If {{\color{darkblue}{\textsc{Declassify}}}$({\color{darkred}{allSame}})$}
         \State \textbf{return} ${\color{darkred}{examples}}[0][classAttribute]$
     \ElsIf {$\textsc{Length}({\color{darkred}{attributes}}) = 0$}
         \State \textbf{return} $\textsc{MostCommonLabel}({\color{darkred}{examples}})$
     \EndIf
-  
+
     \State ${\color{darkred}{A}} \gets$ The Attribute that best classifies examples
     \State Decision Tree attribute for ${\color{darkred}{root}} \gets {\color{darkred}{A}}$
-    
+
     \State ${\color{darkred}{branches}} \gets {\color{darkred}{\{\}}}$
 
     \For{each possible value $v_i$ of ${\color{darkred}{A}}$}
@@ -32,7 +32,7 @@
         \State ${\color{darkred}{branches}} \gets {\color{darkred}{branches}} \cup {\color{darkred}{branch}}$
     \EndFor
     \State \textbf{return} ${\color{darkred}{branches}}$
-      
+
 \EndProcedure
 
 \end{algorithmic}

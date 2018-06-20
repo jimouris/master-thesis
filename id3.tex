@@ -1,6 +1,38 @@
-\section{Privacy Preserving ID3}\label{s:id3}
+\section{Decision Trees}\label{s:decision-trees}
 
-\fixme{many things from \href{http://www.pinkas.net/PAPERS/id3-final.pdf}{http://www.pinkas.net/PAPERS/id3-final.pdf}}
+Decision trees are tree-like structures in which each internal node represents a ``test" on an attribute, each branch represents the outcome of the specific test, and each leaf node represents a class label (decision taken after computing all attributes).
+More specifically, decision trees depict models of decisions and their possible results.
+They are also a simple way to display an algorithm that only contains conditional control statements.
+Starting from the root node and following the paths to leaves, each path represents classification rules.
+
+For instance, the attribute ``Gender" would have two edges leaving it, one for ``Male" and
+one for ``Female".
+Each edge could point to a new attribute (for example ``Age Groups"), and so on.
+The leaves of the tree contain the expected class value for transactions matching the path from the root to that leaf.
+Given a decision tree, one can predict the class of a new transaction just by following the ``correct" path, which will result in a class label.
+
+One famous algorithm for decision tree construction is ID3 (Iterative Dichotomiser 3).
+ID3 is the precursor to the C4.5 algorithm, and is typically used in the machine learning and natural language processing domains.
+Both algorithms build decision trees from a set of training data, using the concept of information entropy, however, C4.5 results in better classification utilizing a more efficient splitting criterion.
+
+
+
+
+\subsection{Textbook ID3}\label{s:id3}
+
+The ID3 algorithm assumes that each attribute is categorical, such as the aforementioned attribute ``Age Groups" which is separated in four disjoint categories; ``Infant", ``Adolescent", ``Child" and ``Adult".
+
+ID3 algorithm constructs the classification tree top-down in a recursive fashion.
+The idea is to find the ``best" attribute that classifies the transactions.
+At start, the algorithm searches and chooses the best attribute for the root node, and consecutively the remaining transactions are partitioned by it.
+On each partition, ID3 is then recursively called.
+
+The ``best" attribute is defined as the attribute that has the smallest entropy -- or in other words, the best information gain.
+On each iteration, ID3 iterates through every unused attribute $S$ of the dataset and calculates the entropy $H(S)$ (equation \ref{eq:entropy}) of that attribute.
+Finally, the set $S$ is then split by the selected attribute to produce subsets of the data.
+The algorithm continues to recurse on each subset, considering only attributes never selected before.
+
+\fixme{explain more the algorithm? explain what is MostCommonLabel, AllExamplesSame, etc? OR change algorithm \ref{a:id3-simple} to pseudocode??}
 
 \import{./}{algorithms/id3_textbook.tex}
 
@@ -17,5 +49,19 @@
   Gain(A) = H_C(T) - H_C(T \mid A)
 \end{equation}
 
+
+\subsection{Privacy Preserving ID3}\label{s:pp-id3}
+
+\fixme{many things from \href{http://www.pinkas.net/PAPERS/id3-final.pdf}{http://www.pinkas.net/PAPERS/id3-final.pdf}}
+
+
 \import{./}{algorithms/id3_pp.tex}
+
+
+
+
+\subsection{Textbook C4.5}\label{s:c45}
+
+\subsection{Privacy Preserving C4.5}\label{s:pp-c45}
+
 
