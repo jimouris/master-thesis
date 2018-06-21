@@ -1,14 +1,17 @@
 \chapter{Introduction}\label{c:introduction}
+
+\fixme{Add citations to introduction!!!!}
+
 Big data is growing exponentially, 90 percent of which has been created in the past few years. People are constantly producing and publishing information about themselves.
 Such data comes from browsing the web, talking to someone online, moving around emitting gps signal, being registered by cameras or credit card usage.
-Many companies and organisations, such as Google and Facebook, make profit from big data analytics, collection and storage.
+Many companies and organizations, such as Google and Facebook, make profit from big data analytics, collection and storage.
 
 One of the most common examples is personalized advertisements, occurring from the massive data analytics.
 It is becoming increasingly common for data about our location, music and movies we like, private conversations, and any other online trace we leave behind, to be linked to our purchasing preferences.
 
 The aforementioned tracking and profiling comes from breaching of the individuals’ privacy.
 Privacy is the ability of individuals to have control over how their personal information is collected and used, and thereby express themselves selectively.
-Nowadays, the need of preserving someone's privacy is more crucial than ever. 
+Nowadays, the need of preserving someone's privacy is more crucial than ever.
 
 Financial information can be sensitive. Such information includes a person’s holdings, debts and transactions (\textit{e.g.} purchases).
 This information, if compromised, can lead criminal activity such as fraud or identity theft.
@@ -23,3 +26,30 @@ There is no need to justify why such a right is needed.
 The burden of justification falls on the one seeking to violate this right.
 Even when a right is not useful to you, you can't give away the right of others.
 \textit{``Arguing that you don't care about the right to privacy because you have nothing to hide is no different than saying you don't care about free speech because you have nothing to say."} [Snowden].
+
+\fixme{oi duo apopanw paragrafoi nomizw ksefeugoun ligo...}
+
+% Problem & Motivation
+
+This rapid growth of information has resulted in the consistently growing popularity of cloud computing, which offers strong computational power for both individuals and companies.
+At the same time, all data that are uploaded in the cloud can be exposed to attacks from both the cloud provider and third parties.
+However, in the case of financial and medical data, people are not comfortable sharing their sensitive data, and more importantly, they do not trust any third party with this information.
+
+There are many real world use cases and business models that use information from different parties to compute jointly meaningful results, but due to the aforementioned limitations, some are avoided and others do not always respect data privacy.
+The solution to this, is technique called secure multi-party computation (SMPC or MPC), which leverages cryptographic primitives to carry out computations on encrypted data.
+Real world examples are unlimited; for instance, Sharemind -- a platform for secure computations -- mentions the example of satellite collision, since the number of satellites orbiting the planet is growing and thus the danger of collisions is also growing.
+Indeed, two satellites crashed in 2009.
+Satellite owners are not willing to make the orbits of their satellites public.
+However, this -- and future -- collisions could be avoided by sharing information about the satellites orbits.
+Using MPC, the parties can cooperate and learn whether a collision is going to happen and nothing else.
+No information about the actual orbits would leak, since computations are carried out on encrypted data.
+
+
+% Contribution
+
+\textbf{Our contribution:} In this thesis, our primarily concerned is to create an end-to-end infrastructure for computing privacy analytics.
+We have developed algorithms specifically tailored to encrypted architectures and in the SMPC scenario, but also we have focused on the coordination and communication between all involved parties; those who provide their data, those who perform the secure computation, and finally those that initiate new computations.
+
+\fixme{Add more here..}
+
+
