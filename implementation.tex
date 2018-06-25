@@ -1,14 +1,62 @@
 \chapter{Implementation Details}\label{c:implementation}
 
+Our application consists of four concrete parts, the \textit{coordinator}, the data providers, the SMPC cluster and the user interface.
+
 \section{Coordinator}\label{s:impl-coordinator}
+The \textit{coordinator} handles all private computation requests, communicates with the data providers -- requesting them to securely import their data to the computing cluster --, and finally returns to the researcher the analytics results.
+
+The coordinator server has been implemented using \texttt{Node.js} \texttt{Express Server} and provides the following RESTful API.
+
 
 \subsection{RESTful API}\label{ss:coord-restful-api}
+
+\begin{itemize}
+  \item POST
+  \begin{itemize}[label=$\circ$]
+
+    \item \textbf{\textit{/smpc/histogram/numerical}}
+    This POST request initiates a secure computation for numerical/continuous values dataset.
+    Through the request's body, one can specify the desired attribute names of the dataset.
+    For instance, for the CVI dataset \ref{s:datasets} a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term patient age.
+    If the specified attributes are two or more, then the resulting counts will correspond to tuples, triples, etc.
+
+
+    \item \textbf{\textit{/smpc/histogram/categorical}}
+    This POST request initiates a secure computation for categorical values dataset (MeSH).
+    Through the request's body, one can specify the desired MeSH terms.
+    The values the count of which will be computed are the children of the specified MeSH term from the MeSH ontology.
+    For example, if a user specifies that he/she wants the counts for the MeSH term ``Age Groups" [M01.060], he/she will get four counts back corresponding to the four children of ``Age Groups", namely ``Adolescent" [M01.060.057], ``Adult" [M01.060.116], ``Child" [M01.060.406] and ``Infant" [M01.060.703].
+    If the specified MeSH terms are two, then the resulting counts will correspond to tuples of MeSH labels.
+    If the specified MeSH terms are three, the result will be triples, etc.
+
+
+    \item \textbf{\textit{/smpc/decisionTree}}
+    Finally, this POST request is for computing a decision tree from either dataset.
+    The implemented classifiers are ID3 and C4.5, and one should specify which to use in the request body along with the desired attributes.
+    Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
+
+  \end{itemize}
+
+  \item GET
+  \begin{itemize}[label=$\circ$]
+    \item \textbf{\textit{/smpc/queue}}
+    This GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
+    The status of an ongoing computation request can be accessed through the /smpc/queue GET request by specifying its id.
+    The only parameter this GET request accepts is the id of the desired computation request, as shown below.
+
+  \end{itemize}
+\end{itemize}
+
+\fixme{Add examples and explain more the API}
+
+
 
 
 
 \section{Data Providers}\label{s:impl-data-providers}
 
 \subsection{RESTful API}\label{ss:data-providers-restful-api}
+
 
 \subsection{Docker}\label{ss:data-providers-docker}
 
