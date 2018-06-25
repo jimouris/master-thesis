@@ -52,7 +52,12 @@ Using MPC, the parties can cooperate and learn whether a collision is going to h
 No information about the actual orbits would leak, since computations are carried out on encrypted data.
 
 
-% Contribution
+Another interesting example is presented in \cite{lindell2000privacy}, where in the late 1990s, the Canadian Government maintained a massive federal database that pooled citizen data from a number of different government ministries, with aim to implement governmental research that would arguably improve the services received by citizens.
+This database became known as the “big brother” database, despite that was officially called the Longitudinal Labor Force File.
+Fortunately, the people protested and the project was discontinued due to privacy concerns.
+As in the example of medical research, here, individuals data privacy would have been exposed, rendering the need of privacy-preserving algorithms of crucial importance.
+
+
 
 \section{Our Contribution}\label{s:our-contribution}
 In this thesis, our primarily concern is to create an end-to-end infrastructure for computing privacy preserving analytics such as \cite{lindell2000privacy, agrawal2000privacy}.
@@ -69,16 +74,18 @@ Thus, medical data constitute an example that demonstrates the necessity of priv
 
 
 Although in this thesis we have focused on medical data, our end-to-end infrastructure is oblivious to the type of data that it processes.
-
-
-\fixme{Add more here... probably some reordering between the above two paragraphs?}
+The same analytics will be applied whether it would perform medical research on hospitals data, or highly classified statistics for governments data, or even private computation for preventing satellite collisions.
+This variety of different applications that can be served through our system, also introduces a distinction in the data types -- continuous\footnote{\textit{Continuous data} is data where the values can change continuously, rendering uncountable the number of different possible values.} and categorical\footnote{\textit{Categorical data} refer to those aspects of data where there is a distinction between different groups; the number of possible values/categories are small and can be counted.} data.
+Examples of the former category include weight, price, profits, etc, where some categories of the latter type of data include product-type, gender, age-group, etc.
+This distinction between continuous data and categorical data introduces a limitation, since different data types are managed in different ways.
+However, the algorithms we have developed for privacy-preserving analytics can deal with both quantitative and categorical data.
 
 
 
 
 \section{Thesis Structure}\label{s:thesis-structure}
 The thesis is organized as follows.
-In section \ref{s:preliminaries}, we examine some fundamental cryptographic protocols that are essential for the subsequent sections.
+In section \ref{c:preliminaries}, we examine some fundamental cryptographic protocols that are essential for the subsequent sections.
 In section ...
 
 
