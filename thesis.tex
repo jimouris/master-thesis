@@ -1,12 +1,3 @@
-% demo.tex
-%
-% Enjoy, evolve, and share!
-%
-% Compile it as follows:
-%   latexmk
-%
-% Check file `dithesis.cls' for other configuration options.
-%
 \documentclass[inscr,ack]{dithesis}
 
 %\usepackage{graphicx}
@@ -14,6 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage{booktabs}
 \usepackage{lipsum}
 \usepackage{enumerate}
@@ -43,189 +35,14 @@
 \usepackage[cache=false, newfloat]{minted}
 \usepackage{cite}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\interfootnotelinepenalty=10000
+\import{./}{configuration.tex}
 
-\newcolumntype{s}{>{\centering\arraybackslash}X}
+\import{./}{authors.tex}
 
-\hypersetup{
-    unicode=true,                     % non-Latin characters in bookmarks
-    pdffitwindow=true,                % page fit to window when opened
-    pdfnewwindow=true,                % links in new window
-    pdfkeywords={},                   % list of keywords
-    colorlinks=true,                  % false: boxed links; true: colored links
-    linkcolor=black,                  % color of internal links
-    citecolor=black,                  % color of links to bibliography
-    filecolor=black,                  % color of file links
-    urlcolor=black,                   % color of external links
-    pdftitle={},                      % title
-    pdfauthor={},                     % author
-    pdfsubject={}                     % subject of the document
-}
-
-\newcommand{\fixme}[1]{
-  \noindent
-  \colorbox{yellow} {\scriptsize FIXME}
-  {\bf[}\textcolor{red}{#1}{\bf]}
-  %\newline
-}
-
-\definecolor{darkred}{rgb}{0.7, 0.0, 0.00}
-\definecolor{darkblue}{rgb}{0.1, 0.4, 0.85}
-
-% Notations
-\newcommand{\hplus}{\;\hat{+}\;}
-\newcommand{\hminus}{\;\hat{-}\;}
-\newcommand{\hdiv}{\;\hat{\div}\;}
-\newcommand{\uminus}{\;\hat{-}\;}
-\newcommand{\hmul}{\;\star\;}
-\newcommand{\heq}{\;\hat{=}\;}
-\newcommand{\hgt}{\;\hat{>}\;}
-\newcommand{\hgeq}{\;\hat{\geq}\;}
-\newcommand{\hleq}{\;\hat{\leq}\;}
-\newcommand{\hlt}{\;\hat{<}\;}
-\newcommand{\enc}[1]{\widetilde{#1}}
-\newcommand{\bigo}[1]{$\mathcal{O}({#1})$}
-
-
-\renewcommand*{\lstlistlistingname}{List of Source Codes}
-\renewcommand{\lstlistingname}{Code}
-
-\makeatletter
-\begingroup
-  \let\newcounter\@gobble
-  \let\setcounter\@gobbletwo
-  \globaldefs\@ne
-  \let\c@loadepth\@ne
-  \newlistof{algorithms}{loa}{\listalgorithmname}
-\endgroup
-\let\l@algorithm\l@algorithms
-\makeatother
-
-\makeatletter
-\begingroup
-  \let\newcounter\@gobble
-  \let\setcounter\@gobbletwo
-  \globaldefs\@ne
-  \let\c@loldepth\@ne
-  \newlistof{listings}{lol}{\lstlistlistingname}
-\endgroup
-\let\l@lstlisting\l@listings
-\makeatother
-
-
-\renewcommand{\lstlistoflistings}{\listoflistings}
-
-\renewcommand{\cftsecfont}{\normalfont\bfseries}% section titles in bold
-\renewcommand{\cftfignumwidth}{5em}
-\renewcommand{\cftfigpresnum}{Figure }
-\renewcommand{\cftfigaftersnum}{:}
-
-\renewcommand{\cfttabnumwidth}{4.5em}
-\renewcommand{\cfttabpresnum}{Table }
-\renewcommand{\cfttabaftersnum}{:}
-
-\renewcommand{\cftalgorithmsnumwidth}{6em}
-\renewcommand{\cftalgorithmspresnum}{Algorithm }
-\renewcommand{\cftalgorithmsaftersnum}{:}
-
-\renewcommand{\cftlistingsnumwidth}{4.5em}
-\renewcommand{\cftlistingspresnum}{Code }
-\renewcommand{\cftlistingsaftersnum}{:}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%% User-specific configuration %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%% Required Metadata %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% First name, last name
-%
-\authorFirstGrfst{Αθανάσιος}
-\authorFirstEnfst{Athanasios}
-\authorFirstAbrGrfst{Α.} % abbreviation of first name
-\authorFirstAbrEnfst{A.}
-\authorMiddleGrfst{Γ.}   % abbreviation of father's first name
-\authorMiddleEnfst{G.}
-\authorLastGrfst{Γιαννόπουλος}
-\authorLastEnfst{Giannopoulos}
-\authorSnfst{M1529}
-
-\authorFirstGrsnd{Δημήτρης}
-\authorFirstEnsnd{Dimitris}
-\authorFirstAbrGrsnd{Δ.} % abbreviation of first name
-\authorFirstAbrEnsnd{D.}
-\authorMiddleGrsnd{Η.}   % abbreviation of father's first name
-\authorMiddleEnsnd{I.}
-\authorLastGrsnd{Μούρης}
-\authorLastEnsnd{Mouris}
-\authorSnsnd{M1534}
-
-
-%
-% The title of the thesis
-%
-\titleEn{Privacy Preserving Medical Data Analytics using Secure Multi Party Computation. An End-To-End Use Case.}
-\titleGr{Στατιστικές Αναλύσεις με Σεβασμό στην Ιδιωτικότητα Ιατρικών Δεδομένων χρησιμοποιώντας Ασφαλή Υπολογισμό μεταξύ πολλών Προσώπων. Μία Περίπτωση Χρήσης από Άκρη σε Άκρη.}
-
-%
-% Month followed by Year
-%
-\dateGr{ΑΥΓΟΥΣΤΟΣ 2018}
-\dateEn{AUGUST 2018}
-
-%
-% Supervisor(s) info
-%
-\supervisorGr{Ιωάννης Ε. Ιωαννίδης}{Καθηγητής ΕΚΠΑ}
-\supervisorEn{Yannis E. Ioannidis}{Professor NKUA}
-
-\supervisorGr{Μίνως Ν. Γαροφαλάκης}{Καθηγητής ΠΚ}
-\supervisorEn{Minos N. Garofalakis}{Professor TUC}
-
-%
-% Abstract, synopsis, inscription, ack, and preface pages.
-%
-
-\import{./}{abstract.tex}
-
-\import{./}{acknowledgements.tex}
-
-\inscriptionEn{\emph{This master thesis is dedicated to ...}}
-
-%
-% Subject area and keywords
-%
-\subjectAreaGr{Υπολογισμοί με Σεβασμό στην Ιδιωτικότητα, Εξόρυξη Δεδομένων με Σεβασμό στην Ιδιωτικότητα, Ασφαλείς Υπολογισμοί μεταξύ πολλών Προσώπων}
-\subjectAreaEn{Privacy-Preserving Computation, Privacy-Preserving Data Mining, Secure Multi-Party Computation}
-
-\keywordsGr{Ασφαλείς Υπολογισμοί μεταξύ πολλών Προσώπων, Εξόρυξη Δεδομένων με Σεβασμό στην Ιδιωτικότητα, Ιστόγραμμα, Κατηγοριοποιητής Δεντρου Αποφάσεων, Ιατρικά Δεδομένα}
-\keywordsEn{Secure Multi-Party Computation, Privacy-Preserving Data Mining, Histogram, Decision Tree Classifier, Medical Data}
-
-%
-% Set the .bib file containing your paper publications (leave the extension out)
-%
-% This is optional, but it should be specified when option 'lop' is passed to
-% the document class.
-%
-% Then, inside the document environment, you may use the command '\nocitelop' to
-% site your papers, as you would traditionally do with the commands '\cite' or
-% '\nocite'.
-%
-% The papers are printed in reverse chronological order.
-%
-%\lopfile{mypapers/pubs}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%% Required Metadata %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 

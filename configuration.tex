@@ -1,0 +1,89 @@
+\interfootnotelinepenalty=10000
+
+\newcolumntype{s}{>{\centering\arraybackslash}X}
+
+\hypersetup{
+    unicode=true,                     % non-Latin characters in bookmarks
+    pdffitwindow=true,                % page fit to window when opened
+    pdfnewwindow=true,                % links in new window
+    pdfkeywords={},                   % list of keywords
+    colorlinks=true,                  % false: boxed links; true: colored links
+    linkcolor=black,                  % color of internal links
+    citecolor=black,                  % color of links to bibliography
+    filecolor=black,                  % color of file links
+    urlcolor=black,                   % color of external links
+    pdftitle={},                      % title
+    pdfauthor={},                     % author
+    pdfsubject={}                     % subject of the document
+}
+
+\newcommand{\fixme}[1]{
+  \noindent
+  \colorbox{yellow} {\scriptsize FIXME}
+  {\bf[}\textcolor{red}{#1}{\bf]}
+  %\newline
+}
+
+\definecolor{darkred}{rgb}{0.7, 0.0, 0.00}
+\definecolor{darkblue}{rgb}{0.1, 0.4, 0.85}
+
+% Notations
+\newcommand{\hplus}{\;\hat{+}\;}
+\newcommand{\hminus}{\;\hat{-}\;}
+\newcommand{\hdiv}{\;\hat{\div}\;}
+\newcommand{\uminus}{\;\hat{-}\;}
+\newcommand{\hmul}{\;\star\;}
+\newcommand{\heq}{\;\hat{=}\;}
+\newcommand{\hgt}{\;\hat{>}\;}
+\newcommand{\hgeq}{\;\hat{\geq}\;}
+\newcommand{\hleq}{\;\hat{\leq}\;}
+\newcommand{\hlt}{\;\hat{<}\;}
+\newcommand{\enc}[1]{\widetilde{#1}}
+\newcommand{\bigo}[1]{$\mathcal{O}({#1})$}
+
+
+\renewcommand*{\lstlistlistingname}{List of Source Codes}
+\renewcommand{\lstlistingname}{Code}
+
+\makeatletter
+\begingroup
+  \let\newcounter\@gobble
+  \let\setcounter\@gobbletwo
+  \globaldefs\@ne
+  \let\c@loadepth\@ne
+  \newlistof{algorithms}{loa}{\listalgorithmname}
+\endgroup
+\let\l@algorithm\l@algorithms
+\makeatother
+
+\makeatletter
+\begingroup
+  \let\newcounter\@gobble
+  \let\setcounter\@gobbletwo
+  \globaldefs\@ne
+  \let\c@loldepth\@ne
+  \newlistof{listings}{lol}{\lstlistlistingname}
+\endgroup
+\let\l@lstlisting\l@listings
+\makeatother
+
+
+\renewcommand{\lstlistoflistings}{\listoflistings}
+
+\renewcommand{\cftsecfont}{\normalfont\bfseries}% section titles in bold
+\renewcommand{\cftfignumwidth}{5em}
+\renewcommand{\cftfigpresnum}{Figure }
+\renewcommand{\cftfigaftersnum}{:}
+
+\renewcommand{\cfttabnumwidth}{4.5em}
+\renewcommand{\cfttabpresnum}{Table }
+\renewcommand{\cfttabaftersnum}{:}
+
+\renewcommand{\cftalgorithmsnumwidth}{6em}
+\renewcommand{\cftalgorithmspresnum}{Algorithm }
+\renewcommand{\cftalgorithmsaftersnum}{:}
+
+\renewcommand{\cftlistingsnumwidth}{4.5em}
+\renewcommand{\cftlistingspresnum}{Code }
+\renewcommand{\cftlistingsaftersnum}{:}
+
