@@ -152,7 +152,7 @@ headsep=0.5cm,footskip=0.75cm,
 \RequirePackage{textcase}  % needed for forcing capital letters (in chapters)
 \RequirePackage[resetlabels]{multibib}
 %\usepackage[notlof,notlot,nottoc,notlop]{tocbibind}
-%\RequirePackage{tocloft}  % needed for making chapter titles upper case
+% \RequirePackage[titles]{tocloft}  % needed for making chapter titles upper case
 \RequirePackage{etoolbox}  % needed for patchcmd
 \RequirePackage{tabularx}  % needed for tabular* environment
 \RequirePackage{longtable} % needed for splitting big tables across pages
@@ -174,8 +174,11 @@ headsep=0.5cm,footskip=0.75cm,
 \setotherlanguage{greek}
 
 % List of figures numbering AI, section independent
-\usepackage{chngcntr}
-\counterwithout{figure}{chapter}
+% \usepackage{chngcntr}
+% \counterwithout{figure}{chapter}
+% \counterwithout{table}{chapter}
+% \counterwithout{lstlisting}{chapter}
+
 
 
 %
@@ -661,7 +664,7 @@ publications}\gdef\@lopfileinternal{#1}}
     % list of listings
     % \addcontentsline{toc}{chapter}{\lstlistlistingname}
     % \addcontentsline{toc}{chapter}{List of Source Codes}
-    \listoflistings
+    \lstlistoflistings
     \thispagestyle{empty}
     \cleardoublepage
 

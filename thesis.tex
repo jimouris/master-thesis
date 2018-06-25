@@ -25,7 +25,6 @@
 \usepackage{tcolorbox}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{listings}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{setspace}
@@ -33,15 +32,21 @@
 \usepackage{pgfplots}
 \usepackage{textcomp}
 \usepackage{tabularx}
+\usepackage{listings}
+\usepackage[font=footnotesize, labelfont=bf, textfont=bf, justification=centering]{caption}
 \usepackage[bottom]{footmisc}
 \usepackage{hyperref}
 \usepackage{hyphenat}
+\usepackage{chngcntr}
+\usepackage[titles]{tocloft}  % needed for making chapter titles upper case
 \usepackage{subfig}
 \usepackage[cache=false, newfloat]{minted}
+\usepackage{cite}
 
-\SetupFloatingEnvironment{listing}{name=Source Code}
-\renewcommand*{\listlistingname}{List of Source Code}
-\renewcommand*{\thelisting}{\arabic{listing}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \interfootnotelinepenalty=10000
 
@@ -85,14 +90,54 @@
 \newcommand{\hlt}{\;\hat{<}\;}
 \newcommand{\enc}[1]{\widetilde{#1}}
 \newcommand{\bigo}[1]{$\mathcal{O}({#1})$}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%% User-specific package inclusions %%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%% User-specific configuration %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand*{\lstlistlistingname}{List of Source Codes}
+\renewcommand{\lstlistingname}{Code}
+
+\makeatletter
+\begingroup
+  \let\newcounter\@gobble
+  \let\setcounter\@gobbletwo
+  \globaldefs\@ne
+  \let\c@loadepth\@ne
+  \newlistof{algorithms}{loa}{\listalgorithmname}
+\endgroup
+\let\l@algorithm\l@algorithms
+\makeatother
+
+\makeatletter
+\begingroup
+  \let\newcounter\@gobble
+  \let\setcounter\@gobbletwo
+  \globaldefs\@ne
+  \let\c@loldepth\@ne
+  \newlistof{listings}{lol}{\lstlistlistingname}
+\endgroup
+\let\l@lstlisting\l@listings
+\makeatother
+
+
+\renewcommand{\lstlistoflistings}{\listoflistings}
+
+\renewcommand{\cftsecfont}{\normalfont\bfseries}% section titles in bold
+\renewcommand{\cftfignumwidth}{5em}
+\renewcommand{\cftfigpresnum}{Figure }
+\renewcommand{\cftfigaftersnum}{:}
+
+\renewcommand{\cfttabnumwidth}{4.5em}
+\renewcommand{\cfttabpresnum}{Table }
+\renewcommand{\cfttabaftersnum}{:}
+
+\renewcommand{\cftalgorithmsnumwidth}{6em}
+\renewcommand{\cftalgorithmspresnum}{Algorithm }
+\renewcommand{\cftalgorithmsaftersnum}{:}
+
+\renewcommand{\cftlistingsnumwidth}{4.5em}
+\renewcommand{\cftlistingspresnum}{Code }
+\renewcommand{\cftlistingsaftersnum}{:}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% User-specific configuration %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -183,6 +228,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
+
+% counting
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{lstlisting}{chapter}
 
 \frontmatter
 

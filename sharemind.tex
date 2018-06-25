@@ -87,7 +87,7 @@ void main(){
   print(declassify(max)); // Result publishing
 }
 \end{minted}
-\captionof{listing}{Millionaire problem in SecreC}\label{l:millionaires}
+\captionof{lstlisting}{Millionaire problem in SecreC}\label{l:millionaires}
 }
 
 Each SMPC operation in Sharemind is implemented as an assembly instruction. It also supports vectorized operations. This plays a significant role in the program's efficiency.
@@ -114,7 +114,7 @@ The first one works with a typical loop on each of the array elements, while the
     print(declassify(c)); // Result publishing
   }
 \end{minted}
-\captionof{listing}{Non-vectorized array addition in SecreC}\label{l:non_vectorized_addition}
+\captionof{lstlisting}{Non-vectorized array addition in SecreC}\label{l:non_vectorized_addition}
 }
 
 {
@@ -127,7 +127,7 @@ The first one works with a typical loop on each of the array elements, while the
     print(declassify(c)); // Result publishing
   }
 \end{minted}
-\captionof{listing}{Vectorized array addition in SecreC}\label{l:vectorized_addition}
+\captionof{lstlisting}{Vectorized array addition in SecreC}\label{l:vectorized_addition}
 }
 
 The two example programs will have the same output but their performance will be different. The first program will perform $N$ message exchanges between the parties for the addition, while the second will perform just one.

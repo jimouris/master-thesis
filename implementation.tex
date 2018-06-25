@@ -20,7 +20,7 @@ The coordinator server has been implemented using \texttt{Node.js} \texttt{Expre
     For instance, for the CVI dataset \ref{s:datasets} a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term patient age.
     If the specified attributes are two or more, then the resulting counts will correspond to tuples, triples, etc.
 
-    \begin{listing}[H]
+    {
     \begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
     {
       "attributes": [
@@ -33,9 +33,10 @@ The coordinator server has been implemented using \texttt{Node.js} \texttt{Expre
       ]
     }
     \end{minted}
-    \caption{Example /smpc/histogram/numerical POST request body}
+    \captionof{lstlisting}{Example /smpc/histogram/numerical POST request body}
     \label{sc:histogram-numerical-post}
-    \end{listing}
+    }
+
 
 
     \item \textbf{\textit{/smpc/histogram/categorical}}
@@ -46,7 +47,7 @@ The coordinator server has been implemented using \texttt{Node.js} \texttt{Expre
     If the specified MeSH terms are two, then the resulting counts will correspond to tuples of MeSH labels.
     If the specified MeSH terms are three, the result will be triples, etc.
 
-    \begin{listing}[H]
+    {
     \begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
     {
       "attributes": [
@@ -58,9 +59,9 @@ The coordinator server has been implemented using \texttt{Node.js} \texttt{Expre
       ]
     }
     \end{minted}
-    \caption{Example /smpc/histogram/categorical POST request body}
+    \captionof{lstlisting}{Example /smpc/histogram/categorical POST request body}
     \label{sc:histogram-categorical-post}
-    \end{listing}
+    }
 
 
     \item \textbf{\textit{/smpc/decisionTree}}
@@ -68,7 +69,7 @@ The coordinator server has been implemented using \texttt{Node.js} \texttt{Expre
     The implemented classifiers are ID3 and C4.5, and one should specify which to use in the request body along with the desired attributes.
     Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
 
-    \begin{listing}[H]
+    {
     \begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
     {
       "attributes": [
@@ -84,11 +85,11 @@ The coordinator server has been implemented using \texttt{Node.js} \texttt{Expre
       ]
     }
     \end{minted}
-    \caption{Example /smpc/decisionTree POST request body for numerical values}
+    \captionof{lstlisting}{Example /smpc/decisionTree POST request body for numerical values}
     \label{sc:decisionTree-post-numerical}
-    \end{listing}
+    }
 
-    \begin{listing}[H]
+    {
     \begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
     {
       "attributes": [
@@ -103,9 +104,9 @@ The coordinator server has been implemented using \texttt{Node.js} \texttt{Expre
       ]
     }
     \end{minted}
-    \caption{Example /smpc/decisionTree POST request body for categorical values}
+    \captionof{lstlisting}{Example /smpc/decisionTree POST request body for categorical values}
     \label{sc:decisionTree-post-categorical}
-    \end{listing}
+    }
 
 
 
