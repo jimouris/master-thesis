@@ -74,17 +74,17 @@ The problem at hand is Yao's millionaire problem \cite{yao1982protocols} as desc
 Here we use \texttt{pd\_shared3p} as the security type, which stands for \textit{\textbf{p}rotection \textbf{d}omain \textbf{shared 3 p}arties}, and corresponds to a private security type using secret\hyp sharing between three parties.
 
 {
-\begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{c++}
 pd_shared3p uint64 max(pd_shared3p uint64 x, pd_shared3p uint64 y) {
-  pd_shared3p uint64 gt = (uint64)(x > y);  // 1 if x > y, 0 otherwise
-  return x * gt + y * (1-gt);               // Oblivious selection of the max value
+  pd_shared3p uint64 gt = (uint64)(x > y); // 1 if x > y, 0 otherwise
+  return x * gt + y * (1-gt); // Oblivious selection of the max value
 }
 
 void main(){
-  pd_shared3p uint64 x1 = 5;            // Private, secret-shared value of input party 1
-  pd_shared3p uint64 x2 = 8;            // Private, secret-shared value of input party 2
+  pd_shared3p uint64 x1 = 5; // Private, secret-shared value of input party 1
+  pd_shared3p uint64 x2 = 8; // Private, secret-shared value of input party 2
   pd_shared3p uint64 max = max(x1, x2); // Private result
-  print(declassify(max));               // Result publishing
+  print(declassify(max)); // Result publishing
 }
 \end{minted}
 \captionof{listing}{Millionaire problem in SecreC}\label{l:millionaires}
@@ -102,29 +102,29 @@ Below you can see two versions of array addition in SecreC.
 The first one works with a typical loop on each of the array elements, while the second one works by performing an SIMD addition between two arrays.
 
 {
-\begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{c++}
   void main(){
     uint64 N = 5;
-    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5};        // Array definition of size N
-    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10};       // Array definition of size N
-    pd_shared3p uint64 c(N);                          // Array declaration of size N
+    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5}; // Array definition of size N
+    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10}; // Array definition of size N
+    pd_shared3p uint64 c(N); // Array declaration of size N
     for (uint64 i = 0; i < N; i++){
-      c[i] = a[i] + b[i];            // Element-wise addition with sequential access
+      c[i] = a[i] + b[i]; // Element-wise addition with sequential access
     }
-    print(declassify(c));                             // Result publishing
+    print(declassify(c)); // Result publishing
   }
 \end{minted}
 \captionof{listing}{Non-vectorized array addition in SecreC}\label{l:non_vectorized_addition}
 }
 
 {
-\begin{minted}[linenos,tabsize=2,breaklines,breaksymbolleft=,fontsize=\footnotesize]{c++}
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{c++}
   void main(){
     uint64 N = 5;
-    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5};           // Array definition of size N
-    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10};          // Array definition of size N
+    pd_shared3p uint64 a(N) = {1, 2, 3, 4, 5}; // Array definition of size N
+    pd_shared3p uint64 b(N) = {6, 7, 8, 9, 10}; // Array definition of size N
     pd_shared3p uint64 c(N) = a + b; // SIMD instruction of addition of the two arrays
-    print(declassify(c));                                // Result publishing
+    print(declassify(c)); // Result publishing
   }
 \end{minted}
 \captionof{listing}{Vectorized array addition in SecreC}\label{l:vectorized_addition}
