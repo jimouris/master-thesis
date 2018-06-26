@@ -10,119 +10,181 @@ The coordinator server has been implemented using \texttt{Node.js} \texttt{Expre
 
 \subsection{RESTful API}\label{ss:coord-restful-api}
 
+\begin{table}[H]
+\centering
+\caption{Coordinator's RESTful API}
+\label{t:coordinator-api}
+\begin{tabular}{@{}ll@{}}
+\toprule
+URI                                   & Method        \\ \midrule
+\texttt{/smpc/histogram/numerical}    & \texttt{POST} \\
+\texttt{/smpc/histogram/categorical}  & \texttt{POST} \\
+\texttt{/smpc/decisionTree}           & \texttt{POST} \\
+\texttt{/smpc/queue?=request=\{uid\}} & \texttt{GET}  \\ \bottomrule
+\end{tabular}
+\end{table}
+
+The RESTful API of the \textit{coordinator} is summarized in table \ref{t:coordinator-api}.
+Below we explain in more detail each individual POST and GET request.
+
 \begin{itemize}
-  \item POST
-  \begin{itemize}[label=$\circ$]
+\item \textbf{\textit{/smpc/histogram/numerical}}
+This POST request initiates a secure computation for numerical/continuous values dataset.
+Through the request's body, one can specify the desired attribute names of the dataset.
+For instance, for the CVI dataset \ref{s:datasets} a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term patient age.
+If the specified attributes are two or more, then the resulting counts will correspond to tuples, triples, etc.
 
-    \item \textbf{\textit{/smpc/histogram/numerical}}
-    This POST request initiates a secure computation for numerical/continuous values dataset.
-    Through the request's body, one can specify the desired attribute names of the dataset.
-    For instance, for the CVI dataset \ref{s:datasets} a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term patient age.
-    If the specified attributes are two or more, then the resulting counts will correspond to tuples, triples, etc.
+{
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+{
+  "attributes": [
+    { "name": "Patient Age", "cells": "5" },
+    { "name": "Height (cm)", "cells": "3" },
+  ],
+  "datasources": [
+    "HospitalA",
+    "HospitalB"
+  ]
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/histogram/numerical POST request body}
+\label{sc:histogram-numerical-post}
+}
 
-    {
-    \begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
-    {
-      "attributes": [
-        { "name": "Patient Age", "cells": "5" },
-        { "name": "Height (cm)", "cells": "3" },
-      ],
-      "datasources": [
-        "HospitalA",
-        "HospitalB"
+
+
+\item \textbf{\textit{/smpc/histogram/categorical}}
+This POST request initiates a secure computation for categorical values dataset (MeSH).
+Through the request's body, one can specify the desired MeSH terms.
+The values the count of which will be computed are the children of the specified MeSH term from the MeSH ontology.
+For example, if a user specifies that he/she wants the counts for the MeSH term ``Age Groups" [M01.060], he/she will get four counts back corresponding to the four children of ``Age Groups", namely ``Adolescent" [M01.060.057], ``Adult" [M01.060.116], ``Child" [M01.060.406] and ``Infant" [M01.060.703].
+If the specified MeSH terms are two, then the resulting counts will correspond to tuples of MeSH labels.
+If the specified MeSH terms are three, the result will be triples, etc.
+
+{
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+{
+  "attributes": [
+      "M01.060" // This is a comma separated list of MeSH terms
+  ],
+  "datasources": [
+    "HospitalA",
+    "HospitalB"
+  ]
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/histogram/categorical POST request body}
+\label{sc:histogram-categorical-post}
+}
+
+
+
+\item \textbf{\textit{/smpc/decisionTree}}
+Finally, this POST request is for computing a decision tree from either dataset.
+The implemented classifiers are ID3 and C4.5, and one should specify which to use in the request body along with the desired attributes.
+Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
+
+{
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+{
+  "attributes": [
+    { "name": "Patient Age", "cells": "5" },
+    { "name": "Heart rate", "cells": "3" },
+    { "name": "Height (cm)", "cells": "6" }
+  ],
+  "classifier": "C45",
+  "class_attribute": { "name": "RVESV (ml)", "cells": "3" },
+  "datasources": [
+    "HospitalA",
+    "HospitalB"
+  ]
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/decisionTree POST request body for numerical values}
+\label{sc:decisionTree-post-numerical}
+}
+
+{
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+{
+  "attributes": [
+    "C14",
+    "C12"
+  ],
+  "classifier": "ID3",
+  "class_attribute": "M01.060",
+  "datasources": [
+    "HospitalA",
+    "HospitalB"
+  ]
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/decisionTree POST request body for categorical values}
+\label{sc:decisionTree-post-categorical}
+}
+
+
+
+
+\item \textbf{\textit{/smpc/queue?=request=\{uid\}}}
+This GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
+The status of an ongoing computation request can be accessed through the /smpc/queue GET request by specifying its id.
+The only parameter this GET request accepts is the id of the desired computation request, as shown below.
+
+{
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+{
+  "location": "/smpc/queue?request=944222c9-524b-40eb-b19b-486a946c220d"
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/queue GET request}
+\label{sc:get}
+}
+
+The response is a JSON object containing the specified computation's status, and possibly its current step or result which is a JSON object too.
+The server's response has the following structure.
+\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+    \item [\texttt{status}:] A string indicating the computation's status. One of [running, succeeded, failed, notstarted]
+    \item [\texttt{step}:] A string indicating the current step of the computation. This is present in case that the computation is in the running state.
+    \item [\texttt{result}:] A JSON object with the computation's result in case its status is succeeded. The JSON object contains a single key namely data which contains tuples of (label, value) of the computation result.
+    \begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+        \item [\texttt{label}:] A string, the value name corresponding to that count. Can be a tuple, triple etc. depending on the number of queried Mesh terms.
+        \item [\texttt{value}:] An integer, the actual count for that value.
+    \end{description}
+\end{description}
+
+
+{
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+{
+  "status": "succeeded",
+  "result": {
+      "data": [
+          {
+              "value": 0,
+              "label": "Infant"
+          },
+          {
+              "value": 63,
+              "label": "Adolescent"
+          },
+          {
+              "value": 9936,
+              "label": "Adult"
+          },
+          {
+              "value": 0,
+              "label": "Child"
+          }
       ]
-    }
-    \end{minted}
-    \captionof{lstlisting}{Example /smpc/histogram/numerical POST request body}
-    \label{sc:histogram-numerical-post}
-    }
+  }
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/queue GET response body}
+\label{sc:get-response}
+}
 
-
-
-    \item \textbf{\textit{/smpc/histogram/categorical}}
-    This POST request initiates a secure computation for categorical values dataset (MeSH).
-    Through the request's body, one can specify the desired MeSH terms.
-    The values the count of which will be computed are the children of the specified MeSH term from the MeSH ontology.
-    For example, if a user specifies that he/she wants the counts for the MeSH term ``Age Groups" [M01.060], he/she will get four counts back corresponding to the four children of ``Age Groups", namely ``Adolescent" [M01.060.057], ``Adult" [M01.060.116], ``Child" [M01.060.406] and ``Infant" [M01.060.703].
-    If the specified MeSH terms are two, then the resulting counts will correspond to tuples of MeSH labels.
-    If the specified MeSH terms are three, the result will be triples, etc.
-
-    {
-    \begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
-    {
-      "attributes": [
-          "M01.060" // This is a comma separated list of MeSH terms
-      ],
-      "datasources": [
-        "HospitalA",
-        "HospitalB"
-      ]
-    }
-    \end{minted}
-    \captionof{lstlisting}{Example /smpc/histogram/categorical POST request body}
-    \label{sc:histogram-categorical-post}
-    }
-
-
-    \item \textbf{\textit{/smpc/decisionTree}}
-    Finally, this POST request is for computing a decision tree from either dataset.
-    The implemented classifiers are ID3 and C4.5, and one should specify which to use in the request body along with the desired attributes.
-    Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
-
-    {
-    \begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
-    {
-      "attributes": [
-        { "name": "Patient Age", "cells": "5" },
-        { "name": "Heart rate", "cells": "3" },
-        { "name": "Height (cm)", "cells": "6" }
-      ],
-      "classifier": "C45",
-      "class_attribute": { "name": "RVESV (ml)", "cells": "3" },
-      "datasources": [
-        "HospitalA",
-        "HospitalB"
-      ]
-    }
-    \end{minted}
-    \captionof{lstlisting}{Example /smpc/decisionTree POST request body for numerical values}
-    \label{sc:decisionTree-post-numerical}
-    }
-
-    {
-    \begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
-    {
-      "attributes": [
-        "C14",
-        "C12"
-      ],
-      "classifier": "ID3",
-      "class_attribute": "M01.060",
-      "datasources": [
-        "HospitalA",
-        "HospitalB"
-      ]
-    }
-    \end{minted}
-    \captionof{lstlisting}{Example /smpc/decisionTree POST request body for categorical values}
-    \label{sc:decisionTree-post-categorical}
-    }
-
-
-
-  \end{itemize}
-
-  \item GET
-  \begin{itemize}[label=$\circ$]
-    \item \textbf{\textit{/smpc/queue}}
-    This GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
-    The status of an ongoing computation request can be accessed through the /smpc/queue GET request by specifying its id.
-    The only parameter this GET request accepts is the id of the desired computation request, as shown below.
-
-  \end{itemize}
 \end{itemize}
-
-\fixme{Add examples and explain more the API}
 
 
 
