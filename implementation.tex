@@ -235,6 +235,8 @@ URI                                & Method        \\ \midrule
 \end{tabular}
 \end{table}
 
+The RESTful API of the data providers is summarized in table \ref{t:data-providers-api}.
+Below we explain in more detail the two types of POST requests that the \textit{coordinator} sends to the data providers.
 
 \begin{itemize}
 \item \textbf{\textit{/smpc/import/numerical}}
@@ -264,14 +266,34 @@ The request for importing MeSH dataset is similar to the the numerical one, in C
 }
 
 
-\subsection{Docker}\label{ss:data-providers-docker}
-
 
 \subsection{Data Importer}\label{ss:data-providers-importer}
+The secure data import is one of the most essential procedures in the secure multi-party computation scenario.
+In this step, the data are secret-shared to the three computing parties.
+The shares are part of the secret but reveal nothing about it.
+In section \ref{s:secret-sharing}, we examined some secret sharing techniques and the homomorphic properties that some of them have.
+In simple words, the secret sharing homomorphic property enables meaningful computation on the shares of the initial data.
+
+Our system is based on Sharemind for the SMPC computation and they also provide a module for the secret sharing import.
+However, this module has some restrictions; the data to be imported should be in a comma-separated values (CSV) format.
+
+\fixme{explain what problem does this introduce to MeSH ...}
 
 
 \subsubsection{Data Preprocessor}\label{sss:data-providers-preprocessor}
 
+\fixme{the solution ...}
+
+
+
+\subsection{Docker}\label{ss:data-providers-docker}
+The number of data providers can start from two, and is not restricted in how big it can get.
+Thus, we wanted the deployment of each server to be easy and fast; veiling all the individual parts, such as the required packages and the SMPC importer installation.
+For that reason we have built a Docker image ready for running and accepting requests for data import.
+Each individual data provider, can use this image to create a Docker container and then upload his own dataset to the container.
+
+In this way, non-expert users can easily provide their data to be a part of the secure computation.
+\fixme{add more here...}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
