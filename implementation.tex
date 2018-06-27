@@ -187,6 +187,24 @@ The server's response has the following structure.
 \end{itemize}
 
 
+
+\subsection{Sequence of Actions}\label{ss:coordinator-sequence}
+
+\fixme{Explain the procedure in more detail}
+
+\begin{enumerate}
+\item A request arises in the coordinator
+\item ...
+\item main generator
+\item compile
+\item run
+\item ...
+\item plot or json
+\item ...
+\item send back the results
+\end{enumerate}
+
+
 \subsection{Coordinator Logging}\label{ss:coordinator-logging}
 
 
@@ -199,6 +217,9 @@ When a private computation request arises, the \textit{coordinator} communicates
 Finally the \textit{coordinator} returns the results of the computation to the researcher.
 
 Data providers listen to import requests from the \textit{coordinator} server using a RESTful API, implemented using \texttt{Node.js Express Server}.
+
+\fixme{Specify that a user cannot request data-import, only the coordinator!}
+
 
 \subsection{RESTful API}\label{ss:data-providers-restful-api}
 
@@ -253,13 +274,22 @@ The request for importing MeSH dataset is similar to the the numerical one, in C
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{SMPC Cluster}\label{s:impl-smpc-cluster}
 
 \subsection{SMPC Servers}\label{ss:smpc-cluster-servers}
 
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{User Interface}\label{s:impl-ui}
+
+\fixme{Add screenshots}
 
 
 
