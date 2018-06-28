@@ -90,15 +90,19 @@ void main(){
 \captionof{lstlisting}{Millionaire problem in SecreC}\label{l:millionaires}
 }
 
-Each SMPC operation in Sharemind is implemented as an assembly instruction. It also supports vectorized operations. This plays a significant role in the program's efficiency.
+
+\subsection{SIMD in SecreC}\label{ss:simd-secrec}
+
+Each SMPC operation in Sharemind is implemented as an assembly instruction.
+Sharemind also supports vectorized operations which play a significant role in the program's efficiency.
 With vectorized operations the same protocol is executed but using multiple inputs at once, in parallel.
 Using such SIMD (Single Input Multiple Data) instructions the protocol performs all operations in parallel by packaging the values in a single communication message.
 
 This significantly reduces the communication overhead between the participating parties, which is usually a dominating factor in a protocol's performance.
-So, developing applications with vectorization in mind, has a substantial contribution to the application's efficiency.
-We have tried to use vectorization as much as possible when developing our privacy preserving algorithms which we describe in chapter \ref{c:pp-algorithms}.
+Thus, developing applications with vectorization in mind, has a substantial contribution to the application's efficiency.
+We have focused on using vectorization as much as possible when developing our privacy preserving algorithms, which we describe in chapter \ref{c:pp-algorithms}.
 
-Below you can see two versions of array addition in SecreC.
+Below, in code snippets \ref{l:non_vectorized_addition} and \ref{l:vectorized_addition}, we present two versions of array addition in SecreC.
 The first one works with a typical loop on each of the array elements, while the second one works by performing an SIMD addition between two arrays.
 
 {
@@ -114,7 +118,7 @@ The first one works with a typical loop on each of the array elements, while the
     print(declassify(c)); // Result publishing
   }
 \end{minted}
-\captionof{lstlisting}{Non-vectorized array addition in SecreC}\label{l:non_vectorized_addition}
+\captionof{lstlisting}{Array addition in SecreC}\label{l:non_vectorized_addition}
 }
 
 {
@@ -127,23 +131,29 @@ The first one works with a typical loop on each of the array elements, while the
     print(declassify(c)); // Result publishing
   }
 \end{minted}
-\captionof{lstlisting}{Vectorized array addition in SecreC}\label{l:vectorized_addition}
+\captionof{lstlisting}{Array addition in SecreC using SIMD}\label{l:vectorized_addition}
 }
 
-The two example programs will have the same output but their performance will be different. The first program will perform $N$ message exchanges between the parties for the addition, while the second will perform just one.
+The two example programs will have the same output but their performance will differ.
+The first program will perform $N$ message exchanges between the computing parties for the addition, while the second will perform just one.
 For large enough values of $N$, the performance difference is tremendous.
+
+
 
 \section{Sharemind Infrastructure}\label{sharemind-infrastructure}
 Sharemind consists of three different kinds of parties, input parties, computing parties and result parties.
 The number of the input parties -- data providers -- as well as the result parties -- analysts/users -- is not restricted, however the computing parties are restricted by the SMPC protocol that is been used; for instance the aforementioned ``Millionaire problem" shown in (\textit{Source Code} \ref{l:millionaires}) uses the \textit{pd\_shared3p} security protocol, which utilizes three nodes.
 
-As stated by Sharemind's author in \cite{bogdanov2013sharemind} three is usually the optimal number for the computing nodes configuration in the passively corrupted parties threat model. It is the lowest number for which an honest majority of parties processing secret shared data can be formed. The number of parties can be less -- just two nodes -- but it adds more complexity to the protocols, as it requires more expensive cryptographic primitives to be used. The number of computing parties can also be grater than three, increasing however the communication complexity.
+As stated by Sharemind's author in \cite{bogdanov2013sharemind} three is usually the optimal number for the computing nodes configuration in the passively corrupted parties threat model.
+Three is the lowest number for which an honest majority of parties processing secret shared data can be formed.
+The number of parties can be less -- just two nodes -- but it adds more complexity to the protocols, as it requires more expensive cryptographic primitives to be used.
+The number of computing parties can also be grater than three, increasing however the communication complexity.
 
 An input party can also be the result party, or one of the computing nodes.
 The data providers use secret sharing to distribute their confidential data between the computing nodes.
 The analysts make queries and initiate computations, that are performed by the computing nodes leveraging the homomorphic primitives of the secret shares.
 Finally, the analysts get the results of the private computation without anyone seeing the original confidential data.
-Sharemind's infrastructure is presented in figure \ref{f:sharemind} in more detail.
+Sharemind's infrastructure is presented in figure \ref{f:sharemind} in more detail, which is inspired by \cite{turban2014secure}.
 
 
 \begin{figure}[th]
@@ -151,9 +161,5 @@ Sharemind's infrastructure is presented in figure \ref{f:sharemind} in more deta
   \includegraphics[width=\linewidth]{figures/sharemind_infrastructure.png}
   \caption{An overview of the architecture of Sharemind}\label{f:sharemind}
 \end{figure}
-
-
-
-
 
 
