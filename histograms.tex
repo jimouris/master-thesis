@@ -105,11 +105,6 @@ Similarly to the 1D algorithm, the multi-dimensional one creates a boolean array
 \import{./}{algorithms/multdim_hist_categorical.tex}
 
 
-\textbf{Filtering the Histograms' Results}: In the preceding algorithms, the data
-
-\fixme{Add filters explanation. Maybe code?}
-
-
 
 \subsubsection{Privacy Preserving Histograms for Numerical Values}\label{sss:histogram-numerical}
 
@@ -145,6 +140,29 @@ Similarly, for the 3-dimensional $L \times N \times M$ histogram, $h[i][j][k]$ b
 \import{./}{algorithms/multdim_hist_numerical.tex}
 
 
-Filters here are easily applied as in \ref{sss:histogram-categorical} ... \fixme{some exaplanation ..}
+
+\subsubsection{Filters in Privacy Preserving Histograms}\label{sss:histogram-filters}
+Although histograms are one of the simplest ways to visualize and easily understand data, they also come with some limitations.
+For instance, it is difficult to visualize in one image more than three different attributes.
+Even a 3D representation is sometimes very obscure and difficult to understand.
+
+For all those reasons, we have implemented a technique -- which we call filtering -- in order to include more attributes in the secure computation.
+With filtering, the user is able to select a histogram computation over some attributes (\textit{e.g.} ``Patient Age" and ``Heigh (cm)"), and also specify some extra parameters.
+For example, he/she could request that the ``Patient Age" is greater than $45$ years old, and in the same time ``Weight (kg)" is less than $90$ kg.
+This will result to a two-dimensional histogram with axes the ``Patient Age" and ``Heigh (cm)" attributes, but in the same time the results will be restricted by the selection of filters.
+The described example from above, is depicted in figure \ref{f:....}, in which is obvious the impact of the filters.
+
+\fixme{Add a 2D example here before and after filtering}
+
+\import{./}{algorithms/filters.tex}
+
+
+\fixme{Check the algorithm for bugs}
+
+\fixme{This algorithm is 2D. Maybe switch to 1D for simplicity??}
+
+\fixme{Explain the algorithm}
+
+
 
 

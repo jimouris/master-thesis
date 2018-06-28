@@ -1,0 +1,43 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Privacy Preserving Constraint Map}\label{a:filters}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
+\Require ${\color{darkred}{array}}, {\color{darkred}{constraintMap}}, {\color{darkred}{eq}}, {\color{darkred}{constraintValue}}, {\color{darkred}{constraintAttribute}}$
+ % $\par \hspace{1.2cm}$
+
+\Procedure{ConstraintMap}{${\color{darkred}{array}}[2][N], operation, constraintAttributes[C], $\par\hfill$ constraintOperators[C], constraintValues[C]$}
+
+    \If {$operation = AND$}
+        \State ${\color{darkred}{constraintMap}} \gets [\enc{1}, \enc{1}, \dots, \enc{1}]$
+    \ElsIf {$operation = OR$}
+        \State ${\color{darkred}{constraintMap}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$
+    \EndIf
+
+    \For{$c \in \{0, \dots, C-1\}$}\Comment{\small{$C$ is the number of the different constraints}}
+
+        \State $constraintIdx \gets constraintAttributes[c]$
+
+        \State ${\color{darkred}{constraintAttribute}} \gets {\color{darkred}{array}}[:, constraintIdx]$
+
+        \State ${\color{darkred}{constraintValue}} \gets constraintValues[c]]$ \Comment{\small{This assignment encrypts the right-hand \par\hfill side value.}}
+
+        \If {$constraintOperators[c] = GreaterThan$}
+            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hgt {\color{darkred}{constraintValue}}$
+        \ElsIf {$constraintOperators[c] = LessThan$}
+            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hlt {\color{darkred}{constraintValue}}$
+        \EndIf
+
+        \If {$operation = AND$}
+            \State ${\color{darkred}{constraintMap}} \gets {\color{darkred}{constraintMap}} \hmul eq$
+        \ElsIf {$operation = OR$}
+            \State ${\color{darkred}{constraintMap}} \gets {\color{darkred}{constraintMap}} \hplus eq$
+        \EndIf
+
+    \EndFor
+
+    \State \textbf{return} {${\color{darkred}{constraintMap}}$}
+\EndProcedure
+
+\end{algorithmic}
+\end{algorithm}
+

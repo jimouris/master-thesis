@@ -10,7 +10,7 @@ Neither party is willing to reveal its information, however, if there is a (non-
 
 Despite the variety of applications that encrypted computation can assist, the translation of any function to its privacy preserving equivalent is not a trivial process.
 As mentioned in section \ref{s:homomorphic-encryption}, termination problems are introduced and the avoidance of them is not straightforward.
-First, one has to identify the corresponding termination channels that needs protection against side-channels and leakage; that is, any branch decision which is based on encrypted data (\textit{i.e.} \texttt{if ($\enc{X}$) then statement}).
+First, one has to identify the corresponding termination channels that needs protection against side-channels and leakage; that is, any branch decision which is based on encrypted data (\textit{i.e.} \texttt{if ($Enc(X)$ is True) then statement}).
 Consecutively, they have to translate the termination channels using oblivious computation in the encrypted domain.
 Commonly, the \texttt{if} statement is replaced by a loop over all possible values and an oblivious selection of the desired value.
 Early termination conditions, in general, eventually leak sensitive information, which is why the execution time should only depend on the length of the inputs, not their plaintext values (\textit{i.e.}, execution requires maximum iterations independent of the input).
