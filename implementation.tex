@@ -35,7 +35,7 @@ For instance, for the CVI dataset \ref{s:datasets} a user specifies that he/she 
 If the specified attributes are two or more, then the resulting counts will correspond to tuples, triples, etc.
 
 {
-\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
   "attributes": [
     { "name": "Patient Age", "cells": "5" },
@@ -62,10 +62,10 @@ If the specified MeSH terms are two, then the resulting counts will correspond t
 If the specified MeSH terms are three, the result will be triples, etc.
 
 {
-\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
   "attributes": [
-      "M01.060" // This is a comma separated list of MeSH terms
+      "M01.060"
   ],
   "datasources": [
     "HospitalA",
@@ -85,7 +85,7 @@ The implemented classifiers are ID3 and C4.5, and one should specify which to us
 Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
 
 {
-\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
   "attributes": [
     { "name": "Patient Age", "cells": "5" },
@@ -105,7 +105,7 @@ Moreover, he/she should specify the class-attribute, according to which the deci
 }
 
 {
-\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
   "attributes": [
     "C14",
@@ -132,7 +132,7 @@ The status of an ongoing computation request can be accessed through the /smpc/q
 The only parameter this GET request accepts is the id of the desired computation request, as shown below.
 
 {
-\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
   "location": "/smpc/queue?request=944222c9-524b-40eb-b19b-486a946c220d"
 }
@@ -155,7 +155,7 @@ The server's response has the following structure.
 
 
 {
-\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
   "status": "succeeded",
   "result": {
@@ -252,21 +252,26 @@ The request for importing MeSH dataset is similar to the the numerical one, in C
 \end{itemize}
 
 {
-\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{js}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
-  "attributes": [ // Similarly, this works for MeSH terms
+  "attributes": [
     "Patient Age",
     "Heart rate"
-  ], // (i.e. "attributes": [ "C12", "C14", ... ])
-  "datasource": "HospitalA_944222c9-524b-40eb-b19b-486a946c220d" // "datasource": Data-Provider-Name + "_" + {uid}
+  ],
+  "datasource": "HospitalA_944222c9-524b-40eb-b19b-486a946c220d"
 }
 \end{minted}
-\captionof{lstlisting}{Example /smpc/import/\{numerical, categorical\} POST request body}
+\captionof{lstlisting}{Example /smpc/import/numerical POST request body}
 \label{sc:smpc-import-post}
 }
 
+The post request for categorical/MeSH terms import is similar with Code \ref{sc:smpc-import-post}.
+In the attributes list should be given the MeSH identifiers instead of attribute names (i.e. "attributes": [ "C12", "C14", ... ]).
+The datasource name is the hospital name along with a unique identifier (uid) (i.e. "datasource": Data-Provider-Name + ``\_" + \{uid\}).
+The main reason for this format is that the import procedures are per computation request, not per data-provider.
+Thus, there was a need for distinction between the data that are imported for different requests.
 
-
+ 
 \subsection{Data Importer}\label{ss:data-providers-importer}
 The secure data import is one of the most essential procedures in the secure multi-party computation scenario.
 In this step, the data are secret-shared to the three computing parties.
