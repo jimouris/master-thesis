@@ -1,4 +1,4 @@
-\begin{algorithm}[t]\fontfamily{lmss}
+\begin{algorithm}[H]\fontfamily{lmss}
 \caption{ID3 Textbook Algorithm \fixme{Change the textbook algorithm, make similar to the id3.py}}\label{a:id3-simple}
 \begin{algorithmic}[1]
 \Procedure{ID3Textbook}{$examples, classAttribute, attributes$}
@@ -25,10 +25,13 @@
     \EndFor
     \State \textbf{return} $branches$
 \EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
-\begin{spacing}{0.5}
-\end{spacing}
 
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Entropy Textbook Algorithm}\label{a:id3-Entropy-simple}
+\begin{algorithmic}[1]
 \Procedure{Entropy}{$examples$}\Comment{\small{Entropy (H(S) equation \ref{eq:entropy}), is a measure of the amount of \par\hfill uncertainty in the dataset}}
     \State $entropy \gets 0$
     
@@ -42,10 +45,13 @@
     \EndFor
     \State \textbf{return} $entropy$
 \EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
-\begin{spacing}{0.5}
-\end{spacing}
 
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Information Gain Textbook Algorithm}\label{a:id3-gain-simple}
+\begin{algorithmic}[1]
 \Procedure{InformationGain}{$examples, attribute$}\Comment{\small{Information gain (equation \ref{eq:gain}) is the \par\hfill measure of the difference in entropy from before to after a dataset is split on an attribute}}
     \State $gain \gets \textsc{Entropy}(examples)$
     
@@ -59,8 +65,45 @@
     \EndFor
     \State \textbf{return} $gain$
 \EndProcedure
-
 \end{algorithmic}
 \end{algorithm}
 
+
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{All Examples Same Textbook Algorithm}\label{a:id3-same-simple}
+\begin{algorithmic}[1]
+\Procedure{AllExamplesSame}{$examples, attribute$}\Comment{\small{Check if all examples are same, \par\hfill in order to return the same label
+}}
+    \State $same \gets true$
+    \For{$i \in \{0, \dots, \textsc{Length}(examples)-2\}$}\Comment{\small{Check all examples, two at a time}}
+        \State $ex_1 \gets examples[i]$
+        \State $ex_2 \gets examples[i+1]$
+        
+        \State $same \gets same \textsc{AND} (ex_1[classAttribute] = ex_2[classAttribute])$
+    \EndFor
+    \State \textbf{return} $same$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Best Textbook Algorithm}\label{a:id3-best-simple}
+\begin{algorithmic}[1]
+\Procedure{Best}{$examples, attribute$}\Comment{\small{Find the best attribute; the one with maximum \par\hfill information gain -- or similarly, minimum entropy}}
+    \State $max_gain \gets \textsc{InformationGain}(examples, attributes[0])$
+    \State $best \gets attributes[0]$
+    
+    \For{$i \in \{1, \dots, \textsc{Length}(attributes)-1\}$}
+        \State $gain \gets  \textsc{InformationGain}(examples, attributes[i])$
+        \If {$gain > max_gain$}
+            \State $max_gain \gets gain$
+            \State $best \gets attributes[i]$
+        \EndIf
+    \EndFor
+    \State \textbf{return} $best$
+\EndProcedure
+
+\end{algorithmic}
+\end{algorithm}
 
