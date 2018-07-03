@@ -10,6 +10,42 @@ one for ``Female".
 Each edge could point to a new attribute (for example ``Age Groups"), and so on.
 The leaves of the tree contain the expected class value for transactions matching the path from the root to that leaf.
 Given a decision tree, one can predict the class of a new transaction just by following the ``correct" path, which will result in a class label.
+He/She can predict the class of a transaction by viewing only the non-class attributes (i.e. the ``constructed" decision tree).
+
+For instance, two friends wish to decide if they will go to play tennis outside, depending the weather conditions.
+They also remember the previous days that some weather conditions did not allow them to play.
+Thus, they decide to create a decision tree to assist them.
+First they define the class attribute to be ``Play Tennis", and three more attributes that will help them decide: ``Outlook" (``Sunny", ``Overcast", ``Rainy"), ``Windy" (``High", ``Low") and ``Humidity" (``High", ``Low").
+Then they construct a decision tree like figure \ref{f:outlook} that corresponds to the data that the have collect from the past days.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/outlook.png}
+  \caption{Play-Tennis decision tree example}\label{f:outlook}
+\end{figure}
+
+From figure \ref{f:outlook}, the two friends are able to extract a set of rules, listed in Code \ref{sc:outlook-rules}, that will help them decide if they should go play tennis given the weather conditions.
+
+{
+\begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{bash}
+IF (Outlook = Sunny) AND (Windy = Low) THEN Play=Yes
+
+IF (Outlook = Sunny) AND (Windy = High) THEN Play=No
+
+IF (Outlook = Overcast) THEN Play=Yes
+
+IF (Outlook = Rainy) AND (Humidity = High) THEN Play=No
+
+IF (Outlook = Rainy) AND (Humidity = Low) THEN Play=Yes
+\end{minted}
+\captionof{lstlisting}{Rules for decision tree from figure \ref{f:outlook}}
+\label{sc:outlook-rules}
+}
+
+Of course, remembering the weather conditions of more days in the past and if they had played tennis those days -- having an extended dataset -- could probably result to more specific rules.
+Decision tree rules, help covering all possible future decisions\hyp transactions and can be used to classify them.
+There are many useful examples and it has become evident why this type of learning has become so popular.
+The algorithms according to which those tress are generated vary and lead to possible different trees.
 
 One famous algorithm for decision tree construction is ID3 (Iterative Dichotomiser 3).
 ID3 is the precursor to the C4.5 algorithm, and is typically used in the machine learning and natural language processing domains.
@@ -20,7 +56,7 @@ Both algorithms build decision trees from a set of training data, using the conc
 
 \subsection{Textbook ID3}\label{s:id3}
 
-The ID3 algorithm assumes that each attribute is categorical, such as the aforementioned attribute ``Age Groups" which is separated in four disjoint categories; ``Infant", ``Adolescent", ``Child" and ``Adult".
+The ID3 algorithm was first introduced in \cite{quinlan1986induction} and assumes that each attribute is categorical, such as the aforementioned attribute ``Age Groups" which is separated in four disjoint categories; ``Infant", ``Adolescent", ``Child" and ``Adult".
 
 ID3 algorithm constructs the classification tree top-down in a recursive fashion.
 The idea is to find the ``best" attribute that classifies the transactions.
