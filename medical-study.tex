@@ -62,9 +62,17 @@ Then the privacy preserving computation takes place in the SMPC cluster, and the
 
 \subsection{End-to-End Execution Flow}\label{ss:end-to-end-execution-flow}
 
-An overview of an end\hyp to\hyp end query execution can be found in the following sections.
+An overview of an end\hyp to\hyp end query execution can be found below.
 
-\fixme{Add overview of steps here in an enumeration}
+\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+    \item [Step 1:] A user makes a privacy\hyp preserving analytics request to the \textit{coordinator}.
+    \item [Step 2:] The \textit{coordinator} server is responsible for orchestrating all the involved parties: it communicates with the data\hyp providers requesting secure data\hyp import to the SMPC cluster.
+    \item [Step 3:] The data\hyp providers extract the requested data from their datasets and securely import them to the SMPC cluster applying secret\hyp sharing.
+    \item [Step 4:] The SMPC cluster computes the privacy preserving analytics on the requested data and returns the results to the \textit{coordinator}.
+    \item [Step 5:] Finally, the results are returned to the user through the \textit{coordinator}.
+\end{description}
+
+In the subsequent section we delve into the above end\hyp to\hyp end execution\hyp overview in more detail.
 
 
 \subsubsection{Query Initiation}\label{sss:query-initiation}
