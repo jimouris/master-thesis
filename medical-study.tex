@@ -64,6 +64,9 @@ Then the privacy preserving computation takes place in the SMPC cluster, and the
 
 An overview of an end\hyp to\hyp end query execution can be found in the following sections.
 
+\fixme{Add overview of steps here in an enumeration}
+
+
 \subsubsection{Query Initiation}\label{sss:query-initiation}
 First, a user sends a request to the \textit{coordinator} asking for a private computation.
 This user can be an analyst / researcher, a doctor, or a patient.
@@ -154,13 +157,22 @@ Each meaningful request does not take into account every possible attribute from
 Finally, \fixme{add here the technical reason for data import on the fly?? json files etc...?}
 
 
+
 \section{Supported Computations}\label{s:computations}
-\fixme{General description of hist, id3. Details in \ref{c:pp-algorithms}
-}
+Our focus is to create an end-to-end infrastructure for computing privacy preserving analytics.
+In the field of data mining there have been developed numerous algorithms for data classification, however a little work has been done with respect to data privacy.
+Since we deal with medical data in this thesis, our primary concern is to preserve data privacy and in the same time provide meaningful information about the data to doctors and researchers.
+Notably, our goal is to built a complete platform around secure medical data analytics that could be beneficial to a wide range of users.
+Therefore, the analytics produced from our system should not be complex and convoluted for the average user.
 
-\fixme{what is a histogram/count and why it is useful?}
+One of the simplest and widely used ways to visualize and comprehend a dataset is histograms
+Histograms are bar-graphs that depict frequency distribution, or even statistical approximations, of a dataset.
+Decision trees is another method to visualize a broad dataset in a way that is easily understand and simultaneously providing meaningful information about the dataset.
+Generally, decision trees are tree-like structures that classifies individuals based on a dataset.
+Each internal node represents a ``test" on an attribute, each branch represents the outcome of the specific test, and each leaf node represents a class label (decision taken after computing all attributes).
 
-\fixme{what is a classification tree and why it is useful?}
-
+Although histograms' and decision trees' outcomes are more easily understood than more elaborate algorithms, such as neural networks, SVM or other classifiers, they both provide very insightful information about a dataset.
+Our goal is to provide an end-to-end architecture with essential analytics algorithms that will provide the building blocks for more elaborated algorithms that are implemented with respect to data privacy.
+We discuss in more detail histograms and decision trees in sections \ref{s:histograms} and \ref{s:decision-trees} respectively.
 
 
