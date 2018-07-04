@@ -48,7 +48,9 @@ A researcher could also study the relation between certain conditions and differ
 \section{Our architecture \fixme{give a fancy name for the whole scheme.}}\label{s:architecture}
 Our architecture consists of the \textit{SMPC cluster}, a proxy server, dubbed \textit{coordinator}, as well as \texttt{N} more servers that are hosted in the hospitals' premises and act as \textit{data providers}.
 
-\textbf{SMPC cluster}: The \textit{SMPC cluster} consists of three servers -- three computing nodes -- participating in the SMPC protocol. In our case, these nodes do not provide the data for the computation.
+\textbf{SMPC cluster}: The \textit{SMPC cluster} consists of three servers -- three computing nodes -- participating in the SMPC protocol.
+In our case, these nodes do not provide the data for the computation.
+The only data the computing nodes hold and process, are cryptographic shares of the original data obtained through the secret-sharing mechanism.
 
 \textbf{Data providers}: The \textit{data providers} are hospitals that provide medical datasets upon which the privacy preserving algorithms will execute.
 When the medical data are transferred from the hospitals to the computing nodes, they get secret\hyp shared.
@@ -72,7 +74,7 @@ An overview of an end\hyp to\hyp end query execution can be found below.
     \item [Step 5:] Finally, the results are returned to the user through the \textit{coordinator}.
 \end{description}
 
-In the subsequent section we delve into the above end\hyp to\hyp end execution\hyp overview in more detail.
+In the subsequent section we delve into the above end\hyp to\hyp end execution overview in more detail.
 
 
 \subsubsection{Query Initiation}\label{sss:query-initiation}
@@ -112,7 +114,13 @@ The execution is oblivious as far as the data is concerned.
 Any data that gets published is explicitly defined in the privacy preserving algorithms and usually \footnote{Some data (e.g. those that will be included in the output) can be published before the algorithm terminates, without violating the prescribed privacy guarantees.} is only the computation output.
 
 \subsubsection{Result Publishing}\label{sss:result-publishing}
-\fixme{Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.}
+
+The last step of the secure query execution is the publishing of the computation results.
+These are obtained through computation over private data.
+The results are now considered public data and can be freely shared with the user that requested the computation or be used in other future computations.
+One thing to note is that every published result of such a computation should be treated as public data and should not be confused with the confidential input data.
+With that in mind, whoever initiates a private computation should have a clear view of what data remain private and what gets published.
+
 
 The detailed procedure described above is depicted in figure \ref{f:overview}.
 
