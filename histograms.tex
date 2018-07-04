@@ -98,10 +98,19 @@ Finally, the counts are gathered into a vector and returned -- still encrypted -
 \textbf{Multi-Dimensional Histograms}: In algorithm \ref{a:multidim-histogram-categorical} we present the privacy preserving algorithm of multi-dimensional histograms for categorical values.
 As in algorithm \ref{a:1d-histogram-categorical}, here, the third parameter ($Ps$) is the number of possible choices that exist in $array$.
 However, since here the input data is a private array with multiple dimensions $array[N][M]$, the possible values should express the possible values for each dimension.
-Thus, it is an array of $A$ slots, where $A$ is the number of attributes.
+Thus, $Ps$ is an array of $A$ slots, where $A$ is the number of attributes.
 
-Similarly to the 1D algorithm, the multi-dimensional one creates a boolean array of \fixme{explain the algorithm}
 
+The algorithm that computes a private multi-dimensional histogram is similar to the one regarding one-dimensional histograms but also addresses the issue of having a histogram of arbitrarily many dimensions.
+In case we had a known number of dimensions the simplest solution would be to use nested loops, as many as the histogram dimensions.
+Since the number of dimensions is not known, we have to think of something else.
+We represent the multi-dimensional histogram as a serialized version with an one-dimensional array (a vector) instead of using a multi-dimensional array (a matrix).
+For example a 2-dimensional $3 \times 4$ histogram will be represented as a vector whose length is $ 12 $ ($= 3 \cdot 4$), and a $3 \times 4 \times 5$ 3-dimensional histogram wit a vector of length $ 60 $ ($= 3 \cdot 4 \cdot 5$)
+
+When it comes to indexing if we wish to access the 2-dimensional $N \times M$ histogram represented as an one-dimensional at row $ i $ and column $ j $, instead of using $h[i][j]$ we use $h[i \cdot M + j]$.
+Similarly, for the 3-dimensional $L \times N \times M$ histogram, $h[i][j][k]$ becomes $h[i \cdot N \cdot M + j \cdot M + k]$. So there needs to be a computation of a single index based on the multiple dimension indexes. In algorithm \ref{a:multidim-histogram-categorical}, the $positions$ vector holds this index for each record of the provided array, as can bee seen in lines $ 6 $ and $ 7 $
+
+Similarly to the 1D algorithm, the multi-dimensional one creates a boolean array ($eq$) for each possible histogram cell, which counts the occurrences of that cell in the $positions$ vector, as can be seen in lines $12$ and $13$ of algorithm \ref{a:multidim-histogram-categorical}.
 \import{./}{algorithms/multdim_hist_categorical.tex}
 
 
@@ -127,15 +136,12 @@ Line 5 of algorithm \ref{a:1d-histogram-numerical} is more complex than line 3 o
 
 
 \textbf{Multi-Dimensional Histograms}:
-\fixme{probably move most of them in the numerical multidimensional since it appears first...}
-The algorithm that computes a private multi-dimensional histogram is similar to the one regarding one-dimensional histograms but also addresses the issue of having a histogram of arbitrarily many dimensions.
-In case we had a known number of dimensions the simplest solution would be to use nested loops, as many as the histogram dimensions.
-Since the number of dimensions is not known, we have to think of something else.
-We represent the multi-dimensional histogram as a serialized version with an one-dimensional array (a vector) instead of using a multi-dimensional array (a matrix).
-For example a 2-dimensional $3 \times 4$ histogram will be represented as a vector whose length is $ 12 $ ($= 3 \cdot 4$), and a $3 \times 4 \times 5$ 3-dimensional histogram wit a vector of length $ 60 $ ($= 3 \cdot 4 \cdot 5$)
+Algorithm \ref{a:multidim-histogram-numerical} implements multi\hyp dimensional histograms for numerical, i.e. continuous data.
+The algorithm is a straightforward generalization of algorithm \ref{a:1d-histogram-numerical}.
+Similarly, for each specified attribute we compute the corresponding cell width, that depends on the minimum and maximum values and the specified cell number of that attribute.
+Consecutively, we compute the $positions$ vector containing the histogram cell for each one of the $N$ rows of $array$.
+Like in algorithm \ref{a:multidim-histogram-categorical}, the $positions$ array contains single indexes that correspond to multiple indexes according to the procedure described above in section \ref{sss:histogram-categorical}.
 
-When it comes to indexing if we wish to access the 2-dimensional $N \times M$ histogram represented as an one-dimensional at row $ i $ and column $ j $, instead of using $h[i][j]$ we use $h[i \cdot M + j]$.
-Similarly, for the 3-dimensional $L \times N \times M$ histogram, $h[i][j][k]$ becomes $h[i \cdot N \cdot M + j \cdot M + k]$. So there needs to be a computation of a single index based on the multiple dimension indexes. In algorithm \ref{a:multidim-histogram-numerical}, the \texttt{positions} vector holds this index for each record of the provided array, as can bee seen in lines $ 12 $ and $ 13 $
 
 \import{./}{algorithms/multdim_hist_numerical.tex}
 
