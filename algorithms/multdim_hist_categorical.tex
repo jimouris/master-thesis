@@ -15,7 +15,7 @@
 
       \State ${\color{darkred}{column}} \gets {\color{darkred}{array}}[:, attribute]$ \Comment{\small{Slicing of a specific column of the ${\color{darkred}{array}}$ matrix}}
 
-      \State $prod \gets \textsc{Product}(Ps[a+1:])$ \Comment{\small{Product of all $Ps$ elements from index $a+1$ onwards \fixme{Ps and prod are public data. The PRODUCT function operates on private data.}}}
+      \State $prod \gets \textsc{Product}(Ps[a+1:])$ \Comment{\small{Product of all $Ps$ elements from index $a+1$ onwards}}
 
       \State ${\color{darkred}{positions}} \gets {\color{darkred}{positions}} \hplus {\color{darkred}{column}} \hmul prod$
 
@@ -40,13 +40,12 @@
 \begin{spacing}{0.5}
 \end{spacing}
 
-\Require ${\color{darkred}{array}}, {\color{darkred}{product}}$
-\Procedure{Product}{${\color{darkred}{array}}[N]$}\Comment{\small{Compute and return the product of an array}}
-    \State ${\color{darkred}{product}} \gets \enc{1}$
+\Procedure{Product}{$array[N]$}\Comment{\small{Compute and return the product of an array}}
+    \State $product \gets \enc{1}$
     \For{$i \in \{0, \dots, N-1\}$}
-        \State ${\color{darkred}{product}} \gets {\color{darkred}{product}} \hmul {\color{darkred}{array}}[i]$
+        \State $product \gets product \times array[i]$
     \EndFor
-    \State \textbf{return} {${\color{darkred}{product}}$}
+    \State \textbf{return} {$product$}
 \EndProcedure
 
 \end{algorithmic}
