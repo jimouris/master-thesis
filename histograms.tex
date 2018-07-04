@@ -12,34 +12,48 @@ A histogram is generally a form of classifying and representing data in some cat
 More specifically, a histogram on some attributes $\{A, B, \dots, Z\}$ is constructed by partitioning the data distribution of those attributes into some ranges which are mutually disjoint subsets called buckets and approximating the frequencies and values in each bucket.
 For the sake of simplicity let us suppose that the number of ranges ($\beta$) of all attributes are equal ($\beta \geq 1$).
 
-In figure \ref{f:simple-hist} we present two histograms, the first one-dimensional over the attribute ``Patient Age" and the second is a two-dimensional over the attributes ``Patient Age" and ``Heart rate".
+In figures \ref{f:simple-1d-hist} and \ref{f:simple-2d-hist} we present two histograms, the first one\hyp dimensional over the attribute ``Patient Age" and the second is a two\hyp dimensional over the attributes ``Patient Age" and ``Heart rate".
 In both histograms $\beta = 4$, since the range of values for each attribute has been partitioned in four mutually disjoint subsets.
-In the 1-dimensional histogram \ref{f:simple-hist}.a the $y-axis$ corresponds to the total number of occurrences of values that belong to each bucket.
-In the 2-dimensional histogram \ref{f:simple-hist}.b since $y-axis$ corresponds to the ranges for the buckets for the second attribute, the occurrences are depicted with different colors.
+In the 1\hyp dimensional histogram \ref{f:simple-1d-hist} the $y-axis$ corresponds to the total number of occurrences of values that belong to each bucket.
+In the 2\hyp dimensional histogram \ref{f:simple-2d-hist} since $y-axis$ corresponds to the ranges for the buckets for the second attribute, the occurrences are depicted with different colors.
+
 
 \begin{figure}[t]
-    \centering
-    \subfloat[1D Numerical Histogram]{\includegraphics[width=0.49\columnwidth]{figures/1d-simple-hist.png}}
-    \subfloat[2D Numerical Histogram / Heatmap]{\includegraphics[width=0.49\columnwidth]{figures/2d-simple-hist.png}}
-
-    \caption{(a) An one-dimensional histogram with $\beta = 4$,
-    (b) A two-dimensional histogram with $\beta = 4$.}
-    \label{f:simple-hist}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/1d-simple-hist.png}
+  \captionof{figure}{An one-dimensional histogram with $\beta = 4$}
+  \label{f:simple-1d-hist}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/2d-simple-hist.png}
+  \captionof{figure}{A two-dimensional histogram / heatmap with $\beta = 4$}
+  \label{f:simple-2d-hist}
+\end{minipage}
 \end{figure}
 
 \begin{figure}[t]
-    \centering
-    \subfloat[1D Categorical Histogram]{\includegraphics[width=0.49\columnwidth]{figures/AgeGroups.png}}
-    \subfloat[2D Categorical Histogram / Heatmap]{\includegraphics[width=0.49\columnwidth]{figures/AgeGroups_PopulationGroups.png}}
-
-    \caption{(a) One-dimensional histogram displaying age groups,
-    (b) A two-dimensional histogram displaying age groups with continental population groups.}
-    \label{f:simple-categorical-hist}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/AgeGroups.png}
+  \captionof{figure}{One-dimensional histogram displaying Age Groups}
+  \label{f:simple-1d-categorical-hist}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/AgeGroups_PopulationGroups.png}
+  \captionof{figure}{A two-dimensional histogram displaying Age Groups with Continental Population Groups}
+  \label{f:simple-2d-categorical-hist}
+\end{minipage}
 \end{figure}
 
-Similarly, in figure \ref{f:simple-categorical-hist} we present two more histograms, but with categorical values.
-The attribute ``Age Groups" in \ref{f:simple-categorical-hist}.a is separated in four disjoint categories; ``Infant", ``Adolescent", ``Child" and ``Adult".
-In \ref{f:simple-categorical-hist}.b we present demographic information (attribute ``Continental Population Groups") in relation with ``Age Groups".
+
+Similarly, in figures \ref{f:simple-1d-categorical-hist} and \ref{f:simple-2d-categorical-hist} we present two more histograms, but with categorical values.
+The attribute ``Age Groups" in \ref{f:simple-1d-categorical-hist} is separated in four disjoint categories; ``Infant", ``Adolescent", ``Child" and ``Adult".
+In \ref{f:simple-2d-categorical-hist} we present demographic information (attribute ``Continental Population Groups") in relation with ``Age Groups".
 
 
 
@@ -52,7 +66,7 @@ As we already mentioned, histograms consist of bars that are mutually disjoint a
 \textbf{Challenges with Privacy-Preserving Histograms}: The textbook algorithm splits the dataset to buckets and consecutively for each item it increments the corresponding ``bucket-counter".
 Implementing this algorithm with respect to the privacy of the dataset introduces the problem that for each value it is not trivial to find the bucket that this specific value should be placed.
 
-For instance, let us suppose that we are constructing the histogram in figure \ref{f:simple-hist}.a.
+For instance, let us suppose that we are constructing the histogram in figure \ref{f:simple-1d-categorical-hist}.
 In this case $\beta = 4$, thus the algorithm should obliviously split the values into four disjoint buckets.
 The range of each bucket is computed considering the $\beta$ parameter, as well as the minimum and maximum age in the dataset.
 In this specific example, the minimum age is $18$, while the maximum is $83$.
@@ -150,15 +164,62 @@ Like in algorithm \ref{a:multidim-histogram-categorical}, the $positions$ array 
 \subsubsection{Filters in Privacy Preserving Histograms}\label{sss:histogram-filters}
 Although histograms are one of the simplest ways to visualize and easily understand data, they also come with some limitations.
 For instance, it is difficult to visualize in one image more than three different attributes.
-Even a 3D representation is sometimes very obscure and difficult to understand.
+Even though we can compute histograms of arbitrarily many dimensions, even a 3D representation can sometimes  be very obscure and difficult to understand.
 
-For all those reasons, we have implemented a technique -- which we call filtering -- in order to include more attributes in the secure computation.
-With filtering, the user is able to select a histogram computation over some attributes (\textit{e.g.} ``Patient Age" and ``Heigh (cm)"), and also specify some extra parameters.
-For example, he/she could request that the ``Patient Age" is greater than $45$ years old, and in the same time ``Weight (kg)" is less than $90$ kg.
-This will result to a two-dimensional histogram with axes the ``Patient Age" and ``Heigh (cm)" attributes, but in the same time the results will be restricted by the selection of filters.
-The described example from above, is depicted in figure \ref{f:....}, in which is obvious the impact of the filters.
+Oftentimes, one needs to take into consideration multiple attributes in order to get meaningful results back.
+However, adding more attributes to the computed histogram is not always an option as for the reasons described above, the output could be obscure or even useless whatsoever.
 
-\fixme{Add a 2D example here before and after filtering}
+For all those reasons, we have implemented a \textit{filtering} technique in order to take more attributes into consideration for the secure computation.
+With filtering, the user is able to select a histogram computation over some attributes, and also specify some extra constraints over the same or different attributes.
+Each tuple from the dataset has to meet the specified criteria / filters in ordered to be counted in the resulting histogram.
+
+The specified filters are represented as a list of constraints that should be met.
+Each constraint is defined by the corresponding attribute, an operator ( one of $\{<, >, =\}$ for continuous attributes, and just $=$ for categorical ones) and a value.
+Also a boolean operator (\textit{e.g.} \texttt{AND, OR, XOR}) that will be applied between the different constraints is specified.
+
+
+For example, one could want to see the correlation of age and height but only for a subset of the dataset.
+Let's say the subset should include all patients of age above 45 that weigh less than $90$ kg.
+This can be achieved with a request of a two\hyp dimensional histogram on the attributes \textit{Patient Age} and \textit{Height (cm)} that also includes the filters \textit{Patient Age} $ > 45$, \textit{Weight (kg)} $ < 90$, and also the boolean operator \texttt{AND} between them.
+This will result to a two\hyp dimensional histogram (heatmap) with axes the \textit{Patient Age} and \textit{Height (cm)} attributes, but at the same time the results will be restricted by the selection of these filters.
+The described example from above, is depicted in figures \ref{f:2d_no_filter_1} and \ref{f:2d_filter_1}, in which the impact of the filters is obvious.
+
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/2d_no_filter_1.png}
+  \captionof{figure}{Histogram on \textit{Patient Age} and \textit{Height (cm)} with no filters}
+  \label{f:2d_no_filter_1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/2d_filter_1.png}
+  \captionof{figure}{Histogram on \textit{Patient Age} and \textit{Height (cm)} with filters on \textit{Patient Age} and \textit{Weight (kg)}}
+  \label{f:2d_filter_1}
+\end{minipage}
+\end{figure}
+
+Another example can be an one\hyp dimensional histogram on Body mass Index (BMI) on the subset of patients that weigh more than $90$ kg or are less than $170$ cm in height.
+This can be achieved with a request of an one\hyp dimensional histogram on the attribute \textit{BMI (kg/msq)} that also includes the filters \textit{Weight (kg)} $ > 90$, \textit{Height (cm)} $ < 170$, and also the boolean operator \texttt{OR} between them.
+The effect of this example can be found in figures \ref{f:2d_no_filter_2} and \ref{f:2d_filter_2}.
+
+\begin{figure}
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/2d_no_filter_2.png}
+  \captionof{figure}{Histogram on \textit{BMI (kg/msq)} with no filters}
+  \label{f:2d_no_filter_2}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/2d_filter_2.png}
+  \captionof{figure}{Histogram on \textit{BMI (kg/msq)} with filters on \textit{Height (cm)} and \textit{Weight (kg)}}
+  \label{f:2d_filter_2}
+\end{minipage}
+\end{figure}
 
 \import{./}{algorithms/filters.tex}
 
