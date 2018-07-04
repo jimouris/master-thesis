@@ -182,42 +182,42 @@ For example, one could want to see the correlation of age and height but only fo
 Let's say the subset should include all patients of age above 45 that weigh less than $90$ kg.
 This can be achieved with a request of a two\hyp dimensional histogram on the attributes \textit{Patient Age} and \textit{Height (cm)} that also includes the filters \textit{Patient Age} $ > 45$, \textit{Weight (kg)} $ < 90$, and also the boolean operator \texttt{AND} between them.
 This will result to a two\hyp dimensional histogram (heatmap) with axes the \textit{Patient Age} and \textit{Height (cm)} attributes, but at the same time the results will be restricted by the selection of these filters.
-The described example from above, is depicted in figures \ref{f:2d_no_filter_1} and \ref{f:2d_filter_1}, in which the impact of the filters is obvious.
+The described example from above, is depicted in figures \ref{f:2d_no_filter} and \ref{f:2d_filter}, in which the impact of the filters is obvious.
 
 
 \begin{figure}
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\columnwidth]{figures/2d_no_filter_1.png}
+  \includegraphics[width=\columnwidth]{figures/2d_no_filter.png}
   \captionof{figure}{Histogram on \textit{Patient Age} and \textit{Height (cm)} with no filters}
-  \label{f:2d_no_filter_1}
+  \label{f:2d_no_filter}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\columnwidth]{figures/2d_filter_1.png}
+  \includegraphics[width=\columnwidth]{figures/2d_filter.png}
   \captionof{figure}{Histogram on \textit{Patient Age} and \textit{Height (cm)} with filters on \textit{Patient Age} and \textit{Weight (kg)}}
-  \label{f:2d_filter_1}
+  \label{f:2d_filter}
 \end{minipage}
 \end{figure}
 
 Another example can be an one\hyp dimensional histogram on Body mass Index (BMI) on the subset of patients that weigh more than $90$ kg or are less than $170$ cm in height.
 This can be achieved with a request of an one\hyp dimensional histogram on the attribute \textit{BMI (kg/msq)} that also includes the filters \textit{Weight (kg)} $ > 90$, \textit{Height (cm)} $ < 170$, and also the boolean operator \texttt{OR} between them.
-The effect of this example can be found in figures \ref{f:2d_no_filter_2} and \ref{f:2d_filter_2}.
+The effect of this example can be found in figures \ref{f:1d_no_filter} and \ref{f:1d_filter}.
 
 \begin{figure}
 \centering
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\columnwidth]{figures/2d_no_filter_2.png}
+  \includegraphics[width=\columnwidth]{figures/1d_no_filter.png}
   \captionof{figure}{Histogram on \textit{BMI (kg/msq)} with no filters}
-  \label{f:2d_no_filter_2}
+  \label{f:1d_no_filter}
 \end{minipage}%
 \begin{minipage}{.5\textwidth}
   \centering
-  \includegraphics[width=\columnwidth]{figures/2d_filter_2.png}
+  \includegraphics[width=\columnwidth]{figures/1d_filter.png}
   \captionof{figure}{Histogram on \textit{BMI (kg/msq)} with filters on \textit{Height (cm)} and \textit{Weight (kg)}}
-  \label{f:2d_filter_2}
+  \label{f:1d_filter}
 \end{minipage}
 \end{figure}
 
