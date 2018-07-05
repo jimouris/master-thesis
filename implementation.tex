@@ -37,14 +37,20 @@ If the specified attributes are two or more, then the resulting counts will corr
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
-  "attributes": [
-    { "name": "Patient Age", "cells": "5" },
-    { "name": "Height (cm)", "cells": "3" },
-  ],
-  "datasources": [
-    "HospitalA",
-    "HospitalB"
-  ]
+    "attributes": [
+        {
+            "name": "Patient Age",
+            "cells": "5"
+        },
+        {
+            "name": "Height (cm)",
+            "cells": "3"
+        }
+    ],
+    "datasources": [
+        "HospitalA",
+        "HospitalB"
+    ]
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/histogram/numerical POST request body}
@@ -64,13 +70,13 @@ If the specified MeSH terms are three, the result will be triples, etc.
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
-  "attributes": [
-      "M01.060"
-  ],
-  "datasources": [
-    "HospitalA",
-    "HospitalB"
-  ]
+    "attributes": [
+        "M01.060"
+    ],
+    "datasources": [
+        "HospitalA",
+        "HospitalB"
+    ]
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/histogram/categorical POST request body}
@@ -87,17 +93,29 @@ Moreover, he/she should specify the class-attribute, according to which the deci
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
-  "attributes": [
-    { "name": "Patient Age", "cells": "5" },
-    { "name": "Heart rate", "cells": "3" },
-    { "name": "Height (cm)", "cells": "6" }
-  ],
-  "classifier": "C45",
-  "class_attribute": { "name": "RVESV (ml)", "cells": "3" },
-  "datasources": [
-    "HospitalA",
-    "HospitalB"
-  ]
+    "attributes": [
+        {
+            "name": "Patient Age",
+            "cells": "5"
+        },
+        {
+            "name": "Heart rate",
+            "cells": "3"
+        },
+        {
+            "name": "Height (cm)",
+            "cells": "6"
+        }
+    ],
+    "classifier": "C45",
+    "class_attribute": {
+        "name": "RVESV (ml)",
+        "cells": "3"
+    },
+    "datasources": [
+        "HospitalA",
+        "HospitalB"
+    ]
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/decisionTree POST request body for numerical values}
@@ -107,16 +125,16 @@ Moreover, he/she should specify the class-attribute, according to which the deci
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
-  "attributes": [
-    "C14",
-    "C12"
-  ],
-  "classifier": "ID3",
-  "class_attribute": "M01.060",
-  "datasources": [
-    "HospitalA",
-    "HospitalB"
-  ]
+    "attributes": [
+        "C14",
+        "C12"
+    ],
+    "classifier": "ID3",
+    "class_attribute": "M01.060",
+    "datasources": [
+        "HospitalA",
+        "HospitalB"
+    ]
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/decisionTree POST request body for categorical values}
@@ -134,7 +152,7 @@ The only parameter this GET request accepts is the id of the desired computation
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
-  "location": "/smpc/queue?request=944222c9-524b-40eb-b19b-486a946c220d"
+    "location": "/smpc/queue?request=944222c9-524b-40eb-b19b-486a946c220d"
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/queue GET request}
@@ -157,27 +175,27 @@ The server's response has the following structure.
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
-  "status": "succeeded",
-  "result": {
-      "data": [
-          {
-              "value": 0,
-              "label": "Infant"
-          },
-          {
-              "value": 63,
-              "label": "Adolescent"
-          },
-          {
-              "value": 9936,
-              "label": "Adult"
-          },
-          {
-              "value": 0,
-              "label": "Child"
-          }
-      ]
-  }
+    "status": "succeeded",
+    "result": {
+        "data": [
+            {
+                "value": 0,
+                "label": "Infant"
+            },
+            {
+                "value": 63,
+                "label": "Adolescent"
+            },
+            {
+                "value": 9936,
+                "label": "Adult"
+            },
+            {
+                "value": 0,
+                "label": "Child"
+            }
+        ]
+    }
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/queue GET response body}
@@ -254,11 +272,11 @@ The request for importing MeSH dataset is similar to the the numerical one, in C
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
-  "attributes": [
-    "Patient Age",
-    "Heart rate"
-  ],
-  "datasource": "HospitalA_944222c9-524b-40eb-b19b-486a946c220d"
+    "attributes": [
+        "Patient Age",
+        "Heart rate"
+    ],
+    "datasource": "HospitalA_944222c9-524b-40eb-b19b-486a946c220d"
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/import/numerical POST request body}
@@ -271,7 +289,7 @@ The datasource name is the hospital name along with a unique identifier (uid) (i
 The main reason for this format is that the import procedures are per computation request, not per data-provider.
 Thus, there was a need for distinction between the data that are imported for different requests.
 
- 
+
 \subsection{Data Importer}\label{ss:data-providers-importer}
 The secure data import is one of the most essential procedures in the secure multi-party computation scenario.
 In this step, the data are secret-shared to the three computing parties.
