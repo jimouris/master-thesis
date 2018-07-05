@@ -3,19 +3,18 @@
 Our application consists of four concrete parts, the \textit{coordinator}, the data providers, the SMPC cluster and the user interface.
 
 \section{Coordinator}\label{s:impl-coordinator}
-The \textit{coordinator} handles all private computation requests, communicates with the data providers -- requesting them to securely import their data to the computing cluster --, initiates the secure computation in the SMPC cluster, and finally returns to the requested user the analytics results.
+The \textit{coordinator} handles all private computation requests, communicates with the data providers -- requesting them to securely import their data to the computing cluster, initiates the secure computation in the SMPC cluster, and finally returns to the user the requested analytics results.
 
 The coordinator server has been designed as a Representational State Transfer (REST) web service.
-This design helps decoupling server and client applications and the API that provides is cleaner and easier to understand / discover.
+This design helps decoupling server and client applications; the API that provides is cleaner and easier to understand / discover.
 It's standard format / usage makes it easy for new clients to use the application even if the application was not designed with these clients' use cases in mind.
 
-We have implemented this web service using \texttt{Node.js} and more specifacally the \texttt{Express server} minimal web framework.
+We have implemented this web service using \texttt{Node.js} and more specifically the \texttt{Express server} minimal web framework.
 
-The RESTful API provided by the coordinator server can be found in section \ref{ss:coord-restful-api}.
+The RESTful API provided by the coordinator server can be found in the following section.
 
 
 \subsection{RESTful API}\label{ss:coord-restful-api}
-
 
 \begin{table}[H]
   \centering
@@ -37,33 +36,47 @@ Below we explain in more detail each individual POST and GET request.
 \begin{itemize}
   \item[]
   This POST request initiates a secure computation for numerical / continuous values dataset.
-  \begin{itemize}
-    \item[] Request
 
   Through the request's body, one can specify all the desired properties of the histograms to be computed.
-  These include the attributes on which the histogram will be built (names and cells / $\beta$ factor), the datasources from which data will be used, and a set of filters / conditions that should hold for each data tuple taken into consideration when building the histogram.
+  These include the attributes on which the histogram will be built (names and cells -- $\beta$ factor), the datasources from which data will be used, and a set of filters / conditions that should hold for each data tuple taken into consideration when building the histogram.
 
   %
   % For instance, for the CVI dataset (see section \ref{s:datasets}) a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term ``Patient Age''.
 
   The request's body is a \texttt{JSON} object with the following properties:
 
-\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-    \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of JSON objects, corresponding to the attributes on which this histogram will be built. These JSON objects have the following keys:
-    \begin{description}[labelwidth=2em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+\begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+  
+    \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of JSON objects, corresponding to the attributes on which this histogram will be built.
+    These JSON objects have the following keys:
+    
+    \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{name}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
+        
         \item[\texttt{cells}:] {\color{red}\textit{required}} The number of histogram cells ($\beta$ factor) to be created for this attribute (\textit{positive integer}).
     \end{description}
-    \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed. If this key is left empty or not specified, all available datasources will be used.
-    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that that should be met for each data tuple considered int the secure histogram computation. If this field is left blank or not specified, all data tuples will be used for the computation. The object has the following keys:
-    \begin{description}[labelwidth=2em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-        \item[\texttt{operator}:] {\color{red}\textit{required}} The boolean operator (\textit{string}) that will be applied between all the specified conditions that follow. One of \texttt{[AND, OR, XOR]} In the case of multiple conditions, the operator is left-associative.
-        \item[\texttt{conditions}:] {\color{red}\textit{required}}  The list of conditions that should be met by each data tuple in the computation. Each condition is represented as a JSON object with the following keys:
-        \begin{description}[labelwidth=2em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+    
+    \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed.
+    If this key is left empty or not specified, all available datasources will be used.
+    
+    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that should be met for each data tuple considered int the secure histogram computation.
+    If this field is left blank or not specified, all data tuples will be used for the computation. The object has the following keys:
+    
+    \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+        \item[\texttt{operator}:] {\color{red}\textit{required}} The boolean operator (\textit{string}) that will be applied between all the specified conditions that follow. One of \texttt{[AND, OR, XOR]}.
+        In the case of multiple conditions, the operator is left-associative.
+        
+        \item[\texttt{conditions}:] {\color{red}\textit{required}} The list of conditions that should be met by each data tuple in the computation.
+        Each condition is represented as a JSON object with the following keys:
+        
+        \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
             \item[\texttt{attribute}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
+            
             \item[\texttt{operator}:] {\color{red}\textit{required}} The condition's operator (\textit{string}). One of \texttt{[>, <, =]}.
+            
             \item[\texttt{value}:] {\color{red}\textit{required}}  The attribute's value (\textit{string}).
         \end{description}
+        
     \end{description}
 \end{description}
 
@@ -89,8 +102,10 @@ Below we explain in more detail each individual POST and GET request.
   \captionof{lstlisting}{Example /smpc/histogram/numerical POST request body}
   \label{sc:histogram-numerical-post}
   }
-  \end{itemize}
 \end{itemize}
+
+
+
 
 \includegraphics[page=1,width=\textwidth]{figures/post2.pdf}
 \begin{itemize}
@@ -98,9 +113,41 @@ Below we explain in more detail each individual POST and GET request.
 This POST request initiates a secure computation for categorical values dataset (MeSH).
 Through the request's body, one can specify the desired MeSH terms.
 The values the count of which will be computed are the children of the specified MeSH term from the MeSH ontology.
+
 For example, if a user specifies that he/she wants the counts for the MeSH term ``Age Groups" [M01.060], he/she will get four counts back corresponding to the four children of ``Age Groups", namely ``Adolescent" [M01.060.057], ``Adult" [M01.060.116], ``Child" [M01.060.406] and ``Infant" [M01.060.703].
 If the specified MeSH terms are two, then the resulting counts will correspond to tuples of MeSH labels.
 If the specified MeSH terms are three, the result will be triples, etc.
+
+The request's body is a \texttt{JSON} object with the following properties:
+
+\begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+
+    \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of MeSH terms, corresponding to the attributes on which this histogram will be built.
+    
+    \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed.
+    If this key is left empty or not specified, all available datasources will be used.
+    
+    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that should be met for each data tuple considered int the secure histogram computation.
+    If this field is left blank or not specified, all data tuples will be used for the computation.
+    The object has the following keys:
+    
+    \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+        \item[\texttt{operator}:] {\color{red}\textit{required}} The boolean operator (\textit{string}) that will be applied between all the specified conditions that follow.
+        One of \texttt{[AND, OR, XOR]}.
+        In the case of multiple conditions, the operator is left-associative.
+        
+        \item[\texttt{conditions}:] {\color{red}\textit{required}} The list of conditions that should be met by each data tuple in the computation.
+        Note that the only filter that can be applied in categorical values is the equality checking.
+        Each condition is represented as a JSON object with the following keys:
+        
+        \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+            \item[\texttt{attribute}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
+                        
+            \item[\texttt{value}:] {\color{red}\textit{required}} The value that the selected attribute should be equal with (\textit{string}).
+        \end{description}
+        
+    \end{description}
+\end{description}
 
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
@@ -120,12 +167,43 @@ If the specified MeSH terms are three, the result will be triples, etc.
 \end{itemize}
 
 
+
+
 \includegraphics[page=1,width=\textwidth]{figures/post3.pdf}
 \begin{itemize}
 \item[]
 Finally, this POST request is for computing a decision tree from either dataset.
 The implemented classifiers are ID3 and C4.5, and one should specify which to use in the request body along with the desired attributes.
 Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
+
+The request's body is a \texttt{JSON} object with the following properties:
+
+\begin{description}[labelwidth=9em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+
+    \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of MeSH terms, corresponding to the attributes on which this histogram will be built.
+    These JSON objects have the following keys:
+    
+    \begin{description}[labelwidth=3em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+        \item[\texttt{name}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
+        
+        \item[\texttt{cells}:] {\color{red}\textit{required}} The number of histogram cells ($\beta$ factor) to be created for this attribute (\textit{positive integer}). \footnote{A similar JSON is used for both categorical and numerical decision trees. In the former case, this \texttt{cells} object is omitted. \label{refnote}}
+    \end{description}
+    
+    \item[\texttt{classifier}:] {\color{red}\textit{optional}} The name of the decision tree classifier to be used.
+    Possible values are \{\texttt{ID3, C4.5}\}.
+    If this key is left empty or not specified, the \texttt{ID3} classifier will be used by default.
+    
+    \item[\texttt{class\_attribute}:] {\color{red}\textit{required}} The attribute on which the classification will occur.
+    \begin{description}[labelwidth=3em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+        \item[\texttt{name}:] {\color{red}\textit{required}} The name of the class attribute (\textit{string}).
+        
+        \item[\texttt{cells}:] {\color{red}\textit{required}} The number of histogram cells ($\beta$ factor) to be created for the class attribute (\textit{positive integer}). \textsuperscript{\ref{refnote}}
+    \end{description}
+    
+    \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed.
+    If this key is left empty or not specified, all available datasources will be used.
+
+\end{description}
 
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
