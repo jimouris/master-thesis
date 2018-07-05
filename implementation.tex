@@ -16,37 +16,34 @@ The RESTful API provided by the coordinator server can be found in section \ref{
 
 \subsection{RESTful API}\label{ss:coord-restful-api}
 
-% \begin{table}[H]
-% \centering
-% \caption{Coordinator's RESTful API}
-% \label{t:coordinator-api}
-% \begin{tabular}{@{}ll@{}}
-% \toprule
-% URI                                   & Method        \\ \midrule
-% \texttt{/smpc/histogram/numerical}    & \texttt{POST} \\
-% \texttt{/smpc/histogram/categorical}  & \texttt{POST} \\
-% \texttt{/smpc/decisionTree}           & \texttt{POST} \\
-% \texttt{/smpc/queue?request=\{uid\}} & \texttt{GET}  \\ \bottomrule
-% \end{tabular}
-% \end{table}
 
-
-\begin{figure}[H]
+\begin{table}[H]
   \centering
-  \includegraphics[page=1,width=\textwidth]{figures/api1_no_text.pdf}
-  \caption{Coordinator's RESTful API}\label{f:outlook}
-\end{figure}
+  \caption{Coordinator's RESTful API}
+  \label{t:coordinator-api}
+\begin{tabular}{l}
+  \includegraphics[page=1,width=\textwidth]{figures/post1.pdf} \\
+  \includegraphics[page=1,width=\textwidth]{figures/post2.pdf} \\
+  \includegraphics[page=1,width=\textwidth]{figures/post3.pdf} \\
+  \includegraphics[page=1,width=\textwidth]{figures/get1.pdf} \\
+\end{tabular}
+\end{table}
 
 
 The RESTful API of the \textit{coordinator} is summarized in table \ref{t:coordinator-api}.
 Below we explain in more detail each individual POST and GET request.
 
+\includegraphics[page=1,width=\textwidth]{figures/post1.pdf}
 \begin{itemize}
-\item \textbf{\textit{/smpc/histogram/numerical}}
-This POST request initiates a secure computation for numerical/continuous values dataset.
-Through the request's body, one can specify the desired attribute names of the dataset.
-For instance, for the CVI dataset \ref{s:datasets} a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term ``Patient Age''.
-If the specified attributes are two or more, then the resulting counts will correspond to tuples, triples, etc.
+\item[]
+This POST request initiates a secure computation for numerical / continuous values dataset.
+Through the request's body, one can specify all the desired properties of the histograms to be computed.
+These include the attributes on which the histogram will be built (names and cells / $\beta$ factor), the datasources from which data will be used, and a set of filters / conditions that should hold for each data tuple taken into consideration when building the histogram.
+
+
+For instance, for the CVI dataset (see section \ref{s:datasets}) a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term ``Patient Age''.
+
+% The request's body is a \texttt{JSON} object with the following properties:
 
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
@@ -70,10 +67,11 @@ If the specified attributes are two or more, then the resulting counts will corr
 \captionof{lstlisting}{Example /smpc/histogram/numerical POST request body}
 \label{sc:histogram-numerical-post}
 }
+\end{itemize}
 
-
-
-\item \textbf{\textit{/smpc/histogram/categorical}}
+\includegraphics[page=1,width=\textwidth]{figures/post2.pdf}
+\begin{itemize}
+\item[]
 This POST request initiates a secure computation for categorical values dataset (MeSH).
 Through the request's body, one can specify the desired MeSH terms.
 The values the count of which will be computed are the children of the specified MeSH term from the MeSH ontology.
@@ -96,10 +94,12 @@ If the specified MeSH terms are three, the result will be triples, etc.
 \captionof{lstlisting}{Example /smpc/histogram/categorical POST request body}
 \label{sc:histogram-categorical-post}
 }
+\end{itemize}
 
 
-
-\item \textbf{\textit{/smpc/decisionTree}}
+\includegraphics[page=1,width=\textwidth]{figures/post3.pdf}
+\begin{itemize}
+\item[]
 Finally, this POST request is for computing a decision tree from either dataset.
 The implemented classifiers are ID3 and C4.5, and one should specify which to use in the request body along with the desired attributes.
 Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
@@ -154,11 +154,12 @@ Moreover, he/she should specify the class-attribute, according to which the deci
 \captionof{lstlisting}{Example /smpc/decisionTree POST request body for categorical values}
 \label{sc:decisionTree-post-categorical}
 }
+\end{itemize}
 
 
-
-
-\item \textbf{\textit{/smpc/queue?=request=\{uid\}}}
+\includegraphics[page=1,width=\textwidth]{figures/get1.pdf}
+\begin{itemize}
+\item[]
 This GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
 The status of an ongoing computation request can be accessed through the /smpc/queue GET request by specifying its id.
 The only parameter this GET request accepts is the id of the desired computation request, as shown below.
@@ -176,7 +177,7 @@ The only parameter this GET request accepts is the id of the desired computation
 The response is a JSON object containing the specified computation's status, and possibly its current step or result which is a JSON object too.
 The server's response has the following structure.
 \begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-    \item [\texttt{status}:] A string indicating the computation's status. One of [running, succeeded, failed, notstarted]
+    \item [\texttt{status}:] A string indicating the computation's status. One of [\texttt{running}, \texttt{succeeded}, \texttt{failed}, \texttt{notstarted}]
     \item [\texttt{step}:] A string indicating the current step of the computation. This is present in case that the computation is in the running state.
     \item [\texttt{result}:] A JSON object with the computation's result in case its status is succeeded. The JSON object contains a single key namely data which contains tuples of (label, value) of the computation result.
     \begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
@@ -255,28 +256,32 @@ Data providers listen to import requests from the \textit{coordinator} server us
 
 \subsection{RESTful API}\label{ss:data-providers-restful-api}
 
+
 \begin{table}[H]
-\centering
-\caption{Data Providers' RESTful API}
-\label{t:data-providers-api}
-\begin{tabular}{@{}ll@{}}
-\toprule
-URI                                & Method        \\ \midrule
-\texttt{/smpc/import/numerical}    & \texttt{POST} \\
-\texttt{/smpc/import/categorical}  & \texttt{POST} \\ \bottomrule
+  \centering
+  \caption{Data Providers' RESTful API}
+  \label{t:data-providers-api}
+\begin{tabular}{l}
+  \includegraphics[page=1,width=\textwidth]{figures/post4.pdf} \\
+  \includegraphics[page=1,width=\textwidth]{figures/post5.pdf} \\
 \end{tabular}
 \end{table}
+
 
 The RESTful API of the data providers is summarized in table \ref{t:data-providers-api}.
 Below we explain in more detail the two types of POST requests that the \textit{coordinator} sends to the data providers.
 
+\includegraphics[page=1,width=\textwidth]{figures/post4.pdf}
 \begin{itemize}
-\item \textbf{\textit{/smpc/import/numerical}}
+\item[]
 This POST request initiates a secure import for numerical/continuous values dataset.
 Through the request's body, one can specify the desired attribute names of the dataset to import.
 For instance, an example for the CVI dataset \ref{s:datasets} is shown in Code \ref{sc:smpc-import-post}, in which a user specifies that he/she wants to compute private analytics for terms ``Patient Age'' and ``Heart rate''.
+\end{itemize}
 
-\item \textbf{\textit{/smpc/import/categorical}}
+\includegraphics[page=1,width=\textwidth]{figures/post5.pdf}
+\begin{itemize}
+\item[]
 This POST request initiates a secure import for categorical values dataset (MeSH).
 Through the request's body, one can specify the desired attribute names of the dataset to import.
 The request for importing MeSH dataset is similar to the the numerical one, in Code \ref{sc:smpc-import-post}, however in the attributes should be given MeSH terms.
