@@ -3,26 +3,40 @@
 Our application consists of four concrete parts, the \textit{coordinator}, the data providers, the SMPC cluster and the user interface.
 
 \section{Coordinator}\label{s:impl-coordinator}
-The \textit{coordinator} handles all private computation requests, communicates with the data providers -- requesting them to securely import their data to the computing cluster --, and finally returns to the researcher the analytics results.
+The \textit{coordinator} handles all private computation requests, communicates with the data providers -- requesting them to securely import their data to the computing cluster --, initiates the secure computation in the SMPC cluster, and finally returns to the requested user the analytics results.
 
-The coordinator server has been implemented using \texttt{Node.js Express Server} and provides the following RESTful API.
+The coordinator server has been designed as a Representational State Transfer (REST) web service.
+This design helps decoupling server and client applications and the API that provides is cleaner and easier to understand / discover.
+It's standard format / usage makes it easy for new clients to use the application even if the application was not designed with these clients' use cases in mind.
+
+We have implemented this web service using \texttt{Node.js} and more specifacally the \texttt{Express server} minimal web framework.
+
+The RESTful API provided by the coordinator server can be found in section \ref{ss:coord-restful-api}.
 
 
 \subsection{RESTful API}\label{ss:coord-restful-api}
 
-\begin{table}[H]
-\centering
-\caption{Coordinator's RESTful API}
-\label{t:coordinator-api}
-\begin{tabular}{@{}ll@{}}
-\toprule
-URI                                   & Method        \\ \midrule
-\texttt{/smpc/histogram/numerical}    & \texttt{POST} \\
-\texttt{/smpc/histogram/categorical}  & \texttt{POST} \\
-\texttt{/smpc/decisionTree}           & \texttt{POST} \\
-\texttt{/smpc/queue?=request=\{uid\}} & \texttt{GET}  \\ \bottomrule
-\end{tabular}
-\end{table}
+% \begin{table}[H]
+% \centering
+% \caption{Coordinator's RESTful API}
+% \label{t:coordinator-api}
+% \begin{tabular}{@{}ll@{}}
+% \toprule
+% URI                                   & Method        \\ \midrule
+% \texttt{/smpc/histogram/numerical}    & \texttt{POST} \\
+% \texttt{/smpc/histogram/categorical}  & \texttt{POST} \\
+% \texttt{/smpc/decisionTree}           & \texttt{POST} \\
+% \texttt{/smpc/queue?request=\{uid\}} & \texttt{GET}  \\ \bottomrule
+% \end{tabular}
+% \end{table}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[page=1,width=\textwidth]{figures/api1_no_text.pdf}
+  \caption{Coordinator's RESTful API}\label{f:outlook}
+\end{figure}
+
 
 The RESTful API of the \textit{coordinator} is summarized in table \ref{t:coordinator-api}.
 Below we explain in more detail each individual POST and GET request.
@@ -276,7 +290,7 @@ The request for importing MeSH dataset is similar to the the numerical one, in C
         "Patient Age",
         "Heart rate"
     ],
-    "datasource": "HospitalA_944222c9-524b-40eb-b19b-486a946c220d"
+    "datasource": "HospitalA"
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/import/numerical POST request body}
