@@ -28,6 +28,42 @@ Multiplication of a shared value with a constant and extraction of its bits as s
 Bit extraction and arithmetic primitives are sufficient to construct any Boolean circuit with a linear overhead and thus the Sharemind framework is also Turing complete \cite{bogdanov2008sharemind}.
 Many data mining and statistical analysis algorithms use no other mathematical operations than the Sharemind's instruction set, thus it is sufficient for most applications.
 
+
+
+
+\section{Real World Applications}\label{s:real-world-applications}
+
+\subsection{Satellite Collision Detection}\label{s:satellite-collision-detection}
+One notable example of a real world application of SMPC using Sharemind was presented in \cite{kamm2015secure}.
+In this paper, Sharemind engine was utilized to perform satellite collision detection in a secure multiparty setting.
+The number of satellites orbiting our planet is growing, and so does the danger of collisions.
+Indeed, two satellites crashed in 2009.
+Satellite owners, such as governments, do not want to reveal orbital information about their satellites.
+However, satellites come with extravagant expenses and each satellite owner want to protect their property.
+
+Future collisions could be avoided by sharing information about the satellites orbits.
+Using SMPC, the parties can cooperate and learn whether a collision is going to happen and nothing else.
+No information about the actual orbits would leak -- no party can see the individual values, since computations are carried out on encrypted data.
+The SMPC solution provides cryptographic guarantees for the confidentiality of the input trajectories.
+
+
+\subsection{Analysing Private Databases}\label{s:analysing-private-databases}
+Another worth mentioning application took place in 2015, where the Estonian Center of Applied Research used Sharemind to collect governmental tax and education records with purpose to run a big data study looking for correlations between people who work during their studies and those who fail to graduate in time.
+
+In Estonia -- where this research took place, the Ministry of Education and Science keeps track of students and the Tax and Customs Board keeps track of working (by tracking income tax payments).
+A correlation between working during studies and not graduating in time could be possible to find, if these databases were not private.
+However, this data cannot be shared because of the Personal Data Protection Act and the Taxation Act and also many European Union regulations, such as General Data Protection Regulation (GDPR).
+All these legislation prevents such studies from being performed.
+
+The results of the study were quite surprising.
+The study found no relation between working during studies and not graduating on time.
+Instead, it turned out that the population group that was studied (Estonian students of all fields) work an equal amount.
+Moreover, it showed an obvious the reduction of employment during the financial crisis in 2008.
+This study would not have been possible without an SMPC engine such as Sharemind, as no research organization can gain access to these private databases due to Data Protection regulations.
+Nevertheless, this research allowed more personalised follow-up studies to be planned for finding the reasons why students quit.
+
+
+
 \section{SecreC}\label{s:secrec}
 
 The programmer of the privacy preserving applications does not necessarily know the underlying security protocols.
