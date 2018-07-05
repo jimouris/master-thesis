@@ -71,7 +71,7 @@ In this case $\beta = 4$, thus the algorithm should obliviously split the values
 The range of each bucket is computed considering the $\beta$ parameter, as well as the minimum and maximum age in the dataset.
 In this specific example, the minimum age is $18$, while the maximum is $83$.
 Having $\beta = 4$ results to bucket-range $(83 - 18) / 4 = 16.25$.
-Therefore, the ranges for attribute ``Patient Age" are formed as follows: $[18, 34.25), [34.25, 50.50), [50.50, 66.75), [66.75, 83]$.
+Therefore, the ranges for attribute ``Patient Age" are formed as follows: $[18, 34.25),$ $[34.25, 50.50),$ $[50.50, 66.75),$ $[66.75, 83]$.
 Consecutively, for each patient in the dataset the algorithm calculates the number of bucket that the patient belongs by dividing his/her value with the bucket-range; however, this index is encrypted.
 Finally, the algorithm iterates through all $\beta$ buckets and obliviously adding $\enc{1}$ if the bucket is the correct one, or $\enc{0}$ otherwise.
 
@@ -116,13 +116,13 @@ Thus, $Ps$ is an array of $A$ slots, where $A$ is the number of attributes.
 
 
 The algorithm that computes a private multi-dimensional histogram is similar to the one regarding one-dimensional histograms but also addresses the issue of having a histogram of arbitrarily many dimensions.
-In case we had a known number of dimensions the simplest solution would be to use nested loops, as many as the histogram dimensions.
+In case we had a fixed (\textit{i.e.} known \textit{a-priori}) number of dimensions the simplest solution would be to use nested loops, as many as the histogram dimensions.
 Since the number of dimensions is not known, we have to think of something else.
 We represent the multi-dimensional histogram as a serialized version with an one-dimensional array (a vector) instead of using a multi-dimensional array (a matrix).
 For example a 2-dimensional $3 \times 4$ histogram will be represented as a vector whose length is $ 12 $ ($= 3 \cdot 4$), and a $3 \times 4 \times 5$ 3-dimensional histogram wit a vector of length $ 60 $ ($= 3 \cdot 4 \cdot 5$)
 
 When it comes to indexing if we wish to access the 2-dimensional $N \times M$ histogram represented as an one-dimensional at row $ i $ and column $ j $, instead of using $h[i][j]$ we use $h[i \cdot M + j]$.
-Similarly, for the 3-dimensional $L \times N \times M$ histogram, $h[i][j][k]$ becomes $h[i \cdot N \cdot M + j \cdot M + k]$. So there needs to be a computation of a single index based on the multiple dimension indexes. In algorithm \ref{a:multidim-histogram-categorical}, the $positions$ vector holds this index for each record of the provided array, as can bee seen in lines $ 6 $ and $ 7 $
+Similarly, for the 3-dimensional $L \times N \times M$ histogram, $h[i][j][k]$ becomes $h[i \cdot N \cdot M + j \cdot M + k]$. So there needs to be a computation of a single index based on the multiple dimension indexes. In algorithm \ref{a:multidim-histogram-categorical}, the $positions$ vector holds this index for each record of the provided array, as can be seen in lines $ 6 $ and $ 7 $
 
 Similarly to the 1D algorithm, the multi-dimensional one creates a boolean array ($eq$) for each possible histogram cell, which counts the occurrences of that cell in the $positions$ vector, as can be seen in lines $12$ and $13$ of algorithm \ref{a:multidim-histogram-categorical}.
 \import{./}{algorithms/multdim_hist_categorical.tex}
@@ -223,8 +223,18 @@ The effect of this example can be found in figures \ref{f:1d_no_filter} and \ref
 
 \import{./}{algorithms/filters.tex}
 
+The way that \textit{filters} have been implemented is by constructing a vector of size $N$ (\textit{i.e.} as long as the number of tuples in the dataset), that works as a boolean mask corresponding to the specified constraints.
+Each position of that vector corresponds to a data tuple from the dataset.
+If that tuple satisfies all the specified constraints, then the vector should have the (encrypted) value \texttt{True} in that position, or (encrypted) \texttt{False} otherwise.
+This vector then is taken into consideration when we build the histogram.
+Only tuples which have ``scored'' \texttt{True} are counted into the histogram.
 
-\fixme{Explain the algorithm}
+In algorithm \ref{a:filters-constraint-mask} the aforementioned vector is $constraintMask$.
+In lines 14-20 we build this boolean mask for each constraint into the $eq$ vector, and in lines 21-27 we combine these vectors to build the total one, according to the specified boolean operator applied between them.
+
+As you can see in algorithm \ref{a:filters-2d-histogram} which computes a multi\hyp dimensional histogram of categorical attributes, the application of this constraints is as simple as a private multiplication with the $N$-size vector $constraintMask$.
+This SIMD operator can be seen in line 13.
+Beyond this addition, the algorithm is identical to the standard multi\hyp dimensional histogram of categorical attributes as in algorithm \ref{a:multidim-histogram-categorical}.
 
 
 
