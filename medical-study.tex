@@ -133,23 +133,35 @@ The detailed procedure described above is depicted in figure \ref{f:overview}.
 
 
 
-\subsection{SMPC Cluster Privacy Guarantees}\label{s:smpc-privacy-guarantees}
+\subsection{SMPC Threat Model}\label{s:smpc-threat-model}
+The main security goal of every SMPC engine is to protect the values provided by the input parties from all other parties.
+The data of the input parties will be stored and processed encrypted by the computing parties.
+The SMPC cluster needs to ensure that no party can learn anything from the information available to them.
 
-As we examined in section \ref{s:smpc}, the computing nodes of the \textit{SMPC cluster} do not need to be trusted nodes.
+Moreover, the final results must not reveal anything except for the actual results of the secure computation performed by the computing parties.
+Note, that depending on the algorithm and provided data, the output may leak the input of one or more input parties.
+For instance, without loss of generality let us suppose a SMPC setting with two parties.
+A malicious adversary can always alter his/her input and define it to be an empty database (or a database with null values).
+This fact can be very damaging since the final output is the result of the algorithm on the other party’s database alone.
+
+In this work we assume that the adversary is \emph{semi\hyp honest} -- or similarly, \emph{rational, honest\hyp but\hyp curious}.
+That is, the adversary correctly follows the protocol specification, but has incentives to eavesdrop sensitive user data.
+He/She could also attempt to learn additional information by analyzing any data received during the execution, either unencrypted or encrypted.
+In our developed algorithms, we explicitly define which variables are sensitive and should remain encrypted throughout the whole execution to preserve data privacy.
+
+
+\subsubsection{Computing Parties Collusion}\label{s:computing-parties-collusion}
+In the active adversary scenario, where the adversary controls some of the computing nodes, the only requirement is not to control all of them simultaneously.
+Since the actual data are transferred from the data-providers (hospitals) to the computing nodes through secret\hyp sharing, it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
+However, meaningful computations can be applied due to the homomorphic properties that the shares have (section \ref{ss:secret-sharing-homomorphism}).
+
+As we examined in section \ref{s:smpc}, the computing nodes of the SMPC cluster do not need to be trusted nodes.
 The only requirement of these nodes is not to collude.
 This should not be confused with trusted servers.
 A reasonable way to prevent collusion, is to deploy the computing nodes in premises of organizations having conflicting interests.
 
-
-Since the actual data are transferred from the hospitals to the computing nodes through secret\hyp sharing, it is impossible for any of the three nodes to decrypt them, and in general to infer any information, as each computing node possesses only a share of the data.
-However, meaningful computations can be applied due to the homomorphic properties that the shares have (section \ref{ss:secret-sharing-homomorphism}).
-
-The only information that gets published is the output of the privacy preserving computation.
+Finally, the only information that gets published is the output of the privacy preserving computation.
 This is returned to the user who initiated the query via the \textit{coordinator} server.
-
-
-% \section{Data Importing}\label{s:importing}
-
 
 
 
