@@ -25,7 +25,7 @@
         \State $constraintOperators \gets constraintOperators[c]$
 
         \If {$constraintOperators = GreaterThan$}
-            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hgt constraintValue$ \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where the constraint holds, $\enc{0}$ otherwise}}
+            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hgt constraintValue$ \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the constraint holds, $\enc{0}$ otherwise}}
         \ElsIf {$constraintOperators = LessThan$}
             \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hlt constraintValue$
             % \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where ${\color{darkred}{constraintAttribute}} \hlt constraintValue,  \enc{0}$ otherwise}}
@@ -35,7 +35,7 @@
         \EndIf
 
         \If {$operation = AND$}
-            \State ${\color{darkred}{constraintMask}} \gets {\color{darkred}{constraintMask}} \hmul {\color{darkred}{eq}}$ \Comment{Applying the boolean operator between the constraints. \small{${\texttt{SIMD}}$}}
+            \State ${\color{darkred}{constraintMask}} \gets {\color{darkred}{constraintMask}} \hmul {\color{darkred}{eq}}$ \Comment{Applying the boolean operator between \par\hfill the constraints. \small{${\texttt{SIMD}}$}}
         \ElsIf {$operation = OR$}
             \State ${\color{darkred}{constraintMask}} \gets {\color{darkred}{constraintMask}} \hplus {\color{darkred}{eq}}$
         \ElsIf {$operation = XOR$}
