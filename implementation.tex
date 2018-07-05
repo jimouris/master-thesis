@@ -35,18 +35,40 @@ Below we explain in more detail each individual POST and GET request.
 
 \includegraphics[page=1,width=\textwidth]{figures/post1.pdf}
 \begin{itemize}
-\item[]
-This POST request initiates a secure computation for numerical / continuous values dataset.
-Through the request's body, one can specify all the desired properties of the histograms to be computed.
-These include the attributes on which the histogram will be built (names and cells / $\beta$ factor), the datasources from which data will be used, and a set of filters / conditions that should hold for each data tuple taken into consideration when building the histogram.
+  \item[]
+  This POST request initiates a secure computation for numerical / continuous values dataset.
+  \begin{itemize}
+    \item[] Request
 
+  Through the request's body, one can specify all the desired properties of the histograms to be computed.
+  These include the attributes on which the histogram will be built (names and cells / $\beta$ factor), the datasources from which data will be used, and a set of filters / conditions that should hold for each data tuple taken into consideration when building the histogram.
 
-For instance, for the CVI dataset (see section \ref{s:datasets}) a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term ``Patient Age''.
+  %
+  % For instance, for the CVI dataset (see section \ref{s:datasets}) a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term ``Patient Age''.
 
-% The request's body is a \texttt{JSON} object with the following properties:
+  The request's body is a \texttt{JSON} object with the following properties:
 
-{
-\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+    \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of JSON objects, corresponding to the attributes on which this histogram will be built. These JSON objects have the following keys:
+    \begin{description}[labelwidth=2em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+        \item[\texttt{name}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
+        \item[\texttt{cells}:] {\color{red}\textit{required}} The number of histogram cells ($\beta$ factor) to be created for this attribute (\textit{positive integer}).
+    \end{description}
+    \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed. If this key is left empty or not specified, all available datasources will be used.
+    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that that should be met for each data tuple considered int the secure histogram computation. If this field is left blank or not specified, all data tuples will be used for the computation. The object has the following keys:
+    \begin{description}[labelwidth=2em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+        \item[\texttt{operator}:] {\color{red}\textit{required}} The boolean operator (\textit{string}) that will be applied between all the specified conditions that follow. One of \texttt{[AND, OR, XOR]} In the case of multiple conditions, the operator is left-associative.
+        \item[\texttt{conditions}:] {\color{red}\textit{required}}  The list of conditions that should be met by each data tuple in the computation. Each condition is represented as a JSON object with the following keys:
+        \begin{description}[labelwidth=2em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+            \item[\texttt{attribute}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
+            \item[\texttt{operator}:] {\color{red}\textit{required}} The condition's operator (\textit{string}). One of \texttt{[>, <, =]}.
+            \item[\texttt{value}:] {\color{red}\textit{required}}  The attribute's value (\textit{string}).
+        \end{description}
+    \end{description}
+\end{description}
+
+  {
+  \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
     "attributes": [
         {
@@ -63,10 +85,11 @@ For instance, for the CVI dataset (see section \ref{s:datasets}) a user specifie
         "HospitalB"
     ]
 }
-\end{minted}
-\captionof{lstlisting}{Example /smpc/histogram/numerical POST request body}
-\label{sc:histogram-numerical-post}
-}
+  \end{minted}
+  \captionof{lstlisting}{Example /smpc/histogram/numerical POST request body}
+  \label{sc:histogram-numerical-post}
+  }
+  \end{itemize}
 \end{itemize}
 
 \includegraphics[page=1,width=\textwidth]{figures/post2.pdf}
