@@ -2,35 +2,44 @@
 \caption{Privacy Preserving Constraint Map}\label{a:filters}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
-\Require ${\color{darkred}{array}}, {\color{darkred}{constraintMap}}, {\color{darkred}{eq}}, {\color{darkred}{constraintValue}}, {\color{darkred}{constraintAttribute}}$
+\Require ${\color{darkred}{array}}, {\color{darkred}{constraintMap}}, {\color{darkred}{eq}}, {\color{darkred}{constraintAttribute}}$
  % $\par \hspace{1.2cm}$
 
-\Procedure{ConstraintMap}{${\color{darkred}{array}}[2][N], operation, constraintAttributes[C], $\par\hfill$ constraintOperators[C], constraintValues[C]$}
+\Procedure{ConstraintMap}{${\color{darkred}{array}}[N][M], operation, constraintAttributes[C], $\par\hfill$ constraintOperators[C], constraintValues[C]$}
 
     \If {$operation = AND$}
-        \State ${\color{darkred}{constraintMap}} \gets [\enc{1}, \enc{1}, \dots, \enc{1}]$
+        \State ${\color{darkred}{constraintMap}} \gets [\enc{1}, \enc{1}, \dots, \enc{1}]$ \Comment{\small{array initialized with $\enc{1}$}}
     \ElsIf {$operation = OR$}
-        \State ${\color{darkred}{constraintMap}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$
+        \State ${\color{darkred}{constraintMap}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{\small{array initialized with $\enc{0}$}}
+    \ElsIf {$operation = XOR$}
+        \State ${\color{darkred}{constraintMap}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{\small{array initialized with $\enc{0}$}}
     \EndIf
 
     \For{$c \in \{0, \dots, C-1\}$}\Comment{\small{$C$ is the number of the different constraints}}
 
-        \State $constraintIdx \gets constraintAttributes[c]$
+        \State $constraintIndex \gets constraintAttributes[c]$
 
-        \State ${\color{darkred}{constraintAttribute}} \gets {\color{darkred}{array}}[:, constraintIdx]$
+        \State ${\color{darkred}{constraintAttribute}} \gets {\color{darkred}{array}}[:, constraintIndex]$
 
-        \State ${\color{darkred}{constraintValue}} \gets constraintValues[c]]$ \Comment{\small{This assignment encrypts the right-hand \par\hfill side value.}}
+        \State $constraintValue \gets constraintValues[c]$
+        \State $constraintOperators \gets constraintOperators[c]$
 
-        \If {$constraintOperators[c] = GreaterThan$}
-            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hgt {\color{darkred}{constraintValue}}$
-        \ElsIf {$constraintOperators[c] = LessThan$}
-            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hlt {\color{darkred}{constraintValue}}$
+        \If {$constraintOperators = GreaterThan$}
+            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hgt constraintValue$ \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where the constraint holds, $\enc{0}$ otherwise}}
+        \ElsIf {$constraintOperators = LessThan$}
+            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hlt constraintValue$
+            % \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where ${\color{darkred}{constraintAttribute}} \hlt constraintValue,  \enc{0}$ otherwise}}
+        \ElsIf {$constraintOperators = Equal$}
+            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \heq constraintValue$
+            % \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where ${\color{darkred}{constraintAttribute}} \heq constraintValue,  \enc{0}$ otherwise}}
         \EndIf
 
         \If {$operation = AND$}
-            \State ${\color{darkred}{constraintMap}} \gets {\color{darkred}{constraintMap}} \hmul eq$
+            \State ${\color{darkred}{constraintMap}} \gets {\color{darkred}{constraintMap}} \hmul {\color{darkred}{eq}}$ \Comment{Applying the boolean operator between the constraints. \small{${\texttt{SIMD}}$}}
         \ElsIf {$operation = OR$}
-            \State ${\color{darkred}{constraintMap}} \gets {\color{darkred}{constraintMap}} \hplus eq$
+            \State ${\color{darkred}{constraintMap}} \gets {\color{darkred}{constraintMap}} \hplus {\color{darkred}{eq}}$
+        \ElsIf {$operation = XOR$}
+            \State ${\color{darkred}{constraintMap}} \gets {\color{darkred}{constraintMap}} \hplus (1-{\color{darkred}{eq}}) + (1-{\color{darkred}{constraintMap}}) * {\color{darkred}{eq}}$
         \EndIf
 
     \EndFor
