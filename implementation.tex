@@ -711,7 +711,15 @@ This POST request initiates a secure import for numerical/continuous values data
 Through the request's body, one can specify the desired attribute names (\textit{i.e.} columns of the dataset) to be imported.
 For instance, an example for the CVI dataset (see section \ref{s:datasets}) is shown in Code \ref{sc:smpc-import-cvi}, in which a user specifies that he/she wants to compute private analytics for attributes ``Patient Age'' and ``Heart rate''.
 
-\fixme{Add request body description}
+The request's body is a JSON object of the following form.
+
+\begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+
+    \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of attributes (\textit{strings}) on which this histogram will be built.
+
+    \item[\texttt{datasource}:] {\color{red}\textit{required}} The name for the table of the SPMC cluster's encrypted database in which the data  will be imported.
+
+\end{description}
 
 \ \\
 \begin{minipage}{\linewidth}
@@ -753,7 +761,15 @@ This POST request initiates a secure import from datasets with categorical value
 Through the request's body, one can specify the desired attribute names of the dataset to import.
 The request for importing attributes from th MeSH dataset is similar to the the numerical one, in Code \ref{sc:smpc-import-cvi}, however in attributes should be specified by their MeSH codes, due to name ambiguity.
 
-\fixme{Add request body description}
+The request's body is a JSON object of the following form.
+
+\begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+
+    \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of attributes (MeSH codes) on which this histogram will be built.
+
+    \item[\texttt{datasource}:] {\color{red}\textit{required}} The name for the table of the SPMC cluster's encrypted database in which the data  will be imported.
+
+\end{description}
 
 \ \\
 \begin{minipage}{\linewidth}
@@ -783,12 +799,6 @@ The server responds with \texttt{HTTP/1.1 200 OK} upon successful importing or w
 
 
 
-
-\fixme{Why should we mention this??? --The datasource name is the hospital name along with a unique identifier (uid) (i.e. "datasource": Data-Provider-Name + ``\_" + \{uid\}).
-The main reason for this format is that the import procedures are per computation request, not per data-provider.
-Thus, there was a need for distinction between the data that are imported for different requests.}
-
-
 \subsection{Data Importer}\label{ss:data-providers-importer}
 The secure data import is one of the most essential procedures in the secure multi-party computation scenario.
 In this step, the data are secret-shared to the three computing parties.
@@ -797,7 +807,7 @@ In section \ref{s:secret-sharing}, we examined some secret sharing techniques an
 In simple words, the secret sharing homomorphic property enables meaningful computation on the shares of the initial data.
 
 Our system is based on Sharemind for the SMPC computation and they also provide a module for the secret sharing import.
-However, this module has some restrictions; the data to be imported should be in a comma-separated values (CSV) format.
+\fixme{Should we mention that?? -- However, this module has some restrictions; the data to be imported should be in a comma-separated values (CSV) format.}
 
 \fixme{explain what problem does this introduce to MeSH ...}
 
