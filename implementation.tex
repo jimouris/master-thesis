@@ -103,7 +103,7 @@ Example (without \texttt{datasources} or \texttt{filters}):
  \label{sc:histogram-numerical-post-1}
  }
 \end{minipage}
-
+\ \\
  Example (with \texttt{datasources} and \texttt{filters}):
 
  \begin{minipage}{\linewidth}
@@ -160,7 +160,7 @@ The secure histogram computation is a potentially long running operation. For th
     "location": "/smpc/queue?request=b171-3f4ade123374"
 }
 \end{minted}
-\captionof{lstlisting}{Example 1 of /smpc/histogram/numerical response body}
+\captionof{lstlisting}{Example 1 of /smpc/histogram/numerical response}
 \label{sc:histogram-numerical-response-1}
 }
 \end{minipage}
@@ -173,7 +173,7 @@ In case of a malformed request the server responds with \texttt{HTTP/1.1 400 Bad
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{bash}
 Bad Request
 \end{minted}
-\captionof{lstlisting}{Example 2 of /smpc/histogram/numerical response body}
+\captionof{lstlisting}{Example 2 of /smpc/histogram/numerical response}
 \label{sc:histogram-numerical-response-2}
 }
 \end{minipage}
@@ -244,7 +244,7 @@ Example (without \texttt{datasources} or \texttt{filters}):
 \label{sc:histogram-categorical-post-1}
 }
 \end{minipage}
-
+\ \\
 Example (with \texttt{datasources} and \texttt{filters}):
 
 \begin{minipage}{\linewidth}
@@ -294,9 +294,10 @@ The server's response for the \texttt{/smpc/histogram/categorical} POST request 
 \begin{itemize}
 \item[]
 Finally, this POST request is for computing a decision tree from either dataset.
-The implemented classifiers are ID3 and C4.5, and one should specify which to use in the request body along with the desired attributes.
+The implemented classifiers are ID3 and C4.5, and one should specify which one to use in the request body along with the desired attributes.
 Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
-
+\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+     \item[Request:]\ \\
 The request's body is a \texttt{JSON} object with the following properties:
 
 \begin{description}[labelwidth=9em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
@@ -307,10 +308,10 @@ The request's body is a \texttt{JSON} object with the following properties:
     \begin{description}[labelwidth=3em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{name}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
 
-        \item[\texttt{cells}:] {\color{red}\textit{required}} The number of histogram cells ($\beta$ factor) to be created for this attribute (\textit{positive integer}). \footnote{A similar JSON is used for both categorical and numerical decision trees. In the former case, this \texttt{cells} object is omitted. \label{refnote}}
+        \item[\texttt{cells}:] {\color{blue}\textit{optional}} The number of histogram cells ($\beta$ factor) to be created for this attribute (\textit{positive integer}). \footnote{In case, where C4.5 is selected as \texttt{classifier}, or the attribute is categorical, the \texttt{cells} object is omitted. \label{refnote1}}
     \end{description}
 
-    \item[\texttt{classifier}:] {\color{red}\textit{optional}} The name of the decision tree classifier to be used.
+    \item[\texttt{classifier}:] {\color{blue}\textit{optional}} The name of the decision tree classifier to be used.
     Possible values are \{\texttt{ID3, C4.5}\}.
     If this key is left empty or not specified, the \texttt{ID3} classifier will be used by default.
 
@@ -318,7 +319,7 @@ The request's body is a \texttt{JSON} object with the following properties:
     \begin{description}[labelwidth=3em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{name}:] {\color{red}\textit{required}} The name of the class attribute (\textit{string}).
 
-        \item[\texttt{cells}:] {\color{red}\textit{required}} The number of histogram cells ($\beta$ factor) to be created for the class attribute (\textit{positive integer}). \textsuperscript{\ref{refnote}}
+        \item[\texttt{cells}:] {\color{blue}\textit{optional}} The number of histogram cells ($\beta$ factor) to be created for the class attribute (\textit{positive integer}).\footnote{In case, where the \texttt{class\_attribute} is categorical, the \texttt{cells} object is omitted. \label{refnote2}}
     \end{description}
 
     \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed.
@@ -326,27 +327,25 @@ The request's body is a \texttt{JSON} object with the following properties:
 
 \end{description}
 
+Example (using ID3 as the classifier for categorical values):\\
+\begin{minipage}{\linewidth}
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
     "attributes": [
         {
-            "name": "Patient Age",
-            "cells": "5"
+            "name": "C14"
         },
         {
-            "name": "Heart rate",
-            "cells": "3"
+            "name": "C12"
         },
         {
-            "name": "Height (cm)",
-            "cells": "6"
+            "name": "M01.686"
         }
     ],
-    "classifier": "C45",
+    "classifier": "ID3",
     "class_attribute": {
-        "name": "RVESV (ml)",
-        "cells": "3"
+        "name": "M01.060"
     },
     "datasources": [
         "HospitalA",
@@ -354,28 +353,83 @@ The request's body is a \texttt{JSON} object with the following properties:
     ]
 }
 \end{minted}
-\captionof{lstlisting}{Example /smpc/decisionTree POST request body for numerical values}
-\label{sc:decisionTree-post-numerical}
+\captionof{lstlisting}{Example 1 of /smpc/decisionTree POST request body for categorical values}
+\label{sc:decisionTree-post-numerical-id3}
 }
-
+\end{minipage}
+\ \\
+Example (using ID3 as the classifier for numerical values):\\
+\begin{minipage}{\linewidth}
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
     "attributes": [
-        "C14",
-        "C12"
+        {
+            "name": "Height (cm)",
+            "cells": "4"
+        },
+        {
+            "name": "Weight (kg)",
+            "cells": "5"
+        },
+        {
+            "name": "Heart rate",
+            "cells": "4"
+        }
     ],
     "classifier": "ID3",
-    "class_attribute": "M01.060",
+    "class_attribute": {
+        "name": "Patient Age",
+        "cells": "4"
+    },
     "datasources": [
         "HospitalA",
         "HospitalB"
     ]
 }
 \end{minted}
-\captionof{lstlisting}{Example /smpc/decisionTree POST request body for categorical values}
+\captionof{lstlisting}{Example 2 of /smpc/decisionTree POST request body for numerical values}
+\label{sc:decisionTree-post-numerical-id3}
+}
+\end{minipage}
+\ \\
+Example (using C4.5 as the classifier for numerical values):\\
+\begin{minipage}{\linewidth}
+{
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+    "attributes": [
+        {
+            "name": "Height (cm)"
+        },
+        {
+            "name": "Weight (kg)"
+        },
+        {
+            "name": "Heart rate"
+        }
+    ],
+    "classifier": "C4.5",
+    "class_attribute": {
+        "name": "Patient Age",
+        "cells": "4"
+    },
+    "datasources": [
+        "HospitalA",
+        "HospitalB"
+    ]
+}
+\end{minted}
+\captionof{lstlisting}{Example 3 of /smpc/decisionTree POST request body for categorical values}
 \label{sc:decisionTree-post-categorical}
 }
+\end{minipage}
+
+\item[Response:]\ \\
+
+The server's response for the \texttt{/smpc/decisionTree} POST request is the same as the ones described above. The server returns \texttt{HTTP/1.1 202 Accepted} or \texttt{HTTP/1.1 400 Bad Request}. Examples for both cases can be seen in code snippets \ref{sc:histogram-numerical-response-1} and \ref{sc:histogram-numerical-response-2}.
+
+\end{description}
 \end{itemize}
 
 
