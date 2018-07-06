@@ -704,19 +704,14 @@ Below we explain in more detail the two types of POST requests that the \textit{
 \begin{itemize}
 \item[]
 This POST request initiates a secure import for numerical/continuous values dataset.
-Through the request's body, one can specify the desired attribute names of the dataset to import.
-For instance, an example for the CVI dataset \ref{s:datasets} is shown in Code \ref{sc:smpc-import-post}, in which a user specifies that he/she wants to compute private analytics for terms ``Patient Age'' and ``Heart rate''.
-\end{itemize}
+\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+\item[Request:]\ \\
+Through the request's body, one can specify the desired attribute names (\textit{i.e.} columns of the dataset) to be imported.
+For instance, an example for the CVI dataset (see section \ref{s:datasets}) is shown in Code \ref{sc:smpc-import-cvi}, in which a user specifies that he/she wants to compute private analytics for attributes ``Patient Age'' and ``Heart rate''.
 
-\includegraphics[page=1,width=\textwidth]{figures/post5.pdf}
-\begin{itemize}
-\item[]
-This POST request initiates a secure import for categorical values dataset (MeSH).
-Through the request's body, one can specify the desired attribute names of the dataset to import.
-The request for importing MeSH dataset is similar to the the numerical one, in Code \ref{sc:smpc-import-post}, however in the attributes should be given MeSH terms.
-
-\end{itemize}
-
+\ \\
+\begin{minipage}{\linewidth}
+  Example (importing of some attribute from the CVI dataset):\\
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
@@ -728,10 +723,61 @@ The request for importing MeSH dataset is similar to the the numerical one, in C
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/import/numerical POST request body}
-\label{sc:smpc-import-post}
+\label{sc:smpc-import-cvi}
 }
+\end{minipage}
 
-The post request for categorical/MeSH terms import is similar with Code \ref{sc:smpc-import-post}.
+
+\item[Response:]\ \\
+The server responds with \texttt{HTTP/1.1 200 OK} upon successful importing or with \texttt{HTTP/1.1 400 Bad Request} upon failure.
+\end{description}
+
+
+\end{itemize}
+
+
+
+
+
+
+\includegraphics[page=1,width=\textwidth]{figures/post5.pdf}
+\begin{itemize}
+\item[]
+This POST request initiates a secure import from datasets with categorical values dataset (MeSH).
+\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+\item[Request:]\ \\
+Through the request's body, one can specify the desired attribute names of the dataset to import.
+The request for importing attributes from th MeSH dataset is similar to the the numerical one, in Code \ref{sc:smpc-import-cvi}, however in attributes should be specified by their MeSH codes, due to name ambiguity.
+
+\ \\
+\begin{minipage}{\linewidth}
+  Example (importing of some attribute from the CVI dataset):\\
+{
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+    "attributes": [
+        "M01.060",
+        "C14.280",
+        "C14.240"
+    ],
+    "datasource": "HospitalA"
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/import/categorical POST request body}
+\label{sc:smpc-import-cvi}
+}
+\end{minipage}
+
+\item[Response:]\ \\
+The server responds with \texttt{HTTP/1.1 200 OK} upon successful importing or with \texttt{HTTP/1.1 400 Bad Request} upon failure.
+\end{description}
+
+
+\end{itemize}
+
+
+
+The post request for categorical/MeSH terms import is similar with Code \ref{sc:smpc-import-cvi}.
 In the attributes list should be given the MeSH identifiers instead of attribute names (i.e. "attributes": [ "C12", "C14", ... ]).
 The datasource name is the hospital name along with a unique identifier (uid) (i.e. "datasource": Data-Provider-Name + ``\_" + \{uid\}).
 The main reason for this format is that the import procedures are per computation request, not per data-provider.
