@@ -1,0 +1,18 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Best Textbook Algorithm}\label{a:id3-best-simple}
+\begin{algorithmic}[1]
+\Procedure{Best}{$examples, attribute$}\Comment{\small{Find the best attribute; the one with maximum \par\hfill information gain -- or similarly, minimum entropy}}
+    \State $maxGain \gets \textsc{InformationGain}(examples, attributes[0])$
+    \State $best \gets attributes[0]$
+
+    \For{$i \in \{1, \dots, \textsc{Length}(attributes)-1\}$}
+        \State $gain \gets  \textsc{InformationGain}(examples, attributes[i])$
+        \If {$gain > maxGain$}
+            \State $maxGain \gets gain$
+            \State $best \gets attributes[i]$
+        \EndIf
+    \EndFor
+    \State \textbf{return} $best$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}

@@ -65,7 +65,9 @@ On each partition, ID3 is then recursively called.
 
 The ``best" attribute is defined as the attribute that has the smallest entropy -- or in other words, the best information gain.
 Let $T$ be a set of transactions, $C$ the class attribute and $A$ some non-class attribute.
-On each iteration, ID3 iterates through every unused attribute $T$ of the dataset and calculates the entropy $H_C(T)$ (equation \ref{eq:entropy}) of that attribute.
+On each iteration, ID3 iterates through every unused attribute $T$ of the dataset and calculates the entropy $H_C(T)$ (equation \ref{eq:entropy} and algorithm \ref{a:id3-Entropy-simple}) of that attribute.
+
+\import{./}{algorithms/entropy_textbook.tex}
 
 \begin{equation}\label{eq:entropy}
   H_C(T) = \sum_{i=1}^{l} - \frac{\mid T(c_i) \mid}{\mid T \mid} log{\frac{\mid T(c_i) \mid}{\mid T \mid}}
@@ -75,20 +77,26 @@ The idea is to identify the class of a transaction $T$, given that the value of 
 Let $A$ obtain values $a_1, \dots, a_m$ and let $T(a_j)$ be the transactions obtaining value $a_j$ for $A$.
 Then, the conditional information of $T$ given $A$, is given from equation \ref{eq:TgivenA}.
 
+\import{./}{algorithms/gain_textbook.tex}
+
+\import{./}{algorithms/best_textbook.tex}
+
 \begin{equation}\label{eq:TgivenA}
   H_C(T \mid A) = \sum_{j=1}^{m} - \frac{\mid T(a_j) \mid}{\mid T \mid} H_C(T(a_j))
 \end{equation}
-
-Finally, the set $T$ is then split by the selected attribute $A$ that has the maximum gain -- or equivalently minimum $H_C(T \mid A)$ -- to produce subsets of the data.
-The algorithm continues to recurse on each subset, considering only attributes never selected before.
 
 \begin{equation}\label{eq:gain}
   Gain(A) = H_C(T) - H_C(T \mid A)
 \end{equation}
 
 
-\import{./}{algorithms/id3_textbook.tex}
+Finally, the set $T$ is then split by the selected attribute $A$ (best-attribute algorithm \ref{a:id3-best-simple}) that has the maximum gain (equation \ref{eq:gain} and algorithm \ref{a:id3-gain-simple}) -- or equivalently minimum $H_C(T \mid A)$ -- to produce subsets of the data.
+The algorithm continues to recurse on each subset, considering only attributes never selected before.
 
+
+\import{./}{algorithms/allsame_textbook.tex}
+
+\import{./}{algorithms/id3_textbook.tex}
 
 
 
