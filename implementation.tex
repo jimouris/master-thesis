@@ -709,6 +709,8 @@ This POST request initiates a secure import for numerical/continuous values data
 Through the request's body, one can specify the desired attribute names (\textit{i.e.} columns of the dataset) to be imported.
 For instance, an example for the CVI dataset (see section \ref{s:datasets}) is shown in Code \ref{sc:smpc-import-cvi}, in which a user specifies that he/she wants to compute private analytics for attributes ``Patient Age'' and ``Heart rate''.
 
+\fixme{Add request body description}
+
 \ \\
 \begin{minipage}{\linewidth}
   Example (importing of some attribute from the CVI dataset):\\
@@ -749,6 +751,8 @@ This POST request initiates a secure import from datasets with categorical value
 Through the request's body, one can specify the desired attribute names of the dataset to import.
 The request for importing attributes from th MeSH dataset is similar to the the numerical one, in Code \ref{sc:smpc-import-cvi}, however in attributes should be specified by their MeSH codes, due to name ambiguity.
 
+\fixme{Add request body description}
+
 \ \\
 \begin{minipage}{\linewidth}
   Example (importing of some attribute from the CVI dataset):\\
@@ -764,7 +768,7 @@ The request for importing attributes from th MeSH dataset is similar to the the 
 }
 \end{minted}
 \captionof{lstlisting}{Example /smpc/import/categorical POST request body}
-\label{sc:smpc-import-cvi}
+\label{sc:smpc-import-mesh}
 }
 \end{minipage}
 
@@ -777,11 +781,10 @@ The server responds with \texttt{HTTP/1.1 200 OK} upon successful importing or w
 
 
 
-The post request for categorical/MeSH terms import is similar with Code \ref{sc:smpc-import-cvi}.
-In the attributes list should be given the MeSH identifiers instead of attribute names (i.e. "attributes": [ "C12", "C14", ... ]).
-The datasource name is the hospital name along with a unique identifier (uid) (i.e. "datasource": Data-Provider-Name + ``\_" + \{uid\}).
+
+\fixme{Why should we mention this??? --The datasource name is the hospital name along with a unique identifier (uid) (i.e. "datasource": Data-Provider-Name + ``\_" + \{uid\}).
 The main reason for this format is that the import procedures are per computation request, not per data-provider.
-Thus, there was a need for distinction between the data that are imported for different requests.
+Thus, there was a need for distinction between the data that are imported for different requests.}
 
 
 \subsection{Data Importer}\label{ss:data-providers-importer}
