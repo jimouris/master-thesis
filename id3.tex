@@ -104,6 +104,26 @@ The algorithm continues to recurse on each subset, considering only attributes n
 
 \fixme{many things from \href{http://www.pinkas.net/PAPERS/id3-final.pdf}{http://www.pinkas.net/PAPERS/id3-final.pdf}}
 
+In privacy-preserving algorithms, all intermediate values should remain hidden.
+In many cases, intermediate values may reveal some patterns, and in general sensitive information about the inputs.
+
+However, in the case of ID3, some of these intermediate values are part of the output and eventually will be revealed.
+For instance, the attributes chosen in each node of the tree will be revealed in the final results.
+Thus, there is no reason to trying to protect them during the protocol execution.
+In the privacy-preserving ID3, as in all algorithms in this thesis, we explicitly define which values are private (and thus encrypted), and which are public.
+
+Although the names of the selected attributes will be revealed (those nodes have the highest information gain), nothing is learned about the actual $H_C(T \mid A)$ values themselves.
+Therefore, the problem is reduced to privately find the attribute with the highest information gain.
+
+Despite the fact that the selected attributes will be revealed, we cannot regard their values as public data.
+All computations are carried out on encrypted data -- using the homomorphic properties of secret sharing, and when a decision is made ....
+\fixme{explain more here}
+
+
+
+As we have mentioned, our aim is to privately find the attribute $A$ for which $H_C(T \mid A)$ is minimum....
+\fixme{explain PP-Best, PP-Gain and PP-Entropy!}
+
 
 \import{./}{algorithms/id3_pp.tex}
 
