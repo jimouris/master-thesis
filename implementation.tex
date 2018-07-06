@@ -81,9 +81,8 @@ Below we explain in more detail each individual POST and GET request.
     \end{description}
 \end{description}
 
-Example (without \texttt{datasources} or \texttt{filters}):
-
  \begin{minipage}{\linewidth}
+   Example (without \texttt{datasources} or \texttt{filters}):
  {
  \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
@@ -104,9 +103,8 @@ Example (without \texttt{datasources} or \texttt{filters}):
  }
 \end{minipage}
 \ \\
- Example (with \texttt{datasources} and \texttt{filters}):
-
  \begin{minipage}{\linewidth}
+   Example (with \texttt{datasources} and \texttt{filters}):
  {
  \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
@@ -228,9 +226,8 @@ The request's body is a \texttt{JSON} object with the following properties:
     \end{description}
 \end{description}
 
-Example (without \texttt{datasources} or \texttt{filters}):
-
 \begin{minipage}{\linewidth}
+  Example (without \texttt{datasources} or \texttt{filters}):
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
@@ -245,9 +242,8 @@ Example (without \texttt{datasources} or \texttt{filters}):
 }
 \end{minipage}
 \ \\
-Example (with \texttt{datasources} and \texttt{filters}):
-
 \begin{minipage}{\linewidth}
+  Example (with \texttt{datasources} and \texttt{filters}):
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
@@ -327,8 +323,8 @@ The request's body is a \texttt{JSON} object with the following properties:
 
 \end{description}
 
-Example (using ID3 as the classifier for categorical values):\\
 \begin{minipage}{\linewidth}
+  Example (using ID3 as the classifier for categorical values):\\
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
@@ -358,8 +354,8 @@ Example (using ID3 as the classifier for categorical values):\\
 }
 \end{minipage}
 \ \\
-Example (using ID3 as the classifier for numerical values):\\
 \begin{minipage}{\linewidth}
+  Example (using ID3 as the classifier for numerical values):\\
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
@@ -393,8 +389,8 @@ Example (using ID3 as the classifier for numerical values):\\
 }
 \end{minipage}
 \ \\
-Example (using C4.5 as the classifier for numerical values):\\
 \begin{minipage}{\linewidth}
+  Example (using C4.5 as the classifier for numerical values):\\
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
@@ -436,41 +432,53 @@ The server's response for the \texttt{/smpc/decisionTree} POST request is the sa
 \includegraphics[page=1,width=\textwidth]{figures/get1.pdf}
 \begin{itemize}
 \item[]
-This GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
+The \texttt{/smpc/queue} GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
 The status of an ongoing computation request can be accessed through the /smpc/queue GET request by specifying its id.
+\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+  \item[Request:]\ \\
 The only parameter this GET request accepts is the id of the desired computation request, as shown below.
 
+\begin{minipage}{\linewidth}
 {
-\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
-{
-    "location": "/smpc/queue?request=944222c9-524b-40eb-b19b-486a946c220d"
-}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{html}
+/smpc/queue?request=81c2-b9c0e5589ec0
 \end{minted}
 \captionof{lstlisting}{Example /smpc/queue GET request}
-\label{sc:get}
+\label{sc:queue-request}
 }
-
-The response is a JSON object containing the specified computation's status, and possibly its current step or result which is a JSON object too.
-The server's response has the following structure.
+\end{minipage}
+  \item[Response:]\ \\
+In case of a correct request, the server responds with \texttt{HTTP/1.1 200 OK} and the response body is a JSON object containing the specified computation's status, and possibly its current step or result which is a JSON object too.
+The server's response body has the following structure.
 \begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-    \item [\texttt{status}:] A string indicating the computation's status. One of [\texttt{running}, \texttt{succeeded}, \texttt{failed}, \texttt{notstarted}]
-    \item [\texttt{step}:] A string indicating the current step of the computation. This is present in case that the computation is in the running state.
-    \item [\texttt{result}:] A JSON object with the computation's result in case its status is succeeded. The JSON object contains a single key namely data which contains tuples of (label, value) of the computation result.
+    \item [\texttt{status}:]{\color{red}\textit{required}} A string indicating the computation's status. One of [\texttt{running}, \texttt{succeeded}, \texttt{failed}, \texttt{notstarted}]
+    \item [\texttt{step}:]{\color{blue}\textit{optional}} A string indicating the current step of the computation. This is present in case that the computation is in the running state.
+    \item [\texttt{result}:]{\color{blue}\textit{optional}} A JSON object with the computation's result in case its status is succeeded. The JSON object contains a single key namely data which contains computation result.
+
+    In case of private histogram computations the result is in the form of tuples (label, value) tuples, which are described here.
     \begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item [\texttt{label}:] A string, the value name corresponding to that count. Can be a tuple, triple etc. depending on the number of queried Mesh terms.
         \item [\texttt{value}:] An integer, the actual count for that value.
     \end{description}
+    In case of private decision tree computations the result is in the form of a JSON object which has a key for each tree branch, and a value for the corresponding subtree that resides under that branch.
 \end{description}
 
+In case of a malformed request the server responds with \texttt{HTTP/1.1 400 Bad Request} as in \ref{sc:histogram-numerical-response-2}
 
+Below you can find example responses for correct \texttt{/smpc/queue} GET requests.
+
+
+\begin{minipage}{\linewidth}
+  Example (successfully computed private categorical histogram):\\
 {
+\texttt{Status: {\color{ForestGreen}\textbf{200 OK}}}
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
     "status": "succeeded",
     "result": {
         "data": [
             {
-                "value": 0,
+                "value": 78,
                 "label": "Infant"
             },
             {
@@ -482,17 +490,162 @@ The server's response has the following structure.
                 "label": "Adult"
             },
             {
-                "value": 0,
+                "value": 154,
                 "label": "Child"
             }
         ]
     }
 }
 \end{minted}
-\captionof{lstlisting}{Example /smpc/queue GET response body}
-\label{sc:get-response}
+\captionof{lstlisting}{Example /smpc/queue GET response body for a successful Age Groups (M01.060) histogram}
+\label{sc:get-response-sucessful-1}
 }
+\end{minipage}
+\ \\
+\begin{minipage}{\linewidth}
+  Example (successfully computed private numerical histogram):\\
+{
+\texttt{Status: {\color{ForestGreen}\textbf{200 OK}}}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+    "status": "succeeded",
+    "result": {
+        "data": [
+            {
+                "value": 84,
+                "label": "[130.0, 144.0)"
+            },
+            {
+                "value": 314,
+                "label": "[144.0, 158.0)"
+            },
+            {
+                "value": 428,
+                "label": "[158.0, 172.0)"
+            },
+            {
+                "value": 800,
+                "label": "[172.0, 186.0)"
+            },
+            {
+                "value": 374,
+                "label": "[186.0, 200.0]"
+            }
+        ]
+    }
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/queue GET response body for a successful Height(cm) histogram with $\beta = 5$}
+\label{sc:get-response-sucessful-2}
+}
+\end{minipage}
 
+\ \\
+\begin{minipage}{\linewidth}
+  Example (successfully computed private decision tree using C4.5):\\
+{
+\texttt{Status: {\color{ForestGreen}\textbf{200 OK}}}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+    "status": "succeeded",
+    "result": {
+        "data": {
+            "Height (cm) <= 173.01": {
+                "Weight (kg) > 68.56": {
+                    "Heart rate > 81.50": "[18.00, 31.00)",
+                    "Heart rate <= 81.50": "[70.00, 83.00)"
+                },
+                "Weight (kg) <= 68.56": {
+                    "Heart rate > 70.50": "[31.00, 44.00)",
+                    "Heart rate <= 70.50": "[18.00, 31.00)"
+                }
+            },
+            "Height (cm) > 173.01": {
+                "Weight (kg) > 87.70": {
+                    "Heart rate > 94.00": "[18.00, 31.00)",
+                    "Heart rate <= 94.00": "[31.00, 44.00)"
+                },
+                "Weight (kg) <= 87.70": {
+                    "Heart rate <= 65.50": "[31.00, 44.00)",
+                    "Heart rate > 65.50": "[57.00, 70.00)"
+                }
+            }
+        }
+    }
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/queue GET response body for a successfully computed private decision tree using C4.5 on Patient Age from categorical values}
+\label{sc:get-response-sucessful-3}
+}
+\end{minipage}
+
+\ \\
+\begin{minipage}{\linewidth}
+  Example (successfully computed private decision tree using ID3):\\
+{
+\texttt{Status: {\color{ForestGreen}\textbf{200 OK}}}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+    "status": "succeeded",
+    "result": {
+        "data": {
+            "Height (cm) == [153.34, 176.67)": {
+                "Heart rate == [95.33, 123.00)": "[34.25, 50.50)",
+                "Heart rate == [67.67, 95.33)": "[18.00, 34.25)",
+                "Heart rate == [40.00, 67.67)": "[18.00, 34.25)"
+            },
+            "Height (cm) == [130.01, 153.34)": {
+                "Heart rate == [95.33, 123.00)": "[34.25, 50.50)",
+                "Heart rate == [67.67, 95.33)": "[34.25, 50.50)",
+                "Heart rate == [40.00, 67.67)": "[18.00, 34.25)"
+            },
+            "Height (cm) == [176.67, 200.00)": {
+                "Heart rate == [95.33, 123.00)": "[18.00, 34.25)",
+                "Heart rate == [67.67, 95.33)": "[34.25, 50.50)",
+                "Heart rate == [40.00, 67.67)": "[34.25, 50.50)"
+            }
+        }
+    }
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/queue GET response body for a successfully computed private decision tree using ID3 on Patient Age from categorical values}
+\label{sc:get-response-sucessful-4}
+}
+\end{minipage}
+
+\ \\
+\begin{minipage}{\linewidth}
+  Example (ongoing computation):\\
+{
+\texttt{Status: {\color{ForestGreen}\textbf{200 OK}}}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+    "status": "running",
+    "step": "Securely importing data"
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/queue GET response body for an ongoing computation during secure import}
+\label{sc:get-response-running}
+}
+\end{minipage}
+
+\ \\
+\begin{minipage}{\linewidth}
+  Example (failed computation):\\
+{
+\texttt{Status: {\color{ForestGreen}\textbf{200 OK}}}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+    "status": "failed"
+}
+\end{minted}
+\captionof{lstlisting}{Example /smpc/queue GET response body for afailed computation}
+\label{sc:get-response-failed}
+}
+\end{minipage}
+
+
+\end{description}
 \end{itemize}
 
 
