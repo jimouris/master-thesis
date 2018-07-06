@@ -36,7 +36,8 @@ Below we explain in more detail each individual POST and GET request.
 \begin{itemize}
   \item[]
   This POST request initiates a secure computation for numerical / continuous values dataset.
-
+  \begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+       \item[Request:]\ \\
   Through the request's body, one can specify all the desired properties of the histograms to be computed.
   These include the attributes on which the histogram will be built (names and cells -- $\beta$ factor), the datasources from which data will be used, and a set of filters / conditions that should hold for each data tuple taken into consideration when building the histogram.
 
@@ -46,62 +47,138 @@ Below we explain in more detail each individual POST and GET request.
   The request's body is a \texttt{JSON} object with the following properties:
 
 \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-  
+
     \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of JSON objects, corresponding to the attributes on which this histogram will be built.
     These JSON objects have the following keys:
-    
-    \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+
+    \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{name}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
-        
+
         \item[\texttt{cells}:] {\color{red}\textit{required}} The number of histogram cells ($\beta$ factor) to be created for this attribute (\textit{positive integer}).
     \end{description}
-    
+
     \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed.
     If this key is left empty or not specified, all available datasources will be used.
-    
-    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that should be met for each data tuple considered int the secure histogram computation.
+
+    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that should be met for each data tuple considered in the secure histogram computation.
     If this field is left blank or not specified, all data tuples will be used for the computation. The object has the following keys:
-    
-    \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+
+    \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{operator}:] {\color{red}\textit{required}} The boolean operator (\textit{string}) that will be applied between all the specified conditions that follow. One of \texttt{[AND, OR, XOR]}.
         In the case of multiple conditions, the operator is left-associative.
-        
+
         \item[\texttt{conditions}:] {\color{red}\textit{required}} The list of conditions that should be met by each data tuple in the computation.
         Each condition is represented as a JSON object with the following keys:
-        
+
         \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
             \item[\texttt{attribute}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
-            
+
             \item[\texttt{operator}:] {\color{red}\textit{required}} The condition's operator (\textit{string}). One of \texttt{[>, <, =]}.
-            
+
             \item[\texttt{value}:] {\color{red}\textit{required}}  The attribute's value (\textit{string}).
         \end{description}
-        
+
     \end{description}
 \end{description}
 
-  {
-  \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+Example (without \texttt{datasources} and \texttt{filters}):
+
+ \begin{minipage}{\linewidth}
+ {
+ \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
-    "attributes": [
-        {
-            "name": "Patient Age",
-            "cells": "5"
-        },
-        {
-            "name": "Height (cm)",
-            "cells": "3"
-        }
-    ],
-    "datasources": [
-        "HospitalA",
-        "HospitalB"
-    ]
+   "attributes": [
+       {
+           "name": "Patient Age",
+           "cells": "5"
+       },
+       {
+           "name": "Height (cm)",
+           "cells": "3"
+       }
+   ]
 }
-  \end{minted}
-  \captionof{lstlisting}{Example /smpc/histogram/numerical POST request body}
-  \label{sc:histogram-numerical-post}
-  }
+ \end{minted}
+ \captionof{lstlisting}{Example 1 of /smpc/histogram/numerical POST request body}
+ \label{sc:histogram-numerical-post-1}
+ }
+\end{minipage}
+
+ Example (with \texttt{datasources} and \texttt{filters}):
+
+ \begin{minipage}{\linewidth}
+ {
+ \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+   "attributes": [
+       {
+           "name": "Patient Age",
+           "cells": "5"
+       },
+       {
+           "name": "Height (cm)",
+           "cells": "3"
+       }
+   ],
+   "datasources": [
+       "HospitalA",
+       "HospitalB"
+   ],
+   "filters": {
+       "operator": "AND",
+       "conditions": [
+           {
+               "attribute": "Patient Age",
+               "operator": ">",
+               "value": "45"
+           },
+           {
+               "attribute": "Weight (kg)",
+               "operator": "<",
+               "value": "90"
+           }
+       ]
+   }
+}
+ \end{minted}
+ \captionof{lstlisting}{Example 2 of /smpc/histogram/numerical POST request body}
+ \label{sc:histogram-numerical-post-2}
+ }
+\end{minipage}
+
+\item[Response:]\ \\
+
+
+The secure histogram computation is a potentially long running operation. For that reason the server's response to such a request is always \texttt{HTTP/1.1 202 Accepted} in case of successful execution, along with a location in which one should periodically poll for the computation's status and/or result. An example response can be found below.
+\ \\
+
+\begin{minipage}{\linewidth}
+{
+\texttt{Status: {\color{ForestGreen}\textbf{202 Accepted}}}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+    "location": "/smpc/queue?request=b171-3f4ade123374"
+}
+\end{minted}
+\captionof{lstlisting}{Example 1 of /smpc/histogram/numerical response body}
+\label{sc:histogram-numerical-response-1}
+}
+\end{minipage}
+
+\ \\
+
+\begin{minipage}{\linewidth}
+{
+\texttt{Status: {\color{BrickRed}\textbf{400 Bad Request}}}
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{bash}
+Bad Request
+\end{minted}
+\captionof{lstlisting}{Example 2 of /smpc/histogram/numerical response body}
+\label{sc:histogram-numerical-response-2}
+}
+\end{minipage}
+
+ \end{description}
 \end{itemize}
 
 
@@ -123,29 +200,29 @@ The request's body is a \texttt{JSON} object with the following properties:
 \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
 
     \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of MeSH terms, corresponding to the attributes on which this histogram will be built.
-    
+
     \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed.
     If this key is left empty or not specified, all available datasources will be used.
-    
-    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that should be met for each data tuple considered int the secure histogram computation.
+
+    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that should be met for each data tuple considered in the secure histogram computation.
     If this field is left blank or not specified, all data tuples will be used for the computation.
     The object has the following keys:
-    
+
     \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{operator}:] {\color{red}\textit{required}} The boolean operator (\textit{string}) that will be applied between all the specified conditions that follow.
         One of \texttt{[AND, OR, XOR]}.
         In the case of multiple conditions, the operator is left-associative.
-        
+
         \item[\texttt{conditions}:] {\color{red}\textit{required}} The list of conditions that should be met by each data tuple in the computation.
         Note that the only filter that can be applied in categorical values is the equality checking.
         Each condition is represented as a JSON object with the following keys:
-        
+
         \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
             \item[\texttt{attribute}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
-                        
+
             \item[\texttt{value}:] {\color{red}\textit{required}} The value that the selected attribute should be equal with (\textit{string}).
         \end{description}
-        
+
     \end{description}
 \end{description}
 
@@ -182,24 +259,24 @@ The request's body is a \texttt{JSON} object with the following properties:
 
     \item[\texttt{attributes}:] {\color{red}\textit{required}} A list of MeSH terms, corresponding to the attributes on which this histogram will be built.
     These JSON objects have the following keys:
-    
+
     \begin{description}[labelwidth=3em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{name}:] {\color{red}\textit{required}} The name of the attribute (\textit{string}).
-        
+
         \item[\texttt{cells}:] {\color{red}\textit{required}} The number of histogram cells ($\beta$ factor) to be created for this attribute (\textit{positive integer}). \footnote{A similar JSON is used for both categorical and numerical decision trees. In the former case, this \texttt{cells} object is omitted. \label{refnote}}
     \end{description}
-    
+
     \item[\texttt{classifier}:] {\color{red}\textit{optional}} The name of the decision tree classifier to be used.
     Possible values are \{\texttt{ID3, C4.5}\}.
     If this key is left empty or not specified, the \texttt{ID3} classifier will be used by default.
-    
+
     \item[\texttt{class\_attribute}:] {\color{red}\textit{required}} The attribute on which the classification will occur.
     \begin{description}[labelwidth=3em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{name}:] {\color{red}\textit{required}} The name of the class attribute (\textit{string}).
-        
+
         \item[\texttt{cells}:] {\color{red}\textit{required}} The number of histogram cells ($\beta$ factor) to be created for the class attribute (\textit{positive integer}). \textsuperscript{\ref{refnote}}
     \end{description}
-    
+
     \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed.
     If this key is left empty or not specified, all available datasources will be used.
 
