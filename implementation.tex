@@ -81,7 +81,7 @@ Below we explain in more detail each individual POST and GET request.
     \end{description}
 \end{description}
 
-Example (without \texttt{datasources} and \texttt{filters}):
+Example (without \texttt{datasources} or \texttt{filters}):
 
  \begin{minipage}{\linewidth}
  {
@@ -149,7 +149,7 @@ Example (without \texttt{datasources} and \texttt{filters}):
 \item[Response:]\ \\
 
 
-The secure histogram computation is a potentially long running operation. For that reason the server's response to such a request is always \texttt{HTTP/1.1 202 Accepted} in case of successful execution, along with a location in which one should periodically poll for the computation's status and/or result. An example response can be found below.
+The secure histogram computation is a potentially long running operation. For that reason the server's response to such a request is always \texttt{HTTP/1.1 202 Accepted} in case of correct request, along with a location in which one should periodically poll for the computation's status and/or result. An example response can be found below.
 \ \\
 
 \begin{minipage}{\linewidth}
@@ -165,7 +165,7 @@ The secure histogram computation is a potentially long running operation. For th
 }
 \end{minipage}
 
-\ \\
+In case of a malformed request the server responds with \texttt{HTTP/1.1 400 Bad Request} as seen below.\\
 
 \begin{minipage}{\linewidth}
 {
@@ -195,6 +195,8 @@ For example, if a user specifies that he/she wants the counts for the MeSH term 
 If the specified MeSH terms are two, then the resulting counts will correspond to tuples of MeSH labels.
 If the specified MeSH terms are three, the result will be triples, etc.
 
+\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+     \item[Request:]\ \\
 The request's body is a \texttt{JSON} object with the following properties:
 
 \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
@@ -226,21 +228,63 @@ The request's body is a \texttt{JSON} object with the following properties:
     \end{description}
 \end{description}
 
+Example (without \texttt{datasources} or \texttt{filters}):
+
+\begin{minipage}{\linewidth}
 {
 \begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
 {
     "attributes": [
-        "M01.060"
+        "M01.060",
+        "M01.686.508"
+    ]
+}
+\end{minted}
+\captionof{lstlisting}{Example 1 of /smpc/histogram/categorical POST request body}
+\label{sc:histogram-categorical-post-1}
+}
+\end{minipage}
+
+Example (with \texttt{datasources} and \texttt{filters}):
+
+\begin{minipage}{\linewidth}
+{
+\begin{minted}[framesep=3mm, frame=single, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{json}
+{
+    "attributes": [
+        "M01.060",
+        "M01.686.508"
     ],
     "datasources": [
         "HospitalA",
         "HospitalB"
-    ]
+    ],
+    "filters": {
+        "operator": "OR",
+        "conditions": [
+            {
+                "attribute": "C14",
+                "operator": "=",
+                "value": "C14.280"
+            },
+            {
+                "attribute": "C12",
+                "operator": "=",
+                "value": "C12.294"
+            }
+        ]
+    }
 }
 \end{minted}
-\captionof{lstlisting}{Example /smpc/histogram/categorical POST request body}
-\label{sc:histogram-categorical-post}
+\captionof{lstlisting}{Example 2 of /smpc/histogram/categorical POST request body}
+\label{sc:histogram-categorical-post-2}
 }
+\end{minipage}
+
+\item[Response:]\ \\
+
+The server's response for the \texttt{/smpc/histogram/categorical} POST request is identical to that of \texttt{/smpc/histogram/numerical}. The server returns \texttt{HTTP/1.1 202 Accepted} or \texttt{HTTP/1.1 400 Bad Request}. Examples for both cases can be seen in code snippets \ref{sc:histogram-numerical-response-1} and \ref{sc:histogram-numerical-response-2}.
+ \end{description}
 \end{itemize}
 
 
