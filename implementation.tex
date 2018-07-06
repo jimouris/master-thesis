@@ -675,10 +675,12 @@ Below you can find example responses for correct \texttt{/smpc/queue} GET reques
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Data Providers}\label{s:impl-data-providers}
-When a private computation request arises, the \textit{coordinator} communicates with the data providers and requests them to securely import their data to the computing cluster.
+When a private computation request arises, the \textit{coordinator} server communicates with the data providers and requests them to securely import their data to the computing cluster.
 Finally the \textit{coordinator} returns the results of the computation to the researcher.
 
-Data providers listen to import requests from the \textit{coordinator} server using a RESTful API, implemented using \texttt{Node.js Express Server}.
+Data providers run their own web server that listen to import requests from the \textit{coordinator}.
+
+That server is implemented using \texttt{Node.js Express Server}, and provides the following RESTful API.
 
 \fixme{Specify that a user cannot request data-import, only the coordinator!}
 
