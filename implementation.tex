@@ -32,13 +32,16 @@ The RESTful API provided by the coordinator server can be found in the following
 The RESTful API of the \textit{coordinator} is summarized in table \ref{t:coordinator-api}.
 Below we explain in more detail each individual POST and GET request.
 
-\includegraphics[page=1,width=\textwidth]{figures/post1.pdf}
-\begin{itemize}
-  \item[]
+
+
+\subsubsection[/smpc/histogram/numerical POST request]{\protect\icon{figures/post1.pdf}}\label{sss:post1}
+
+% \includegraphics[page=1,width=\textwidth]{figures/post1.pdf}
+% \begin{itemize}[leftmargin=*]
+  % \item[]
   This POST request initiates a secure computation for numerical / continuous values dataset.
-  \begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-       \item[Request:]\ \\
-  Through the request's body, one can specify all the desired properties of the histograms to be computed.
+  \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+       \item[Request:] Through the request's body, one can specify all the desired properties of the histograms to be computed.
   These include the attributes on which the histogram will be built (names and cells -- $\beta$ factor), the datasources from which data will be used, and a set of filters / conditions that should hold for each data tuple taken into consideration when building the histogram.
 
   %
@@ -65,7 +68,7 @@ Below we explain in more detail each individual POST and GET request.
 
     \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{operator}:] {\color{red}\textit{required}} The boolean operator (\textit{string}) that will be applied between all the specified conditions that follow. One of \texttt{[AND, OR, XOR]}.
-        In the case of multiple conditions, the operator is left-associative.
+        In the case of multiple conditions, the operator is left\hyp associative.
 
         \item[\texttt{conditions}:] {\color{red}\textit{required}} The list of conditions that should be met by each data tuple in the computation.
         Each condition is represented as a JSON object with the following keys:
@@ -144,10 +147,7 @@ Below we explain in more detail each individual POST and GET request.
  }
 \end{minipage}
 
-\item[Response:]\ \\
-
-
-The secure histogram computation is a potentially long running operation. For that reason the server's response to such a request is always \texttt{HTTP/1.1 202 Accepted} in case of correct request, along with a location in which one should periodically poll for the computation's status and/or result. An example response can be found below.
+\item[Response:] The secure histogram computation is a potentially long running operation. For that reason the server's response to such a request is always \texttt{HTTP/1.1 202 Accepted} in case of correct request, along with a location in which one should periodically poll for the computation's status and/or result. An example response can be found below.
 \ \\
 
 \begin{minipage}{\linewidth}
@@ -177,14 +177,14 @@ Bad Request
 \end{minipage}
 
  \end{description}
-\end{itemize}
+% \end{itemize}
 
 
 
-
-\includegraphics[page=1,width=\textwidth]{figures/post2.pdf}
-\begin{itemize}
-\item[]
+\subsubsection[/smpc/histogram/categorical POST request]{\protect\icon{figures/post2.pdf}}\label{sss:post2}
+% \includegraphics[page=1,width=\textwidth]{figures/post2.pdf}
+% \begin{itemize}[leftmargin=*]
+% \item[]
 This POST request initiates a secure computation for categorical values dataset (MeSH).
 Through the request's body, one can specify the desired MeSH terms.
 The values the count of which will be computed are the children of the specified MeSH term from the MeSH ontology.
@@ -193,9 +193,8 @@ For example, if a user specifies that he/she wants the counts for the MeSH term 
 If the specified MeSH terms are two, then the resulting counts will correspond to tuples of MeSH labels.
 If the specified MeSH terms are three, the result will be triples, etc.
 
-\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-     \item[Request:]\ \\
-The request's body is a \texttt{JSON} object with the following properties:
+\begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+     \item[Request:] The request's body is a \texttt{JSON} object with the following properties:
 
 \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
 
@@ -211,7 +210,7 @@ The request's body is a \texttt{JSON} object with the following properties:
     \begin{description}[labelwidth=6em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
         \item[\texttt{operator}:] {\color{red}\textit{required}} The boolean operator (\textit{string}) that will be applied between all the specified conditions that follow.
         One of \texttt{[AND, OR, XOR]}.
-        In the case of multiple conditions, the operator is left-associative.
+        In the case of multiple conditions, the operator is left\hyp associative.
 
         \item[\texttt{conditions}:] {\color{red}\textit{required}} The list of conditions that should be met by each data tuple in the computation.
         Note that the only filter that can be applied in categorical values is the equality checking.
@@ -277,24 +276,21 @@ The request's body is a \texttt{JSON} object with the following properties:
 }
 \end{minipage}
 
-\item[Response:]\ \\
-
-The server's response for the \texttt{/smpc/histogram/categorical} POST request is identical to that of \texttt{/smpc/histogram/numerical}. The server returns \texttt{HTTP/1.1 202 Accepted} or \texttt{HTTP/1.1 400 Bad Request}. Examples for both cases can be seen in code snippets \ref{sc:histogram-numerical-response-1} and \ref{sc:histogram-numerical-response-2}.
+\item[Response:] The server's response for the \texttt{/smpc/histogram/categorical} POST request is identical to that of \texttt{/smpc/histogram/numerical}. The server returns \texttt{HTTP/1.1 202 Accepted} or \texttt{HTTP/1.1 400 Bad Request}. Examples for both cases can be seen in code snippets \ref{sc:histogram-numerical-response-1} and \ref{sc:histogram-numerical-response-2}.
  \end{description}
-\end{itemize}
+% \end{itemize}
 
 
 
-
-\includegraphics[page=1,width=\textwidth]{figures/post3.pdf}
-\begin{itemize}
-\item[]
+\subsubsection[/smpc/decisionTree POST request]{\protect\icon{figures/post3.pdf}}\label{sss:post3}
+% \includegraphics[page=1,width=\textwidth]{figures/post3.pdf}
+% \begin{itemize}[leftmargin=*]
+% \item[]
 Finally, this POST request is for computing a decision tree from either dataset.
 The implemented classifiers are ID3 and C4.5, and one should specify which one to use in the request body along with the desired attributes.
 Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
-\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-     \item[Request:]\ \\
-The request's body is a \texttt{JSON} object with the following properties:
+\begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+     \item[Request:] The request's body is a \texttt{JSON} object with the following properties:
 
 \begin{description}[labelwidth=9em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
 
@@ -421,22 +417,21 @@ The request's body is a \texttt{JSON} object with the following properties:
 }
 \end{minipage}
 
-\item[Response:]\ \\
-
-The server's response for the \texttt{/smpc/decisionTree} POST request is the same as the ones described above. The server returns \texttt{HTTP/1.1 202 Accepted} or \texttt{HTTP/1.1 400 Bad Request}. Examples for both cases can be seen in code snippets \ref{sc:histogram-numerical-response-1} and \ref{sc:histogram-numerical-response-2}.
+\item[Response:] The server's response for the \texttt{/smpc/decisionTree} POST request is the same as the ones described above. The server returns \texttt{HTTP/1.1 202 Accepted} or \texttt{HTTP/1.1 400 Bad Request}. Examples for both cases can be seen in code snippets \ref{sc:histogram-numerical-response-1} and \ref{sc:histogram-numerical-response-2}.
 
 \end{description}
-\end{itemize}
+% \end{itemize}
 
 
-\includegraphics[page=1,width=\textwidth]{figures/get1.pdf}
-\begin{itemize}
-\item[]
+
+\subsubsection[/smpc/queue GET request]{\protect\icon{figures/get1.pdf}}\label{sss:get1}
+% \includegraphics[page=1,width=\textwidth]{figures/get1.pdf}
+% \begin{itemize}[leftmargin=*]
+% \item[]
 The \texttt{/smpc/queue} GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
 The status of an ongoing computation request can be accessed through the /smpc/queue GET request by specifying its id.
-\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-  \item[Request:]\ \\
-The only parameter this GET request accepts is the id of the desired computation request, as shown below.
+\begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+  \item[Request:] The only parameter this GET request accepts is the id of the desired computation request, as shown below.
 
 \begin{minipage}{\linewidth}
 {
@@ -447,8 +442,7 @@ The only parameter this GET request accepts is the id of the desired computation
 \label{sc:queue-request}
 }
 \end{minipage}
-  \item[Response:]\ \\
-In case of a correct request, the server responds with \texttt{HTTP/1.1 200 OK} and the response body is a JSON object containing the specified computation's status, and possibly its current step or result which is a JSON object too.
+  \item[Response:] In case of a correct request, the server responds with \texttt{HTTP/1.1 200 OK} and the response body is a JSON object containing the specified computation's status, and possibly its current step or result which is a JSON object too.
 The server's response body has the following structure.
 \begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
     \item [\texttt{status}:]{\color{red}\textit{required}} A string indicating the computation's status. One of [\texttt{running}, \texttt{succeeded}, \texttt{failed}, \texttt{notstarted}]
@@ -646,7 +640,7 @@ Below you can find example responses for correct \texttt{/smpc/queue} GET reques
 
 
 \end{description}
-\end{itemize}
+% \end{itemize}
 
 
 
@@ -702,13 +696,14 @@ That server is implemented using \texttt{Node.js Express Server}, and provides t
 The RESTful API of the data providers is summarized in table \ref{t:data-providers-api}.
 Below we explain in more detail the two types of POST requests that the \textit{coordinator} sends to the data providers.
 
-\includegraphics[page=1,width=\textwidth]{figures/post4.pdf}
-\begin{itemize}
-\item[]
+
+\subsubsection[/smpc/import/numerical POST request]{\protect\icon{figures/post4.pdf}}\label{sss:post4}
+% \includegraphics[page=1,width=\textwidth]{figures/post4.pdf}
+% \begin{itemize}[leftmargin=*]
+% \item[]
 This POST request initiates a secure import for numerical/continuous values dataset.
-\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-\item[Request:]\ \\
-Through the request's body, one can specify the desired attribute names (\textit{i.e.} columns of the dataset) to be imported.
+\begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+\item[Request:] Through the request's body, one can specify the desired attribute names (\textit{i.e.} columns of the dataset) to be imported.
 For instance, an example for the CVI dataset (see section \ref{s:datasets}) is shown in Code \ref{sc:smpc-import-cvi}, in which a user specifies that he/she wants to compute private analytics for attributes ``Patient Age'' and ``Heart rate''.
 
 The request's body is a JSON object of the following form.
@@ -740,25 +735,22 @@ The request's body is a JSON object of the following form.
 \end{minipage}
 
 
-\item[Response:]\ \\
-The server responds with \texttt{HTTP/1.1 200 OK} upon successful importing or with \texttt{HTTP/1.1 400 Bad Request} upon failure.
+\item[Response:] The server responds with \texttt{HTTP/1.1 200 OK} upon successful importing or with \texttt{HTTP/1.1 400 Bad Request} upon failure.
 \end{description}
 
 
-\end{itemize}
+% \end{itemize}
 
 
 
 
-
-
-\includegraphics[page=1,width=\textwidth]{figures/post5.pdf}
-\begin{itemize}
-\item[]
+\subsubsection[/smpc/import/categorical POST request]{\protect\icon{figures/post5.pdf}}\label{sss:post5}
+% \includegraphics[page=1,width=\textwidth]{figures/post5.pdf}
+% \begin{itemize}[leftmargin=*]
+% \item[]
 This POST request initiates a secure import from datasets with categorical values dataset (MeSH).
-\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
-\item[Request:]\ \\
-Through the request's body, one can specify the desired attribute names of the dataset to import.
+\begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+\item[Request:] Through the request's body, one can specify the desired attribute names of the dataset to import.
 The request for importing attributes from th MeSH dataset is similar to the the numerical one, in Code \ref{sc:smpc-import-cvi}, however in attributes should be specified by their MeSH codes, due to name ambiguity.
 
 The request's body is a JSON object of the following form.
@@ -790,12 +782,11 @@ The request's body is a JSON object of the following form.
 }
 \end{minipage}
 
-\item[Response:]\ \\
-The server responds with \texttt{HTTP/1.1 200 OK} upon successful importing or with \texttt{HTTP/1.1 400 Bad Request} upon failure.
+\item[Response:] The server responds with \texttt{HTTP/1.1 200 OK} upon successful importing or with \texttt{HTTP/1.1 400 Bad Request} upon failure.
 \end{description}
 
 
-\end{itemize}
+% \end{itemize}
 
 
 
