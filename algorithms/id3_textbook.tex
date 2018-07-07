@@ -4,7 +4,7 @@
 \Procedure{ID3Textbook}{$examples, classAttribute, attributes$}
     \If {$\textsc{AllExamplesSame}(examples)$}
         \State \textbf{return} $examples[0][classAttribute]$\Comment{\small{Return a node with the label that is same \par\hfill to all examples}}
-    \ElsIf {$\textsc{Length}(attributes) = 0$}\Comment{\small{If number of predicting attributes is empty}}
+    \ElsIf {$attributes = \{\}$}\Comment{\small{If number of predicting attributes is empty}}
         \State \textbf{return} $\textsc{MostCommonLabel}(examples)$\Comment{\small{Return the label with the most common \par\hfill value of the target attribute in the examples}}
     \EndIf
 
@@ -16,7 +16,7 @@
 
         \State $subset \gets$ all examples that $examples[bestAttribute] = v_i$
 
-        \If {$\textsc{Length}(subset) = 0$}
+        \If {$subset = \{\}$}
             \State $branch \gets \textsc{MostCommonLabel}(examples))$\Comment{\small{Add a leaf}}
         \Else
             \State $branch \gets \textsc{ID3}(subset,$ $attributes - \{bestAttribute\})$\Comment{\small{Recurse and add the subtree}}
