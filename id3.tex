@@ -59,13 +59,13 @@ Both algorithms build decision trees from a set of training data, using the conc
 The ID3 algorithm was first introduced in \cite{quinlan1986induction} and assumes that each attribute is categorical, such as the aforementioned attribute ``Age Groups" which is separated in four disjoint categories; ``Infant", ``Adolescent", ``Child" and ``Adult".
 
 ID3 algorithm constructs the classification tree top-down in a recursive fashion.
-The idea is to find the ``best" attribute that classifies the transactions.
+The idea is to find the \textit{best} attribute that classifies the transactions.
 At start, the algorithm searches and chooses the best attribute for the root node, and consecutively the remaining transactions are partitioned by it.
 On each partition, ID3 is then recursively called.
 
-The ``best" attribute is defined as the attribute that has the smallest entropy -- or in other words, the best information gain.
+The \textit{best} attribute is defined as the attribute that has the smallest entropy -- or in other words, the best information gain.
 Let $T$ be a set of transactions, $C$ the class attribute and $A$ some non-class attribute.
-On each iteration, ID3 iterates through every unused attribute $T$ of the dataset and calculates the entropy $H_C(T)$ (equation \ref{eq:entropy} and algorithm \ref{a:id3-Entropy-simple}) of that attribute.
+On each iteration, ID3 iterates through every unused attribute $A$ of the dataset and calculates the entropy $H_C(T)$ (equation \ref{eq:entropy} and algorithm \ref{a:id3-Entropy-simple}) for every subset $T$ that results from splitting the dataset on attribute $A$.
 
 \import{./}{algorithms/entropy_textbook.tex}
 
