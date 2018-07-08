@@ -15,14 +15,14 @@
         \State \textbf{return} $\textsc{MostCommonLabel}({\color{darkred}{examples}})$
     \EndIf
 
-    \State ${\color{darkred}{A}} \gets$ The Attribute that best classifies examples
-    \State Decision Tree attribute for ${\color{darkred}{root}} \gets {\color{darkred}{A}}$
+    \State $bestAttribute \gets \textsc{Best}({\color{darkred}{examples}}, attributes)$
+    \State Decision Tree attribute for ${\color{darkred}{root}} \gets bestAttribute$ \fixme{WAT IS DIS?}
 
     \State ${\color{darkred}{branches}} \gets {\color{darkred}{\{\}}}$
 
-    \For{each possible value $v_i$ of ${\color{darkred}{A}}$}
-        \State Add a new tree branch below ${\color{darkred}{root}}$, corresponding to the test ${\color{darkred}{A}} \gets v_i$
-        \State Let ${\color{darkred}{examples}}[v_i]$ be the subset of examples that have the value $v_i$ for ${\color{darkred}{A}}$
+    \For{each possible value $v_i$ of $bestAttribute$}
+        \State Add a new tree branch below ${\color{darkred}{root}}$, corresponding to the test $bestAttribute = v_i$
+        \State Let ${\color{darkred}{examples}}[v_i]$ be the subset of examples that have the value $v_i$ for $bestAttribute$
 
         \If {{\color{darkblue}{\textsc{Declassify}}}$(\textsc{Length}({\color{darkred}{examples}}[v_i]) \heq \enc{0})$}
             \State ${\color{darkred}{branch}} \gets \textsc{MostCommonLabel}({\color{darkred}{examples}}))$ add a leaf
