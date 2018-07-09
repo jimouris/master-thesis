@@ -1,0 +1,18 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Privacy Preserving Best Algorithm}\label{a:id3-best-pp}
+\begin{algorithmic}[1]
+\Require ${\color{darkred}{examples}}, {\color{darkred}{maxGain}}, {\color{darkred}{gain}}, {\color{darkred}{gt}}, {\color{darkred}{best}}$
+\Procedure{Best}{${\color{darkred}{examples}}, attribute$}\Comment{\small{Find the best attribute; the one with maximum \par\hfill information gain, as public data}}
+    \State ${\color{darkred}{maxGain}} \gets -\enc{\infty}$
+    \State ${\color{darkred}{best}} \gets \enc{-1}$
+
+    \For{$attribute \in attributes$}
+        \State ${\color{darkred}{gain}} \gets  \textsc{InformationGain}({\color{darkred}{examples}}, attribute)$
+        \State ${\color{darkred}{gt}} \gets {\color{darkred}{gain}} \hgt  {\color{darkred}{maxGain}}$
+        \State ${\color{darkred}{maxGain}} \gets {\color{darkred}{gt}} \hmul {\color{darkred}{gain}} \hplus (1 - {\color{darkred}{gt}}) \hmul {\color{darkred}{maxGain}}$ \Comment{\small{Obliviously choose maximum gain}}
+        \State ${\color{darkred}{best}} \gets {\color{darkred}{gt}} \hmul attribute \hplus (1 - {\color{darkred}{gt}}) \hmul {\color{darkred}{best}}$\Comment{\small{Obliviously choose best attribute}}
+    \EndFor
+    \State \textbf{return} ${\color{darkblue}{\textsc{Declassify}}}({\color{darkred}{best}})$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
