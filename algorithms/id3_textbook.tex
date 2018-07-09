@@ -12,14 +12,13 @@
 
     \State $branches \gets \{\}$
     \For{each possible value $v_i$ of $bestAttribute$}
-        \State Add a new tree branch below $root$, corresponding to the test $bestAttribute = v_i$
-
-        \State $subset \gets$ all examples that $examples[bestAttribute] = v_i$
+        \State Let $branch$ be a new tree branch below $root$, corresponding to the test $bestAttribute = v_i$
+        \State $subset \gets \{example \in examples : example[bestAttribute] = v_i\}$
 
         \If {$subset = \{\}$}
-            \State $branch \gets \textsc{MostCommonLabel}(examples))$\Comment{\small{Add a leaf}}
+            \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(examples)))$\Comment{\small{Add a leaf}}
         \Else
-            \State $branch \gets \textsc{ID3}(subset,$ $attributes - \{bestAttribute\})$\Comment{\small{Recurse and add the subtree}}
+            \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}(subset,$ $attributes - \{bestAttribute\}))$\Comment{\small{Recurse and add the subtree}}
         \EndIf
         \State $branches \gets branches \cup branch$
     \EndFor
