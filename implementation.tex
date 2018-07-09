@@ -649,19 +649,48 @@ Below you can find example responses for correct \texttt{/smpc/queue} GET reques
 
 \subsection{Sequence of Actions}\label{ss:coordinator-sequence}
 
-\fixme{Explain the procedure in more detail}
+In section \ref{ss:end-to-end-execution-flow} we have presented a brief overview of the end\hyp to\hyp end query execution.
+In this section, we elaborate on this brief overview, including many implementation details that have been omitted.
 
-\begin{enumerate}
-\item A request arises in the coordinator
-\item ...
-\item main generator
-\item compile
-\item run
-\item ...
-\item plot or json
-\item ...
-\item send back the results
-\end{enumerate}
+\begin{description}[labelwidth=4em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
+  \item [Step 1:] A user makes a privacy\hyp preserving analytics request to the \textit{coordinator}.
+
+  This request is either made from the UI (presented in section \ref{s:impl-ui}) or from another service (\textit{e.g.} Postman tool\footnote{\href{https://www.getpostman.com}{https://www.getpostman.com}}, or even another custom UI that accords with our API).
+
+
+  \item [Step 2:] The \textit{coordinator} server is responsible for orchestrating all the involved parties: it communicates with the data\hyp providers requesting secure data\hyp import to the SMPC cluster.
+  \begin{enumerate}[label=\subscript{2}]
+    \item The \textit{coordinator} maintains a database with the IP addresses of all hospitals involved in the privacy\hyp preserving computation so it can send import requests.
+    \item The user has the option to select which of the data providers to involve in the secure computation. The \textit{coordinator} sends import requests to the selected data providers.
+    \item After the import procedure has finished, the \textit{coordinator} is responsible to return the results to the user. If the initial request has been made from the UI, the results are visualized and returned through the UI, otherwise a JSON file is returned to the user.
+  \end{enumerate}
+
+
+  \item [Step 3:] The data\hyp providers extract the requested data from their datasets and securely import them to the SMPC cluster applying secret\hyp sharing.
+
+  A database is maintained in each hospital with all its private data.
+  However, in each request, the user selects which attributes take part in the privacy\hyp preserving analytics.
+
+  \begin{enumerate}[label=\subscript{3}]
+    \item Each hospital's server receives a secure data import request from the \textit{coordinator} for the user selected attributes.
+    \item A data extraction and a secret sharing procedure takes place in each hospital's server in order to securely import the data to the SMPC cluster.
+  \end{enumerate}
+
+  The data\hyp import procedure is described in more detail in section \ref{ss:data-providers-importer}.
+
+
+  \item [Step 4:] The SMPC cluster computes the privacy preserving analytics on the requested data and returns the results to the \textit{coordinator}.
+
+  Depending on the user's request, the SMPC cluster execute either a secure aggregation or a secure decision tree algorithm.
+  After the computation has finished, the SMPC cluster returns the results to the \textit{coordinator}.
+
+
+  \item [Step 5:] Finally, the results are returned to the user through the \textit{coordinator}.
+
+  If the initial request has been made from the UI, the results are visualized and returned through the UI, otherwise a JSON file is returned to the user as described in section \ref{ss:coord-restful-api}.
+
+\end{description}
+
 
 
 \subsection{Coordinator Logging}\label{ss:coordinator-logging}
