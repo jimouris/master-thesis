@@ -1,0 +1,18 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Privacy Preserving All Examples Same Algorithm\fixme{Maybe change this}}\label{a:id3-same-pp}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
+\Require ${\color{darkred}{examples}}, {\color{darkred}{same}}, {\color{darkred}{ex_1}}, {\color{darkred}{ex_2}}, {\color{darkred}{subset}}$
+\Procedure{AllExamplesSame}{${\color{darkred}{examples}}, attribute$}\Comment{\small{Check if all {\color{darkred}{examples}} are same, \par\hfill in order to return the ${\color{darkred}{same}}$ label
+}}
+    \State ${\color{darkred}{same}} \gets \enc{true}$
+    \For{$i \in \{0, \dots, \textsc{Length}({\color{darkred}{examples}})-2\}$}\Comment{\small{Check all {\color{darkred}{examples}}, two at a time}}
+        \State ${\color{darkred}{ex_1}} \gets {\color{darkred}{examples}}[i]$
+        \State ${\color{darkred}{ex_2}} \gets {\color{darkred}{examples}}[i+1]$
+
+        \State ${\color{darkred}{same}} \gets {\color{darkred}{same}} \hand ({\color{darkred}{ex_1}}[classAttribute] \heq {\color{darkred}{ex_2}}[classAttribute])$
+    \EndFor
+    \State \textbf{return} ${\color{darkred}{same}}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
