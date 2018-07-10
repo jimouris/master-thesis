@@ -1,0 +1,31 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Privacy Preserving Most Common Label Algorithm}\label{a:id3-most-common-label-pp}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
+\Require ${\color{darkred}{examples}}, {\color{darkred}{maxCount}}, {\color{darkred}{eq}}, {\color{darkred}{gt}}, {\color{darkred}{maxLabel}}, {\color{darkred}{count}}$
+\renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
+\Require $classAttribute$
+\Procedure{MostCommonLabel}{${\color{darkred}{examples}}$}\Comment{\small{Return the most common class in all \par\hfill ${\color{darkred}{examples}}$}}
+  \State ${\color{darkred}{maxCount}} \gets -\enc{\infty}$
+  \State ${\color{darkred}{maxLabel}} \gets -\enc{1}$
+
+    \For{each possible class $c_i$ of $classAttribute$}
+
+      \State ${\color{darkred}{eq}} \gets {\color{darkred}{examples}}[classAttribute] \heq c_i$ \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
+
+      \State ${\color{darkred}{count}} \gets \textsc{Sum}({\color{darkred}{eq}})$
+      \Comment{\small{${\color{darkred}{count}}$ gets the number of examples with \par\hfill class $c_i$}}
+
+      \State ${\color{darkred}{gt}} \gets {\color{darkred}{count}} \hgt  {\color{darkred}{maxCount}}$
+
+      \State ${\color{darkred}{maxCount}} \gets {\color{darkred}{gt}} \hmul {\color{darkred}{count}} \hplus (1 - {\color{darkred}{gt}}) \hmul {\color{darkred}{maxCount}}$ \Comment{\small{Obliviously choose maximum count}}
+
+      \State ${\color{darkred}{maxLabel}} \gets {\color{darkred}{gt}} \hmul c_i \hplus (1 - {\color{darkred}{gt}}) \hmul {\color{darkred}{maxLabel}}$\Comment{\small{Obliviously choose class \par\hfill with maximum count}}
+
+
+    \EndFor
+
+    \State \textbf{return} ${\color{darkred}{maxLabel}}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
