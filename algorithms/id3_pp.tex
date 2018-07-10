@@ -31,7 +31,7 @@
         \If {{\color{darkblue}{\textsc{Declassify}}}$(\textsc{CountPositives}(subset) \heq \enc{0})$}
             \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}({\color{darkred}{examples}})))$ \Comment{\small{Add a leaf}}
         \Else
-            \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}({\color{darkred}{subset}},$ $attributes - \{bestAttribute\}))$ \Comment{\small{Recurse and add the subtree}}
+            \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}({\color{darkred}{subset}},$ $attributes - \{bestAttribute\}))$ \Comment{\small{Recurse \par\hfill and add the subtree}}
         \EndIf
         \State $branches \gets branches \cup branch$
     \EndFor
