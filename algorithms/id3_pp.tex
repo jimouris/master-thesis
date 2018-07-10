@@ -10,8 +10,12 @@
     \State ${\color{darkred}{allSame}} \gets \textsc{AllExamplesSame}({\color{darkred}{examples}})$
 
     \If {{\color{darkblue}{\textsc{Declassify}}}$({\color{darkred}{allSame}})$}\Comment{\small{If number of predicting attributes is empty}}
-        \State \textbf{return} ${\color{darkred}{examples}}[0][classAttribute]$\Comment{\small{Return a node with the label that is common \par\hfill to all examples}}
-    \ElsIf {$attributes = \{\}$}
+        \State ${\color{darkred}{label}} \gets \enc{-1}$
+        \For{${\color{darkred}{example}} \in {\color{darkred}{examples}}$}
+            \State ${\color{darkred}{neq}} \gets {\color{darkred}{example}}[classAttribute] \hneq \enc{-1}$
+            \State ${\color{darkred}{label}} \gets {\color{darkred}{neq}} \hmul {\color{darkred}{example}}[classAttribute] \hplus (\enc{1} - {\color{darkred}{neq}}) \hmul {\color{darkred}{label}} $
+        \EndFor
+        \State \textbf{return} \textsc{Declassify}$({\color{darkred}{label}})$
         \State \textbf{return} $\textsc{MostCommonLabel}({\color{darkred}{examples}})$\Comment{\small{Return the label with the most common \par\hfill value of the target attribute in the examples}}
     \EndIf
 
@@ -22,6 +26,7 @@
 
     \For{each possible value $v_i$ of $bestAttribute$}
         \State Let $branch$ be a new tree branch below root, corresponding to the test $bestAttribute = v_i$
+      \State ${\color{darkred}{eq}} \gets {\color{darkred}{examples}}[bestAttribute] \heq v_i$ \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
       \State ${\color{darkred}{subset}} \gets {\color{darkred}{examples}} \hmul {\color{darkred}{eq}} \hplus (1 \hminus {\color{darkred}{eq}}) \hmul \enc{-1} $ \Comment{\small{${\texttt{SIMD}; \color{darkred}{subset}}$ gets a copy of ${\color{darkred}{examples}}$ \par\hfill at positions  where the equality holds, $\enc{-1}$ otherwise}}
         \If {{\color{darkblue}{\textsc{Declassify}}}$(\textsc{CountPositives}(subset) \heq \enc{0})$}
             \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}({\color{darkred}{examples}})))$ \Comment{\small{Add a leaf}}
