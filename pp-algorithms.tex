@@ -20,13 +20,13 @@ Below we examine the privacy preserving equivalents of some simple and widely us
 \section{Notation}\label{s:notation}
 Our notation for encrypted values and for operations between encrypted variables consists of a variation of the classical mathematical operations.
 Namely, $\enc{X}$ corresponds to the encryption of number $X$, while $\hplus$ , $\hminus$ , $\hmul$ and $\hdiv$ represent homomorphic addition, subtraction, multiplication and division respectively, as shown in equation \ref{eq:operands}.
-In a like manner, $\heq$ (eq. \ref{eq:equal}) and $\hlt$ (eq. \ref{eq:lt}) represent private equality and private comparison, returning an encryption of one (that is $\enc{1}$) if the operands map to equal plaintexts (or respectively the first is less than the second), or an encryption of zero ($\enc{0}$) otherwise.
+In a like manner, $\heq$ (eq. \ref{eq:equal}), $\hneq$ (eq. \ref{eq:not-equal}) $\hlt$ (eq. \ref{eq:lt}) and $\hgt$ (eq. \ref{eq:gt}) represent private equality and private comparison, returning an encryption of one (that is $\enc{1}$) if the operands map to equal plaintexts (or respectively the first is less than the second), or an encryption of zero ($\enc{0}$) otherwise.
 
 \begin{equation}\label{eq:operands}
   \begin{aligned}
       Enc(X) \hplus Enc(Y) = Enc(X + Y)\\
       Enc(X) \hminus Enc(Y) = Enc(X - Y)\\
-      Enc(X) \hmul Enc(Y) = Enc(X \times Y)\\
+      Enc(X) \hmul Enc(Y) = Enc(X \cdot Y)\\
       Enc(X) \hdiv Enc(Y) = Enc(X \div Y)
   \end{aligned}
 \end{equation}
@@ -38,9 +38,23 @@ In a like manner, $\heq$ (eq. \ref{eq:equal}) and $\hlt$ (eq. \ref{eq:lt}) repre
   \end{cases}
 \end{equation}
 
+\begin{equation}\label{eq:not-equal}
+  Enc(X) \hneq Enc(Y) :\begin{cases}
+    \enc{1}, & \text{if $X \neq Y$}.\\
+    \enc{0}, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+
 \begin{equation}\label{eq:lt}
   Enc(X) \hlt Enc(Y) :\begin{cases}
     \enc{1}, & \text{if $X < Y$}.\\
+    \enc{0}, & \text{otherwise}.
+  \end{cases}
+\end{equation}
+
+\begin{equation}\label{eq:gt}
+  Enc(X) \hgt Enc(Y) :\begin{cases}
+    \enc{1}, & \text{if $X > Y$}.\\
     \enc{0}, & \text{otherwise}.
   \end{cases}
 \end{equation}
