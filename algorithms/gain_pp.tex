@@ -1,0 +1,18 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Privacy Preserving Information Gain Algorithm}\label{a:id3-gain-pp}
+\begin{algorithmic}[1]
+\Require ${\color{darkred}{examples}}, {\color{darkred}{example}}, {\color{darkred}{gain}}, {\color{darkred}{subset}}, {\color{darkred}{percentage}}$
+\Procedure{InformationGain}{${\color{darkred}{examples}}, attribute$}\Comment{\small{Information gain (equation \ref{eq:gain}) is \par\hfill the measure of the difference in entropy from before to after a dataset is split on an attribute}}
+    \State ${\color{darkred}{gain}} \gets \textsc{Entropy}({\color{darkred}{examples}})$
+
+    \For{each possible value $v_i$ of $attribute$}
+        \State ${\color{darkred}{eq}} \gets {\color{darkred}{examples}}[attribute] \heq v_i$ \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
+        \State ${\color{darkred}{subset}} \gets {\color{darkred}{examples}} \hmul {\color{darkred}{eq}} \hplus (1 \hminus {\color{darkred}{eq}}) \hmul \enc{-1} $ \Comment{\small{${\texttt{SIMD}; \color{darkred}{subset}}$ gets a copy of ${\color{darkred}{examples}}$ \par\hfill at positions  where the equality holds, $\enc{-1}$ otherwise}}
+
+        \State ${\color{darkred}{percentage}} \gets \textsc{CountPositives}({\color{darkred}{subset}}) \hdiv \textsc{CountPositives}({\color{darkred}{examples}})$
+        \State ${\color{darkred}{gain}} \gets {\color{darkred}{gain}} \hminus {\color{darkred}{percentage}} \hmul \textsc{Entropy}({\color{darkred}{subset}})$
+    \EndFor
+    \State \textbf{return} ${\color{darkred}{gain}}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
