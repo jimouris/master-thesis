@@ -1,6 +1,8 @@
 \begin{algorithm}[H]\fontfamily{lmss}
 \caption{All Examples Same Textbook Algorithm}\label{a:id3-same-simple}
 \begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
+\Require $classAttribute$
 \Procedure{AllExamplesSame}{$examples, attribute$}\Comment{\small{Check if all examples are same, \par\hfill in order to return the same label
 }}
     \State $same \gets true$

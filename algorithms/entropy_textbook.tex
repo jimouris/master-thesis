@@ -1,6 +1,8 @@
 \begin{algorithm}[H]\fontfamily{lmss}
 \caption{Entropy Textbook Algorithm}\label{a:id3-Entropy-simple}
 \begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
+\Require $classAttribute$
 \Procedure{Entropy}{$examples$}\Comment{\small{Entropy (H(S) equation \ref{eq:entropy}), is a measure of the \par\hfill amount of uncertainty in the dataset}}
     \State $entropy \gets 0$
 

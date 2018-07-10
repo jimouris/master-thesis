@@ -1,7 +1,9 @@
 \begin{algorithm}[H]\fontfamily{lmss}
 \caption{ID3 Textbook Algorithm}\label{a:id3-simple}
 \begin{algorithmic}[1]
-\Procedure{ID3Textbook}{$examples, classAttribute, attributes$}
+\renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
+\Require $classAttribute$
+\Procedure{ID3Textbook}{$examples, attributes$}
     \If {$\textsc{AllExamplesSame}(examples)$}
         \State \textbf{return} $examples[0][classAttribute]$\Comment{\small{Return a node with the label that is common \par\hfill to all examples}}
     \ElsIf {$attributes = \{\}$}\Comment{\small{If number of predicting attributes is empty}}
