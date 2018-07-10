@@ -15,7 +15,8 @@
             \State ${\color{darkred}{neq}} \gets {\color{darkred}{example}}[classAttribute] \hneq \enc{-1}$
             \State ${\color{darkred}{label}} \gets {\color{darkred}{neq}} \hmul {\color{darkred}{example}}[classAttribute] \hplus (\enc{1} - {\color{darkred}{neq}}) \hmul {\color{darkred}{label}} $
         \EndFor
-        \State \textbf{return} \textsc{Declassify}$({\color{darkred}{label}})$
+        \State \textbf{return} {{\color{darkblue}{\textsc{Declassify}}}}$({\color{darkred}{label}})$
+   \ElsIf {$attributes = \{\}$}
         \State \textbf{return} $\textsc{MostCommonLabel}({\color{darkred}{examples}})$\Comment{\small{Return the label with the most common \par\hfill value of the target attribute in the examples}}
     \EndIf
 
