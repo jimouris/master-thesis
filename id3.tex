@@ -134,10 +134,35 @@ The private variable $res$ is initialized to $\enc{0}$, and gets increased if an
 If $res$ is greater than $\enc{0}$ (equal to $\enc{1}$) then all the examples have the same class.
 
 \import{./}{algorithms/allsame_pp.tex}
+
+Similarly to the \f{AllExamplesSame} procedure, the \f{MostCommonLabel} procedure also maintains the transaction counts for each possible class $c_i$.
+Using the technique described in algorithm \ref{a:max}, we obliviously keep the maximum count and the class label corresponding to that count, which is returned.
+
 \import{./}{algorithms/most_common_label_pp.tex}
+
+The \f{Best} procedure obliviously chooses the attribute that has the greatest information gain.
+This attribute is considered to be the best to split the dataset on an will be included in an output tree node.
+That is why this attribute can be handled as public data (note the usage of the \f{Declassify} operator in line 10) after it has been privately computed.
+
+
 \import{./}{algorithms/best_pp.tex}
+
+As in algorithms \ref{a:id3-entropy-simple} and \ref{a:id3-gain-simple}, procedures \f{Entropy} and \f{InformationGain} (algorithms \ref{a:id3-entropy-pp}, \ref{a:id3-gain-pp}) compute the entropy of a set of transactions, and an attribute's information gain respectively.
+The key differences with the previously described textbook algorithms include the usage of \f{CountPositives} procedure instead of \f{Length}, due to the difference in the sets involved in the computation, and the modified $log_2$ function that handles zero input.
+Also, note that the subsets (algorithm \ref{a:id3-gain-pp}, line 5) are also constructed with the technique described in the beginning of this section.
+
+
 \import{./}{algorithms/entropy_pp.tex}
 \import{./}{algorithms/gain_pp.tex}
+
+The complete \f{ID3} procedure is described in algorithm \ref{a:id3-pp}.
+In lines 6-11 of the algorithm we retrieve class label that is same to all examples ad return it.
+In order to do that, we cannot just take a random's example value in the $classAttribute$ column.
+We should make sure that this is not a dummy ($\enc{-1}$) example (line 8).
+The rest of the algorithm is quite similar to the textbook one.
+The differences mainly include the subsets handling. (creation, counting, etc.)
+
+
 \import{./}{algorithms/id3_pp.tex}
 
 
@@ -153,16 +178,16 @@ In the privacy\hyp preserving ID3, as in all algorithms in this thesis, we expli
 
 For an algorithm to remain private, the requirement is that any information is learned by the algorithm, can also be learned directly from the input and output \cite{lindell2000privacy}.
 
-As mentioned in section \ref{s:secrec} the $Declassify$ operator publishes a private value.
-We should now reason about the selection of public and private data in the described algorithms and also about the usage of the $Declassify$ operator.
+As mentioned in section \ref{s:secrec} the \f{Declassify} operator publishes a private value.
+We should now reason about the selection of public and private data in the described algorithms and also about the usage of the \f{Declassify} operator.
 
 First of all, we consider the case that all involved parties have the same schema for their data.
 Thus, attribute names are known to all parties an should not be considered private information.
 
-There are three cases where the $ID3$ algorithm (see algorithm \ref{a:id3-pp}) terminates (\textit{i.e.} returns a value).
+There are three cases where the ID3 algorithm (see algorithm \ref{a:id3-pp}) terminates (\textit{i.e.} returns a value).
 The algorithm output is a node of the resulting tree.
-That is why, everything that the algorithm returns in any of the three cases should be considered as public data (see $Declassify$ operator in lines 9, 11 and public $branches$ variable in line 14).
-% Also, in the first termination case of the algorithm, we use the $Declassify$ operator to determine if all examples of the dataset are of the same class.
+That is why, everything that the algorithm returns in any of the three cases should be considered as public data (see \f{Declassify} operator in lines 9, 11 and public $branches$ variable in line 14).
+% Also, in the first termination case of the algorithm, we use the \f{Declassify} operator to determine if all examples of the dataset are of the same class.
 % We argue that the the information that gets published (\textit{i.e.} if all the dataset is of the same class) reveals nothing more as
 %
 
