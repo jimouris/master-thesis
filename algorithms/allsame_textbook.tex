@@ -3,16 +3,17 @@
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
 \Require $classAttribute$
-\Procedure{AllExamplesSame}{$examples, attribute$}\Comment{{\small Check if all examples are same, \par\hfill in order to return the same label
+\Procedure{AllExamplesSame}{$examples, attribute$}\Comment{{\small Check if all examples are \par\hfill of the same class
 }}
-    \State $same \gets true$
     \For{$i \in \{0, \dots, \textsc{Length}(examples)-2\}$}\Comment{{\small Check all examples, two at a time}}
         \State $ex_1 \gets examples[i]$
         \State $ex_2 \gets examples[i+1]$
 
-        \State $same \gets same$ \textsc{and} $(ex_1[classAttribute] = ex_2[classAttribute])$
+        \If{$(ex_1[classAttribute] \neq ex_2[classAttribute])$}
+            \State \textbf{return} $false$
+        \EndIf
     \EndFor
-    \State \textbf{return} $same$
+    \State \textbf{return} $true$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
