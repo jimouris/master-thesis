@@ -693,6 +693,25 @@ In this section, we elaborate on this brief overview, including many implementat
 
 
 
+\subsection{Result Caching}\label{ss:caching}
+Privacy-preserving algorithms can sometimes be highly time-demanding.
+Execution times vary depending on the number of patients, attributes, and also the analytics algorithm that is used.
+For instance, by definition, decision trees require way more computational power that aggregators do.
+Similarly, their privacy\hyp preserving equivalents are computationally intensive tasks.
+
+Furthermore, since our end-to-end system is designed to accept hundreds of requests per day, it is computationally infeasible to meet them all.
+Not to mention, that many of them could possible be the same request -- or even repeated.
+
+For all those reasons, we have implemented a caching mechanism that stores secure computation results so future requests for that data can be served faster.
+If a cache hit occurs, the secure computation is omitted and the results are immediately returned to the user.
+Otherwise, if a cache miss occurs, the secure computation will normally continue as described in sections \ref{s:architecture} and \ref{ss:coordinator-sequence}.
+
+However, a proficient user may want to omit the already computed results, in case of a recent dataset modification.
+In this case, he/she can explicitly specify that the cache should not be used by adding a ``cache'': ``no'' option in the JSON request body.
+For the average user, that would not be necessary, since our system invalidate cache results that are older than 1 month.
+
+
+
 \subsection{Coordinator Logging}\label{ss:coordinator-logging}
 
 
