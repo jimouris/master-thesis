@@ -105,15 +105,34 @@ The algorithm continues to recurse on each subset, considering only attributes n
 
 \fixme{many things from \href{http://www.pinkas.net/PAPERS/id3-final.pdf}{http://www.pinkas.net/PAPERS/id3-final.pdf}}
 
+In the previous subsection we described the ID3 algorithm which operates on public data.
+We should now describe the privacy\hyp preserving version of the same algorithm, where all the transactions (\textit{examples}) from which the algorithm builds the tree are private data.
 
+First of all, a key difference from the textbook algorithm is the lack of ability to maintain subsets of the transactions based on private conditions.
+In particular, as you can see in line 11 of algorithm \ref{a:id3-simple}, we wish to keep a subset of all $examples$ that have a certain value in the $bestAttribute$
+ column.
 
+As we cannot have conditional statements on private data, the only thing we can do is to apply the oblivious selection technique described in section \ref{s:secrec}.
+Thus, we are not able to keep only the subset of rows that satisfy our condition.
+A solution to this problem is to define $subset$ as a copy of the $examples$ array.
+We keep a vector $eq$ (see line 17 of algoritm \ref{a:id3-pp}) of equal length with $examples$.
+The value of $eq[i]$ is $\enc{1}$ if $examples[bestAttribute]$ is equal to $v_i$, or $\enc{0}$ otherwise.
+Since the values of $eq$ are encrypted, we perform a vector multiplication between $eq$ and $examples$ so the result will be identical to $examples$ for ever row $i$ that the condition holds ($eq[i]$ is equal to $\enc{1}$), and $\enc{0}$ otherwise.
+Then we add a dummy row $[\enc{-1}, \enc{-1}, \dots, \enc{-1}]$ (a row of all $\enc{-1}$, denoted as just $\enc{-1}$ for simplicity) to all rows that don't satisfy the condition (using multiplication with $\enc{1} - eq$).
+The resulting array has all rows from $examples$ that satisfy the condition, and rows full of $\enc{-1}$ wherever the condition does not hold.
 
-
-As we have mentioned, our aim is to privately find the attribute $A$ for which $H_C(T \mid A)$ is minimum....
-\fixme{explain PP-Best, PP-Gain and PP-Entropy!}
+For that reason, all the algorithms listed below operate on these kinds of ``sets''.
+In algorithm \ref{a:id3-count-positives-pp} we describe the \f{CountPositives} procedure which returns the (encrypted) number of rows that are not the dummy $[\enc{-1}, \enc{-1}, \dots, \enc{-1}]$ row.
+The \f{CountPositives} procedure is equivalent to the call of $Length$ on sets with public data.
 
 
 \import{./}{algorithms/count_positives.tex}
+
+The \f{AllExamplesSame} procedure described in algorithm \ref{a:id3-same-pp} returns the same result as that in algorithm \ref{a:id3-same-simple}.
+The way this is achieved is by counting the number of examples / transactions that are of class $c_i$, for each possible class $c_i$.
+The private variable $res$ is initialized to $\enc{0}$, and gets increased if any of those counts is equal to the total number of examples, \textit{i.e.} all examples are of that class.
+If $res$ is greater than $\enc{0}$ (equal to $\enc{1}$) then all the examples have the same class.
+
 \import{./}{algorithms/allsame_pp.tex}
 \import{./}{algorithms/most_common_label_pp.tex}
 \import{./}{algorithms/best_pp.tex}
@@ -145,7 +164,7 @@ The algorithm output is a node of the resulting tree.
 That is why, everything that the algorithm returns in any of the three cases should be considered as public data (see $Declassify$ operator in lines 9, 11 and public $branches$ variable in line 14).
 % Also, in the first termination case of the algorithm, we use the $Declassify$ operator to determine if all examples of the dataset are of the same class.
 % We argue that the the information that gets published (\textit{i.e.} if all the dataset is of the same class) reveals nothing more as
-% 
+%
 
 
 \subsection{Textbook C4.5}\label{s:c45}
