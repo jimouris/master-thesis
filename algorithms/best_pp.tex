@@ -9,8 +9,8 @@
     \For{$attribute \in attributes$}
         \State ${\color{darkred}{gain}} \gets  \textsc{InformationGain}({\color{darkred}{examples}}, attribute)$
         \State ${\color{darkred}{gt}} \gets {\color{darkred}{gain}} \hgt  {\color{darkred}{maxGain}}$
-        \State ${\color{darkred}{maxGain}} \gets {\color{darkred}{gt}} \hmul {\color{darkred}{gain}} \hplus (1 - {\color{darkred}{gt}}) \hmul {\color{darkred}{maxGain}}$ \Comment{\small{Obliviously choose maximum gain}}
-        \State ${\color{darkred}{best}} \gets {\color{darkred}{gt}} \hmul attribute \hplus (1 - {\color{darkred}{gt}}) \hmul {\color{darkred}{best}}$\Comment{\small{Obliviously choose best attribute}}
+        \State ${\color{darkred}{maxGain}} \gets {\color{darkred}{gt}} \hmul {\color{darkred}{gain}} \hplus (\enc{1} \hminus {\color{darkred}{gt}}) \hmul {\color{darkred}{maxGain}}$ \Comment{\small{Obliviously choose maximum gain}}
+        \State ${\color{darkred}{best}} \gets {\color{darkred}{gt}} \hmul attribute \hplus (\enc{1} \hminus {\color{darkred}{gt}}) \hmul {\color{darkred}{best}}$\Comment{\small{Obliviously choose best attribute}}
     \EndFor
     \State \textbf{return} ${\color{darkblue}{\textsc{Declassify}}}({\color{darkred}{best}})$
 \EndProcedure
