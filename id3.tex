@@ -105,20 +105,7 @@ The algorithm continues to recurse on each subset, considering only attributes n
 
 \fixme{many things from \href{http://www.pinkas.net/PAPERS/id3-final.pdf}{http://www.pinkas.net/PAPERS/id3-final.pdf}}
 
-In privacy-preserving algorithms, all intermediate values should remain hidden.
-In many cases, intermediate values may reveal some patterns, and in general sensitive information about the inputs.
 
-However, in the case of ID3, some of these intermediate values are part of the output and eventually will be revealed.
-For instance, the attributes chosen in each node of the tree will be revealed in the final results.
-Thus, there is no reason to trying to protect them during the protocol execution.
-In the privacy-preserving ID3, as in all algorithms in this thesis, we explicitly define which values are private (and thus encrypted), and which are public.
-
-Although the names of the selected attributes will be revealed (those nodes have the highest information gain), nothing is learned about the actual $H_C(T \mid A)$ values themselves.
-Therefore, the problem is reduced to privately find the attribute with the highest information gain.
-
-Despite the fact that the selected attributes will be revealed, we cannot regard their values as public data.
-All computations are carried out on encrypted data -- using the homomorphic properties of secret sharing, and when a decision is made ....
-\fixme{explain more here}
 
 
 
@@ -135,6 +122,30 @@ As we have mentioned, our aim is to privately find the attribute $A$ for which $
 \import{./}{algorithms/id3_pp.tex}
 
 
+\subsubsection{Privacy Assessment}\label{s:id3-privacy-assessment}
+
+In privacy-preserving algorithms, all intermediate values should remain private.
+In many cases, intermediate values may reveal some patterns, and in general sensitive information about the inputs.
+
+However, in the case of ID3, some of these intermediate values are part of the output and eventually will be revealed.
+For instance, the attributes chosen in each node of the tree will be revealed in the final results.
+Thus, there is no reason to trying to protect them during the protocol execution.
+In the privacy\hyp preserving ID3, as in all algorithms in this thesis, we explicitly define which values are private (and thus encrypted), and which are public.
+
+For an algorithm to remain private, the requirement is that any information is learned by the algorithm, can also be learned directly from the input and output \cite{lindell2000privacy}.
+
+As mentioned in section \ref{s:secrec} the $Declassify$ operator publishes a private value.
+We should now reason about the selection of public and private data in the described algorithms and also about the usage of the $Declassify$ operator.
+
+First of all, we consider the case that all involved parties have the same schema for their data.
+Thus, attribute names are known to all parties an should not be considered private information.
+
+There are three cases where the $ID3$ algorithm (see algorithm \ref{a:id3-pp}) terminates (\textit{i.e.} returns a value).
+The algorithm output is a node of the resulting tree.
+That is why, everything that the algorithm returns in any of the three cases should be considered as public data (see $Declassify$ operator in lines 9, 11 and public $branches$ variable in line 14).
+% Also, in the first termination case of the algorithm, we use the $Declassify$ operator to determine if all examples of the dataset are of the same class.
+% We argue that the the information that gets published (\textit{i.e.} if all the dataset is of the same class) reveals nothing more as
+% 
 
 
 \subsection{Textbook C4.5}\label{s:c45}
