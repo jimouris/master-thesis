@@ -707,6 +707,8 @@ publications}\gdef\@lopfileinternal{#1}}
       \phantomsection
       \addcontentsline{toc}{chapter}{Appendices}
 
+      \import{./}{appendixCoordinatorAPI.tex}
+      \import{./}{appendixDataProvidersAPI.tex}
       \import{./}{appendixA.tex}
       \import{./}{appendixB.tex}
     \end{appendix}
