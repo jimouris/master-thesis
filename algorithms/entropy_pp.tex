@@ -10,7 +10,7 @@
     \For{each possible class $c_i$ of $classAttribute$}
         \State ${\color{darkred}{eq}} \gets {\color{darkred}{examples}}[classAttribute] \heq c_i$ \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
         \State ${\color{darkred}{count}} \gets \textsc{Sum}({\color{darkred}{eq}})$
-        \State ${\color{darkred}{percentage}} \gets {\color{darkred}{count}} \div \textsc{Length}({\color{darkred}{examples}})$
+        \State ${\color{darkred}{percentage}} \gets {\color{darkred}{count}} \div \textsc{CountPositives}({\color{darkred}{examples}})$
         \State ${\color{darkred}{entropy}} \gets {\color{darkred}{entropy}} - ({\color{darkred}{percentage}} * log_2 ({\color{darkred}{percentage}}))$\Comment{{\small Here we use a modified $log_2$ \par\hfill function that returns $\enc{0}$ given $\enc{0}$ as input}}
     \EndFor
     \State \textbf{return} ${\color{darkred}{entropy}}$
