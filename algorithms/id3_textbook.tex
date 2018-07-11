@@ -5,12 +5,12 @@
 \Require $classAttribute$
 \Procedure{ID3Textbook}{$examples, attributes$}
     \If {$\textsc{AllExamplesSame}(examples)$}
-        \State \textbf{return} $examples[0][classAttribute]$\Comment{\small{Return a node with the label that is common \par\hfill to all examples}}
-    \ElsIf {$attributes = \{\}$}\Comment{\small{If number of predicting attributes is empty}}
-        \State \textbf{return} $\textsc{MostCommonLabel}(examples)$\Comment{\small{Return the label with the most common \par\hfill value of the target attribute in the examples}}
+        \State \textbf{return} $examples[0][classAttribute]$\Comment{{\small Return a node with the label that is common \par\hfill to all examples}}
+    \ElsIf {$attributes = \{\}$}\Comment{{\small If number of predicting attributes is empty}}
+        \State \textbf{return} $\textsc{MostCommonLabel}(examples)$\Comment{{\small Return the label with the most common \par\hfill value of the target attribute in the examples}}
     \EndIf
 
-    \State $bestAttribute \gets \textsc{Best}(examples, attributes)$\Comment{\small{Best attribute is the one with maximum \par\hfill information gain -- or similarly, minimum entropy}}
+    \State $bestAttribute \gets \textsc{Best}(examples, attributes)$\Comment{{\small Best attribute is the one with maximum \par\hfill information gain -- or similarly, minimum entropy}}
 
     \State $branches \gets \{\}$
     \For{each possible value $v_i$ of $bestAttribute$}
@@ -18,9 +18,9 @@
         \State $subset \gets \{example \in examples : example[bestAttribute] = v_i\}$
 
         \If {$subset = \{\}$}
-            \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(examples)))$\Comment{\small{Add a leaf}}
+            \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(examples)))$\Comment{{\small Add a leaf}}
         \Else
-            \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}(subset,$ $attributes - \{bestAttribute\}))$\Comment{\small{Recurse and add the subtree}}
+            \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}(subset,$ $attributes - \{bestAttribute\}))$\Comment{{\small Recurse and add the subtree}}
         \EndIf
         \State $branches \gets branches \cup branch$
     \EndFor

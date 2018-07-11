@@ -8,14 +8,14 @@
 \Procedure{ConstraintMask}{${\color{darkred}{array}}[N][M], operation, constraintAttributes[C], $\par\hfill$ constraintOperators[C], constraintValues[C]$}
 
     \If {$operation = AND$}
-        \State ${\color{darkred}{constraintMask}} \gets [\enc{1}, \enc{1}, \dots, \enc{1}]$ \Comment{\small{array initialized with $\enc{1}$}}
+        \State ${\color{darkred}{constraintMask}} \gets [\enc{1}, \enc{1}, \dots, \enc{1}]$ \Comment{{\small array initialized with $\enc{1}$}}
     \ElsIf {$operation = OR$}
-        \State ${\color{darkred}{constraintMask}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{\small{array initialized with $\enc{0}$}}
+        \State ${\color{darkred}{constraintMask}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{{\small array initialized with $\enc{0}$}}
     \ElsIf {$operation = XOR$}
-        \State ${\color{darkred}{constraintMask}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{\small{array initialized with $\enc{0}$}}
+        \State ${\color{darkred}{constraintMask}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{{\small array initialized with $\enc{0}$}}
     \EndIf
 
-    \For{$c \in \{0, \dots, C-1\}$}\Comment{\small{$C$ is the number of the different constraints}}
+    \For{$c \in \{0, \dots, C-1\}$}\Comment{{\small $C$ is the number of the different constraints}}
 
         \State $constraintIndex \gets constraintAttributes[c]$
 
@@ -25,17 +25,17 @@
         \State $constraintOperators \gets constraintOperators[c]$
 
         \If {$constraintOperators = GreaterThan$}
-            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hgt constraintValue$ \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the constraint holds, $\enc{0}$ otherwise}}
+            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hgt constraintValue$ \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the constraint holds, $\enc{0}$ otherwise}}
         \ElsIf {$constraintOperators = LessThan$}
             \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hlt constraintValue$
-            % \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where ${\color{darkred}{constraintAttribute}} \hlt constraintValue,  \enc{0}$ otherwise}}
+            % \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where ${\color{darkred}{constraintAttribute}} \hlt constraintValue,  \enc{0}$ otherwise}}
         \ElsIf {$constraintOperators = Equal$}
             \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \heq constraintValue$
-            % \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where ${\color{darkred}{constraintAttribute}} \heq constraintValue,  \enc{0}$ otherwise}}
+            % \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where ${\color{darkred}{constraintAttribute}} \heq constraintValue,  \enc{0}$ otherwise}}
         \EndIf
 
         \If {$operation = AND$}
-            \State ${\color{darkred}{constraintMask}} \gets {\color{darkred}{constraintMask}} \hmul {\color{darkred}{eq}}$ \Comment{Applying the boolean operator between \par\hfill the constraints. \small{${\texttt{SIMD}}$}}
+            \State ${\color{darkred}{constraintMask}} \gets {\color{darkred}{constraintMask}} \hmul {\color{darkred}{eq}}$ \Comment{Applying the boolean operator between \par\hfill the constraints. {\small ${\texttt{SIMD}}$}}
         \ElsIf {$operation = OR$}
             \State ${\color{darkred}{constraintMask}} \gets {\color{darkred}{constraintMask}} \hplus {\color{darkred}{eq}}$
         \ElsIf {$operation = XOR$}
@@ -60,7 +60,7 @@
 
   \Procedure{MultDimHistogramCategoricalFiltered}{${\color{darkred}{array}}[N][M], attributes[A], $\par\hfill$ Ps[A], operation, constraintAttributes[C], constraintOperators[C], $\par\hfill$ constraintValues[C]$}
       \State
-      ${\color{darkred}{positions}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $\Comment{\small{${\color{darkred}{positions}}$ is an array initialized with $\enc{0}$}}
+      ${\color{darkred}{positions}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $\Comment{{\small ${\color{darkred}{positions}}$ is an array initialized with $\enc{0}$}}
 
       \State ${\color{darkred}{constraintMask}} \gets \textsc{constraintMask}({\color{darkred}{array}}, operation, constraintAttributes, $\par\hfill$ constraintOperators, constraintValues)$
 
@@ -68,9 +68,9 @@
 
         \State $attribute \gets attributes[a]$
 
-        \State ${\color{darkred}{column}} \gets {\color{darkred}{array}}[:, attribute]$ \Comment{\small{Slicing of a specific column of the ${\color{darkred}{array}}$ matrix}}
+        \State ${\color{darkred}{column}} \gets {\color{darkred}{array}}[:, attribute]$ \Comment{{\small Slicing of a specific column of the ${\color{darkred}{array}}$ matrix}}
 
-        \State $prod \gets \textsc{Product}(Ps[a+1:])$ \Comment{\small{Product of all $Ps$ elements from index $a+1$ onwards}}
+        \State $prod \gets \textsc{Product}(Ps[a+1:])$ \Comment{{\small Product of all $Ps$ elements from index $a+1$ onwards}}
 
         \State ${\color{darkred}{positions}} \gets {\color{darkred}{positions}} \hplus {\color{darkred}{column}} \hmul prod$
 
@@ -78,13 +78,13 @@
 
       \State $length \gets \textsc{Product}(Ps)$
 
-      \State ${\color{darkred}{histogram}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$\Comment{\small{${\color{darkred}{histogram}}$ is an array initialized with $\enc{0}$}}
+      \State ${\color{darkred}{histogram}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$\Comment{{\small ${\color{darkred}{histogram}}$ is an array initialized with $\enc{0}$}}
 
 
       \For{$j \in \{0, \dots, length-1\}$}
 
         \State ${\color{darkred}{eq}} \gets ({\color{darkred}{positions}} \heq j) \hmul {\color{darkred}{constraintMask}}$
-        \Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ gets either $\enc{0}$ or $\enc{1}$}}
+        \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ gets either $\enc{0}$ or $\enc{1}$}}
 
         \State ${\color{darkred}{histogram}}[j] \gets \textsc{Sum}({\color{darkred}{eq}})$
 

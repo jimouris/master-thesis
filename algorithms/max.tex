@@ -3,7 +3,7 @@
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
 
-\Procedure{Max}{$array[N]$}\Comment{\small{Find max of a public array}}
+\Procedure{Max}{$array[N]$}\Comment{{\small Find max of a public array}}
     \State $max  \gets -\infty$
     \For{$i \in \{0, \dots, N-1\}$}
         \If{$array[i] > max$}
@@ -17,12 +17,12 @@
 \end{spacing}
 
 \Require ${\color{darkred}{array}}, {\color{darkred}{max}}, {\color{darkred}{gt}}$
-\Procedure{Max}{${\color{darkred}{array}}[N]$}\Comment{\small{Find max of a private array}}
+\Procedure{Max}{${\color{darkred}{array}}[N]$}\Comment{{\small Find max of a private array}}
     \State ${\color{darkred}{max}} \gets \enc{-\infty}$
     \For{$i \in \{0, \dots, N-1\}$}
-        \State ${\color{darkred}{gt}} \gets ({\color{darkred}{array}}[i] \hgt {\color{darkred}{max}})$\Comment{\small{${\color{darkred}{gt}}$ obliviously gets either $\enc{1}$ if $array[i] > max$, or $\enc{1}$ otherwise}}
+        \State ${\color{darkred}{gt}} \gets ({\color{darkred}{array}}[i] \hgt {\color{darkred}{max}})$\Comment{{\small ${\color{darkred}{gt}}$ obliviously gets either $\enc{1}$ if $array[i] > max$, or $\enc{1}$ otherwise}}
         
-        \State ${\color{darkred}{max}} \gets ({\color{darkred}{gt}} \hmul {\color{darkred}{array}}[i]) \hplus ((\enc{1} \hminus {\color{darkred}{gt}}) \hmul {\color{darkred}{max}})$\Comment{\small{Obliviously update the value of ${\color{darkred}{max}}$}}
+        \State ${\color{darkred}{max}} \gets ({\color{darkred}{gt}} \hmul {\color{darkred}{array}}[i]) \hplus ((\enc{1} \hminus {\color{darkred}{gt}}) \hmul {\color{darkred}{max}})$\Comment{{\small Obliviously update the value of ${\color{darkred}{max}}$}}
     \EndFor
     \State \textbf{return} {${\color{darkred}{max}}$}
 \EndProcedure

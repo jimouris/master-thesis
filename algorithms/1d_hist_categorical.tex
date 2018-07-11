@@ -5,11 +5,11 @@
 \Require ${\color{darkred}{array}}, {\color{darkred}{histogram}}, {\color{darkred}{eq}}$
 
 \Procedure{1DimHistogramCategorical}{${\color{darkred}{array}}[N], P$}
-    \For{$i \in \{0, \dots, P-1\}$}\Comment{\small{$P$ is the number of the different (possible) values in $array$}}
-        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{array}} \heq i)$\Comment{\small{\texttt{SIMD}; array eq contains $\enc{1}$ where $array[j] \heq i$, \par\hfill$\enc{0}$ otherwise, $j \in \{0, \dots, P-1\}$}}
+    \For{$i \in \{0, \dots, P-1\}$}\Comment{{\small $P$ is the number of the different (possible) values in $array$}}
+        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{array}} \heq i)$\Comment{{\small \texttt{SIMD}; array eq contains $\enc{1}$ where $array[j] \heq i$, \par\hfill$\enc{0}$ otherwise, $j \in \{0, \dots, P-1\}$}}
 
         \State ${\color{darkred}{histogram}}[i] \gets
-        \textsc{Sum}({\color{darkred}{eq}})$\Comment{\small{Operation to sum eq array}}
+        \textsc{Sum}({\color{darkred}{eq}})$\Comment{{\small Operation to sum eq array}}
     \EndFor
     \State \textbf{return} {${\color{darkred}{histogram}}$}
 \EndProcedure
@@ -18,7 +18,7 @@
 \end{spacing}
 
 % \Require ${\color{darkred}{array}}, {\color{darkred}{sum}}$
-% \Procedure{Sum}{${\color{darkred}{array}}[N]$}\Comment{\small{Compute and return the sum of an array}}
+% \Procedure{Sum}{${\color{darkred}{array}}[N]$}\Comment{{\small Compute and return the sum of an array}}
 %     \State ${\color{darkred}{sum}} \gets \enc{0}$
 %     \For{$i \in \{0, \dots, N-1\}$}
 %         \State ${\color{darkred}{sum}} \gets {\color{darkred}{sum}} \hplus{\color{darkred}{array}}[i]$

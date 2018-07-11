@@ -10,9 +10,9 @@
 
         \For{$j \in \{0, \dots, cells-1\}$}
 
-            \State ${\color{darkred}{histogram}}[j] \gets {\color{darkred}{histogram}}[j] \hplus ({\color{darkred}{array}}[i] \heq j)$\Comment{\small{Add ${\enc{1}}$ if ${\color{darkred}{array}}[i]$ is equal to $j$,}}
+            \State ${\color{darkred}{histogram}}[j] \gets {\color{darkred}{histogram}}[j] \hplus ({\color{darkred}{array}}[i] \heq j)$\Comment{{\small Add ${\enc{1}}$ if ${\color{darkred}{array}}[i]$ is equal to $j$,}}
 
-        \EndFor\Comment{\small{${\enc{0}}$ otherwise}}
+        \EndFor\Comment{{\small ${\enc{0}}$ otherwise}}
     \EndFor
     \State \textbf{return} {${\color{darkred}{histogram}}$}
 \EndProcedure

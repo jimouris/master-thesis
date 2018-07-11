@@ -3,7 +3,7 @@
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
 
-\Procedure{Sum}{$array[N]$}\Comment{\small{Sum of a public array}}
+\Procedure{Sum}{$array[N]$}\Comment{{\small Sum of a public array}}
     \State $sum  \gets 0$
     \For{$i \in \{0, \dots, N-1\}$}
         \State $sum \gets sum + array[i]$
@@ -15,7 +15,7 @@
 \end{spacing}
 
 \Require ${\color{darkred}{array}}, {\color{darkred}{sum}}$
-\Procedure{Sum}{${\color{darkred}{array}}[N]$}\Comment{\small{Sum of a private array}}
+\Procedure{Sum}{${\color{darkred}{array}}[N]$}\Comment{{\small Sum of a private array}}
     \State ${\color{darkred}{sum}} \gets \enc{0}$
     \For{$i \in \{0, \dots, N-1\}$}
         \State ${\color{darkred}{sum}} \gets {\color{darkred}{sum}} \hplus{\color{darkred}{array}}[i]$

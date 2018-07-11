@@ -7,7 +7,7 @@
 
 \Procedure{MultDimHistogramNumerical}{${\color{darkred}{array}}[N][M], attributes[A], $\par\hfill$cellsPerAttribute[A], {\color{darkred}{mins}}[M], {\color{darkred}{maxs}}[M]$}
     \State
-    ${\color{darkred}{positions}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $\Comment{\small{${\color{darkred}{positions}}$ is an array initialized with $\enc{0}$}}
+    ${\color{darkred}{positions}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $\Comment{{\small ${\color{darkred}{positions}}$ is an array initialized with $\enc{0}$}}
 
     \For{$a \in \{0, \dots, A-1\}$}
 
@@ -21,7 +21,7 @@
 
       \State ${\color{darkred}{cellWidth}} \gets ({\color{darkred}{max}} \hminus {\color{darkred}{min}}) \hdiv numberOfCells$
 
-      \State ${\color{darkred}{column}} \gets {\color{darkred}{array}}[:, attribute]$\Comment{\small{Slicing of a specific column of the ${\color{darkred}{array}}$ matrix}}
+      \State ${\color{darkred}{column}} \gets {\color{darkred}{array}}[:, attribute]$\Comment{{\small Slicing of a specific column of the ${\color{darkred}{array}}$ matrix}}
 
       \State ${\color{darkred}{cellMap}} \gets ({\color{darkred}{column}} \hminus {\color{darkred}{min}}) \hdiv cellWidth$
 
@@ -35,12 +35,12 @@
 
     \State $length \gets \textsc{Product}(cellsPerAttribute)$
 
-    \State ${\color{darkred}{histogram}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$\Comment{\small{${\color{darkred}{histogram}}$ is an array initialized with $\enc{0}$}}
+    \State ${\color{darkred}{histogram}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$\Comment{{\small ${\color{darkred}{histogram}}$ is an array initialized with $\enc{0}$}}
 
 
     \For{$j \in \{0, \dots, length-1\}$}
 
-      \State ${\color{darkred}{eq}} \gets {\color{darkred}{positions}} \heq j$\Comment{\small{${\texttt{SIMD}; \color{darkred}{eq}}$ gets either $\enc{0}$ or $\enc{1}$}}
+      \State ${\color{darkred}{eq}} \gets {\color{darkred}{positions}} \heq j$\Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ gets either $\enc{0}$ or $\enc{1}$}}
 
       \State ${\color{darkred}{histogram}}[j] \gets \textsc{Sum}({\color{darkred}{eq}})$
 

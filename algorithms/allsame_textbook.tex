@@ -3,10 +3,10 @@
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
 \Require $classAttribute$
-\Procedure{AllExamplesSame}{$examples, attribute$}\Comment{\small{Check if all examples are same, \par\hfill in order to return the same label
+\Procedure{AllExamplesSame}{$examples, attribute$}\Comment{{\small Check if all examples are same, \par\hfill in order to return the same label
 }}
     \State $same \gets true$
-    \For{$i \in \{0, \dots, \textsc{Length}(examples)-2\}$}\Comment{\small{Check all examples, two at a time}}
+    \For{$i \in \{0, \dots, \textsc{Length}(examples)-2\}$}\Comment{{\small Check all examples, two at a time}}
         \State $ex_1 \gets examples[i]$
         \State $ex_2 \gets examples[i+1]$
 

@@ -3,21 +3,21 @@
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
 \Require $classAttribute$
-\Procedure{MostCommonLabel}{$examples$}\Comment{\small{Return the most common class in all \par\hfill $examples$}}
+\Procedure{MostCommonLabel}{$examples$}\Comment{{\small Return the most common class in all \par\hfill $examples$}}
   \State $maxCount \gets -\infty$
   \State $maxLabel \gets -1$
 
     \For{each possible class $c_i$ of $classAttribute$}
 
-      \State $eq \gets examples[classAttribute] = c_i$ \Comment{\small{${\texttt{SIMD}; eq}$ vector gets $1$ at positions \par\hfill where the equality holds, $0$ otherwise}}
+      \State $eq \gets examples[classAttribute] = c_i$ \Comment{{\small ${\texttt{SIMD}; eq}$ vector gets $1$ at positions \par\hfill where the equality holds, $0$ otherwise}}
 
       \State $count \gets \textsc{Sum}(eq)$
-      \Comment{\small{$count$ gets the number of examples with \par\hfill class $c_i$}}
+      \Comment{{\small $count$ gets the number of examples with \par\hfill class $c_i$}}
 
 
       \If{$count > maxCount$}
-        \State $maxCount \gets count$\Comment{\small{Choose maximum count}}
-        \State $maxLabel \gets c_i$\Comment{\small{Choose class with maximum count}}
+        \State $maxCount \gets count$\Comment{{\small Choose maximum count}}
+        \State $maxLabel \gets c_i$\Comment{{\small Choose class with maximum count}}
       \EndIf
 
 
