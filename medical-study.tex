@@ -76,6 +76,12 @@ An overview of an end\hyp to\hyp end query execution can be found below.
 
 In the subsequent section we delve into the above end\hyp to\hyp end execution overview in more detail.
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/overview.pdf}
+  % \vspace{-0.2in}
+  \caption{An overview of the architecture of our study}\label{f:overview}
+\end{figure}
 
 \subsubsection{Query Initiation}\label{sss:query-initiation}
 First, a user sends a request to the \textit{coordinator} asking for a private computation.
@@ -88,8 +94,8 @@ These datasets are populated from the hospitals that participate in the platform
 
 The user's request includes the desired private computation to be executed, the selected attributes that are involved in this computation, as well as the selected datasets.
 
-\subsubsection{Data Import}\label{sss:data-import}
 
+\subsubsection{Data Import}\label{sss:data-import}
 After the coordinator server collects the user's private computation query, a data importing procedure takes place.
 
 The server will send an importing request to the hospitals that are specified in the user's query.
@@ -104,8 +110,25 @@ However, it has been elucidated in section \ref{s:secret-sharing} that secret sh
 For transferring each share from the data providers to the corresponding SMPC computing nodes standard techniques -- such as symmetric encryption -- are used to protect data in transit.
 Data are also safe while at rest in the SMPC cluster as each node only stores a cryptographic share of a piece of data, so no information about the original data can be inferred.
 
-\subsubsection{Computation Execution}\label{sss:computation-execution}
+\subsubsection{Data Importing On-the-Fly}\label{sss:importing-otf}
+Everyday, thousands of people visit their doctors, updating their medical records with new diagnoses.
+One may wonder, \textit{since the medical data of each hospital are constantly changing, how often should the datasets in the SMPC cluster be updated?}
 
+In our architecture, we have developed a mechanism for data importing \textit{on-the-fly}, as figure \ref{f:overview} portrays.
+More specifically, when a query is requested for private computation, the coordinator interacts with the hospitals' servers, initiating the data import procedure.
+Since the individual making the query also selects some specific attributes for data aggregation and/or classification, the importing of the data only happens for the selected attributes.
+
+This importing on-the-fly is beneficial for many reasons.
+First and foremost, all private computations are evaluated over the most recent data, and not in a former version of them.
+An alternative could be to update the imported data over small time periods, however, in this case the results from the secure multi-party computation would not represent the actual data.
+\fixme{Add more..}
+
+\fixme{needs rephrase...}
+Finally, another reason is that the actual datasets are huge compared to the requested attributes.
+Each meaningful request does not take into account every possible attribute from the dataset, thus there is no purpose importing everything a priori.
+
+
+\subsubsection{Computation Execution}\label{sss:computation-execution}
 The next step after the data import is the actual private computation execution.
 The nodes participating in the SMPC protocol, execute the privacy preserving version of the analytics algorithm that the requesting user has selected.
 
@@ -114,7 +137,6 @@ The execution is oblivious as far as the data is concerned.
 Any data that gets published is explicitly defined in the privacy preserving algorithms and usually \footnote{Some data (e.g. those that will be included in the output) can be published before the algorithm terminates, without violating the prescribed privacy guarantees.} is only the computation output.
 
 \subsubsection{Result Publishing}\label{sss:result-publishing}
-
 The last step of the secure query execution is the publishing of the computation results.
 These are obtained through computation over private data.
 The results are now considered public data and can be freely shared with the user that requested the computation or be used in other future computations.
@@ -124,12 +146,6 @@ With that in mind, whoever initiates a private computation should have a clear v
 
 The detailed procedure described above is depicted in figure \ref{f:overview}.
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\linewidth]{figures/overview.pdf}
-  % \vspace{-0.2in}
-  \caption{An overview of the architecture of our study}\label{f:overview}
-\end{figure}
 
 
 
@@ -162,27 +178,6 @@ A reasonable way to prevent collusion, is to deploy the computing nodes in premi
 
 Finally, the only information that gets published is the output of the privacy preserving computation.
 This is returned to the user who initiated the query via the \textit{coordinator} server.
-
-
-
-\subsection{Data Importing On-the-Fly}\label{s:importing-otf}
-Everyday, thousands of people visit their doctors, updating their medical records with new diagnoses.
-One may wonder, \textit{since the medical data of each hospital are constantly changing, how often should the datasets in the SMPC cluster be updated?}
-
-In our architecture, we have developed a mechanism for data importing \textit{on-the-fly}, as figure \ref{f:overview} portrays.
-More specifically, when a query is requested for private computation, the coordinator interacts with the hospitals' servers, initiating the data import procedure.
-Since the individual making the query also selects some specific attributes for data aggregation and/or classification, the importing of the data only happens for the selected attributes.
-
-This importing on-the-fly is beneficial for many reasons.
-First and foremost, all private computations are evaluated over the most recent data, and not in a former version of them.
-An alternative could be to update the imported data over small time periods, however, in this case the results from the secure multi-party computation would not represent the actual data.
-
-\fixme{needs rephrase...}
-Another reason is that the actual datasets are huge compared to the requested attributes.
-Each meaningful request does not take into account every possible attribute from the dataset, thus there is no purpose importing everything a priori.
-
-
-Finally, \fixme{add here the technical reason for data import on the fly?? json files etc...?}
 
 
 
