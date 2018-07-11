@@ -6,8 +6,8 @@
 \Procedure{Entropy}{$examples$}\Comment{{\small Entropy (H(S) equation \ref{eq:entropy}), is a measure of the \par\hfill amount of uncertainty in the dataset}}
     \State $entropy \gets 0$
 
-    \For{each possible value $v_i$ of $classAttribute$}
-        \State $count \gets$ number of examples that $examples[classAttribute] = v_i$
+    \For{{\small each possible value} $v_i$ {\small of} $classAttribute$}
+        \State $count \gets$ {\small number of examples that} $examples[classAttribute] = v_i$
 
         \State $percentage \gets count \div \textsc{Length}(examples)$
         \If {$percentage \neq 0$}

@@ -7,7 +7,7 @@
 \Procedure{Entropy}{${\color{darkred}{examples}}$}\Comment{{\small Entropy (H(S) equation \ref{eq:entropy}), is a measure of the \par\hfill amount of uncertainty in the dataset}}
     \State ${\color{darkred}{entropy}} \gets \enc{0}$
 
-    \For{each possible class $c_i$ of $classAttribute$}
+    \For{{\small each possible class} $c_i$ {\small of} $classAttribute$}
         \State ${\color{darkred}{eq}} \gets {\color{darkred}{examples}}[classAttribute] \heq c_i$ \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
         \State ${\color{darkred}{count}} \gets \textsc{Sum}({\color{darkred}{eq}})$
         \State ${\color{darkred}{percentage}} \gets {\color{darkred}{count}} \div \textsc{CountPositives}({\color{darkred}{examples}})$

@@ -11,7 +11,7 @@
     \State ${\color{darkred}{cellMap}} \gets ({\color{darkred}{array}} \hminus {\color{darkred}{min}}) \hdiv {\color{darkred}{cellWidth}} $\Comment{{\small \texttt{SIMD}; ${\color{darkred}{cellMap}}$ has $N$ elements,\par\hfill each corresponds to an index ${\color{darkred}{idx}}$ where $\enc{0} \leq {\color{darkred}{idx}} \leq \enc{cells}$ }}
 
     \For{$i \in \{0, \dots, cells-1\}$}
-        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{cellMap}} \heq i) \hplus (({\color{darkred}{cellMap}} \heq cells) \hmul (i == cells - 1)) $\Comment{{\small \texttt{SIMD}; similar to line 3 \par\hfill alg. \ref{a:1d-histogram-categorical}, grouping elements to corresponding cell indexes}}
+        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{cellMap}} \heq i) \hplus (({\color{darkred}{cellMap}} \heq cells) \hmul (i == cells - 1)) $\Comment{{\small \texttt{SIMD}; similar to \par\hfill line 3 alg. \ref{a:1d-histogram-categorical}, grouping elements to corresponding cell indexes}}
 
         \State ${\color{darkred}{histogram}}[i] \gets \textsc{Sum}({\color{darkred}{eq}})$
     \EndFor

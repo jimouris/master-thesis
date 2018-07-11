@@ -7,12 +7,12 @@
   \State $maxCount \gets -\infty$
   \State $maxLabel \gets -1$
 
-    \For{each possible class $c_i$ of $classAttribute$}
+    \For{{\small each possible class} $c_i$ {\small of} $classAttribute$}
 
       \State $eq \gets examples[classAttribute] = c_i$ \Comment{{\small ${\texttt{SIMD}; eq}$ vector gets $1$ at positions \par\hfill where the equality holds, $0$ otherwise}}
 
       \State $count \gets \textsc{Sum}(eq)$
-      \Comment{{\small $count$ gets the number of examples with \par\hfill class $c_i$}}
+      \Comment{{\small $count$ gets the number of examples with class $c_i$}}
 
 
       \If{$count > maxCount$}

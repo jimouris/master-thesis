@@ -1,0 +1,44 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Privacy Preserving Multi-Dimensional Histogram for Categorical Values with Filters}\label{a:filters-2d-histogram}
+\begin{algorithmic}[1]
+  \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
+  \Require ${\color{darkred}{array}}, {\color{darkred}{column}}, {\color{darkred}{positions}}, {\color{darkred}{histogram}}, {\color{darkred}{eq}}, {\color{darkred}{constraintMask}}$
+
+
+  \Procedure{MultDimHistogramCategoricalFiltered}{${\color{darkred}{array}}[N][M], attributes[A], $\par\hfill$ Ps[A], operation, constraintAttributes[C], constraintOperators[C], $\par\hfill$ constraintValues[C]$}
+      \State
+      ${\color{darkred}{positions}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $\Comment{{\small ${\color{darkred}{positions}}$ is an array initialized with $\enc{0}$}}
+
+      \State ${\color{darkred}{constraintMask}} \gets \textsc{constraintMask}({\color{darkred}{array}}, operation, constraintAttributes, $\par\hfill$ constraintOperators, constraintValues)$
+
+      \For{$a \in \{0, \dots, A-1\}$}
+
+        \State $attribute \gets attributes[a]$
+
+        \State ${\color{darkred}{column}} \gets {\color{darkred}{array}}[:, attribute]$ \Comment{{\small Slicing of a specific column of the ${\color{darkred}{array}}$ matrix}}
+
+        \State $prod \gets \textsc{Product}(Ps[a+1:])$ \Comment{{\small Product of all $Ps$ elements from index $a+1$ onwards}}
+
+        \State ${\color{darkred}{positions}} \gets {\color{darkred}{positions}} \hplus {\color{darkred}{column}} \hmul prod$
+
+      \EndFor
+
+      \State $length \gets \textsc{Product}(Ps)$
+
+      \State ${\color{darkred}{histogram}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$\Comment{{\small ${\color{darkred}{histogram}}$ is an array initialized with $\enc{0}$}}
+
+
+      \For{$j \in \{0, \dots, length-1\}$}
+
+        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{positions}} \heq j) \hmul {\color{darkred}{constraintMask}}$
+        \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ gets either $\enc{0}$ or $\enc{1}$}}
+
+        \State ${\color{darkred}{histogram}}[j] \gets \textsc{Sum}({\color{darkred}{eq}})$
+
+      \EndFor
+
+      \State \textbf{return} {${\color{darkred}{histogram}}$}
+  \EndProcedure
+
+\end{algorithmic}
+\end{algorithm}

@@ -8,7 +8,7 @@
 \Procedure{AllExamplesSame}{${\color{darkred}{examples}}$}\Comment{{\small Check if all {\color{darkred}{examples}} have the same class}}
     \State ${\color{darkred}{res}} \gets  \enc{0}$
 
-    \For{each possible class $c_i$ of $classAttribute$}
+    \For{{\small each possible class} $c_i$ {\small of} $classAttribute$}
 
       \State ${\color{darkred}{eq}} \gets {\color{darkred}{examples}}[classAttribute] \heq c_i$ \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
 
@@ -16,7 +16,7 @@
       \Comment{{\small ${\color{darkred}{classCounts}}[c_i]$ gets the number of examples with \par\hfill class $c_i$}}
 
       \State ${\color{darkred}{res}} \gets {\color{darkred}{res}} \hplus ({\color{darkred}{classCounts}}[c_i] \heq \textsc{CountPositives}({\color{darkred}{examples}}))$
-      \Comment{{\small ${\color{darkred}{res}}$ will  \par\hfill increase if all examples are of one class}}
+      \Comment{{\small ${\color{darkred}{res}}$ will increase \par\hfill if all examples are of one class}}
 
     \EndFor
 

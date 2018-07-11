@@ -14,14 +14,14 @@
     \State $bestAttribute \gets \textsc{Best}(examples, attributes)$\Comment{{\small Best attribute is the one with maximum \par\hfill information gain -- or similarly, minimum entropy}}
 
     \State $branches \gets \{\}$
-    \For{each possible value $v_i$ of $bestAttribute$}
-        \State Let $branch$ be a new tree branch below root, corresponding to the test $bestAttribute = v_i$
+    \For{{\small each possible value} $v_i$ {\small of} $bestAttribute$}
+        \State {\small Let} $branch$ {\small be a new tree branch below root, corresponding to the test} $bestAttribute = v_i$
         \State $subset \gets \{example \in examples : example[bestAttribute] = v_i\}$
 
         \If {$subset = \{\}$}
             \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(examples)))$\Comment{{\small Add a leaf}}
         \Else
-            \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}(subset,$ $attributes - \{bestAttribute\}))$\Comment{{\small Recurse and add the subtree}}
+            \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}(subset,$ $attributes - \{bestAttribute\}))$\par\hfill \Comment{{\small Recurse and add the subtree}}
         \EndIf
         \State $branches \gets branches \cup branch$
     \EndFor
