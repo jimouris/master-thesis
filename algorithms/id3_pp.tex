@@ -17,7 +17,7 @@
         \EndFor
         \State \textbf{return} {{\color{darkblue}{\textsc{Declassify}}}}$({\color{darkred}{label}})$
    \ElsIf {$attributes = \{\}$}
-        \State \textbf{return} ${\color{darkblue}{\textsc{Declassify}}}(\textsc{MostCommonLabel}({\color{darkred}{examples}}))$\Comment{\small{Return the label with the most common \par\hfill value of the target attribute in the examples}}
+        \State \textbf{return} ${\color{darkblue}{\textsc{Declassify}}}(\textsc{MostCommonLabel}({\color{darkred}{examples}}))$\Comment{\small{Return the most common \par\hfill  class in the dataset}}
     \EndIf
 
     \State $bestAttribute \gets \textsc{Best}({\color{darkred}{examples}}, attributes)$\Comment{\small{Best attribute is the one with maximum \par\hfill information gain -- or similarly, minimum entropy}}
