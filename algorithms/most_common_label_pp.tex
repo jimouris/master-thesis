@@ -6,8 +6,8 @@
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
 \Require $classAttribute$
 \Procedure{MostCommonLabel}{${\color{darkred}{examples}}$}\Comment{{\small Return the most common class in all \par\hfill ${\color{darkred}{examples}}$}}
-  \State ${\color{darkred}{maxCount}} \gets -\enc{\infty}$
-  \State ${\color{darkred}{maxLabel}} \gets -\enc{1}$
+  \State ${\color{darkred}{maxCount}} \gets \enc{-\infty}$
+  \State ${\color{darkred}{maxLabel}} \gets \enc{-1}$
 
     \For{each possible class $c_i$ of $classAttribute$}
 

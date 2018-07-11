@@ -3,7 +3,7 @@
 \begin{algorithmic}[1]
 \Require ${\color{darkred}{examples}}, {\color{darkred}{maxGain}}, {\color{darkred}{gain}}, {\color{darkred}{gt}}, {\color{darkred}{best}}$
 \Procedure{Best}{${\color{darkred}{examples}}, attributes$}\Comment{{\small Find the best attribute; the one with maximum \par\hfill information gain, as public data}}
-    \State ${\color{darkred}{maxGain}} \gets -\enc{\infty}$
+    \State ${\color{darkred}{maxGain}} \gets \enc{-\infty}$
     \State ${\color{darkred}{best}} \gets \enc{-1}$
 
     \For{$attribute \in attributes$}
