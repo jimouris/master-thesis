@@ -4,11 +4,12 @@
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
 \Require $classAttribute$
 \Procedure{ID3Textbook}{$examples, attributes$}
-    \If {$\textsc{AllExamplesSame}(examples)$}
+    \If   {$attributes = \{\}$}\Comment{{\small If number of predicting attributes is empty}}
+          \State \textbf{return} $\textsc{MostCommonLabel}(examples)$\Comment{{\small Return the label with the most common \par\hfill value of the target attribute in the examples}}
+    \ElsIf {$\textsc{AllExamplesSame}(examples)$}
         \State \textbf{return} $examples[0][classAttribute]$\Comment{{\small Return a node with the label that is common \par\hfill to all examples}}
-    \ElsIf {$attributes = \{\}$}\Comment{{\small If number of predicting attributes is empty}}
-        \State \textbf{return} $\textsc{MostCommonLabel}(examples)$\Comment{{\small Return the label with the most common \par\hfill value of the target attribute in the examples}}
     \EndIf
+
 
     \State $bestAttribute \gets \textsc{Best}(examples, attributes)$\Comment{{\small Best attribute is the one with maximum \par\hfill information gain -- or similarly, minimum entropy}}
 
