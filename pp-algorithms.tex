@@ -17,6 +17,27 @@ Early termination conditions, in general, eventually leak sensitive information,
 Below we examine the privacy preserving equivalents of some simple and widely used algorithms in order to clarify the termination problems and the translation process.
 
 
+\section{Branching Oracles}\label{s:bros}
+Although we cannot take branch decisions that are based on encrypted values, recent research \cite{mazonka2016cryptoleq} has implemented special constructions -- dubbed \emph{BRanching} \emph{Oracles} (\emph{BROs}) -- which obliviously evaluate the branch outcomes.
+\emph{BROs} are treated as decision-making black boxes and enable an alternative solution to branching on private information.
+All the algorithms presented in the following sections suppose that the underlying encrypted architecture supports a privacy\hyp preserving \emph{BRO}.
+More specifically, \emph{BROs} enable comparison of encrypted values and obliviously return an encrypted boolean variable (true, false).
+
+For instance, the following example illustrates the usage of \emph{BROs}:
+
+\texttt{if (x > 1) a = b; else a = c; }
+
+Since \texttt{x} is encrypted, the host is unable to make the branch decision whether \texttt{a} should take the value of \texttt{b} or \texttt{c}.
+Using a branching oracle, an encryption of true or false will emerge from the comparison \texttt{(x > 1)} (\textit{i.e.} \texttt{gt = (x > 1)}).
+Then, one can compute obliviously the branch outcome using the result of the private comparison as follows:
+
+\texttt{a = b * gt + c * (1-gt)}.
+
+Using this technique a programmer can replace conditional statements on private data with such oblivious selection clauses.
+Therefore, the control flow dependencies are converted into data dependencies.
+
+
+
 \section{Notation}\label{s:notation}
 Our notation for encrypted values and for operations between encrypted variables consists of a variation of the classical mathematical operations.
 Namely, $\enc{X}$ corresponds to the encryption of number $X$, while $\hplus$ , $\hminus$ , $\hmul$ and $\hdiv$ represent homomorphic addition, subtraction, multiplication and division respectively, as shown in equation \ref{eq:operands}.

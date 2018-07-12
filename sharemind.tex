@@ -96,10 +96,6 @@ For instance, consider the following example:
 
 \texttt{if (x) a = b; else a = c; }
 
-However, since \texttt{x} is encrypted, the host is unable to make branch decisions, which motivates the use for special constructions -- dubbed \emph{BRanching} \emph{Oracles} (\emph{BROs}) -- which obliviously evaluate the branch outcomes \cite{mazonka2016cryptoleq}.
-The underlying encrypted architecture of Sharemind supports a privacy\hyp preserving \emph{BRO}, which enables comparison of encrypted values and obliviously returns an encrypted boolean variable (true, false).
-
-\emph{BROs} are treated as decision-making black boxes and enable an alternative solution to branching on private information.
 One can rewrite the previous statement using with the following expression:
 
 \texttt{a = b * x + c * (1-x); }
