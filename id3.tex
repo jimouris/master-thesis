@@ -93,9 +93,21 @@ Then, the conditional information of $T$ given $A$, is given from equation \ref{
 Finally, the set $T$ is then split by the selected attribute $A$ (best-attribute algorithm \ref{a:id3-best-simple}) that has the maximum gain (equation \ref{eq:gain} and algorithm \ref{a:id3-gain-simple}) -- or equivalently minimum $H_C(T \mid A)$ -- to produce subsets of the data.
 The algorithm continues to recurse on each subset, considering only attributes never selected before.
 
+The \f{AllExamplesSame} (see algorithm \ref{a:id3-same-simple}) procedure is used to determine if all transactions are of the same class, by checking the value of $classAttribute$ for each transaction.
+It returns $true$ if they are, $false$ otherwise.
 
 \import{./}{algorithms/allsame_textbook.tex}
+
+The \f{MostCommonLabel} (algorithm \ref{a:id3-most-common-label-simple}) procedure returns the class label that is most common in all available transactions.
+
 \import{./}{algorithms/most_common_label_textbook.tex}
+
+The recursive \f{ID3} algorithm (see algorithm \ref{a:id3-simple} shown below) has the following structure with three halting conditions.
+\begin{enumerate}
+  \item If the set of remaining attributes is empty, then the algorithm returns the label that is most common in all transactions as a leaf (lines 2-3).
+  \item If all transactions are of the same class, then the algorithm returns this class as a leaf (lines 4-5).
+  \item If none of the above conditions hold, then the algorithm finds the best splitting attribute (using algorithm \ref{a:id3-best-simple}) and makes a branch for every possible value of that attribute (lines 7-19).
+\end{enumerate}
 
 \import{./}{algorithms/id3_textbook.tex}
 
