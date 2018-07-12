@@ -119,13 +119,16 @@ More specifically, when a query is requested for private computation, the coordi
 Since the individual making the query also selects some specific attributes for data aggregation and/or classification, the importing of the data only happens for the selected attributes.
 
 This importing on-the-fly is beneficial for many reasons.
-First and foremost, all private computations are evaluated over the most recent data, and not in a former version of them.
-An alternative could be to update the imported data over small time periods, however, in this case the results from the secure multi-party computation would not represent the actual data.
-\fixme{Add more..}
+First and foremost, all private computations are evaluated over the most recent data, and not in a outdated / stale version of them.
+As there are no data stored in the SMPC cluster, every computation is based on fresh data imported directly from the hospitals (data providers) at the time of computation.
+There is no need to keep redundant copies of the dataset in the SMPC cluster.
+This eliminates the need to keep the copies regularly updated and reduces the storage requirements.
+Also, not having the data replicated outside the data providers' servers is less prone to data breaches or similar attacks.
 
-\fixme{needs rephrase...}
 Finally, another reason is that the actual datasets are huge compared to the requested attributes.
 Each meaningful request does not take into account every possible attribute from the dataset, thus there is no purpose importing everything a priori.
+The attributes involved in most computations are a subset of the available attributes of the hospitals' datasets.
+The storage requirements for importing data just for each computation are minor in comparison with the entire dataset.
 
 
 \subsubsection{Computation Execution}\label{sss:computation-execution}
