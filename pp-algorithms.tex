@@ -42,6 +42,7 @@ Therefore, the control flow dependencies are converted into data dependencies.
 Our notation for encrypted values and for operations between encrypted variables consists of a variation of the classical mathematical operations.
 Namely, $\enc{X}$ corresponds to the encryption of number $X$, while $\hplus$ , $\hminus$ , $\hmul$ and $\hdiv$ represent homomorphic addition, subtraction, multiplication and division respectively, as shown in equation \ref{eq:operands}.
 In a like manner, $\heq$ (eq. \ref{eq:equal}), $\hneq$ (eq. \ref{eq:not-equal}) $\hlt$ (eq. \ref{eq:lt}) and $\hgt$ (eq. \ref{eq:gt}) represent private equality and private comparison, returning an encryption of one (that is $\enc{1}$) if the operands map to equal plaintexts (or respectively the first is less than the second), or an encryption of zero ($\enc{0}$) otherwise.
+All those aforementioned comparisons are utilizing the branching oracle of the underlying encrypted architecture.
 
 \begin{equation}\label{eq:operands}
   \begin{aligned}
