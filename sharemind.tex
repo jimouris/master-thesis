@@ -79,35 +79,33 @@ If no security type is specified then the public one is used by default.
 Security types differ from standard data types in the sense that data associated with the public security type will be stored and processed publicly on the Sharemind virtual machine, whereas data associated with the private security type, will be stored in secret\hyp shared form.
 Each computing node will acquire one share of the actual value.
 
-In SecreC one can have expressions or private or public data.
-In the case that such two expressions are combined into a single expression something needs to be done in order for the composite expression to be evaluated.
-In that case the public data are secret\hyp shared and moved into the private execution environment.
+In SecreC one can have expressions of private or public data.
+In the case that such two expressions are combined into a single expression, the public data are secret\hyp shared and moved into the private execution environment in order for the composite expression to be evaluated.
 That way all data are of the private security type and the expression can be evaluated.
 
 Sometimes however it is vital to open a secret.
 This could be done in order to gain some insight about an algorithm having good intentions in mind.
-SecreC offers a special \texttt{declassify} operator through which is made possible to publish private information.
-An expression that is  declassified has its security type changed from private to public, and the secret\hyp shared value moves into the public execution environment.
-Since the use of the \texttt{declassify} operator is the only way for private data to become public, its use should be tracked in order to reason about data privacy and to avoid potential unwanted privacy leaks.
+SecreC offers a special \f{Declassify} operator through which is made possible to publish private information.
+An expression that is declassified has its security type changed from private to public, and the secret\hyp shared value moves into the public execution environment.
+Since the use of the \f{Declassify} operator is the only way for private data to become public, its use should be tracked in order to reason about data privacy and to avoid potential unwanted privacy leaks.
 As a rule of thumb, declassification of private data should occur ass little as possible.
 Ideally, declassification should be used only to publish the final results of an algorithm, or intermediate results that have low privacy risk \textit{i.e.} do not reveal sensitive information.
 
-Typically, if a decision (e.g a branch) is to be made over private data, that would require the data to be published, that is to be converted to the public security type.
-There is however an alternative solution to branching on private information.
+Typically, if a decision (e.g. a branch) is to be made over private data, that would require the data to be published, that is to be converted to the public security type.
 For instance, consider the following example:
 
 \texttt{if (x) a = b; else a = c; }
 
+However, since \texttt{x} is encrypted, the host is unable to make branch decisions, which motivates the use for special constructions -- dubbed \emph{BRanching} \emph{Oracles} (\emph{BROs}) -- which obliviously evaluate the branch outcomes \cite{mazonka2016cryptoleq}.
+The underlying encrypted architecture of Sharemind supports a privacy\hyp preserving \emph{BRO}, which enables comparison of encrypted values and obliviously returns an encrypted boolean variable (true, false).
+
+\emph{BROs} are treated as decision-making black boxes and enable an alternative solution to branching on private information.
 One can rewrite the previous statement using with the following expression:
 
 \texttt{a = b * x + c * (1-x); }
 
 Using this technique a programmer can replace conditional statements on private data with such oblivious selection clauses.
 So the control flow dependencies are converted into data dependencies.
-
-An example of SecreC code can be found below.
-The problem at hand is Yao's millionaire problem \cite{yao1982protocols} as described in section \ref{s:smpc}.
-Here we use \texttt{pd\_shared3p} as the security type, which stands for \textit{\textbf{p}rotection \textbf{d}omain \textbf{shared 3 p}arties}, and corresponds to a private security type using secret\hyp sharing between three parties.
 
 {
 \begin{minted}[xleftmargin=21pt, framesep=3mm, frame=single, linenos, tabsize=2, breaklines, breaksymbolleft=, fontsize=\footnotesize]{c++}
@@ -125,6 +123,10 @@ void main(){
 \end{minted}
 \captionof{lstlisting}{Millionaire problem in SecreC}\label{l:millionaires}
 }
+
+An example of SecreC code can be found in Code Snippet \ref{l:millionaires}.
+The problem at hand is Yao's millionaire problem \cite{yao1982protocols} as described in section \ref{s:smpc}.
+Here we use \texttt{pd\_shared3p} as the security type, which stands for \textit{\textbf{p}rotection \textbf{d}omain \textbf{shared 3 p}arties}, and corresponds to a private security type using secret\hyp sharing between three parties.
 
 
 \subsection{SIMD in SecreC}\label{ss:simd-secrec}
