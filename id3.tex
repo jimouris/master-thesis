@@ -65,7 +65,7 @@ On each partition, ID3 is then recursively called.
 
 The \textit{best} attribute is defined as the attribute that has the smallest entropy -- or in other words, the best information gain.
 Let $T$ be a set of transactions, $C$ the class attribute and $A$ some non-class attribute.
-On each iteration, ID3 iterates through every unused attribute $A$ of the dataset and calculates the entropy $H_C(T)$ (equation \ref{eq:entropy} and algorithm \ref{a:id3-Entropy-simple}) for every subset $T$ that results from splitting the dataset on attribute $A$.
+On each iteration, ID3 iterates through every unused attribute $A$ of the dataset and calculates the entropy $H_C(T)$ (equation \ref{eq:entropy} and algorithm \ref{a:id3-entropy-simple}) for every subset $T$ that results from splitting the dataset on attribute $A$.
 
 \import{./}{algorithms/entropy_textbook.tex}
 
