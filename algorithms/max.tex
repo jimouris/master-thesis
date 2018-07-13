@@ -21,7 +21,7 @@
     \State ${\color{darkred}{max}} \gets \enc{-\infty}$
     \For{$i \in \{0, \dots, N-1\}$}
         \State ${\color{darkred}{gt}} \gets ({\color{darkred}{array}}[i] \hgt {\color{darkred}{max}})$\Comment{{\small ${\color{darkred}{gt}}$ obliviously gets either $\enc{1}$ if $array[i] > max$, or $\enc{1}$ otherwise}}
-        
+
         \State ${\color{darkred}{max}} \gets ({\color{darkred}{gt}} \hmul {\color{darkred}{array}}[i]) \hplus ((\enc{1} \hminus {\color{darkred}{gt}}) \hmul {\color{darkred}{max}})$\Comment{{\small Obliviously update the value of ${\color{darkred}{max}}$}}
     \EndFor
     \State \textbf{return} {${\color{darkred}{max}}$}

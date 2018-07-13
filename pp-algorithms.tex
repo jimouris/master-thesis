@@ -85,35 +85,36 @@ Also, in the algorithms described below, the variables in {\color{darkred} red} 
 
 
 \section{Transforming Algorithms to their Privacy Preserving Equivalent}\label{s:simple-algorithms}
-In this section we will examine three simple algorithms (namely {\fontfamily{lmss}\textsc{Sum}, \textsc{Max}, \textsc{PIR}}) and how to develop them in a way to preserve the data privacy.
+In this section we will examine three simple algorithms (namely {\fontfamily{lmss}\textsc{Sum}, \textsc{Max}, \textsc{PIR}}) and how to develop them in a way to preserve data privacy.
 Firstly, algorithm \ref{a:sum} computes the sum of an array of numbers and it is quite similar to the private sum algorithm.
-The latter obliviously updates the encrypted sum with each value of the array.
+The latter obliviously updates the encrypted sum with each value of the array, utilizing the homomorphic properties of the encrypted variables.
 
 \import{./}{algorithms/sum.tex}
 
 
 On the other hand, algorithm \ref{a:max} finds and returns the maximum number of an array.
 In the private {\fontfamily{lmss}\textsc{Max}} algorithm, the host is not able to determine for each value of the array if it is greater from the current value of max.
-However, it can obliviously update the value of max, based on an encrypted comparison (alg. \ref{a:max} line 13, 14).
-In the cases that the value of the $array$ is smaller than the current $max$ the $gt$ flag will have the value $\enc{0}$, otherwise $\enc{1}$.
-Thus the multiplexer operation in line 14 each time will ``keep'' the greatest value and set the variable $max$ to it.
-
-Both textbook algorithms' time complexity (algorithms. \ref{a:sum} and \ref{a:max}) is \bigo{n} and the transformation to their privacy preserving equivalents did not affect their complexity.
-However, it is inevitably more computationally intensive, since the encrypted operations require many additional CPU cycles.
+However, it can obliviously update the value of max, based on the encrypted comparison outcome (alg. \ref{a:max} line 13, 14).
+In the cases that the value of the $array$ is less than the current $max$ the $gt$ flag will have the value $\enc{0}$, otherwise $\enc{1}$.
+Thus the multiplexer operation in line 14 each time will obliviously ``keep'' the greatest value and set the variable $max$ to it.
 
 \import{./}{algorithms/max.tex}
 
-
-The third and final example is the Information Retrieval algorithm, where a user maintains an database and desires to retrieve some data based on a key.
-The simplest textbook algorithm searches each consecutive position on the array to find a key match, and immediately returns the corresponding value.
-In contrast, the privacy preserving algorithm (PIR) is not able to return before searching the whole database without revealing any information about the key and the result.
-In this pair of examples the worst case complexity is also \bigo{n}, however in the average case, the former will return earlier.
+Both textbook algorithms' time complexity (algorithms. \ref{a:sum} and \ref{a:max}) is \bigo{n} and the transformation to their privacy preserving equivalents did not affect their complexity.
+However, the privacy\hyp preserving algorithm is inevitably more computationally intensive, since the encrypted operations require many additional CPU cycles.
 
 
 \import{./}{algorithms/pir.tex}
 
+The third and final example is the Information Retrieval algorithm, where a user maintains a database and desires to retrieve some data based on a key.
+The simplest textbook algorithm searches each consecutive position on the array to find a key match, and immediately returns the corresponding value.
+In contrast, the privacy preserving algorithm (PIR) \cite{chor1995private} is not able to return before searching the whole database without revealing any information about the key and the result.
+In this pair of examples the worst case complexity is also \bigo{n}, however in the average case, the former will search the half database.
 
-More elaborate algorithms can be transformed similarly to their privacy preserving equivalents, sacrificing performance for privacy.
+The idea here is to brute\hyp force all possible table positions and obliviously find and keep the value for the requested key.
+It has become obvious that it is not straightforward to make more sophisticated algorithms privacy preserving.
+However, similar techniques are applied for simple and more elaborated algorithms, in order to transform them to their privacy preserving equivalents, sacrificing performance for privacy.
+
 Motivated by privacy concerns and from the challenges that arise in securing any function, in this thesis we concentrate on developing an end-to-end infrastructure for privacy preserving analytics and incorporate some essential algorithms for aggregation statistics and classification.
 
 
