@@ -190,19 +190,36 @@ In the privacy\hyp preserving ID3, as in all algorithms in this thesis, we expli
 For an algorithm to remain private, the requirement is that any information is learned by the algorithm, can also be learned directly from the input and output \cite{lindell2000privacy}.
 
 As mentioned in section \ref{s:secrec} the \f{Declassify} operator publishes a private value.
-We should now reason about the selection of public and private data in the described algorithms and also about the usage of the \f{Declassify} operator.
+Consecutively, we reason about the selection of public and private data in the described algorithms and also about the usage of the \f{Declassify} operator.
 
 First of all, we consider the case that all involved parties have the same schema for their data.
 Thus, attribute names are known to all parties an should not be considered private information.
 
-There are three cases where the ID3 algorithm (see algorithm \ref{a:id3-pp}) terminates (\textit{i.e.} returns a value).
-The algorithm output is a node of the resulting tree.
+The ID3 algorithm (see algorithm \ref{a:id3-pp}) can terminate in three different ways (\textit{i.e.} returns a value).
+Each time, the algorithm output is a node of the resulting tree.
 That is why, everything that the algorithm returns in any of the three cases should be considered as public data (see \f{Declassify} operator in lines 9, 11 and public $branches$ variable in line 14).
-% Also, in the first termination case of the algorithm, we use the \f{Declassify} operator to determine if all examples of the dataset are of the same class.
-% We argue that the the information that gets published (\textit{i.e.} if all the dataset is of the same class) reveals nothing more as
-%
 
-\fixme{More here..}
+\textbf{All examples same:}
+In the first termination channel of the algorithm, we use the \f{Declassify} operator to determine if all transactions of the dataset are of the same class.
+We argue that the the information that gets published (\textit{i.e.} if all the dataset is of the same class) reveals nothing more from what it could be inferred from the resulting decision tree.
+
+
+\textbf{Empty attributes:}
+The second way that ID3 can terminate, is when there are no attributes left for the algorithm to check.
+In this case, the algorithm returns the most common label of the remaining transactions.
+Here, we use the \f{Declassify} operator to add the most common label to the tree.
+
+
+\textbf{After recursive calls:}
+Finally, if none of the above cases terminate the execution of ID3, the algorithm will recursively add either a leaf or a sub\hyp tree for each possible value of the selected attribute, and then return.
+In order to determine whether to add a leaf or a sub\hyp tree, we declassify the information that there are no transactions left for the algorithm to check.
+\fixme{explain in more detail why this 3rd case is secure..}
+
+
+As stated in \cite{lindell2000privacy}, although the name of the attribute with the highest information gain is revealed, nothing is learned of the actual $H_C(T \mid A)$ values themselves.
+This observation holds true for all three above cases, since no information about the information gain of the attributes can be leaked.
+
+Algorithm \ref{a:id3-pp} is a generalization to the SMPC setting from the 2\hyp party protocol that is described in \cite{lindell2000privacy}.
 
 
 \subsection{Textbook C4.5}\label{s:c45}
