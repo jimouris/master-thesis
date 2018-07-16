@@ -195,7 +195,14 @@ We have deployed our end\hyp to\hyp end infrastructure in \href{https://mhmd.mad
 
 
 \section{Communication}\label{s:impl-communication}
+We employ encryption for data in transit using Transport Layer Security (TLS).
+All communication through the \textit{coordinator} uses Hypertext Transfer Protocol Secure (HTTPS), with a certificate issued from Let's Encrypt\footnote{https://letsencrypt.org/}.
+Thus, all secure computation requests as well as the private\hyp computed results are transferred encrypted.
+Also, since HTTPS provides authentication of the accessed website, the users know that they communicate with the correct server.
 
-\fixme{Mention https}
-\fixme{Mention promises}
+
+
+
+\fixme{Mention packages used from nodejs??}
+\fixme{Mention promises??}
 
