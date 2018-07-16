@@ -1,5 +1,20 @@
 \chapter{Experimental Evaluation}\label{c:evaluations}
 
+
+
+We measured the runtime performance of our privacy\hyp preserving algorithms using the Sharemind secure computing platform.
+We instantiated all private aggregators and decision tree classifiers using the SecreC programming language \cite{jagomagis2010secrec} that Sharemind provides.
+In Sharemind, the number of the computing parties are restricted by the SMPC protocol that is been used.
+Our experiments use the \textit{pd\_shared3p} security protocol, which utilizes three nodes in the private domain.
+
+
+\textbf{Experimental Setup:}
+All experiments were performed on three machines, each running Ubuntu 18.04, using a 2.50 GHz Intel Xeon E5-2670 (v2) system with 4 GBs of memory.
+
+\fixme{Add the correct setup}
+% All the time measurements were performed on a 64-bit machine with ten-core Intel Xeon E5-2670 (v2) CPU at 2.50GHz and 4GB of RAM.
+
 \input{datasets}
+
 \input{results}
 

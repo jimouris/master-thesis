@@ -1,2 +1,20 @@
 \section{Datasets}\label{s:datasets}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+As we have stated in section \ref{s:two-types-of-data}, the input data can have many different types, since our system can serve a wide variety of applications.
+We have separated the data in two broad categories -- categorical and continuous, therefore our algorithms are also logically separated for those two different kinds of data.
+
+The second reason that we separated our algorithms in those two types, was that we had two different datasets that we could use.
+
+\textbf{MeSH Dataset:}
+MeSH\footnote{\href{https://meshb.nlm.nih.gov/}{https://meshb.nlm.nih.gov/}} provides a hierarchically-organized \footnote{\href{https://meshb.nlm.nih.gov/treeView}{https://meshb.nlm.nih.gov/treeView}} terminology for indexing and cataloging of biomedical information such as MEDLINE/PUBmed and other United States National Library of Medicine (NLM) databases.
+Created and updated by the NLM, it is used by articles databases and by NLM's catalog of book holdings.
+This dataset is based on the MeSH tree structure.
+MeSH terms are represented as normalized values; this means that even attributes like Age, are separated into groups (for instance Child, Adult, etc).
+This dataset contains semantically annotated patient data.
+
+\textbf{CVI Dataset:}
+Cardiovascular disease is a class of diseases that involve the heart or blood vessels.
+Cardiovascular disease includes coronary artery diseases (CAD) such as angina and myocardial infarction (commonly known as a heart attack).
+This dataset contains CardioVascular Imaging (CVI) information, which are represented as numerical values – not normalized.
+
+\fixme{Add more...}
+
