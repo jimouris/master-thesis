@@ -195,31 +195,39 @@ Consecutively, we reason about the selection of public and private data in the d
 First of all, we consider the case that all involved parties have the same schema for their data.
 Thus, attribute names are known to all parties an should not be considered private information.
 
-The ID3 algorithm (see algorithm \ref{a:id3-pp}) can terminate (\textit{i.e.} return a value) in three different ways.
+Lindell and Pinkas have constructed a protocol in \cite{lindell2000privacy} for privately computing ID3 that works in the two\hyp party setting.
+This two\hyp party protocol is proven to be private.
+However that algorithm does not consider the case in where the set of transactions $T$ is empty. Algorithm \ref{a:id3-pp} is a generalization to the multi\hyp party setting from the 2\hyp party protocol that is described in \cite{lindell2000privacy}.
+The algorithm also addresses the empty transaction set case.
+
+The ID3 algorithm (see algorithm \ref{a:id3-pp}) can terminate (\textit{i.e.} return a value) in three different cases.
 Each time, the algorithm's output is a node of the resulting tree.
 That is why, everything that the algorithm returns in any of the three cases should be considered as public data (see \f{Declassify} operator in lines 9, 11 and public $branches$ variable in line 14).
 
-\textbf{All examples same:}
-In the first termination channel of the algorithm, we use the \f{Declassify} operator to determine if all transactions of the dataset are of the same class.
-We argue that the the information that gets published (\textit{i.e.} if all the dataset is of the same class) reveals nothing more from what it could be inferred from the resulting decision tree.
-
-
-\textbf{Empty attributes:}
-The second way that ID3 can terminate, is when there are no attributes left for the algorithm to check.
+\textbf{Empty attribute set:}
+The first termination channel of the algorithm is when the set of remaining attributes is empty, \textit{i.e.} when there are no attributes left for the algorithm to check..
+This information is publicly known since the remaining attributes can be derived from the output tree.
 In this case, the algorithm returns the most common label of the remaining transactions.
-Here, we use the \f{Declassify} operator to add the most common label to the tree.
+Here, we use the \f{Declassify} operator to publish that label and add it as a leaf to the tree.
 
+\textbf{All examples same:}
+The second way that algorithm \ref{a:id3-pp} can terminate, is when all transactions of the dataset are of the same class.
+We use the \f{Declassify} operator to determine that information (\textit{i.e.} if all the dataset is of the same class).
 
 \textbf{After recursive calls:}
 Finally, if none of the above cases terminate the execution of ID3, the algorithm will recursively add either a leaf or a sub\hyp tree for each possible value of the selected attribute, and then return.
-In order to determine whether to add a leaf or a sub\hyp tree, we publish the information that there are no transactions left for the algorithm to check.
-\fixme{explain in more detail why this 3rd case is secure..}
+In order to determine whether to add a leaf or a sub\hyp tree, we publish the information that there are no transactions left in the subset of the dataset that corresponds to a particular value of the selected attribute.
+
+By observing the output tree, as well as the public input, one can make the following observations.
+Wherever there is a leaf node with class $c_i$, one can tell if the set of remaining attributes is empty, simply by observing the path from the root of the tree.
+If all attributes have been used then the set is empty, otherwise it is not.
+If the attribute set is not empty, we can deduce that one of two things holds.
+Either all transactions that belong to the current path are of the same class ($c_i$), or that there are no transactions at all in that path.
+These exact information is also published by algorithm \ref{a:id3-pp}, with the only difference being that the information published by the algorithm distinguishes between when all transactions are of the same class and the corner case of having no transactions for a particular path of the tree.
 
 
 As stated in \cite{lindell2000privacy}, although the name of the attribute with the highest information gain is revealed, nothing is learned of the actual $H_C(T \mid A)$ values themselves.
 This observation holds true for all three above cases, since no information about the information gain of the attributes can be leaked.
-
-Algorithm \ref{a:id3-pp} is a generalization to the SMPC setting from the 2\hyp party protocol that is described in \cite{lindell2000privacy}.
 
 
 \subsection{Textbook C4.5}\label{s:c45}
