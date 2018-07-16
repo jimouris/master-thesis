@@ -1,12 +1,23 @@
 \abstractEn{
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus placerat lectus mollis mi dapibus, vitae volutpat dui vestibulum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean vitae feugiat neque. Morbi pellentesque elementum velit, sed tempor magna facilisis et. Maecenas in fermentum arcu. Mauris et magna in turpis egestas tristique. Nullam dignissim, quam non tristique porta, nisi felis accumsan felis, id ullamcorper magna odio et massa. Integer lacus odio, fringilla nec metus vel, faucibus lacinia dolor. Suspendisse ut semper est. Aliquam pellentesque, urna eu sagittis tincidunt, odio lorem tristique lectus, eu commodo turpis velit ut nibh. Quisque facilisis fringilla lorem vitae finibus.
+The new era of big data demands high performance computing, since the amount of data published online is growing exponentially.
+Cloud computing has emerged as a result, providing strong computational power for both individuals and for doing business.
+Though cloud computing is the answer to many business models, there are many use\hyp cases where cloud fails to meet the demands of information privacy.
+For instance, exposing financial and medical information to the cloud may violate the individuals' right to privacy.
+People are not comfortable sharing their sensitive data, and more importantly, they do not trust any cloud provider with this information; data that are uploaded in the cloud can be exposed to attacks from both the cloud provider and third parties.
 
-Integer nisi lacus, fringilla sit amet ipsum at, pulvinar luctus lectus. Pellentesque sit amet lectus eu augue vehicula pellentesque eget vitae mauris. Donec placerat ex nulla, vitae tempus nunc lobortis at. In gravida, odio luctus vehicula interdum, turpis dolor suscipit lorem, in finibus massa dui vitae purus. Donec laoreet purus sem. Aenean dui sapien, interdum sit amet dictum ut, dignissim a augue. Aliquam bibendum pulvinar sem ut pulvinar. Fusce lacinia lorem sit amet augue tempus maximus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed finibus condimentum sagittis.
+
+Nevertheless, there are many real world use cases that use information from different parties to compute jointly meaningful results, but due to the aforementioned limitations, some are avoided and others do not always respect data privacy.
+The solution to this, is technique called secure multi-party computation (SMPC or MPC), which leverages cryptographic primitives to carry out computations on confidential data, computing a function and learning nothing more than what the $N$ parties would have if a separate trusted party had collected their inputs, computed the same function for them, and then return the result to all parties.
+
+
+Motivated by this wide range of applications, in this thesis we have focused on providing an end\hyp to\hyp end infrastructure for computing privacy\hyp preserving analytics.
+More specifically, we have developed algorithms specifically tailored to encrypted architectures and in the SMPC scenario, such as secure aggregators and secure decision tree classifiers.
+Moreover, we have focused on the coordination and communication between all involved parties; those who provide their data, those who perform the secure computation, and finally those that initiate new computations.
+Our goal is to establish an end\hyp to\hyp end system for discovering useful information with respect to data privacy, and also to provide the building blocks for potentially more elaborated privacy\hyp preserving algorithms.
 }
+
 
 \abstractGr{
 Σύμφωνα με την ιστορία του Superman, ο ήρωας γεννήθηκε στον πλανήτη Krypton, με το όνομα Καλ-Ελ. Όταν ήταν ακόμη βρέφος, εστάλη στην Γη από τον επιστήμονα πατέρα του, Τζορ-Ελ, λίγο πριν την καταστροφή του πλανήτη Krypton. Με την άφιξη του στην Γη, τον βρήκε και τον υιοθέτησε ένα ζευγάρι από το Κάνσας, με τους οποίους και μεγάλωσε, παίρνοντας το όνομα Κλαρκ Κεντ. Πολύ νωρίς άρχισε να ανακαλύπτει τις υπερφυσικές δυνάμεις του και όταν ενηλικιώθηκε αποφάσισε να τις χρησιμοποιεί για το κοινό καλό. Ο Superman ζει σε μία φανταστική πόλη των ΗΠΑ, με το όνομα Μητρόπολη.
-
-Στην κανονική του ζωή ως Κλαρκ Κεντ, εργάζεται σαν δημοσιογράφος στην τοπική εφημερίδα Ημερήσιος Πλανήτης, κρύβοντας τις υπερδυνάμεις του. Ο μεγαλύτερος εχθρός του Superman είναι ο μεγιστάνας και εγκληματίας Λεξ Λούθορ.
 
 }
