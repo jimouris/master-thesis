@@ -180,14 +180,14 @@ The differences mainly include the subsets handling. (creation, counting, etc.)
 \subsubsection{Privacy Assessment}\label{s:id3-privacy-assessment}
 
 In privacy-preserving algorithms, all intermediate values should remain private.
-In many cases, intermediate values may reveal some patterns, and in general sensitive information about the inputs.
+In many cases, intermediate values may reveal some patterns, and in general sensitive information about the private inputs.
 
 However, in the case of ID3, some of these intermediate values are part of the output and eventually will be revealed.
 For instance, the attributes chosen in each node of the tree will be revealed in the final results.
 Thus, there is no reason to trying to protect them during the protocol execution.
 In the privacy\hyp preserving ID3, as in all algorithms in this thesis, we explicitly define which values are private (and thus encrypted), and which are public.
 
-For an algorithm to remain private, the requirement is that any information is learned by the algorithm, can also be learned directly from the input and output \cite{lindell2000privacy}.
+For an algorithm to remain private, the requirement is that any information is learned by the algorithm, can also be learned directly from the public input and output \cite{lindell2000privacy}.
 
 As mentioned in section \ref{s:secrec} the \f{Declassify} operator publishes a private value.
 Consecutively, we reason about the selection of public and private data in the described algorithms and also about the usage of the \f{Declassify} operator.
@@ -195,8 +195,8 @@ Consecutively, we reason about the selection of public and private data in the d
 First of all, we consider the case that all involved parties have the same schema for their data.
 Thus, attribute names are known to all parties an should not be considered private information.
 
-The ID3 algorithm (see algorithm \ref{a:id3-pp}) can terminate in three different ways (\textit{i.e.} returns a value).
-Each time, the algorithm output is a node of the resulting tree.
+The ID3 algorithm (see algorithm \ref{a:id3-pp}) can terminate (\textit{i.e.} return a value) in three different ways.
+Each time, the algorithm's output is a node of the resulting tree.
 That is why, everything that the algorithm returns in any of the three cases should be considered as public data (see \f{Declassify} operator in lines 9, 11 and public $branches$ variable in line 14).
 
 \textbf{All examples same:}
@@ -212,7 +212,7 @@ Here, we use the \f{Declassify} operator to add the most common label to the tre
 
 \textbf{After recursive calls:}
 Finally, if none of the above cases terminate the execution of ID3, the algorithm will recursively add either a leaf or a sub\hyp tree for each possible value of the selected attribute, and then return.
-In order to determine whether to add a leaf or a sub\hyp tree, we declassify the information that there are no transactions left for the algorithm to check.
+In order to determine whether to add a leaf or a sub\hyp tree, we publish the information that there are no transactions left for the algorithm to check.
 \fixme{explain in more detail why this 3rd case is secure..}
 
 
