@@ -161,7 +161,7 @@ The case with only one data provider is when that provider just wants to outsour
 The case of multiple data providers is the most common case, where the providers wish to perform computation over the union of all datasets without anyone being able to learn anything more than the computation's output.
 Thus, we wanted the deployment of each data provider to be easy and fast; veiling all the individual parts, such as the required packages, the SMPC importer installation, any software for data pre\hyp processing etc.
 
-For that reason we decided that the best choice is to offer a containerized solution. We used Docker \footnote{\href{https://www.docker.com/}{https://www.docker.com/}} for the building and shipping of an \textit{image} with everything installed and ready to run.
+For that reason we decided that the best choice is to offer a containerized solution. We used Docker\footnote{\href{https://www.docker.com/}{https://www.docker.com/}} for the building and shipping of an \textit{image} with everything installed and ready to run.
 That image also includes the web server accepting requests for data import (according to the API specified in section \ref{ss:data-providers-restful-api}), already up and running.
 
 Each individual data provider, can use this image to create a lightweight, portable, self-sufficient container, which can run virtually anywhere.
