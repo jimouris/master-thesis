@@ -1,0 +1,19 @@
+\subsection{Textbook C4.5}\label{s:c45}
+C4.5 is a decision tree generating algorithm developed by Ross Quinlan \cite{quinlan1993c4}.
+The C4.5 algorithm is an extension of the ID3 algorithm described in section \ref{s:id3} also developed by Quinlan \cite{quinlan1986induction}.
+It was ranked \#1 in the \textit{Top 10 Algorithms in Data Mining} pre\hyp eminent paper published by Springer Knowledge and Information Systems in 2008 \cite{wu2008top}.
+
+The main difference between C4.5 and ID3 is that the former has native support for both continuous (\textit{i.e.} numerical) data and discrete (\textit{i.e.} categorical) data.
+
+The idea behind C4.5 classification is to find the best splitting point for an attribute and split the dataset on that point.
+Transactions that are below that threshold belong to one branch and transaction above that threshold belong to the other branch.
+The splitting criterion is based on the information gain \ref{eq:gain} (difference in entropy \ref{eq:entropy}) given by the splitting point.
+The attribute that most efficiently splits the dataset is chosen by the algorithm at each level of the tree.
+After that the algorithm recurses on the two subsets created by that split.
+
+Since the algorithm creates two branches for every split (one for transactions with values less than the threshold and one with ones with values greater than the threshold) the output tree is a binary tree (branching factor $= 2$), unlike ID3 where the branching factor of the tree is equal to the number of possible values for every attribute.
+
+\subsection{Privacy Preserving C4.5}\label{s:pp-c45}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+

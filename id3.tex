@@ -126,7 +126,7 @@ In particular, as you can see in line 11 of algorithm \ref{a:id3-simple}, we wis
 As we cannot have conditional statements on private data, the only thing we can do is to apply the oblivious selection technique described in section \ref{s:secrec}.
 Thus, we are not able to keep only the subset of rows that satisfy our condition.
 A solution to this problem is to define $subset$ as a copy of the $examples$ array.
-We keep a vector $eq$ (see line 17 of algoritm \ref{a:id3-pp}) of equal length with $examples$.
+We keep a vector $eq$ (see line 17 of algorithm \ref{a:id3-pp}) of equal length with $examples$.
 The value of $eq[i]$ is $\enc{1}$ if $examples[bestAttribute]$ is equal to $v_i$, or $\enc{0}$ otherwise.
 Since the values of $eq$ are encrypted, we perform a vector multiplication between $eq$ and $examples$ so the result will be identical to $examples$ for ever row $i$ that the condition holds ($eq[i]$ is equal to $\enc{1}$), and $\enc{0}$ otherwise.
 Then we add a dummy row $[\enc{-1}, \enc{-1}, \dots, \enc{-1}]$ (a row of all $\enc{-1}$, denoted as just $\enc{-1}$ for simplicity) to all rows that don't satisfy the condition (using multiplication with $\enc{1} - eq$).
@@ -227,13 +227,5 @@ If all attributes have been used then the set is empty, otherwise it is not.
 If the attribute set is not empty, we can deduce that one of two things holds.
 Either all transactions that belong to the current path are of the same class ($c_i$), or that there are no transactions at all in that path.
 These exact information is also published by algorithm \ref{a:id3-pp}, with the only difference being that the information published by the algorithm distinguishes between when all transactions are of the same class and the corner case of having no transactions for a particular path of the tree.
-
-
-
-\subsection{Textbook C4.5}\label{s:c45}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-\subsection{Privacy Preserving C4.5}\label{s:pp-c45}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
