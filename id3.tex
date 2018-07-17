@@ -187,6 +187,9 @@ For instance, the attributes chosen in each node of the tree will be revealed in
 Thus, there is no reason to trying to protect them during the protocol execution.
 In the privacy\hyp preserving ID3, as in all algorithms in this thesis, we explicitly define which values are private (and thus encrypted), and which are public.
 
+As stated in \cite{lindell2000privacy}, although the name of the attribute with the highest information gain is revealed, nothing is learned of the actual $H_C(T \mid A)$ values themselves.
+This observation holds true for all such cases, since neither the information gain nor any other intermediate values which are not explicitly denoted as public can be leaked.
+
 For an algorithm to remain private, the requirement is that any information is learned by the algorithm, can also be learned directly from the public input and output \cite{lindell2000privacy}.
 
 As mentioned in section \ref{s:secrec} the \f{Declassify} operator publishes a private value.
@@ -225,9 +228,6 @@ If the attribute set is not empty, we can deduce that one of two things holds.
 Either all transactions that belong to the current path are of the same class ($c_i$), or that there are no transactions at all in that path.
 These exact information is also published by algorithm \ref{a:id3-pp}, with the only difference being that the information published by the algorithm distinguishes between when all transactions are of the same class and the corner case of having no transactions for a particular path of the tree.
 
-
-As stated in \cite{lindell2000privacy}, although the name of the attribute with the highest information gain is revealed, nothing is learned of the actual $H_C(T \mid A)$ values themselves.
-This observation holds true for all three above cases, since no information about the information gain of the attributes can be leaked.
 
 
 \subsection{Textbook C4.5}\label{s:c45}
