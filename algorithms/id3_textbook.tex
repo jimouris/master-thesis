@@ -3,7 +3,7 @@
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
 \Require $classAttribute$
-\Procedure{ID3Textbook}{$examples, attributes$}
+\Procedure{ID3}{$examples, attributes$}
     \If   {$attributes = \{\}$}\Comment{{\small If number of predicting attributes is empty}}
           \State \textbf{return} $\textsc{MostCommonLabel}(examples)$\Comment{{\small Return the label with the most common \par\hfill value of the target attribute in the examples}}
     \ElsIf {$\textsc{AllExamplesSame}(examples)$}
