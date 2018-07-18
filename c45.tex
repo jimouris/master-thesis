@@ -17,11 +17,12 @@ In algorithm \ref{a:c45-simple} we present the \f{C45} procedure.
 It is quite similar to the \f{ID3} one in algorithm \ref{a:id3-simple}.
 The main differences include that the call of \f{Best} procedure, now not only returns the ``best'' attribute, but also the ``best'' threshold that this attribute should split on, and the subsets that result from that split.
 In case that $bestAttribute$ is a numerical attribute, then the $bestSplitted$ variable will contain the two subsets (the set of transactions $t$ having $t[bestAttribute] <= bestThreshold$, and the set of transactions $t$ having $t[bestAttribute] > bestThreshold$).
-In case that the chosen attribute is categorical, then the $bestSplitted$ variable will contain the subsets resulting from each possible value $v_i$ of that attribute. ($\{example \in examples : example[bestAttribute] = v_i\}$ for each possible $v_i$)
+In case that the chosen attribute is categorical, then the $bestSplitted$ variable will contain the subsets resulting from each possible value $v_i$ of that attribute. ($\{example \in examples \mid example[bestAttribute] = v_i\}$ for each possible $v_i$)
 
 Also, if the selected attribute is numerical then the algorithm creates two branches (one for transactions with value less than the threshold, and one for transactions with value greater than the threshold).
 If the selected attribute is categorical the algorithm creates as many branches as the possible values of that attribute.
 
+\import{./}{algorithms/c45_best_textbook.tex}
 \import{./}{algorithms/c45_textbook.tex}
 
 \subsection{Privacy Preserving C4.5}\label{s:pp-c45}

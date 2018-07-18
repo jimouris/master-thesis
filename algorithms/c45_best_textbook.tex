@@ -1,0 +1,49 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{C4.5 Best Textbook Algorithm}\label{a:c45-best-simple}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
+\Require $classAttribute, categoricalAttributes$
+\Procedure{Best}{$examples, attributes$}
+  \State $bestSplitted \gets \{\}$
+  \State $maxGain \gets -\infty$
+  \State $bestThreshold \gets -1$
+  \State $bestAttribute \gets -1$
+  \For{$attribute \in attributes$}
+    \If {$attribute \in categoricalAttributes$}\Comment{{\small If attribute is categorical}}
+      \State $splitted \gets \{\}$
+        \For{{\small each possible value} $v_i$ {\small of} $attribute$}
+          \State $subset \gets \{example \in examples \mid example[attribute] = v_i\}$
+          \State $splitted \gets splitted \cup subset$
+        \EndFor
+        \State $gain \gets  \textsc{InformationGain}(examples, splitted)$
+        \If {$gain > maxGain$}
+            \State $maxGain \gets gain$
+            \State $bestAttribute \gets attribute$
+            \State $bestSplitted \gets splitted$
+        \EndIf
+    \Else \Comment{{\small If attribute is numerical}}
+      \State {\small Sort $examples$ by $attribute$ column}
+      \For{$i \in \{0, \dots, \textsc{Length}(examples)-2\}$}\Comment{{\small Check all examples, two at a time}}
+          \State $ex_1 \gets examples[i]$
+          \State $ex_2 \gets examples[i+1]$
+          \If {$ex_1[attribute] \neq ex_1[attribute]$}
+            \State $threshold \gets (ex_1[attribute] + ex_1[attribute]) / 2$
+            \State $less \gets \{example \in examples \mid example[attribute] <= threshold\}$
+            \State $greater \gets\{example \in examples \mid example[attribute] > threshold\}$
+            \State $splitted \gets \{less, greater\}$
+            \State $gain \gets  \textsc{InformationGain}(examples, splitted)$
+            \If {$gain > maxGain$}
+                \State $maxGain \gets gain$
+                \State $bestAttribute \gets attribute$
+                \State $bestThreshold \gets threshold$
+                \State $bestSplitted \gets splitted$
+            \EndIf
+          \EndIf
+        \EndFor
+    \EndIf
+  \EndFor
+  \State \textbf{return} $(bestAttribute, bestThreshold, bestSplitted)$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
