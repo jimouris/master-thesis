@@ -7,9 +7,9 @@
 \Require $classAttribute$
 
 \Procedure{ID3}{${\color{darkred}{examples}}, attributes$}
-    \If {$attributes = \{\}$}
+    \If {$attributes = \{\}$}\Comment{{\small If number of predicting attributes is empty}}
          \State \textbf{return} ${\color{darkblue}{\textsc{Declassify}}}(\textsc{MostCommonLabel}({\color{darkred}{examples}}))$\Comment{{\small Return the most \par\hfill common class in the dataset}}
-   \ElsIf {{\color{darkblue}{\textsc{Declassify}}}$({\color{darkred}{\textsc{AllExamplesSame}({\color{darkred}{examples}})}})$}\Comment{{\small If number of predicting attributes is empty}}
+   \ElsIf {{\color{darkblue}{\textsc{Declassify}}}$({\color{darkred}{\textsc{AllExamplesSame}({\color{darkred}{examples}})}})$}
        \State ${\color{darkred}{label}} \gets \enc{-1}$
        \For{${\color{darkred}{example}} \in {\color{darkred}{examples}}$}
            \State ${\color{darkred}{neq}} \gets {\color{darkred}{example}}[classAttribute] \hneq \enc{-1}$
