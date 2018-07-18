@@ -5,7 +5,7 @@
     \State $gain \gets \textsc{Entropy}(examples)$
 
     \For{{\small each possible value} $v_i$ {\small of} $attribute$}
-        \State $subset \gets$ {\small all examples that} $examples[attribute] = v_i$
+        \State $subset \gets \{example \in examples : example[attribute] = v_i\}$
 
         \State $percentage \gets \textsc{Length}(subset) \div \textsc{Length}(examples)$
         \If {$percentage \neq 0$}
