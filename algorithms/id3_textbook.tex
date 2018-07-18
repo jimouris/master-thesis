@@ -16,7 +16,7 @@
     \State $branches \gets \{\}$
     \For{{\small each possible value} $v_i$ {\small of} $bestAttribute$}
         \State {\small Let} $branch$ {\small be a new tree branch below root, corresponding to the test} $bestAttribute = v_i$
-        \State $subset \gets \{example \in examples : example[bestAttribute] = v_i\}$
+        \State $subset \gets \{example \in examples \mid example[bestAttribute] = v_i\}$
 
         \If {$subset = \{\}$}
             \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(examples)))$\Comment{{\small Add a leaf}}
