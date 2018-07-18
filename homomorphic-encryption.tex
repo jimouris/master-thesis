@@ -25,7 +25,7 @@ The only point in the process where data would be decrypted is when the user wan
 
 
 One challenge that homomorphic encryption schemes, and in general every encrypted computation framework, face is the inability to make runtime decisions based on encrypted data.
-Using homomorphic operations requires special care to ensure that branching does not reveal any sensitive data by observing side-channel information (e.g. the branch target).
+Using homomorphic operations requires special care to ensure that branching does not reveal any sensitive data by observing side-channel information (\textit{e.g.} the branch target).
 For instance, the host is unable to perform operations like ``\texttt{if (x > 0) return;}" when \texttt{x} is an encrypted variable.
 This is known as the ``termination problem", introduced in \cite{brenner2011secret}, since performing runtime branch decisions is not possible and therefore rendering the algorithms implemented on top of those systems by design more complex.
 
