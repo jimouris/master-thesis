@@ -22,6 +22,11 @@ In case that the chosen attribute is categorical, then the $bestSplitted$ variab
 Also, if the selected attribute is numerical then the algorithm creates two branches (one for transactions with value less than the threshold, and one for transactions with value greater than the threshold).
 If the selected attribute is categorical the algorithm creates as many branches as the possible values of that attribute.
 
+Below we present the algorithms for \f{C45} and \f{Best} procedures.
+We omit the rest as they are similar to the ones presented in section \ref{s:id3}.
+One difference for example is that the \f{InformationGain} procedure takes the disjoint subsets that occur from a split as an argument instead of taking the attribute and computing the subsets inside.
+
+% \import{./}{algorithms/c45_gain_textbook.tex}
 \import{./}{algorithms/c45_best_textbook.tex}
 \import{./}{algorithms/c45_textbook.tex}
 

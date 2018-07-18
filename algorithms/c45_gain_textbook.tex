@@ -1,0 +1,16 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Information Gain Textbook Algorithm}\label{a:c45-gain-simple}
+\begin{algorithmic}[1]
+\Procedure{InformationGain}{$examples, subsets$}\Comment{{\small Information gain (equation \ref{eq:gain}) is \par\hfill the measure of the difference in entropy from before to after a dataset is split on an attribute}}
+    \State $gain \gets \textsc{Entropy}(examples)$
+
+    \For{$subset \in subsets$}
+        \State $percentage \gets \textsc{Length}(subset) \div \textsc{Length}(examples)$
+        \If {$percentage \neq 0$}
+            \State $gain \gets gain - (percentage * \textsc{Entropy}(subset))$
+        \EndIf
+    \EndFor
+    \State \textbf{return} $gain$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
