@@ -27,7 +27,7 @@
           \State $branches \gets branches \cup branch$
       \EndFor
     \Else
-      \State {\small Let} $branch$ {\small be a new tree branch below root, corresponding to the test}  \par\hfill $bestAttribute <= v_i$
+      \State {\small Let} $branch$ {\small be a new tree branch below root, corresponding to the test}  \par\hfill $bestAttribute <= bestThreshold$
       \State $less \gets bestSplitted[0]$
       \If {$less = \{\}$}
           \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(examples)))$
@@ -35,7 +35,7 @@
           \State $branch \gets \textsc{AddTree}(branch, \textsc{C45}(less,$ $attributes - \{bestAttribute\}))$\par\hfill
       \EndIf
       \State $branches \gets branches \cup branch$
-      \State {\small Let} $branch$ {\small be a new tree branch below root, corresponding to the test}  \par\hfill $bestAttribute > v_i$
+      \State {\small Let} $branch$ {\small be a new tree branch below root, corresponding to the test}  \par\hfill $bestAttribute > bestThreshold$
       \State $greater \gets bestSplitted[1]$
       \If {$greater = \{\}$}
           \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(examples)))$
