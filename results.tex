@@ -137,3 +137,95 @@
 
 \subsection{Decision Trees}\label{ss:results-dtrees}
 
+
+\begin{figure}[H]
+\centering
+\centerline{
+\begin{minipage}{.5\linewidth}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[scale only axis, enlarge x limits=-1, width=\textwidth*0.75, ymajorgrids=true, xmode=log, log ticks with fixed point, xlabel={Number of Patients}, ylabel={Time (sec.)}, xticklabels={1,10,100,1k}, ymax=500, grid style=dashed]
+  \addplot
+      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
+  \addlegendentry{Num. ID3}
+  \addplot
+      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
+  \addlegendentry{Cat. ID3}
+  \addplot
+      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
+  \addlegendentry{Num. C4.5}
+  \addplot
+      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
+  \addlegendentry{Cat. C4.5}
+  \end{axis}
+  \end{tikzpicture}
+  \caption{ID3 \& C4.5 decision tree classifier timings for 3 attributes}
+\end{minipage}%
+\begin{minipage}{.5\linewidth}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[scale only axis,enlarge x limits=-1,width=\textwidth*0.75,ymajorgrids=true,xmode=log,log ticks with fixed point,xlabel={Number of Patients},ylabel={Time (sec.)},xticklabels={1,10,100,1k},ymax=500,grid style=dashed]
+  \addplot
+      coordinates {(1, 0.382224)(10, 3.947421)(100, 38.052168)(1000, 392.634467)};
+  \addlegendentry{Num. ID3}
+  \addplot
+      coordinates {(1, 0.099595)(10, 0.922558)(100, 9.712436)(1000, 99.149262)};
+  \addlegendentry{Cat. ID3}
+  \addplot
+      coordinates {(1, 0.382224)(10, 3.947421)(100, 38.052168)(1000, 392.634467)};
+  \addlegendentry{Num. C4.5}
+  \addplot
+      coordinates {(1, 0.099595)(10, 0.922558)(100, 9.712436)(1000, 99.149262)};
+  \addlegendentry{Cat. C4.5}
+  \end{axis}
+  \end{tikzpicture}
+  \caption{ID3 \& C4.5 decision tree classifier timings for 4 attributes}
+\end{minipage}
+}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{figure}[H]
+\centering
+\centerline{
+\begin{minipage}{.5\linewidth}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[scale only axis, enlarge x limits=-1, width=\textwidth*0.75, ymajorgrids=true, xmode=log, log ticks with fixed point, xlabel={Number of Patients}, ylabel={Time (sec.)}, xticklabels={1,10,100,1k}, ymax=500, grid style=dashed]
+  \addplot
+      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
+  \addlegendentry{1 data provider}
+  \addplot
+      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
+  \addlegendentry{2 data providers}
+  \addplot
+      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
+  \addlegendentry{3 data providers}
+  \end{axis}
+  \end{tikzpicture}
+  \caption{ID3 decision tree classifier timings for 3 attributes for different number of data\hyp providers}
+\end{minipage}%
+\begin{minipage}{.5\linewidth}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[scale only axis,enlarge x limits=-1,width=\textwidth*0.75,ymajorgrids=true,xmode=log,log ticks with fixed point,xlabel={Number of Patients},ylabel={Time (sec.)},xticklabels={1,10,100,1k},ymax=500,grid style=dashed]
+  \addplot
+      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
+  \addlegendentry{1 data provider}
+  \addplot
+      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
+  \addlegendentry{2 data providers}
+  \addplot
+      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
+  \addlegendentry{3 data providers}
+  \end{axis}
+  \end{tikzpicture}
+  \caption{C4.5 decision tree classifier timings for 3 attributes for different number of data\hyp providers}
+\end{minipage}
+}
+\end{figure}
+
+
