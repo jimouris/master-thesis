@@ -2,49 +2,49 @@
 \caption{Privacy Preserving Constraint Mask}\label{a:filters-constraint-mask}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
-\Require ${\color{darkred}{array}}, {\color{darkred}{constraintMask}}, {\color{darkred}{eq}}, {\color{darkred}{constraintAttribute}}$
+\Require $\red{array}, \red{constraintMask}, \red{eq}, \red{constraintAttribute}$
  % $\par \hspace{1.2cm}$
 
-\Procedure{ConstraintMask}{${\color{darkred}{array}}[N][M], operation, constraintAttributes[C], $\par\hfill$ constraintOperators[C], constraintValues[C]$}
+\Procedure{ConstraintMask}{$\red{array}[N][M], operation, constraintAttributes[C], $\par\hfill$ constraintOperators[C], constraintValues[C]$}
 
     \If {$operation = AND$}
-        \State ${\color{darkred}{constraintMask}} \gets [\enc{1}, \enc{1}, \dots, \enc{1}]$ \Comment{{\small array initialized with $\enc{1}$}}
+        \State $\red{constraintMask} \gets [\enc{1}, \enc{1}, \dots, \enc{1}]$ \Comment{{\small array initialized with $\enc{1}$}}
     \ElsIf {$operation = OR$}
-        \State ${\color{darkred}{constraintMask}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{{\small array initialized with $\enc{0}$}}
+        \State $\red{constraintMask} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{{\small array initialized with $\enc{0}$}}
     \ElsIf {$operation = XOR$}
-        \State ${\color{darkred}{constraintMask}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{{\small array initialized with $\enc{0}$}}
+        \State $\red{constraintMask} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$ \Comment{{\small array initialized with $\enc{0}$}}
     \EndIf
 
     \For{$c \in \{0, \dots, C-1\}$}\Comment{{\small $C$ is the number of the different constraints}}
 
         \State $constraintIndex \gets constraintAttributes[c]$
 
-        \State ${\color{darkred}{constraintAttribute}} \gets {\color{darkred}{array}}[:, constraintIndex]$
+        \State $\red{constraintAttribute} \gets \red{array}[:, constraintIndex]$
 
         \State $constraintValue \gets constraintValues[c]$
         \State $constraintOperators \gets constraintOperators[c]$
 
         \If {$constraintOperators = GreaterThan$}
-            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hgt constraintValue$ \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at \par\hfill positions where the constraint holds, $\enc{0}$ otherwise}}
+            \State $\red{eq} \gets \red{constraintAttribute} \hgt constraintValue$ \Comment{{\small ${\texttt{SIMD}; \red{eq}}$ vector gets $\enc{1}$ at \par\hfill positions where the constraint holds, $\enc{0}$ otherwise}}
         \ElsIf {$constraintOperators = LessThan$}
-            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \hlt constraintValue$
-            % \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where ${\color{darkred}{constraintAttribute}} \hlt constraintValue,  \enc{0}$ otherwise}}
+            \State $\red{eq} \gets \red{constraintAttribute} \hlt constraintValue$
+            % \Comment{{\small ${\texttt{SIMD}; \red{eq}}$ vector gets $\enc{1}$  at positions where $\red{constraintAttribute} \hlt constraintValue,  \enc{0}$ otherwise}}
         \ElsIf {$constraintOperators = Equal$}
-            \State ${\color{darkred}{eq}} \gets {\color{darkred}{constraintAttribute}} \heq constraintValue$
-            % \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$  at positions where ${\color{darkred}{constraintAttribute}} \heq constraintValue,  \enc{0}$ otherwise}}
+            \State $\red{eq} \gets \red{constraintAttribute} \heq constraintValue$
+            % \Comment{{\small ${\texttt{SIMD}; \red{eq}}$ vector gets $\enc{1}$  at positions where $\red{constraintAttribute} \heq constraintValue,  \enc{0}$ otherwise}}
         \EndIf
 
         \If {$operation = AND$}
-            \State ${\color{darkred}{constraintMask}} \gets {\color{darkred}{constraintMask}} \hmul {\color{darkred}{eq}}$ \Comment{{\small Applying the boolean operator \par\hfill between the constraints. {\small ${\texttt{SIMD}}$}}}
+            \State $\red{constraintMask} \gets \red{constraintMask} \hmul \red{eq}$ \Comment{{\small Applying the boolean operator \par\hfill between the constraints. {\small ${\texttt{SIMD}}$}}}
         \ElsIf {$operation = OR$}
-            \State ${\color{darkred}{constraintMask}} \gets {\color{darkred}{constraintMask}} \hplus {\color{darkred}{eq}}$
+            \State $\red{constraintMask} \gets \red{constraintMask} \hplus \red{eq}$
         \ElsIf {$operation = XOR$}
-            \State ${\color{darkred}{constraintMask}} \gets {\color{darkred}{constraintMask}} \hplus (1-{\color{darkred}{eq}}) + (1-{\color{darkred}{constraintMask}}) * {\color{darkred}{eq}}$
+            \State $\red{constraintMask} \gets \red{constraintMask} \hplus (1-\red{eq}) + (1-\red{constraintMask}) * \red{eq}$
         \EndIf
 
     \EndFor
 
-    \State \textbf{return} {${\color{darkred}{constraintMask}}$}
+    \State \textbf{return} {$\red{constraintMask}$}
 \EndProcedure
 
 \end{algorithmic}

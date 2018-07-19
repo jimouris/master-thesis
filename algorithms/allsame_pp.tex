@@ -2,25 +2,25 @@
 \caption{Privacy Preserving All Examples Same Algorithm}\label{a:id3-same-pp}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
-\Require ${\color{darkred}{examples}}, {\color{darkred}{res}}, {\color{darkred}{eq}}, {\color{darkred}{classCounts}}$
+\Require $\red{examples}, \red{res}, \red{eq}, \red{classCounts}$
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
 \Require $classAttribute$
-\Procedure{AllExamplesSame}{${\color{darkred}{examples}}$}\Comment{{\small Check if all {\color{darkred}{examples}} have the same class}}
-    \State ${\color{darkred}{res}} \gets  \enc{0}$
+\Procedure{AllExamplesSame}{$\red{examples}$}\Comment{{\small Check if all \red{examples} have the same class}}
+    \State $\red{res} \gets  \enc{0}$
 
     \For{{\small each possible class} $c_i$ {\small of} $classAttribute$}
 
-      \State ${\color{darkred}{eq}} \gets {\color{darkred}{examples}}[classAttribute] \heq c_i$ \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
+      \State $\red{eq} \gets \red{examples}[classAttribute] \heq c_i$ \Comment{{\small ${\texttt{SIMD}; \red{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
 
-      \State ${\color{darkred}{classCounts}}[c_i] \gets \textsc{Sum}({\color{darkred}{eq}})$
-      \Comment{{\small ${\color{darkred}{classCounts}}[c_i]$ gets the number of examples with \par\hfill class $c_i$}}
+      \State $\red{classCounts}[c_i] \gets \textsc{Sum}(\red{eq})$
+      \Comment{{\small $\red{classCounts}[c_i]$ gets the number of examples with \par\hfill class $c_i$}}
 
-      \State ${\color{darkred}{res}} \gets {\color{darkred}{res}} \hplus ({\color{darkred}{classCounts}}[c_i] \heq \textsc{CountPositives}({\color{darkred}{examples}}))$
-      \Comment{{\small ${\color{darkred}{res}}$ will increase \par\hfill if all examples are of one class}}
+      \State $\red{res} \gets \red{res} \hplus (\red{classCounts}[c_i] \heq \textsc{CountPositives}(\red{examples}))$
+      \Comment{{\small $\red{res}$ will increase \par\hfill if all examples are of one class}}
 
     \EndFor
 
-    \State \textbf{return} ${\color{darkred}{res}} \hgt \enc{0}$
+    \State \textbf{return} $\red{res} \hgt \enc{0}$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}

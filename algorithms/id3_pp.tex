@@ -2,35 +2,35 @@
 \caption{Privacy Preserving ID3 Algorithm}\label{a:id3-pp}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
-\Require ${\color{darkred}{examples}}, {\color{darkred}{example}}, {\color{darkred}{eq}}, {\color{darkred}{subset}}$
+\Require $\red{examples}, \red{example}, \red{eq}, \red{subset}$
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
 \Require $classAttribute$
 
-\Procedure{ID3}{${\color{darkred}{examples}}, attributes$}
+\Procedure{ID3}{$\red{examples}, attributes$}
     \If {$attributes = \{\}$}\Comment{{\small If number of predicting attributes is empty}}
-         \State \textbf{return} ${\color{darkblue}{\textsc{Declassify}}}(\textsc{MostCommonLabel}({\color{darkred}{examples}}))$\Comment{{\small Return the most \par\hfill common class in the dataset}}
-  \ElsIf {${\color{darkblue}{\textsc{Declassify}}}({\color{darkred}{\textsc{AllExamplesSame}}}({\color{darkred}{examples}}))$}
-       \State ${\color{darkred}{label}} \gets \enc{-1}$
-       \For{${\color{darkred}{example}} \in {\color{darkred}{examples}}$}
-           \State ${\color{darkred}{neq}} \gets {\color{darkred}{example}}[classAttribute] \hneq \enc{-1}$
-           \State ${\color{darkred}{label}} \gets {\color{darkred}{neq}} \hmul {\color{darkred}{example}}[classAttribute] \hplus (\enc{1} - {\color{darkred}{neq}}) \hmul {\color{darkred}{label}} $
+         \State \textbf{return} ${\blue{\textsc{Declassify}}}(\textsc{MostCommonLabel}(\red{examples}))$\Comment{{\small Return the most \par\hfill common class in the dataset}}
+  \ElsIf {${\blue{\textsc{Declassify}}}({\red{\textsc{AllExamplesSame}}}(\red{examples}))$}
+       \State $\red{label} \gets \enc{-1}$
+       \For{$\red{example} \in \red{examples}$}
+           \State $\red{neq} \gets \red{example}[classAttribute] \hneq \enc{-1}$
+           \State $\red{label} \gets \red{neq} \hmul \red{example}[classAttribute] \hplus (\enc{1} - \red{neq}) \hmul \red{label} $
        \EndFor
-       \State \textbf{return} {{\color{darkblue}{\textsc{Declassify}}}}$({\color{darkred}{label}})$
+       \State \textbf{return} {{\blue{\textsc{Declassify}}}}$(\red{label})$
     \EndIf
 
-    \State $bestAttribute \gets \textsc{Best}({\color{darkred}{examples}}, attributes)$\Comment{{\small Best attribute is the one with maximum \par\hfill information gain -- or similarly, minimum entropy}}
+    \State $bestAttribute \gets \textsc{Best}(\red{examples}, attributes)$\Comment{{\small Best attribute is the one with maximum \par\hfill information gain -- or similarly, minimum entropy}}
 
 
     \State $branches \gets \{\}$
 
     \For{{\small each possible value} $v_i$ {\small of} $bestAttribute$}
         \State {\small Let} $branch$ {\small be a new tree branch below root, corresponding to the test} $bestAttribute = v_i$
-      \State ${\color{darkred}{eq}} \gets {\color{darkred}{examples}}[bestAttribute] \heq v_i$ \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
-      \State ${\color{darkred}{subset}} \gets {\color{darkred}{examples}} \hmul {\color{darkred}{eq}} \hplus (\enc{1} \hminus {\color{darkred}{eq}}) \hmul \enc{-1} $ \Comment{{\small ${\texttt{SIMD}; \color{darkred}{subset}}$ gets a copy of ${\color{darkred}{examples}}$ \par\hfill at positions  where the equality holds, $\enc{-1}$ otherwise}}
-        \If {{\color{darkblue}{\textsc{Declassify}}}$(\textsc{CountPositives}({\color{darkred}{subset}}) \heq \enc{0})$}
-            \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}({\color{darkred}{examples}})))$ \Comment{{\small Add a \par\hfill leaf}}
+      \State $\red{eq} \gets \red{examples}[bestAttribute] \heq v_i$ \Comment{{\small ${\texttt{SIMD}; \red{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
+      \State $\red{subset} \gets \red{examples} \hmul \red{eq} \hplus (\enc{1} \hminus \red{eq}) \hmul \enc{-1} $ \Comment{{\small ${\texttt{SIMD}; \red{subset}}$ gets a copy of $\red{examples}$ \par\hfill at positions  where the equality holds, $\enc{-1}$ otherwise}}
+        \If {{\blue{\textsc{Declassify}}}$(\textsc{CountPositives}(\red{subset}) \heq \enc{0})$}
+            \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(\red{examples})))$ \Comment{{\small Add a \par\hfill leaf}}
         \Else
-            \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}({\color{darkred}{subset}},$ $attributes - \{bestAttribute\}))$ \par\hfill \Comment{{\small Recurse and add the subtree}}
+            \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}(\red{subset},$ $attributes - \{bestAttribute\}))$ \par\hfill \Comment{{\small Recurse and add the subtree}}
         \EndIf
         \State $branches \gets branches \cup branch$
     \EndFor

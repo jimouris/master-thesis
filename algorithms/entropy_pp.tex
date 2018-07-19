@@ -1,19 +1,19 @@
 \begin{algorithm}[H]\fontfamily{lmss}
 \caption{Privacy Preserving Entropy Algorithm}\label{a:id3-entropy-pp}
 \begin{algorithmic}[1]
-\Require ${\color{darkred}{examples}}, {\color{darkred}{example}}, {\color{darkred}{entropy}}, {\color{darkred}{count}}, {\color{darkred}{percentage}}, {\color{darkred}{eq}}$
+\Require $\red{examples}, \red{example}, \red{entropy}, \red{count}, \red{percentage}, \red{eq}$
 \renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
 \Require $classAttribute$
-\Procedure{Entropy}{${\color{darkred}{examples}}$}\Comment{{\small Entropy (H(S) equation \ref{eq:entropy}), is a measure of the \par\hfill amount of uncertainty in the dataset}}
-    \State ${\color{darkred}{entropy}} \gets \enc{0}$
+\Procedure{Entropy}{$\red{examples}$}\Comment{{\small Entropy (H(S) equation \ref{eq:entropy}), is a measure of the \par\hfill amount of uncertainty in the dataset}}
+    \State $\red{entropy} \gets \enc{0}$
 
     \For{{\small each possible class} $c_i$ {\small of} $classAttribute$}
-        \State ${\color{darkred}{eq}} \gets {\color{darkred}{examples}}[classAttribute] \heq c_i$ \Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
-        \State ${\color{darkred}{count}} \gets \textsc{Sum}({\color{darkred}{eq}})$
-        \State ${\color{darkred}{percentage}} \gets {\color{darkred}{count}} \div \textsc{CountPositives}({\color{darkred}{examples}})$
-        \State ${\color{darkred}{entropy}} \gets {\color{darkred}{entropy}} - ({\color{darkred}{percentage}} * log_2 ({\color{darkred}{percentage}}))$\Comment{{\small Here we use a modified $log_2$ \par\hfill function that returns $\enc{0}$ given $\enc{0}$ as input}}
+        \State $\red{eq} \gets \red{examples}[classAttribute] \heq c_i$ \Comment{{\small ${\texttt{SIMD}; \red{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
+        \State $\red{count} \gets \textsc{Sum}(\red{eq})$
+        \State $\red{percentage} \gets \red{count} \div \textsc{CountPositives}(\red{examples})$
+        \State $\red{entropy} \gets \red{entropy} - (\red{percentage} * log_2 (\red{percentage}))$\Comment{{\small Here we use a modified $log_2$ \par\hfill function that returns $\enc{0}$ given $\enc{0}$ as input}}
     \EndFor
-    \State \textbf{return} ${\color{darkred}{entropy}}$
+    \State \textbf{return} $\red{entropy}$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}

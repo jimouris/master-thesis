@@ -14,13 +14,13 @@
 \begin{spacing}{0.5}
 \end{spacing}
 
-\Require ${\color{darkred}{array}}, {\color{darkred}{sum}}$
-\Procedure{Sum}{${\color{darkred}{array}}[N]$}\Comment{{\small Sum of a private array}}
-    \State ${\color{darkred}{sum}} \gets \enc{0}$
+\Require $\red{array}, \red{sum}$
+\Procedure{Sum}{$\red{array}[N]$}\Comment{{\small Sum of a private array}}
+    \State $\red{sum} \gets \enc{0}$
     \For{$i \in \{0, \dots, N-1\}$}
-        \State ${\color{darkred}{sum}} \gets {\color{darkred}{sum}} \hplus{\color{darkred}{array}}[i]$
+        \State $\red{sum} \gets \red{sum} \hplus \red{array}[i]$
     \EndFor
-    \State \textbf{return} {${\color{darkred}{sum}}$}
+    \State \textbf{return} {$\red{sum}$}
 \EndProcedure
 
 \end{algorithmic}

@@ -1,12 +1,12 @@
 \begin{algorithm}[H]\fontfamily{lmss}
 \caption{Privacy Preserving Count Positives Algorithm}\label{a:id3-count-positives-pp}
 \begin{algorithmic}[1]
-\Require ${\color{darkred}{examples}}, {\color{darkred}{neq}}, {\color{darkred}{count}}$
-\Procedure{CountPositives}{${\color{darkred}{examples}}$}
+\Require $\red{examples}, \red{neq}, \red{count}$
+\Procedure{CountPositives}{$\red{examples}$}
 
-  \State ${\color{darkred}{neq}} \gets {\color{darkred}{examples}} \hneq \enc{-1}$\Comment{{\small {\texttt{SIMD} comparison}}}
-  \State ${\color{darkred}{count}} \gets \textsc{Sum}({\color{darkred}{neq}})$
-  \State \textbf{return} ${\color{darkred}{count}}$
+  \State $\red{neq} \gets \red{examples} \hneq \enc{-1}$\Comment{{\small {\texttt{SIMD} comparison}}}
+  \State $\red{count} \gets \textsc{Sum}(\red{neq})$
+  \State \textbf{return} $\red{count}$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}

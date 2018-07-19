@@ -2,28 +2,28 @@
 \caption{Privacy Preserving 1D Histogram for Categorical Values}\label{a:1d-histogram-categorical}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
-\Require ${\color{darkred}{array}}, {\color{darkred}{histogram}}, {\color{darkred}{eq}}$
+\Require $\red{array}, \red{histogram}, \red{eq}$
 
-\Procedure{1DimHistogramCategorical}{${\color{darkred}{array}}[N], P$}
+\Procedure{1DimHistogramCategorical}{$\red{array}[N], P$}
     \For{$i \in \{0, \dots, P-1\}$}\Comment{{\small $P$ is the number of the different (possible) values in $array$}}
-        \State ${\color{darkred}{eq}} \gets ({\color{darkred}{array}} \heq i)$\Comment{{\small \texttt{SIMD}; array eq contains $\enc{1}$ where $array[j] \heq i$, \par\hfill$\enc{0}$ otherwise, $j \in \{0, \dots, P-1\}$}}
+        \State $\red{eq} \gets (\red{array} \heq i)$\Comment{{\small \texttt{SIMD}; array eq contains $\enc{1}$ where $array[j] \heq i$, \par\hfill$\enc{0}$ otherwise, $j \in \{0, \dots, P-1\}$}}
 
-        \State ${\color{darkred}{histogram}}[i] \gets
-        \textsc{Sum}({\color{darkred}{eq}})$\Comment{{\small Operation to sum eq array}}
+        \State $\red{histogram}[i] \gets
+        \textsc{Sum}(\red{eq})$\Comment{{\small Operation to sum eq array}}
     \EndFor
-    \State \textbf{return} {${\color{darkred}{histogram}}$}
+    \State \textbf{return} {$\red{histogram}$}
 \EndProcedure
 
 \begin{spacing}{0.5}
 \end{spacing}
 
-% \Require ${\color{darkred}{array}}, {\color{darkred}{sum}}$
-% \Procedure{Sum}{${\color{darkred}{array}}[N]$}\Comment{{\small Compute and return the sum of an array}}
-%     \State ${\color{darkred}{sum}} \gets \enc{0}$
+% \Require $\red{array}, \red{sum}$
+% \Procedure{Sum}{$\red{array}[N]$}\Comment{{\small Compute and return the sum of an array}}
+%     \State $\red{sum} \gets \enc{0}$
 %     \For{$i \in \{0, \dots, N-1\}$}
-%         \State ${\color{darkred}{sum}} \gets {\color{darkred}{sum}} \hplus{\color{darkred}{array}}[i]$
+%         \State $\red{sum} \gets \red{sum} \hplus\red{array}[i]$
 %     \EndFor
-%     \State \textbf{return} {${\color{darkred}{sum}}$}
+%     \State \textbf{return} {$\red{sum}$}
 % \EndProcedure
 
 \end{algorithmic}

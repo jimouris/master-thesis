@@ -2,12 +2,12 @@
 \caption{Privacy Preserving Multi-Dimensional Histogram for Numerical Values (Specified Cells)}\label{a:multidim-histogram-numerical}
 \begin{algorithmic}[1]
 \renewcommand{\algorithmicrequire}{\textbf{Private Vars:}}
-\Require ${\color{darkred}{array}}, {\color{darkred}{mins}}, {\color{darkred}{maxs}}, {\color{darkred}{min}}, {\color{darkred}{max}}, {\color{darkred}{column}}, {\color{darkred}{positions}}, {\color{darkred}{histogram}}, {\color{darkred}{cellWidth}}, {\color{darkred}{eq}} ,$\par
-\hspace{1.2cm}${\color{darkred}{cellMap}}$
+\Require $\red{array}, {\red{mins}}, {\red{maxs}}, \red{min}, \red{max}, \red{column}, \red{positions}, \red{histogram}, \red{cellWidth}, \red{eq} ,$\par
+\hspace{1.2cm}$\red{cellMap}$
 
-\Procedure{MultDimHistogramNumerical}{${\color{darkred}{array}}[N][M], attributes[A], $\par\hfill$cellsPerAttribute[A], {\color{darkred}{mins}}[M], {\color{darkred}{maxs}}[M]$}
+\Procedure{MultDimHistogramNumerical}{$\red{array}[N][M], attributes[A], $\par\hfill$cellsPerAttribute[A], {\red{mins}}[M], {\red{maxs}}[M]$}
     \State
-    ${\color{darkred}{positions}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $\Comment{{\small ${\color{darkred}{positions}}$ is an array initialized with $\enc{0}$}}
+    $\red{positions} \gets [\enc{0}, \enc{0}, \dots, \enc{0}] $\Comment{{\small $\red{positions}$ is an array initialized with $\enc{0}$}}
 
     \For{$a \in \{0, \dots, A-1\}$}
 
@@ -15,38 +15,38 @@
 
       \State $numberOfCells \gets cellsPerAttribute[a]$
 
-      \State ${\color{darkred}{max}} \gets {\color{darkred}{maxs}}[attribute]$
+      \State $\red{max} \gets {\red{maxs}}[attribute]$
 
-      \State ${\color{darkred}{min}} \gets {\color{darkred}{mins}}[attribute]$
+      \State $\red{min} \gets {\red{mins}}[attribute]$
 
-      \State ${\color{darkred}{cellWidth}} \gets ({\color{darkred}{max}} \hminus {\color{darkred}{min}}) \hdiv numberOfCells$
+      \State $\red{cellWidth} \gets (\red{max} \hminus \red{min}) \hdiv numberOfCells$
 
-      \State ${\color{darkred}{column}} \gets {\color{darkred}{array}}[:, attribute]$\Comment{{\small Slicing of a specific column of the ${\color{darkred}{array}}$ matrix}}
+      \State $\red{column} \gets \red{array}[:, attribute]$\Comment{{\small Slicing of a specific column of the $\red{array}$ matrix}}
 
-      \State ${\color{darkred}{cellMap}} \gets ({\color{darkred}{column}} \hminus {\color{darkred}{min}}) \hdiv cellWidth$
+      \State $\red{cellMap} \gets (\red{column} \hminus \red{min}) \hdiv cellWidth$
 
-      \State ${\color{darkred}{cellMap}} \gets {\color{darkred}{cellMap}} \hminus ({\color{darkred}{cellMap}} \heq numberOfCells)$
+      \State $\red{cellMap} \gets \red{cellMap} \hminus (\red{cellMap} \heq numberOfCells)$
 
       \State $prod \gets \textsc{Product}(cellsPerAttribute[a+1:])$
 
-      \State ${\color{darkred}{positions}} \gets {\color{darkred}{positions}} \hplus {\color{darkred}{cellMap}} \hmul prod$
+      \State $\red{positions} \gets \red{positions} \hplus \red{cellMap} \hmul prod$
 
     \EndFor
 
     \State $length \gets \textsc{Product}(cellsPerAttribute)$
 
-    \State ${\color{darkred}{histogram}} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$\Comment{{\small ${\color{darkred}{histogram}}$ is an array initialized with $\enc{0}$}}
+    \State $\red{histogram} \gets [\enc{0}, \enc{0}, \dots, \enc{0}]$\Comment{{\small $\red{histogram}$ is an array initialized with $\enc{0}$}}
 
 
     \For{$j \in \{0, \dots, length-1\}$}
 
-      \State ${\color{darkred}{eq}} \gets {\color{darkred}{positions}} \heq j$\Comment{{\small ${\texttt{SIMD}; \color{darkred}{eq}}$ gets either $\enc{0}$ or $\enc{1}$}}
+      \State $\red{eq} \gets \red{positions} \heq j$\Comment{{\small ${\texttt{SIMD}; \red{eq}}$ gets either $\enc{0}$ or $\enc{1}$}}
 
-      \State ${\color{darkred}{histogram}}[j] \gets \textsc{Sum}({\color{darkred}{eq}})$
+      \State $\red{histogram}[j] \gets \textsc{Sum}(\red{eq})$
 
     \EndFor
 
-    \State \textbf{return} {${\color{darkred}{histogram}}$}
+    \State \textbf{return} {$\red{histogram}$}
 \EndProcedure
 
 
