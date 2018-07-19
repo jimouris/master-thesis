@@ -150,14 +150,13 @@ Line 5 of algorithm \ref{a:1d-histogram-numerical} is more complex than line 3 o
 
 
 \textbf{Multi-Dimensional Histograms}:
-Algorithm \ref{a:multidim-histogram-numerical} implements multi\hyp dimensional histograms for numerical, \textit{i.e.} continuous data.
-The algorithm is a straightforward generalization of algorithm \ref{a:1d-histogram-numerical}.
-Similarly, for each specified attribute we compute the corresponding cell width, that depends on the minimum and maximum values and the specified cell number of that attribute.
+The algorithm that implements multi\hyp dimensional histograms for numerical, \textit{i.e.} continuous data is a straightforward generalization of algorithms \ref{a:multidim-histogram-categorical} and \ref{a:1d-histogram-numerical}.
+Similarly, for each specified attribute we compute the corresponding cell width (as in the 1\hyp dimensional for numerical values -- alg. \ref{a:1d-histogram-numerical}), that depends on the minimum and maximum values and the specified cell number of that attribute.
 Consecutively, we compute the $positions$ vector containing the histogram cell for each one of the $N$ rows of $array$.
 Like in algorithm \ref{a:multidim-histogram-categorical}, the $positions$ array contains single indexes that correspond to multiple indexes according to the procedure described above in section \ref{sss:histogram-categorical}.
 
 
-\import{./}{algorithms/multdim_hist_numerical.tex}
+% \import{./}{algorithms/multdim_hist_numerical.tex}
 
 
 
@@ -237,14 +236,17 @@ If that tuple satisfies all the specified constraints, then the vector should ha
 This vector then is taken into consideration when we build the histogram.
 Only tuples which have ``scored'' \texttt{True} are counted into the histogram.
 
-In algorithm \ref{a:filters-constraint-mask} the aforementioned vector is $constraintMask$.
+In algorithm \ref{a:filters-constraint-mask}, the aforementioned vector is called $constraintMask$.
 In lines 14-20 we build this boolean mask for each constraint into the $eq$ vector, and in lines 21-27 we combine these vectors to build the total one, according to the specified boolean operator applied between them.
 
-As you can see in algorithm \ref{a:filters-2d-histogram} which computes a multi\hyp dimensional histogram of categorical attributes, the application of this constraints is as simple as a private multiplication with the $N$-size vector $constraintMask$.
-This SIMD operator can be seen in line 13.
-Beyond this addition, the algorithm is identical to the standard multi\hyp dimensional histogram of categorical attributes as in algorithm \ref{a:multidim-histogram-categorical}.
+The algorithm for computing histograms for either categorical or numerical attributes utilizes this $constraintMask$ vector.
+After having computed the constraints, in order to join them with the data computed by the algorithms, a private multiplication with the $N$-size vector $constraintMask$ is needed.
+This multiplication can be done with SIMD operation, which saves a lot of communication overhead between the computing nodes.
 
-\import{./}{algorithms/filters2.tex}
+As the multi\hyp dimensional histogram computation algorithms for numerical and categorical data, constraint mask can be used for as many dimensions as requested.
+Since the constraint\hyp mask is dependent to the number of tuples in the dataset, the dimensions of the requested histogram can be as many as the user requests.
+
+% \import{./}{algorithms/filters2.tex}
 
 
 
