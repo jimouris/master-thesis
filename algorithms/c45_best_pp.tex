@@ -1,0 +1,50 @@
+\begin{algorithm}[H]\fontfamily{lmss}
+\caption{Privacy Preserving C4.5 Best Algorithm}\label{a:c45-best-simple}
+\begin{algorithmic}[1]
+\renewcommand{\algorithmicrequire}{\textbf{Global Vars:}}
+\Require $classAttribute, categoricalAttributes$
+\Procedure{Best}{$\red{examples}, attributes$}
+  \State $\red{bestSplitted} \gets \enc{\{\}}$
+  \State $\red{maxGain} \gets \enc{-\infty}$
+  \State $\red{bestThreshold} \gets \enc{-1}$
+  \State $\red{bestAttribute} \gets \enc{-1}$
+  \For{$attribute \in attributes$}
+    \If {$attribute \in categoricalAttributes$}\Comment{{\small If attribute is categorical}}
+      \State $\red{splitted} \gets \{\}$
+        \For{{\small each possible value} $v_i$ {\small of} $attribute$}
+        \State $\red{eq} \gets \red{examples}[attribute] \heq v_i$ \Comment{{\small $\texttt{SIMD};\red{eq}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
+        \State $\red{subset} \gets \red{examples} \hmul \red{eq} \hplus (\enc{1} \hminus \red{eq}) \hmul \enc{-1} $ \Comment{{\small $\texttt{SIMD};\red{subset}$ gets a copy of \par\hfill $\red{examples}$  at positions  where the equality holds, $\enc{-1}$ otherwise}}
+          \State $\red{splitted} \gets \red{splitted} \cup \red{subset}$
+        \EndFor
+        \State $\red{gain} \gets  \textsc{InformationGain}(\red{examples}, \red{splitted})$
+        \State $\red{gt} \gets \red{gain} \hgt  \red{maxGain}$
+        \State $\red{maxGain} \gets \red{gt} \hmul \red{gain} \hplus (\enc{1} \hminus \red{gt}) \hmul \red{maxGain}$ \Comment{{\small Obliviously choose  \par\hfill maximum gain}}
+        \State $\red{bestAttribute} \gets \red{gt} \hmul attribute \hplus (\enc{1} \hminus \red{gt}) \hmul \red{bestAttribute}$
+        \State $\red{bestSplitted} \gets \red{gt} \hmul splitted \hplus (\enc{1} \hminus \red{gt}) \hmul \red{bestSplitted}$
+    \Else \Comment{{\small If attribute is numerical}}
+      \State {\small Sort $\red{examples}$ by $attribute$ column}
+      \For{$i \in \{0, \dots, \textsc{Length}(\red{examples})-2\}$}\Comment{{\small Check all examples, two at a time}}
+          \State {\small Let} $\red{ex_1}$ {\small be the first valid example}
+          \State {\small Let} $\red{ex_2}$ {\small be the second valid example}
+          \State $\red{neq} \gets \red{ex_1} \hneq \red{ex_1}$
+          \State $\red{threshold} \gets (\red{ex_1}[attribute] + \red{ex_1}[attribute]) / 2$
+          \State $\red{lt} \gets \red{examples}[attribute] \hlte \red{threshold}$ \Comment{{\small $\texttt{SIMD};\red{lt}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
+          \State $\red{less} \gets \red{examples} \hmul \red{lt} \hplus (\enc{1} \hminus \red{lt}) \hmul \enc{-1} $ \Comment{{\small $\texttt{SIMD};\red{less}$ gets a copy of \par\hfill $\red{examples}$  at positions  where the inequality holds, $\enc{-1}$ otherwise}}
+          \State $\red{gt} \gets \red{examples}[attribute] \hgt \red{threshold}$
+          \State $\red{greater} \gets \red{examples} \hmul \red{gt} \hplus (\enc{1} \hminus \red{gt}) \hmul \enc{-1} $
+
+          \State $\red{splitted} \gets \{\red{less}, \red{greater}\}$
+          \State $\red{gain} \gets  \textsc{InformationGain}(\red{examples}, splitted)$
+          \State $\red{gt} \gets \red{gain} \hgt  \red{maxGain}$
+          \State $\red{maxGain} \gets \red{gt} \hmul \red{gain} \hplus (\enc{1} \hminus \red{gt}) \hmul \red{maxGain}$ \Comment{{\small Obliviously choose  \par\hfill maximum gain}}
+          \State $\red{bestAttribute} \gets \red{gt} \hmul attribute \hplus (\enc{1} \hminus \red{gt}) \hmul \red{bestAttribute}$
+          \State $\red{bestThreshold} \gets \red{gt} \hmul threshold \hplus (\enc{1} \hminus \red{gt}) \hmul \red{bestThreshold}$
+          \State $\red{bestSplitted} \gets \red{gt} \hmul splitted \hplus (\enc{1} \hminus \red{gt}) \hmul \red{bestSplitted}$
+        \EndFor
+    \EndIf
+  \EndFor
+  \State \textbf{return} $(\red{bestAttribute}, \red{bestThreshold}, \red{bestSplitted})$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
