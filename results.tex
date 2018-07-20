@@ -10,56 +10,98 @@
   \centering
   \begin{tikzpicture}
   \begin{axis}[
+    legend pos=north west,
     scale only axis,
     enlarge x limits=-1,
     width=\textwidth*0.75,
     ymajorgrids=true,
     xmode=log,
+    ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
     ylabel={Time (sec.)}, 
-    xticklabels={1,10,100,1k}, 
     ymin=0,
-    ymax=500,
     grid style=dashed
   ]
   \addplot
-      coordinates {(1, 5.66)(10, 10.54)(100, 57.94)(1000, 536.09)};
-  \addlegendentry{Num.}
+    coordinates {(100, 0.5)(1000, 3)(10000, 33)(100000, 355)};
+    \addlegendentry{1D}
   \addplot
-      coordinates {(1, 54.29)(10, 56.5)(100, 75.95)(1000, 267.7)};
-  \addlegendentry{Cat.}
+    coordinates {(100, 2)(1000, 7)(10000, 68)(100000, 713)};
+    \addlegendentry{2D}
   \end{axis}
   \end{tikzpicture}
-  \caption{1-Dimensional histograms timings}
+  \caption{Numerical histograms timings}
 \end{minipage}%
 \begin{minipage}{.5\linewidth}
   \centering
   \begin{tikzpicture}
   \begin{axis}[
+    legend pos=north west,
     scale only axis,
     enlarge x limits=-1,
     width=\textwidth*0.75,
     ymajorgrids=true,
     xmode=log,
+    ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
     ylabel={Time (sec.)},
-    xticklabels={1,10,100,1k},
     ymin=0,
-    ymax=500,
     grid style=dashed
   ]
   \addplot
-      coordinates {(1, 6.36)(10, 9.99)(100, 44.02)(1000, 398.86)};
-  \addlegendentry{Num.}
+    coordinates {(100, 0.2)(1000, 0.3)(10000, 3)(100000, 28)};
+    \addlegendentry{1D}
   \addplot
-      coordinates {(1, 48.33)(10, 47.99)(100, 57.55)(1000, 147.08)};
-  \addlegendentry{Cat.}
+    coordinates {(100, 0.3)(1000, 2)(10000, 13)(100000, 131)};
+    \addlegendentry{2D}
   \end{axis}
   \end{tikzpicture}
-  \caption{2-Dimensional histograms timings}
+  \caption{Categorical histograms timings}
 \end{minipage}
+}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[H]
+\centering
+\centerline{
+\begin{minipage}{.8\linewidth}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[
+    legend pos=north west,
+    scale only axis,
+    enlarge x limits=-1,
+    width=\textwidth*0.75,
+    ymajorgrids=true,
+    xmode=log,
+    ymode=log,
+    log ticks with fixed point,
+    xlabel={Number of Patients},
+    ylabel={Time (sec.)}, 
+    ymin=0,
+    grid style=dashed
+  ]
+  \addplot
+    coordinates {(100, 0.6)(1000, 4)(10000, 34)(100000, 114)};
+    \addlegendentry{1D \& 1 Filter}
+  \addplot
+    coordinates {(100, 0.8)(1000, 4.2)(10000, 36)(100000, 120)};
+    \addlegendentry{1D \& 2 Filters}
+  \addplot
+    coordinates {(100, 0.2)(1000, 2)(10000, 21)(100000, 215)};
+    \addlegendentry{2D \& 1 Filter}
+  \addplot
+    coordinates {(100, 0.2)(1000, 2)(10000, 21)(100000, 215)};
+    \addlegendentry{2D \& 2 Filters}
+  \end{axis}
+  \end{tikzpicture}
+  \caption{Numerical histograms with filters timings}
+\end{minipage}%
 }
 \end{figure}
 
@@ -73,103 +115,28 @@
   \centering
   \begin{tikzpicture}
   \begin{axis}[
+    legend pos=north west,
     scale only axis,
     enlarge x limits=-1,
     width=\textwidth*0.75,
     ymajorgrids=true,
     xmode=log,
+    ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
     ylabel={Time (sec.)}, 
-    xticklabels={1,10,100,1k}, 
     ymin=0,
-    ymax=500,
     grid style=dashed
   ]
   \addplot
-      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
-  \addlegendentry{Num. \& 1 Filter}
+    coordinates {(100, 5.66)(1000, 10.54)(10000, 57.94)(100000, 536.09)};
+    \addlegendentry{1 data\hyp provider}
   \addplot
-      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
-  \addlegendentry{Cat. \& 1 Filter}
+    coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
+    \addlegendentry{2 data\hyp providers}
   \addplot
-      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
-  \addlegendentry{Num. \& 2 Filters}
-  \addplot
-      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
-  \addlegendentry{Cat. \& 2 Filters}
-  \end{axis}
-  \end{tikzpicture}
-  \caption{1-Dimensional histograms with filters timings}
-\end{minipage}%
-\begin{minipage}{.5\linewidth}
-  \centering
-  \begin{tikzpicture}
-  \begin{axis}[
-    scale only axis,
-    enlarge x limits=-1,
-    width=\textwidth*0.75,
-    ymajorgrids=true,
-    xmode=log,
-    log ticks with fixed point,
-    xlabel={Number of Patients},
-    ylabel={Time (sec.)},
-    xticklabels={1,10,100,1k},
-    ymin=0,
-    ymax=500,
-    grid style=dashed
-  ]
-  \addplot
-      coordinates {(1, 0.382224)(10, 3.947421)(100, 38.052168)(1000, 392.634467)};
-  \addlegendentry{Num. \& 1 Filter}
-  \addplot
-      coordinates {(1, 0.099595)(10, 0.922558)(100, 9.712436)(1000, 99.149262)};
-  \addlegendentry{Cat. \& 1 Filter}
-  \addplot
-      coordinates {(1, 0.382224)(10, 3.947421)(100, 38.052168)(1000, 392.634467)};
-  \addlegendentry{Num. \& 2 Filters}
-  \addplot
-      coordinates {(1, 0.099595)(10, 0.922558)(100, 9.712436)(1000, 99.149262)};
-  \addlegendentry{Cat. \& 2 Filters}
-  \end{axis}
-  \end{tikzpicture}
-  \caption{2-Dimensional histograms with filters timings}
-\end{minipage}
-}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}[H]
-\centering
-\centerline{
-\begin{minipage}{.5\linewidth}
-  \centering
-  \begin{tikzpicture}
-  \begin{axis}[
-    scale only axis,
-    enlarge x limits=-1,
-    width=\textwidth*0.75,
-    ymajorgrids=true,
-    xmode=log,
-    log ticks with fixed point,
-    xlabel={Number of Patients},
-    ylabel={Time (sec.)}, 
-    xticklabels={1,10,100,1k}, 
-    ymin=0,
-    ymax=500,
-    grid style=dashed
-  ]
-  \addplot
-      coordinates {(1, 5.66)(10, 10.54)(100, 57.94)(1000, 536.09)};
-  \addlegendentry{1 data\hyp provider}
-  \addplot
-      coordinates {(1, 54.29)(10, 56.5)(100, 75.95)(1000, 267.7)};
-  \addlegendentry{2 data\hyp providers}
-  \addplot
-      coordinates {(1, 54.29)(10, 56.5)(100, 75.95)(1000, 267.7)};
-  \addlegendentry{3 data\hyp providers}
+    coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
+    \addlegendentry{3 data\hyp providers}
   \end{axis}
   \end{tikzpicture}
   \caption{1-Dimensional numerical histograms timings for different number of data\hyp providers}
@@ -178,28 +145,28 @@
   \centering
   \begin{tikzpicture}
   \begin{axis}[
+    legend pos=north west,
     scale only axis,
     enlarge x limits=-1,
     width=\textwidth*0.75,
     ymajorgrids=true,
     xmode=log,
+    ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
     ylabel={Time (sec.)},
-    xticklabels={1,10,100,1k},
     ymin=0,
-    ymax=500,
     grid style=dashed
   ]
   \addplot
-      coordinates {(1, 5.66)(10, 10.54)(100, 57.94)(1000, 536.09)};
-  \addlegendentry{1 data\hyp provider}
+    coordinates {(100, 5.66)(1000, 10.54)(10000, 57.94)(100000, 536.09)};
+    \addlegendentry{1 data\hyp provider}
   \addplot
-      coordinates {(1, 54.29)(10, 56.5)(100, 75.95)(1000, 267.7)};
-  \addlegendentry{2 data\hyp providers}
+    coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
+    \addlegendentry{2 data\hyp providers}
   \addplot
-      coordinates {(1, 54.29)(10, 56.5)(100, 75.95)(1000, 267.7)};
-  \addlegendentry{3 data\hyp providers}
+    coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
+    \addlegendentry{3 data\hyp providers}
   \end{axis}
   \end{tikzpicture}
   \caption{2-Dimensional categorical histograms timings for different number of data\hyp providers}
@@ -223,31 +190,31 @@
   \centering
   \begin{tikzpicture}
   \begin{axis}[
+    legend pos=north west,
     scale only axis,
     enlarge x limits=-1,
     width=\textwidth*0.75,
     ymajorgrids=true,
     xmode=log,
+    ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
     ylabel={Time (sec.)}, 
-    xticklabels={1,10,100,1k}, 
     ymin=0,
-    ymax=500,
     grid style=dashed
   ]
   \addplot
-      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
-  \addlegendentry{Num. ID3}
+    coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
+    \addlegendentry{Num. ID3}
   \addplot
-      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
-  \addlegendentry{Cat. ID3}
+    coordinates {(100, 0.237847)(1000, 2.117192)(10000, 21.845599)(100000, 215.412621)};
+    \addlegendentry{Cat. ID3}
   \addplot
-      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
-  \addlegendentry{Num. C4.5}
+    coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
+    \addlegendentry{Num. C4.5}
   \addplot
-      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
-  \addlegendentry{Cat. C4.5}
+    coordinates {(100, 0.237847)(1000, 2.117192)(10000, 21.845599)(100000, 215.412621)};
+    \addlegendentry{Cat. C4.5}
   \end{axis}
   \end{tikzpicture}
   \caption{ID3 \& C4.5 decision tree classifier timings for 3 attributes}
@@ -256,31 +223,31 @@
   \centering
   \begin{tikzpicture}
   \begin{axis}[
+    legend pos=north west,
     scale only axis,
     enlarge x limits=-1,
     width=\textwidth*0.75,
     ymajorgrids=true,
     xmode=log,
+    ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
     ylabel={Time (sec.)},
-    xticklabels={1,10,100,1k},
     ymin=0,
-    ymax=500,
     grid style=dashed
   ]
   \addplot
-      coordinates {(1, 0.382224)(10, 3.947421)(100, 38.052168)(1000, 392.634467)};
-  \addlegendentry{Num. ID3}
+    coordinates {(100, 0.382224)(1000, 3.947421)(10000, 38.052168)(100000, 392.634467)};
+    \addlegendentry{Num. ID3}
   \addplot
-      coordinates {(1, 0.099595)(10, 0.922558)(100, 9.712436)(1000, 99.149262)};
-  \addlegendentry{Cat. ID3}
+    coordinates {(100, 0.099595)(1000, 0.922558)(10000, 9.712436)(100000, 99.149262)};
+    \addlegendentry{Cat. ID3}
   \addplot
-      coordinates {(1, 0.382224)(10, 3.947421)(100, 38.052168)(1000, 392.634467)};
-  \addlegendentry{Num. C4.5}
+    coordinates {(100, 0.382224)(1000, 3.947421)(10000, 38.052168)(100000, 392.634467)};
+    \addlegendentry{Num. C4.5}
   \addplot
-      coordinates {(1, 0.099595)(10, 0.922558)(100, 9.712436)(1000, 99.149262)};
-  \addlegendentry{Cat. C4.5}
+    coordinates {(100, 0.099595)(1000, 0.922558)(10000, 9.712436)(100000, 99.149262)};
+    \addlegendentry{Cat. C4.5}
   \end{axis}
   \end{tikzpicture}
   \caption{ID3 \& C4.5 decision tree classifier timings for 4 attributes}
@@ -299,28 +266,28 @@
   \centering
   \begin{tikzpicture}
   \begin{axis}[
+    legend pos=north west,
     scale only axis,
     enlarge x limits=-1,
     width=\textwidth*0.75,
     ymajorgrids=true,
     xmode=log,
+    ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
     ylabel={Time (sec.)}, 
-    xticklabels={1,10,100,1k}, 
     ymin=0,
-    ymax=500,
     grid style=dashed
   ]
   \addplot
-      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
-  \addlegendentry{1 data provider}
+    coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
+    \addlegendentry{1 data provider}
   \addplot
-      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
-  \addlegendentry{2 data providers}
+    coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
+    \addlegendentry{2 data providers}
   \addplot
-      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
-  \addlegendentry{3 data providers}
+    coordinates {(100, 0.237847)(1000, 2.117192)(10000, 21.845599)(100000, 215.412621)};
+    \addlegendentry{3 data providers}
   \end{axis}
   \end{tikzpicture}
   \caption{ID3 decision tree classifier timings for 3 attributes for different number of data\hyp providers}
@@ -329,28 +296,28 @@
   \centering
   \begin{tikzpicture}
   \begin{axis}[
+    legend pos=north west,
     scale only axis,
     enlarge x limits=-1,
     width=\textwidth*0.75,
     ymajorgrids=true,
     xmode=log,
+    ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
     ylabel={Time (sec.)},
-    xticklabels={1,10,100,1k},
     ymin=0,
-    ymax=500,
     grid style=dashed
   ]
   \addplot
-      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
-  \addlegendentry{1 data provider}
+    coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
+    \addlegendentry{1 data provider}
   \addplot
-      coordinates {(1, 0.548186)(10, 5.381935)(100, 52.661779)(1000, 530.589239)};
-  \addlegendentry{2 data providers}
+    coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
+    \addlegendentry{2 data providers}
   \addplot
-      coordinates {(1, 0.237847)(10, 2.117192)(100, 21.845599)(1000, 215.412621)};
-  \addlegendentry{3 data providers}
+    coordinates {(100, 0.237847)(1000, 2.117192)(10000, 21.845599)(100000, 215.412621)};
+    \addlegendentry{3 data providers}
   \end{axis}
   \end{tikzpicture}
   \caption{C4.5 decision tree classifier timings for 3 attributes for different number of data\hyp providers}
