@@ -3,29 +3,22 @@ C4.5 is a decision tree generating algorithm developed by Ross Quinlan \cite{qui
 The C4.5 algorithm is an extension of the ID3 algorithm described in section \ref{s:id3} also developed by Quinlan \cite{quinlan1986induction}.
 It was ranked \#1 in the \textit{Top 10 Algorithms in Data Mining} pre\hyp eminent paper published by Springer Knowledge and Information Systems in 2008 \cite{wu2008top}.
 
-The main difference between C4.5 and ID3 is that the former has native support for both continuous (\textit{i.e.} numerical) data and discrete (\textit{i.e.} categorical) data.
-
-The idea behind C4.5 classification is to find the best splitting point for an attribute and split the dataset on that point.
+The main difference between C4.5 and ID3 is that the former has native support for both continuous (\textit{i.e.} numerical) data and discrete (\textit{i.e.} categorical) data. The idea behind C4.5 classification is to find the best splitting point for an attribute and split the dataset on that point.
 Transactions that are below that threshold belong to one branch and transaction above that threshold belong to the other branch.
 The splitting criterion is based on the information gain \ref{eq:gain} (difference in entropy \ref{eq:entropy}) given by the splitting point.
 The attribute that most efficiently splits the dataset is chosen by the algorithm at each level of the tree.
 After that the algorithm recurses on the two subsets created by that split.
 
-Since the algorithm creates two branches for every split (one for transactions with values less than the threshold and one with ones with values greater than the threshold) the output tree is a binary tree (branching factor $= 2$), unlike ID3 where the branching factor of the tree is equal to the number of possible values for every attribute.
 
 In algorithm \ref{a:c45-pp} we present the privacy\hyp preserving \f{C45} procedure.
 It is quite similar to the \f{ID3} one in algorithm \ref{a:id3-pp}.
 The main differences include that the call of \f{Best} procedure (see algorithm \ref{a:c45-best-pp}), now not only returns the ``best'' attribute, but also the ``best'' threshold that this attribute should split on, and the subsets that result from that split.
+In case that the chosen attribute is categorical, then the $bestSplitted$ variable will contain the subsets resulting from each possible value $v_i$ of that attribute. ($\{example \in examples \mid example[bestAttribute] = v_i\}$ for each possible $v_i$), and the algorithm creates that many branches.
 In case that $bestAttribute$ is a numerical attribute, then the $bestSplitted$ variable will contain the two subsets -- the set of transactions $t$ having $t[bestAttribute] <= bestThreshold$ ($less$), and the set of transactions $t$ having $t[bestAttribute] > bestThreshold$ ($greater$).
-In case that the chosen attribute is categorical, then the $bestSplitted$ variable will contain the subsets resulting from each possible value $v_i$ of that attribute. ($\{example \in examples \mid example[bestAttribute] = v_i\}$ for each possible $v_i$)
+Also, in that case creates two branches one for each aforementioned subsets.
+Since the algorithm creates two branches for every split for numerical attributes) the output tree is a binary tree (branching factor $= 2$), unlike ID3 where the branching factor of the tree is equal to the number of possible values for every attribute.
 
-Also, if the selected attribute is numerical then the algorithm creates two branches (one for transactions with value less than the threshold, and one for transactions with value greater than the threshold).
-If the selected attribute is categorical the algorithm creates as many branches as the possible values of that attribute.
-
-Below we present the privacy\hyp preserving algorithms for \f{C45} and \f{Best} procedures.
-As in section \ref{s:pp-id3} we face the same restrictions regarding the subset creation, for the same reasons as described before.
-We omit the rest procedures, as well as their textbook equivalents, as they are similar to the ones presented in sections \ref{s:id3} and \ref{s:pp-id3}.
-One difference for example is that the \f{InformationGain} procedure takes the disjoint subsets that occur from a split as an argument instead of taking the attribute and computing the subsets inside.
+\import{./}{algorithms/c45_pp.tex}
 
 % \import{./}{algorithms/c45_gain_textbook.tex}
 % \import{./}{algorithms/c45_best_textbook.tex}
@@ -33,5 +26,11 @@ One difference for example is that the \f{InformationGain} procedure takes the d
 
 
 
+
+Here we present the privacy\hyp preserving algorithms for \f{C45} and \f{Best} procedures.
+As in section \ref{s:pp-id3} we face the same restrictions regarding the subset creation, for the same reasons as described before.
+We omit the rest procedures, as well as their textbook equivalents, as they are similar to the ones presented in sections \ref{s:id3} and \ref{s:pp-id3}.
+One difference for example is that the \f{InformationGain} procedure takes the disjoint subsets that occur from a split as an argument instead of taking the attribute and computing the subsets inside.
+
+
 \import{./}{algorithms/c45_best_pp.tex}
-\import{./}{algorithms/c45_pp.tex}
