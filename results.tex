@@ -19,7 +19,7 @@
     ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
-    ylabel={Time (sec.)},
+    ylabel={Time (s)},
     ymin=0,
     grid style=dashed
   ]
@@ -46,7 +46,7 @@
     ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
-    ylabel={Time (sec.)},
+    ylabel={Time (s)},
     ymin=0,
     grid style=dashed
   ]
@@ -82,7 +82,7 @@
     ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
-    ylabel={Time (sec.)},
+    ylabel={Time (s)},
     ymin=0,
     grid style=dashed
   ]
@@ -107,72 +107,96 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{figure}[H]
 \centering
 \centerline{
-\begin{minipage}{.5\linewidth}
+\begin{minipage}{.8\linewidth}
   \centering
   \begin{tikzpicture}
   \begin{axis}[
     legend pos=north west,
     scale only axis,
-    enlarge x limits=-1,
-    width=\textwidth*0.75,
     ymajorgrids=true,
-    xmode=log,
-    ymode=log,
-    log ticks with fixed point,
-    xlabel={Number of Patients},
-    ylabel={Time (sec.)},
-    ymin=0,
+    xlabel={Number of Data Providers},
+    ylabel={Time (s)},
+    xtick = {1, 2, 3, 4},
     grid style=dashed
   ]
-  \addplot
-    coordinates {(100, 5.66)(1000, 10.54)(10000, 57.94)(100000, 536.09)};
-    \addlegendentry{1 data\hyp provider}
-  \addplot
-    coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
-    \addlegendentry{2 data\hyp providers}
-  \addplot
-    coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
-    \addlegendentry{3 data\hyp providers}
+  \addplot[ybar, fill=red]
+    coordinates {(1, 441.75)(2, 435.75)(3, 428.75)(4, 425.75)};
   \end{axis}
   \end{tikzpicture}
-  \caption{1-Dimensional numerical histograms timings for different number of data\hyp providers}
+  \caption{Numerical histogram from variable data providers}
 \end{minipage}%
-\begin{minipage}{.5\linewidth}
-  \centering
-  \begin{tikzpicture}
-  \begin{axis}[
-    legend pos=north west,
-    scale only axis,
-    enlarge x limits=-1,
-    width=\textwidth*0.75,
-    ymajorgrids=true,
-    xmode=log,
-    ymode=log,
-    log ticks with fixed point,
-    xlabel={Number of Patients},
-    ylabel={Time (sec.)},
-    ymin=0,
-    grid style=dashed
-  ]
-  \addplot
-    coordinates {(100, 5.66)(1000, 10.54)(10000, 57.94)(100000, 536.09)};
-    \addlegendentry{1 data\hyp provider}
-  \addplot
-    coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
-    \addlegendentry{2 data\hyp providers}
-  \addplot
-    coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
-    \addlegendentry{3 data\hyp providers}
-  \end{axis}
-  \end{tikzpicture}
-  \caption{2-Dimensional categorical histograms timings for different number of data\hyp providers}
-\end{minipage}
 }
 \end{figure}
+
+
+% \begin{figure}[H]
+% \centering
+% \centerline{
+% \begin{minipage}{.5\linewidth}
+%   \centering
+%   \begin{tikzpicture}
+%   \begin{axis}[
+%     legend pos=north west,
+%     scale only axis,
+%     enlarge x limits=-1,
+%     width=\textwidth*0.75,
+%     ymajorgrids=true,
+%     xmode=log,
+%     ymode=log,
+%     log ticks with fixed point,
+%     xlabel={Number of Patients},
+%     ylabel={Time (s)},
+%     ymin=0,
+%     grid style=dashed
+%   ]
+%   \addplot
+%     coordinates {(100, 5.66)(1000, 10.54)(10000, 57.94)(100000, 536.09)};
+%     \addlegendentry{1 data\hyp provider}
+%   \addplot
+%     coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
+%     \addlegendentry{2 data\hyp providers}
+%   \addplot
+%     coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
+%     \addlegendentry{3 data\hyp providers}
+%   \end{axis}
+%   \end{tikzpicture}
+%   \caption{1-Dimensional numerical histograms timings for different number of data\hyp providers}
+% \end{minipage}%
+% \begin{minipage}{.5\linewidth}
+%   \centering
+%   \begin{tikzpicture}
+%   \begin{axis}[
+%     legend pos=north west,
+%     scale only axis,
+%     enlarge x limits=-1,
+%     width=\textwidth*0.75,
+%     ymajorgrids=true,
+%     xmode=log,
+%     ymode=log,
+%     log ticks with fixed point,
+%     xlabel={Number of Patients},
+%     ylabel={Time (s)},
+%     ymin=0,
+%     grid style=dashed
+%   ]
+%   \addplot
+%     coordinates {(100, 5.66)(1000, 10.54)(10000, 57.94)(100000, 536.09)};
+%     \addlegendentry{1 data\hyp provider}
+%   \addplot
+%     coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
+%     \addlegendentry{2 data\hyp providers}
+%   \addplot
+%     coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
+%     \addlegendentry{3 data\hyp providers}
+%   \end{axis}
+%   \end{tikzpicture}
+%   \caption{2-Dimensional categorical histograms timings for different number of data\hyp providers}
+% \end{minipage}
+% }
+% \end{figure}
 
 
 
@@ -199,7 +223,7 @@
     ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
-    ylabel={Time (sec.)},
+    ylabel={Time (s)},
     ymin=0,
     grid style=dashed
   ]
@@ -232,7 +256,7 @@
     ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
-    ylabel={Time (sec.)},
+    ylabel={Time (s)},
     ymin=0,
     grid style=dashed
   ]
@@ -275,7 +299,7 @@
     ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
-    ylabel={Time (sec.)},
+    ylabel={Time (s)},
     ymin=0,
     grid style=dashed
   ]
@@ -305,7 +329,7 @@
     ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
-    ylabel={Time (sec.)},
+    ylabel={Time (s)},
     ymin=0,
     grid style=dashed
   ]
