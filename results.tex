@@ -120,7 +120,9 @@
     xlabel={Number of Data Providers},
     ylabel={Time (s)},
     xtick = {1, 2, 3, 4},
-    grid style=dashed
+    grid style=dashed,
+    enlarge x limits = 0.2,
+    bar width = 40
   ]
   \addplot[ybar, fill=red]
     coordinates {(1, 441.75)(2, 435.75)(3, 428.75)(4, 425.75)};
