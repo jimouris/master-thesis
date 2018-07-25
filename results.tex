@@ -120,6 +120,7 @@
     xlabel={Number of Data Providers},
     ylabel={Time (s)},
     xtick = {1, 2, 3, 4},
+    % ymin = 0,
     grid style=dashed,
     enlarge x limits = 0.2,
     bar width = 40
@@ -234,7 +235,36 @@
     coordinates {(50, 435)(100, 508)(200, 609)(400, 792)(800, 1240)};
   \end{axis}
   \end{tikzpicture}
-  \caption{ID3 decision tree classifier timings}
+  \caption{ID3 decision tree classifier timings with variable patients}
+\end{minipage}%
+}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\centerline{
+\begin{minipage}{.8\linewidth}
+  \centering
+  \begin{tikzpicture}
+  \begin{axis}[
+    legend pos=north west,
+    scale only axis,
+    enlarge x limits=-1,
+    width=\textwidth*0.75,
+    ymajorgrids=true,
+    log ticks with fixed point,
+    xlabel={Number of Attributes},
+    xtick = {1, 2, 3, 4, 5},
+    ylabel={Time (s)},
+    % ymin=0,
+    log ticks with fixed point,
+    grid style=dashed
+  ]
+  \addplot
+    coordinates {(1, 107)(2, 509)(3, 1547)(4, 3428)(5, 6835)};
+  \end{axis}
+  \end{tikzpicture}
+  \caption{ID3 decision tree classifier timings with variable attributes}
 \end{minipage}%
 }
 \end{figure}
