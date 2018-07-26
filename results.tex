@@ -119,6 +119,7 @@ We clearly see that as the dataset grows the number of filters does not make muc
 \end{figure}
 
 
+\fixme{Reason (?) about the following chart.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[H]
 \centering
@@ -147,80 +148,18 @@ We clearly see that as the dataset grows the number of filters does not make muc
 }
 \end{figure}
 
-
-% \begin{figure}[H]
-% \centering
-% \centerline{
-% \begin{minipage}{.5\linewidth}
-%   \centering
-%   \begin{tikzpicture}
-%   \begin{axis}[
-%     legend pos=north west,
-%     scale only axis,
-%     enlarge x limits=-1,
-%     width=\textwidth*0.75,
-%     ymajorgrids=true,
-%     xmode=log,
-%     ymode=log,
-%     log ticks with fixed point,
-%     xlabel={Number of Patients},
-%     ylabel={Time (s)},
-%     ymin=0,
-%     grid style=dashed
-%   ]
-%   \addplot
-%     coordinates {(100, 5.66)(1000, 10.54)(10000, 57.94)(100000, 536.09)};
-%     \addlegendentry{1 data\hyp provider}
-%   \addplot
-%     coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
-%     \addlegendentry{2 data\hyp providers}
-%   \addplot
-%     coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
-%     \addlegendentry{3 data\hyp providers}
-%   \end{axis}
-%   \end{tikzpicture}
-%   \caption{1-Dimensional numerical histograms timings for different number of data\hyp providers}
-% \end{minipage}%
-% \begin{minipage}{.5\linewidth}
-%   \centering
-%   \begin{tikzpicture}
-%   \begin{axis}[
-%     legend pos=north west,
-%     scale only axis,
-%     enlarge x limits=-1,
-%     width=\textwidth*0.75,
-%     ymajorgrids=true,
-%     xmode=log,
-%     ymode=log,
-%     log ticks with fixed point,
-%     xlabel={Number of Patients},
-%     ylabel={Time (s)},
-%     ymin=0,
-%     grid style=dashed
-%   ]
-%   \addplot
-%     coordinates {(100, 5.66)(1000, 10.54)(10000, 57.94)(100000, 536.09)};
-%     \addlegendentry{1 data\hyp provider}
-%   \addplot
-%     coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
-%     \addlegendentry{2 data\hyp providers}
-%   \addplot
-%     coordinates {(100, 54.29)(1000, 56.5)(10000, 75.95)(100000, 267.7)};
-%     \addlegendentry{3 data\hyp providers}
-%   \end{axis}
-%   \end{tikzpicture}
-%   \caption{2-Dimensional categorical histograms timings for different number of data\hyp providers}
-% \end{minipage}
-% }
-% \end{figure}
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Decision Trees}\label{ss:results-dtrees}
+
+Below you can find time measurements regarding out privacy\hyp preserving classification algorithms.
+We have chosen to present results for the ID3 algorithm for the sake of simplicity.
+In figure \ref{chart:id3-patients} we show how the algorithm scales as the dataset grows (Note: both $x$ and $y$ axes are log\hyp scaled).
+\fixme{Fix y-axis log scaling and ticks}
+We have used a fixed number of classification attributes during this measurements.
+
 
 \begin{figure}[H]
 \centering
@@ -253,6 +192,10 @@ We clearly see that as the dataset grows the number of filters does not make muc
 }
 \end{figure}
 
+We observe that the execution time of the algorithm is sub\hyp linear regarding the dataset size.
+In figure \ref{chart:id3-attributes} you can find the ID3 algorithm timings operating on a constant size dataset, but using variable number of classification attributes.
+We can clearly see that the number of attributes used for classification is a dominating factor in the algorithm's performance.
+
 \begin{figure}[H]
 \centering
 \centerline{
@@ -281,151 +224,4 @@ We clearly see that as the dataset grows the number of filters does not make muc
 \end{minipage}%
 }
 \end{figure}
-
-
-
-%
-%
-% \begin{figure}[H]
-% \centering
-% \centerline{
-% \begin{minipage}{.5\linewidth}
-%   \centering
-%   \begin{tikzpicture}
-%   \begin{axis}[
-%     legend pos=north west,
-%     scale only axis,
-%     enlarge x limits=-1,
-%     width=\textwidth*0.75,
-%     ymajorgrids=true,
-%     xmode=log,
-%     ymode=log,
-%     log ticks with fixed point,
-%     xlabel={Number of Patients},
-%     ylabel={Time (s)},
-%     ymin=0,
-%     grid style=dashed
-%   ]
-%   \addplot
-%     coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
-%     \addlegendentry{Num. ID3}
-%   \addplot
-%     coordinates {(100, 0.237847)(1000, 2.117192)(10000, 21.845599)(100000, 215.412621)};
-%     \addlegendentry{Cat. ID3}
-%   \addplot
-%     coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
-%     \addlegendentry{Num. C4.5}
-%   \addplot
-%     coordinates {(100, 0.237847)(1000, 2.117192)(10000, 21.845599)(100000, 215.412621)};
-%     \addlegendentry{Cat. C4.5}
-%   \end{axis}
-%   \end{tikzpicture}
-%   \caption{ID3 \& C4.5 decision tree classifier timings for 3 attributes}
-% \end{minipage}%
-% \begin{minipage}{.5\linewidth}
-%   \centering
-%   \begin{tikzpicture}
-%   \begin{axis}[
-%     legend pos=north west,
-%     scale only axis,
-%     enlarge x limits=-1,
-%     width=\textwidth*0.75,
-%     ymajorgrids=true,
-%     xmode=log,
-%     ymode=log,
-%     log ticks with fixed point,
-%     xlabel={Number of Patients},
-%     ylabel={Time (s)},
-%     ymin=0,
-%     grid style=dashed
-%   ]
-%   \addplot
-%     coordinates {(100, 0.382224)(1000, 3.947421)(10000, 38.052168)(100000, 392.634467)};
-%     \addlegendentry{Num. ID3}
-%   \addplot
-%     coordinates {(100, 0.099595)(1000, 0.922558)(10000, 9.712436)(100000, 99.149262)};
-%     \addlegendentry{Cat. ID3}
-%   \addplot
-%     coordinates {(100, 0.382224)(1000, 3.947421)(10000, 38.052168)(100000, 392.634467)};
-%     \addlegendentry{Num. C4.5}
-%   \addplot
-%     coordinates {(100, 0.099595)(1000, 0.922558)(10000, 9.712436)(100000, 99.149262)};
-%     \addlegendentry{Cat. C4.5}
-%   \end{axis}
-%   \end{tikzpicture}
-%   \caption{ID3 \& C4.5 decision tree classifier timings for 4 attributes}
-% \end{minipage}
-% }
-% \end{figure}
-%
-%
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%
-% \begin{figure}[H]
-% \centering
-% \centerline{
-% \begin{minipage}{.5\linewidth}
-%   \centering
-%   \begin{tikzpicture}
-%   \begin{axis}[
-%     legend pos=north west,
-%     scale only axis,
-%     enlarge x limits=-1,
-%     width=\textwidth*0.75,
-%     ymajorgrids=true,
-%     xmode=log,
-%     ymode=log,
-%     log ticks with fixed point,
-%     xlabel={Number of Patients},
-%     ylabel={Time (s)},
-%     ymin=0,
-%     grid style=dashed
-%   ]
-%   \addplot
-%     coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
-%     \addlegendentry{1 data provider}
-%   \addplot
-%     coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
-%     \addlegendentry{2 data providers}
-%   \addplot
-%     coordinates {(100, 0.237847)(1000, 2.117192)(10000, 21.845599)(100000, 215.412621)};
-%     \addlegendentry{3 data providers}
-%   \end{axis}
-%   \end{tikzpicture}
-%   \caption{ID3 decision tree classifier timings for 3 attributes for different number of data\hyp providers}
-% \end{minipage}%
-% \begin{minipage}{.5\linewidth}
-%   \centering
-%   \begin{tikzpicture}
-%   \begin{axis}[
-%     legend pos=north west,
-%     scale only axis,
-%     enlarge x limits=-1,
-%     width=\textwidth*0.75,
-%     ymajorgrids=true,
-%     xmode=log,
-%     ymode=log,
-%     log ticks with fixed point,
-%     xlabel={Number of Patients},
-%     ylabel={Time (s)},
-%     ymin=0,
-%     grid style=dashed
-%   ]
-%   \addplot
-%     coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
-%     \addlegendentry{1 data provider}
-%   \addplot
-%     coordinates {(100, 0.548186)(1000, 5.381935)(10000, 52.661779)(100000, 530.589239)};
-%     \addlegendentry{2 data providers}
-%   \addplot
-%     coordinates {(100, 0.237847)(1000, 2.117192)(10000, 21.845599)(100000, 215.412621)};
-%     \addlegendentry{3 data providers}
-%   \end{axis}
-%   \end{tikzpicture}
-%   \caption{C4.5 decision tree classifier timings for 3 attributes for different number of data\hyp providers}
-% \end{minipage}
-% }
-% \end{figure}
-
 
