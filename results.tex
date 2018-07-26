@@ -1,6 +1,13 @@
 \section{Experimental Results}\label{s:results}
 
+In this section we present some experimental evaluations of the developed privacy\hyp preserving algorithms.
+We try to provide a concise view of our experiments, by carefully selected the most descriptive diagrams.
+
 \subsection{Histograms}\label{ss:results-histograms}
+
+Here we present some experimental results regarding the privacy\hyp preserving histogram computations.
+In figure \ref{chart:numerical-histogram} we show the scaling in execution time of histograms on  numerical data (Note: both $x$ and $y$ axes are log\hyp scaled).
+In figure \ref{chart:categorical-histogram} we exhibit the respective measurements for histograms on categorical data (Note: both $x$ and $y$ axes are log\hyp scaled).
 
 
 \begin{figure}[H]
@@ -63,13 +70,19 @@
 }
 \end{figure}
 
+We can see that the histograms on categorical data perform better than their numerical data equivalents especially when applied over bigger datasets.
+This is due to the extra computation that needs to be done in the case of numerical data, in order to determine the corresponding histogram cell for each data tuple.
+We also see that privacy\hyp preserving histograms are scaling linearly concerning the dataset size, regardless of the type of it.
+
+Below we present the results of similar measurements of histograms on numerical data, but also adding the application of some filters / constraints.
+We clearly see that as the dataset grows the number of filters does not make much of a difference in the algorithm's execution time.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 \centering
 \centerline{
-\begin{minipage}{.8\linewidth}
+\begin{minipage}{.6\linewidth}
   \centering
   \begin{tikzpicture}
   \begin{axis}[
