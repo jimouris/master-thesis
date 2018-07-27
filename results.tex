@@ -157,7 +157,6 @@ We clearly see that as the dataset grows the number of filters does not make muc
 Below you can find time measurements regarding out privacy\hyp preserving classification algorithms.
 We have chosen to present results for the ID3 algorithm for the sake of simplicity.
 In figure \ref{chart:id3-patients} we show how the algorithm scales as the dataset grows (Note: both $x$ and $y$ axes are log\hyp scaled).
-\fixme{Fix y-axis log scaling and ticks}
 We have used a fixed number of classification attributes during this measurements.
 
 
@@ -177,10 +176,10 @@ We have used a fixed number of classification attributes during this measurement
     ymode=log,
     log ticks with fixed point,
     xlabel={Number of Patients},
-    xtick = {50, 100, 200, 400, 800},
     ylabel={Time (s)},
-    % ymin=0,
-    log ticks with fixed point,
+    xtick = {50, 100, 200, 400, 800},
+    ytick = {400, 800, 1600},
+    ymax=1700,
     grid style=dashed
   ]
   \addplot
