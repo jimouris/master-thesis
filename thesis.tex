@@ -36,6 +36,7 @@
 \usepackage{cite}
 \usepackage{epigraph}
 \usepackage{pdfpages}
+\usepackage{dirtree}
 
 \usepackage{epigraph,varwidth}
 
@@ -78,6 +79,11 @@
    }%
    \end{\epigraphflush}
    \vspace{\afterepigraphskip}}}
+\makeatother
+
+\makeatletter
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}} % Hack to disable red boxes around syntax errors in JSON code snippets
 \makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
