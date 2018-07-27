@@ -113,7 +113,7 @@ To demonstrate how this conversion works, considered the following (incomplete) 
 .1 ....
 }
 
-Lets also assume that the JSON object of a patient contains the keyword \textit{Temporomandibular Joint Dysfunction Syndrome [C07.678.949]} and that the chosen attribute for importing is \textit{Diseases [C]}.
+Let's also assume that the JSON object of a patient contains the keyword \textit{Temporomandibular Joint Dysfunction Syndrome [C07.678.949]} and that the chosen attribute for importing is \textit{Diseases [C]}.
 In this case we will take \textit{Diseases [C]} as the ``column'' and \textit{Stomatognathic Diseases [C07]} as the ``value'', since it is the direct ``child'' of the chosen attribute, which is a ``parent'' of \textit{Temporomandibular Joint Dysfunction Syndrome [C07.678.949]} found in the patient JSON object. The resulting (partial) table can be seen in table \ref{t:json-to-csv-1}.
 If the chosen attribute for importing was \textit{Stomatognathic Diseases [C07]} instead of \textit{Diseases [C]}, then the ``column'' would be \textit{Stomatognathic Diseases [C07]}, and the ``value'' would be \textit{Temporomandibular Joint Disorders [C07.678]}. The resulting (partial) table can be seen in table \ref{t:json-to-csv-2}.
 
@@ -123,11 +123,11 @@ If the chosen attribute for importing was \textit{Stomatognathic Diseases [C07]}
     \caption{Importing of Diseases [C]}
     \label{t:json-to-csv-1}
   \begin{center}
-    \begin{tabular}{ c | c}
-     Diseases & ... \\
+    \begin{tabular}{c}
+     Diseases \\
      \hline
-     Stomatognathic Diseases & ... \\
-     $\vdots$ & $\vdots$ \\
+     Stomatognathic Diseases \\
+     $\vdots$ \\
     \end{tabular}
   \end{center}
 \end{table}
@@ -138,11 +138,11 @@ If the chosen attribute for importing was \textit{Stomatognathic Diseases [C07]}
     \caption{Importing of Stomatognathic Diseases [C07]}
     \label{t:json-to-csv-2}
   \begin{center}
-    \begin{tabular}{ c | c}
-     Stomatognathic Diseases & ... \\
+    \begin{tabular}{c}
+     Stomatognathic Diseases \\
      \hline
-     Temporomandibular Joint Disorders & ... \\
-     $\vdots$ & $\vdots$ \\
+     Temporomandibular Joint Disorders \\
+     $\vdots$ \\
     \end{tabular}
   \end{center}
 \end{table}
