@@ -2,7 +2,11 @@
 As we have stated in section \ref{s:two-types-of-data}, the input data can have many different types, since our system can serve a wide variety of applications.
 We have separated the data in two broad categories -- categorical and continuous, therefore our algorithms are also logically separated for those two different kinds of data.
 
-The second reason that we separated our algorithms in those two types, was that we had two different datasets that we could use.
+The second reason that we separated our algorithms in those two types, was that we experimented with datasets both types.
+In medical research it is common to have standard datasets with continuous exact values corresponding to a set of attributes, but it is also common for the datasets to be semantically annotated.
+For instance a dataset of the first form could have a column corresponding to attribute \textit{Height (cm)} with values including $146.84, 139.35, 189.00, 182.68, 160.19, 138.66, 173.06$ etc.
+On the other hand, a dataset of the second time would have normalized values including $Tall, Average, Short$ etc.
+The synthetic datasets we had available for experimentation were the following.
 
 \textbf{MeSH Dataset:}
 MeSH\footnote{\href{https://meshb.nlm.nih.gov/}{https://meshb.nlm.nih.gov/}} provides a hierarchically-organized\footnote{\href{https://meshb.nlm.nih.gov/treeView}{https://meshb.nlm.nih.gov/treeView}} terminology for indexing and cataloging of biomedical information such as MEDLINE/PUBmed and other United States National Library of Medicine (NLM) databases.
