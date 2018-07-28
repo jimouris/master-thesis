@@ -169,7 +169,8 @@ We can clearly see that as the dataset size grows, the number of filters does no
 
 \subsection{Decision Trees}\label{s:results-dtrees}
 Consecutively, we measured the privacy\hyp preserving classification algorithms.
-For the sake of simplicity, we present the timings of the ID3 algorithm.\footnote{C4.5 algorithm's time complexity (\bigo{m \cdot n^2}, where $m$ is the size of the training data and $n$ is the number of attributes) renders it impracticable to scale when it is translated to the privacy\hyp preserving domain.
+For the sake of simplicity, we present the timings of the ID3 algorithm.\footnote{
+Textbook C4.5 algorithm's time complexity (\bigo{m \cdot n^2}, where $m$ is the size of the training data and $n$ is the number of attributes) renders it impracticable to scale when it is translated to the privacy\hyp preserving domain.
 For many classification attributes and a large number of patients, C4.5 has an unbearable runtime overhead.
 }
 Figure \ref{chart:id3-patients} portrays how the ID3 algorithm scales as the dataset size grows, for a constant number of classification attributes (\fixme{how many???}).
