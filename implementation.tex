@@ -33,7 +33,7 @@ The RESTful API of the \textit{coordinator} is summarized in table \ref{t:coordi
 The two first POST requests initiate a secure histogram computation for numerical and categorical values respectively.
 With the third POST request a user can request a secure decision tree computation for either numerical or categorical values, specifying in the request body one of ID3 and C4.5 classifiers.
 The \texttt{/smpc/queue} GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
-In appendix \ref{c:coordinator-api} we explain in more detail each individual POST and GET request.
+In appendix \ref{s:coordinator-api} we explain in more detail each individual POST and GET request.
 
 
 \subsection{Sequence of Actions}\label{ss:coordinator-sequence}
@@ -133,7 +133,7 @@ That server is implemented using \texttt{Node.js Express Server}, and provides t
 
 The RESTful API of the data providers is summarized in table \ref{t:data-providers-api}.
 The above two POST requests initiates a secure import for numerical and categorical datasets respectively.
-In appendix \ref{c:data-providers-api} we explain in more detail the two types of POST requests that the \textit{coordinator} sends to the data providers.
+In appendix \ref{s:data-providers-api} we explain in more detail the two types of POST requests that the \textit{coordinator} sends to the data providers.
 
 
 \subsection{Data Importer}\label{ss:data-providers-importer}

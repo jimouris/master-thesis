@@ -708,7 +708,7 @@ publications}\gdef\@lopfileinternal{#1}}
       \addcontentsline{toc}{chapter}{Appendices}
 
       \import{./}{appendixCoordinatorAPI.tex}
-      \import{./}{appendixDataProvidersAPI.tex}
+      % \import{./}{appendixDataProvidersAPI.tex}
       \import{./}{appendixA.tex}
       \import{./}{appendixB.tex}
     \end{appendix}
