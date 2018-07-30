@@ -1,3 +1,21 @@
 \chapter{Conclusions \& Future Work}\label{c:conclusions}
+In this thesis we have developed some fundamental privacy\hyp preserving algorithms as well as an end\hyp to\hyp end infrastructure for computing privacy\hyp preserving analytics.
+There are numerous use\hyp cases that require from different parties to jointly compute some function -- such as medical research from different hospitals, but due to data\hyp privacy limitations are avoided.
+Our end\hyp to\hyp end system utilizes encrypted computation and can constitute the building blocks on top of which meaningful privacy computation can take place, as we have demonstrated with secure aggregators and secure decision tree classifiers.
+In our use\hyp case, we focused on medical research, however, in our point of view, this system can serve a wide range of case\hyp studies.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Every coin has two sides, so the same applies to encrypted computation as well.
+Utilizing the homomorphic properties of secret\hyp shares enables a whole new dimension on computing that respects data privacy, but comes at a high cost, as we observed in the decision tree classifiers.
+Although such sophisticated algorithms seem impractical at first sight due to their high execution timings, one should understand that there is no other way respecting data\hyp privacy to obtain such results.
+Moreover, simpler algorithms -- suchlike aggregators -- scale linearly to the size of dataset, which casts them practical for everyday use.
+
+
+Future work will explore more elaborate algorithms that will provide useful analytics results in order to enhance our framework.
+In addition, we aim to refine the ID3 and C4.5 algorithms, using more SIMD instructions, with the purpose of optimizing their execution timings.
+Much work has to be done in the underlying encrypted architecture in order to keep up with conventional computers.
+Thus, our goal is to explore other SMPC frameworks than Sharemind, such as FRESCO (a FRamework for Efficient and Secure COmputation) \cite{chan2017privacy, alxd1}, SPDZ \cite{damgaard2012multiparty, damgaard2013practical} and Obliv\hyp C \cite{zahur2015obliv}.
+
+
+% In this work, we developed an open-source
+
