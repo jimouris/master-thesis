@@ -189,7 +189,7 @@ The only requirement that a data provider has is to upload its datasets to the c
 Apart from the RESTful API, a user/researcher can initiate a secure computation through our user interface (UI), deployed in \href{https://mhmd.madgik.di.uoa.gr/}{https://mhmd.madgik.di.uoa.gr/}.
 Our the goal was to design a simple and elegant user interface which is easy to use and in the same time enjoyable (user\hyp friendly).
 
-In the landing page, except from reading and understanding useful information about the end\hyp to\hyp end infrastructure, the operator can choose between two options: secure data aggregation and secure data classification, as depicted bellow\footnote{In appendix \fixme{add correct ref} \ref{dasasd} we have include the whole landing page screen\hyp shot, as well as many other components of the UI.}.
+In the landing page, except from reading and understanding useful information about the end\hyp to\hyp end infrastructure, the operator can choose between two options: secure data aggregation and secure data classification, as depicted bellow\footnote{In appendix \ref{c:ui} we have include the whole landing page screen\hyp shot, as well as many other components of the UI.}.
 
 \begin{figure}[H]
   \centering
@@ -209,15 +209,22 @@ Consecutively, the user can select the type of the dataset, categorical or numer
 
 
 
-\textbf{Secure Aggregation for CVI:} After selecting the secure aggregation for the CVI (numerical) dataset, the researcher has to choose attributes, filters and data\hyp providers for the privacy computation.
+\textbf{Secure Aggregation for CVI:} After selecting the secure aggregation for the CVI (numerical) dataset, the researcher has to choose attributes, filters and data\hyp providers for the privacy computation, as in figure \ref{f:cvi-histogram}.
+The results of this computation are shown in figure \ref{f:cvi-histogram-results}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\columnwidth]{figures/cvi_histogram.png}
+  \includegraphics[width=0.7\columnwidth]{figures/cvi_histogram.png}
   \caption{Choosing attributes, filters and data\hyp providers for secure aggregation for numerical dataset}
-  \label{f:mesh-cvi}
+  \label{f:cvi-histogram}
 \end{figure}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\columnwidth]{figures/cvi_histogram_results.png}
+  \caption{2D Histogram for ``Patient Age'' \& ``Heart Rate'' for $\beta = 5$ for each dimension}
+  \label{f:cvi-histogram-results}
+\end{figure}
 
 
 \textbf{Secure Aggregation for MeSH:} After selecting the secure aggregation for the MeSH (categorical) dataset, the researcher has to choose attributes, filters and data\hyp providers for the privacy computation.
@@ -225,7 +232,7 @@ For instance, in figure \ref{f:mesh-histogram} the user has specified a 2 dimens
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\columnwidth]{figures/mesh_histogram.png}
+  \includegraphics[width=0.7\columnwidth]{figures/mesh_histogram.png}
   \caption{Choosing attributes, filters and data\hyp providers for secure aggregation for categorical dataset}
   \label{f:mesh-histogram}
 \end{figure}
@@ -237,7 +244,7 @@ For instance, in figure \ref{f:mesh-histogram} the user has specified a 2 dimens
 \textbf{Secure Classification for MeSH:} Finally, the UI for secure classification is similar to the secure aggregation for MeSH, having two extra entries as well.
 
 
-More screenshots are included in appendix \fixme{add correct ref} \ref{dasasd}.
+More screenshots are included in appendix \ref{c:ui}.
 
 \fixme{Add more screenshots in appendix!}
 
