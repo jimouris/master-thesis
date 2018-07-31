@@ -36,7 +36,7 @@
           \If {{\blue{\textsc{Declassify}}}$(\textsc{CountPositives}(subset) \heq \enc{0})$}
               \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(\red{examples})))$
           \Else
-              \State $branch \gets \textsc{AddTree}(branch, \textsc{C45}(\red{subset},$ $attributes - \{bestAttribute\}))$\par\hfill
+              \State $branch \gets \textsc{AddTree}(branch, \textsc{C45}(\red{subset},$ $attributes - \{bestAttribute\}))$
           \EndIf
           \State $branches \gets branches \cup branch$
       \EndFor
@@ -46,7 +46,7 @@
       \If {{\blue{\textsc{Declassify}}}$(\textsc{CountPositives}(\red{less}) \heq \enc{0})$}
           \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(\red{examples})))$
       \Else
-          \State $branch \gets \textsc{AddTree}(branch, \textsc{C45}(\red{less},$ $attributes - \{bestAttribute\}))$\par\hfill
+          \State $branch \gets \textsc{AddTree}(branch, \textsc{C45}(\red{less},$ $attributes - \{bestAttribute\}))$
       \EndIf
       \State $branches \gets branches \cup branch$
       \State {\small Let} $branch$ {\small be a new tree branch corresponding to} $bestAttribute > bestThreshold$
@@ -54,7 +54,7 @@
       \If {{\blue{\textsc{Declassify}}}$(\textsc{CountPositives}(\red{greater}) \heq \enc{0})$}
           \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(\red{examples})))$
       \Else
-          \State $branch \gets \textsc{AddTree}(branch, \textsc{C45}(\red{greater},$ $attributes - \{bestAttribute\}))$\par\hfill
+          \State $branch \gets \textsc{AddTree}(branch, \textsc{C45}(\red{greater},$ $attributes - \{bestAttribute\}))$
       \EndIf
       \State $branches \gets branches \cup branch$
     \EndIf

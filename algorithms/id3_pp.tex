@@ -28,7 +28,7 @@
       \State $\red{eq} \gets \red{examples}[bestAttribute] \heq v_i$ \Comment{{\small ${\texttt{SIMD}; \red{eq}}$ vector gets $\enc{1}$ at positions \par\hfill where the equality holds, $\enc{0}$ otherwise}}
       \State $\red{subset} \gets \red{examples} \hmul \red{eq} \hplus (\enc{1} \hminus \red{eq}) \hmul \enc{-1} $ \Comment{{\small ${\texttt{SIMD}; \red{subset}}$ gets a copy of $\red{examples}$ \par\hfill at positions  where the equality holds, $\enc{-1}$ otherwise}}
         \If {{\blue{\textsc{Declassify}}}$(\textsc{CountPositives}(\red{subset}) \heq \enc{0})$}
-            \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(\red{examples})))$ \Comment{{\small Add a \par\hfill leaf}}
+            \State $branch \gets \textsc{AddLeaf}(branch, \textsc{MostCommonLabel}(\red{examples})))$ \Comment{{\small Add leaf}}
         \Else
             \State $branch \gets \textsc{AddTree}(branch, \textsc{ID3}(\red{subset},$ $attributes - \{bestAttribute\}))$ \par\hfill \Comment{{\small Recurse and add the subtree}}
         \EndIf
