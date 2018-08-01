@@ -189,7 +189,8 @@ The only requirement that a data provider has is to upload its datasets to the c
 Apart from the RESTful API, a user/researcher can initiate a secure computation through our user interface (UI), deployed in \href{https://mhmd.madgik.di.uoa.gr/}{https://mhmd.madgik.di.uoa.gr/}.
 Our the goal was to design a simple and elegant user interface which is easy to use and in the same time enjoyable (user\hyp friendly).
 
-In the landing page, except from reading and understanding useful information about the end\hyp to\hyp end infrastructure, the operator can choose between two options: secure data aggregation and secure data classification, as depicted bellow\footnote{In appendix \ref{c:ui} we have include the whole landing page screen\hyp shot, as well as many other components of the UI.}.
+
+In the landing page, except from reading and understanding useful information about the end\hyp to\hyp end infrastructure, the operator can choose between two options: secure data aggregation and secure data classification, as depicted bellow\footnote{In appendix \ref{c:ui} we have included the whole landing page as a screen\hyp shot, as well as many other components of the UI.}.
 
 \begin{figure}[H]
   \centering
@@ -198,7 +199,7 @@ In the landing page, except from reading and understanding useful information ab
   \label{f:landing-buttons}
 \end{figure}
 
-Consecutively, the user can select the type of the dataset, categorical or numerical, as in figure \ref{f:mesh-cvi}\footnote{The option for selecting dataset for secure classification is identical.}.
+Consecutively, the user can select the desired dataset on which the algorithms will execute, as in figure \ref{f:mesh-cvi}\footnote{The option for selecting dataset for secure classification is identical.}.
 
 \begin{figure}[H]
   \centering
@@ -209,7 +210,7 @@ Consecutively, the user can select the type of the dataset, categorical or numer
 
 
 
-\textbf{Secure Aggregation for CVI:} After selecting the secure aggregation for the CVI (numerical) dataset, the researcher has to choose attributes, filters and data\hyp providers for the privacy computation, as in figure \ref{f:cvi-histogram}.
+\textbf{Secure Aggregation for the CVI dataset:} After selecting the secure aggregation for the CVI (numerical) dataset, the researcher has to choose attributes and their corresponding histogram cells ($\beta$ factor), and optionally filters and data\hyp providers for the privacy\hyp preserving computation, as in figure \ref{f:cvi-histogram}.
 The results of this computation are shown in figure \ref{f:cvi-histogram-results}.
 
 \begin{figure}[H]
@@ -227,8 +228,8 @@ The results of this computation are shown in figure \ref{f:cvi-histogram-results
 \end{figure}
 
 
-\textbf{Secure Aggregation for MeSH:} After selecting the secure aggregation for the MeSH (categorical) dataset, the researcher has to choose attributes, filters and data\hyp providers for the privacy computation.
-For instance, in figure \ref{f:mesh-histogram} the user has specified a 2 dimensional histogram for attributes ``Age Groups [M01.060]'' and ``Population Groups [M01.686]'', filtering the ``Diseases [C]'' attribute in ``Virus Diseases [C02]'' or ``Parasitic Diseases [C03]''.
+\textbf{Secure Aggregation for the MeSH dataset:} After selecting the secure aggregation for the MeSH (categorical) dataset, the researcher has to choose attributes, filters and data\hyp providers for the privacy computation.
+For instance, in figure \ref{f:mesh-histogram} the user has specified a 2\hyp dimensional histogram for attributes ``Age Groups [M01.060]'' and ``Population Groups [M01.686]'', filtering the ``Diseases [C]'' attribute in ``Virus Diseases [C02]'' or ``Parasitic Diseases [C03]''.
 
 \begin{figure}[H]
   \centering
@@ -239,9 +240,9 @@ For instance, in figure \ref{f:mesh-histogram} the user has specified a 2 dimens
 
 
 
-\textbf{Secure Classification for CVI:} The UI for secure classification for CVI is similar to the secure aggregation for CVI, however has two extra entries, one for the \emph{class\hyp attribute} and one for the classification algorithm.
+\textbf{Secure Classification for the CVI dataset:} The UI for secure classification on the CVI dataset is similar to the secure aggregation, however it has two extra entries, one for the \emph{class\hyp attribute} and one for the classification algorithm (currently ID3 or C4.5).
 
-\textbf{Secure Classification for MeSH:} Finally, the UI for secure classification is similar to the secure aggregation for MeSH, having two extra entries as well.
+\textbf{Secure Classification for the MeSH dataset:} Finally, the UI for secure classification on the MeSH dataset is similar to the secure aggregation one, having two extra entries as well.
 
 
 More screenshots are included in appendix \ref{c:ui}.
