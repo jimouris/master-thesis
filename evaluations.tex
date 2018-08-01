@@ -90,7 +90,7 @@ One can observe that the histograms on categorical data perform better than thei
 This is due to the extra computation that needs to be done in the case of numerical data, in order to determine the corresponding histogram cell for each data tuple.
 Moreover, the privacy\hyp preserving histograms scale linearly with the dataset size, regardless the type of it.
 
-The chart below depicts the timings of histograms on numerical data (such as figure \ref{chart:numerical-histogram}), but also with the application of some filters / constraints.
+The chart below (figure \ref{chart:numerical-histogram-filters}) depicts the timings of histograms on numerical data (such as figure \ref{chart:numerical-histogram}), but also with the application of some filters / constraints.
 We can clearly see that as the dataset size grows, the number of filters does not make much of a difference in the total algorithm's execution time.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -169,11 +169,11 @@ We can clearly see that as the dataset size grows, the number of filters does no
 
 \section{Decision Trees}\label{s:results-dtrees}
 Consecutively, we measured the privacy\hyp preserving classification algorithms.
-For the sake of simplicity, we present the timings of the ID3 algorithm.\footnote{
+For the sake of simplicity\footnote{Privacy\hyp preserving C4.5 and ID3 algorithms scale similarly, however the overall timings of C4.5 are more time consuming.}, we present the timings of the ID3 algorithm.\footnote{
 Textbook C4.5 algorithm's time complexity (\bigo{m \cdot n^2}, where $m$ is the size of the training data and $n$ is the number of attributes) renders it impracticable to scale when it is translated to the privacy\hyp preserving domain.
 For many classification attributes and a large number of patients, C4.5 has an unbearable runtime overhead.
 }
-Figure \ref{chart:id3-patients} portrays how the ID3 algorithm scales as the dataset size grows, for a constant number of classification attributes (\fixme{how many???}).
+Figure \ref{chart:id3-patients} portrays how the ID3 algorithm scales as the dataset size grows, for a constant number (3) of classification attributes (``Heart rate'', ``Height (cm)'' and ``Patient Age'').
 \textit{Note:} both $x$ and $y$ axes are log\hyp scaled.
 
 
@@ -204,7 +204,7 @@ Figure \ref{chart:id3-patients} portrays how the ID3 algorithm scales as the dat
     coordinates {(50, 435)(100, 508)(200, 609)(400, 792)(800, 1240)};
   \end{axis}
   \end{tikzpicture}
-  \caption{ID3 decision tree classifier timings with variable patients}\label{chart:id3-patients}
+  \caption{ID3 decision tree classifier timings with variable patients for 3 attributes}\label{chart:id3-patients}
 \end{minipage}%
 }
 \end{figure}
@@ -214,7 +214,6 @@ We observe that the execution time of the algorithm is sub\hyp linear regarding 
 
 Finally, an overview of the runtime performance of the ID3 algorithm for a constant number of patients and variable number of classification attributes is presented in figure \ref{chart:id3-attributes}.
 As we observe from our experiments, the number of attributes used for classification is a dominating factor in the algorithm's performance.
-\fixme{is this exponential???}
 
 
 
