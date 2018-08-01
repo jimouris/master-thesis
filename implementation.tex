@@ -147,11 +147,8 @@ We use a standard tabular structure for the data in order to import them in the 
 The datasets to be imported should be in comma-separated values (CSV) format.
 In case that a dataset has some other non-tabular arrangement (see section \ref{c:datasets}), we transform them in the standard CSV format using software that we developed for that particular task.
 
+The aforementioned procedure is described in more detail in section \ref{c:datasets}.
 
-
-\subsubsection{Data Preprocessor}\label{sss:data-providers-preprocessor}
-
-\fixme{the solution ...}
 
 
 
@@ -174,10 +171,12 @@ The only requirement that a data provider has is to upload its datasets to the c
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{SMPC Cluster}\label{s:impl-smpc-cluster}
-\fixme{add text}
+For the purpose of this dissertation, we have deployed the Sharemind secure computing platform on three 64\hyp bit virtual machines (VM), each running Ubuntu 18.04.
+The three VMs share an Intel Xeon E5-2670 (v2) at 2.50 GHz.
+Each VM utilizes 6 cores and 8 GB of memory.
 
-\subsection{SMPC Servers}\label{ss:smpc-cluster-servers}
-\fixme{remove section?}
+As described in section \ref{s:computing-parties-collusion}, ideally, the three computing nodes should be deployed in premises with conflicting interests, preventing any adversary from controlling all of them simultaneously.
+This should not be confused with trusted servers.
 
 
 
