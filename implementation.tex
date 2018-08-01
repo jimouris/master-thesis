@@ -114,8 +114,6 @@ Data providers run their own web server that listen to import requests from the 
 
 That server is implemented using \texttt{Node.js Express Server}, and provides the following RESTful API.
 
-\fixme{Specify that a user cannot request data-import, only the coordinator!}
-
 
 \subsection{RESTful API}\label{ss:data-providers-restful-api}
 
@@ -255,9 +253,4 @@ All communication through the \textit{coordinator} uses Hypertext Transfer Proto
 Thus, all secure computation requests as well as the private\hyp computed results are transferred encrypted.
 Also, since HTTPS provides authentication of the accessed website, the users know that they communicate with the correct server.
 
-
-
-
-\fixme{Mention packages used from nodejs??}
-\fixme{Mention promises??}
 
