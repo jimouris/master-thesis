@@ -217,5 +217,9 @@ Finally, an overview of the runtime performance of the ID3 algorithm for a const
 \textit{Note:} $y$ axis is log\hyp scaled.
 As we observe from our experiments, the number of attributes used for classification is a dominating factor in the algorithm's performance.
 
+The execution times for the privacy\hyp preserving creation of the decision trees is orders of magnitude greater than those of equivalent algorithms working on unencrypted data.
+However, this is the training part of the classification algorithm which is performed offline.
+For this reason, it does not affect the user experience, since training can happen non\hyp interactively at predefined periods of time (\textit{e.g.} every night or once a week).
+
 
 
