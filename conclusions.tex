@@ -11,11 +11,23 @@ Although such sophisticated algorithms seem impractical at first sight due to th
 Moreover, simpler algorithms -- suchlike aggregators -- scale linearly to the size of dataset, which casts them practical for everyday use.
 
 
-Future work will explore more elaborate algorithms that will provide useful analytics results in order to enhance our framework.
-In addition, we aim to refine the ID3 and C4.5 algorithms, using more SIMD instructions, with the purpose of optimizing their execution timings.
-Much work has to be done in the underlying encrypted architecture in order to keep up with conventional computers.
-Thus, our goal is to explore other SMPC frameworks than Sharemind, such as FRESCO (a FRamework for Efficient and Secure COmputation) \cite{chan2017privacy, alxd1}, SPDZ \cite{damgaard2012multiparty, damgaard2013practical} and Obliv\hyp C \cite{zahur2015obliv}.
+Future work will explore more elaborate algorithms, such as stochastic gradient descent \cite{shokri2015privacy} and/or deep neural networks, that will provide useful analytics results in order to enhance our framework.
+Privacy\hyp preserving clustering algorithms \cite{jha2005privacy, upmanyu2010efficient, jagannathan2006new} are also a topic worth exploring.
 
 
-% In this work, we developed an open-source
+In addition, we aim to refine the ID3 and C4.5 algorithms, taking more advantage of SIMD instructions, with the purpose of optimizing their execution times.
+Although the classification training is performed in an offline phase, more efficient tree\hyp classifiers would improve the overall platform.
+
+
+Privacy\hyp preserving algorithms are inherently more time consuming than their textbook equivalents.
+Much work has to be done in the underlying encrypted architectures in order to keep up with conventional computers.
+Thus, our goal is to explore other SMPC frameworks than Sharemind, such as FRESCO (a FRamework for Efficient and Secure COmputation) \cite{chan2017privacy, alxd1}, SPDZ \cite{damgaard2012multiparty, damgaard2013practical}, Obliv\hyp C \cite{zahur2015obliv} and ObliVM \cite{liu2015oblivm}.
+Trying different MPC frameworks opens many possibilities, since they support different security protocols, different number of computing nodes, and in general different security configurations.
+Moreover, from the programming side of view, each framework provides its own toolkit and API. 
+
+
+Another interesting research topic is to incorporate a blockchain technology such as Hyperledger \cite{cachin2016architecture} for enhancing the transparency, traceability,  non-repudation, data provenance, and auditability of our system's computations \cite{zyskind2015decentralizing}, since all actions are immutable.
+In more detail, a distributed ledger using smart contracts can act as the controller of the system, orchestrating all actions.
+This records the fact that correct processing has taken place without disclosing any information about the data.
+Finally, every private computation request and result could be logged for transparency and future use.
 
