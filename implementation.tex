@@ -2,6 +2,11 @@
 
 Our application consists of four concrete parts, the \textit{coordinator}, the data providers, the SMPC cluster and the user interface.
 
+
+The code for the end\hyp to\hyp end architecture, which is deployed in \footnote{\href{https://mhmd.madgik.di.uoa.gr/}{https://mhmd.madgik.di.uoa.gr/}}, as well as the privacy\hyp preserving algorithms is open\hyp source and hosted in GitHub \footnote{\href{https://github.com/Athena-MHMD/smpc-analytics}{https://github.com/Athena-MHMD/smpc-analytics}}.
+
+
+
 \section{Coordinator}\label{s:impl-coordinator}
 The \textit{coordinator} handles all private computation requests, communicates with the data providers -- requesting them to securely import their data to the computing cluster, initiates the secure computation in the SMPC cluster, and finally returns to the user the requested analytics results.
 
