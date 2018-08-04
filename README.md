@@ -2,7 +2,7 @@
 
 # Privacy Preserving Medical Data Analytics using Secure Multi Party Computation. An End-To-End Use Case.
 
-A. Giannopoulos' & D. Mouris' M.Sc. thesis for the National and Kapodistrian University of Athens.
+A. Giannopoulos, D. Mouris M.Sc. thesis for the National and Kapodistrian University of Athens.
 
 Supervisors: Yannis E. Ioannidis, Minos N. Garofalakis
 
