@@ -153,9 +153,11 @@ The results are now considered public data and can be freely shared with the use
 One thing to note is that every published result of such a computation should be treated as public data and should not be confused with the confidential input data.
 With that in mind, whoever initiates a private computation should have a clear view of what data remain private and what gets published.
 
+There are many different approaches for Privacy Preserving Data Mining (PPDM).
+This thesis aims to investigate the secure computation part, which should not be confused with output\hyp privacy. 
+
 Moreover, since some of the private computations may be repeated and also the privacy\hyp preserving algorithms are highly computational intensive, we have implemented a caching mechanism that stores the secure computation results so future requests for that data can be served faster.
 We elaborate more on the caching mechanism in section (\ref{ss:caching}).
-
 
 All the aforementioned steps are depicted in figure \ref{f:overview}.
 
