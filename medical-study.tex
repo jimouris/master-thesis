@@ -53,16 +53,20 @@ Our architecture consists of the \textit{SMPC cluster}, a proxy server, dubbed \
 
 \textbf{SMPC cluster}: The \textit{SMPC cluster} consists of three servers -- three computing nodes -- participating in the SMPC protocol.
 In our case, these nodes do not provide the data for the computation.
-The only data the computing nodes hold and process, are cryptographic shares of the original data obtained through the secret-sharing mechanism.
+The only data the computing nodes hold and process, are cryptographic shares of the original data obtained through the secret-sharing mechanism. 
+The cluster performs a distributed computation over these secret\hyp shared data, exploiting their homomorphic properties, in order to produce meaningful results. 
+In GDPR terms, the \textit{SMPC cluster} acts as the \textit{Data Processor}.
 
 \textbf{Data providers}: The \textit{data providers} are hospitals that provide medical datasets upon which the privacy preserving algorithms will execute.
+These medical datasets get populated from each hospital's patients \textit{i.e.} the \textit{Data Subjects}.
+The patient data are horizontally distributed among the participating hospitals.
 When the medical data are transferred from the hospitals to the computing nodes, they get secret\hyp shared.
-
 
 \textbf{Coordinator}: The \textit{coordinator} handles all private computation requests.
 The server listens for requests for private query execution, and when such a request arises, the coordinator communicates with the data providers (all \texttt{N} hospitals) requesting them to securely import their data to the computing cluster.
 The data are then secret\hyp shared to the three nodes, with each node acquiring one share of the original value.
 Then the privacy preserving computation takes place in the SMPC cluster, and the results get visualized and served back to the requesting user through the \textit{coordinator} server.
+The \textit{coordinator} server acts as the \textit{Data Controller}.
 
 
 \subsection{End-to-End Execution Flow}\label{ss:end-to-end-execution-flow}
