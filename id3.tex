@@ -11,7 +11,7 @@ one for ``Female".
 Each edge could point to a new attribute (for example ``Age Groups"), and so on.
 The leaves of the tree contain the expected class value for transactions matching the path from the root to that leaf.
 Given a decision tree, one can predict the class of a new transaction just by following the ``correct" path, which will result in a class label.
-He/She can predict the class of a transaction by viewing only the non-class attributes (\textit{i.e.} the ``constructed" decision tree).
+He\myslash She can predict the class of a transaction by viewing only the non-class attributes (\textit{i.e.} the ``constructed" decision tree).
 
 For instance, two friends wish to decide if they will go to play tennis outside, depending the weather conditions.
 They also remember the previous days that some weather conditions did not allow them to play.
@@ -140,7 +140,7 @@ The \f{CountPositives} procedure is equivalent to the call of $Length$ on sets w
 \import{./}{algorithms/count_positives.tex}
 
 The \f{AllExamplesSame} procedure described in algorithm \ref{a:id3-same-pp} returns the same result as that in algorithm \ref{a:id3-same-simple}.
-The way this is achieved is by counting the number of examples / transactions that are of class $c_i$, for each possible class $c_i$.
+The way this is achieved is by counting the number of examples\myslash transactions that are of class $c_i$, for each possible class $c_i$.
 The private variable $res$ is initialized to $\enc{0}$, and gets increased if any of those counts is equal to the total number of examples, \textit{i.e.} all examples are of that class.
 If $res$ is greater than $\enc{0}$ (equal to $\enc{1}$) then all the examples have the same class.
 

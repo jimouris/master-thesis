@@ -4,12 +4,12 @@
 
 \subsection[/smpc/histogram/numerical POST request]{\protect\icon{figures/post1.pdf}}\label{s:post1}
 
-  This POST request initiates a secure computation for numerical / continuous values dataset.
+  This POST request initiates a secure computation for numerical\myslash continuous values dataset.
   \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
        \item[Request:] Through the request's body, one can specify all the desired properties of the histograms to be computed.
-  These include the attributes on which the histogram will be built (names and cells -- $\beta$ factor), the datasources from which data will be used, and a set of filters / conditions that should hold for each data tuple taken into consideration when building the histogram.
+  These include the attributes on which the histogram will be built (names and cells -- $\beta$ factor), the datasources from which data will be used, and a set of filters\myslash conditions that should hold for each data tuple taken into consideration when building the histogram.
 
-  % For instance, for the CVI dataset (see section \ref{c:datasets}) a user specifies that he/she wants to compute a histogram with $\beta = 4$ for term ``Patient Age''.
+  % For instance, for the CVI dataset (see section \ref{c:datasets}) a user specifies that he\myslash she wants to compute a histogram with $\beta = 4$ for term ``Patient Age''.
 
   The request's body is a \texttt{JSON} object with the following properties:
 
@@ -27,7 +27,7 @@
     \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed.
     If this key is left empty or not specified, all available datasources will be used.
 
-    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that should be met for each data tuple considered in the secure histogram computation.
+    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters\myslash conditions that should be met for each data tuple considered in the secure histogram computation.
     If this field is left blank or not specified, all data tuples will be used for the computation. The object has the following keys:
 
     \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
@@ -112,7 +112,7 @@
  }
 \end{minipage}
 
-\item[Response:] The secure histogram computation is a potentially long running operation. For that reason the server's response to such a request is always \texttt{HTTP/1.1 202 Accepted} in case of correct request, along with a location in which one should periodically poll for the computation's status and/or result. An example response can be found below.
+\item[Response:] The secure histogram computation is a potentially long running operation. For that reason the server's response to such a request is always \texttt{HTTP/1.1 202 Accepted} in case of correct request, along with a location in which one should periodically poll for the computation's status and\myslash or result. An example response can be found below.
 \ \\
 
 \begin{minipage}{\linewidth}
@@ -150,7 +150,7 @@ This POST request initiates a secure computation for categorical values dataset 
 Through the request's body, one can specify the desired MeSH terms.
 The values the count of which will be computed are the children of the specified MeSH term from the MeSH ontology.
 
-For example, if a user specifies that he/she wants the counts for the MeSH term ``Age Groups" [M01.060], he/she will get four counts back corresponding to the four children of ``Age Groups", namely ``Adolescent" [M01.060.057], ``Adult" [M01.060.116], ``Child" [M01.060.406] and ``Infant" [M01.060.703].
+For example, if a user specifies that he\myslash she wants the counts for the MeSH term ``Age Groups" [M01.060], he\myslash she will get four counts back corresponding to the four children of ``Age Groups", namely ``Adolescent" [M01.060.057], ``Adult" [M01.060.116], ``Child" [M01.060.406] and ``Infant" [M01.060.703].
 If the specified MeSH terms are two, then the resulting counts will correspond to tuples of MeSH labels.
 If the specified MeSH terms are three, the result will be triples, etc.
 
@@ -164,7 +164,7 @@ If the specified MeSH terms are three, the result will be triples, etc.
     \item[\texttt{datasources}:] {\color{blue}\textit{optional}} A list of the datasources (\textit{strings}) from which the histogram will be computed.
     If this key is left empty or not specified, all available datasources will be used.
 
-    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters / conditions that should be met for each data tuple considered in the secure histogram computation.
+    \item[\texttt{filters}:] {\color{blue}\textit{optional}} A JSON object containing a boolean operator and a list of filters\myslash conditions that should be met for each data tuple considered in the secure histogram computation.
     If this field is left blank or not specified, all data tuples will be used for the computation.
     The object has the following keys:
 
@@ -246,7 +246,7 @@ If the specified MeSH terms are three, the result will be triples, etc.
 \subsection[/smpc/decisionTree POST request]{\protect\icon{figures/post3.pdf}}\label{s:post3}
 Finally, this POST request is for computing a decision tree from either dataset.
 The implemented classifiers are ID3 and C4.5, and one should specify which one to use in the request body along with the desired attributes.
-Moreover, he/she should specify the class-attribute, according to which the decision tree will occur.
+Moreover, he\myslash she should specify the class-attribute, according to which the decision tree will occur.
 \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
      \item[Request:] The request's body is a \texttt{JSON} object with the following properties:
 
@@ -383,7 +383,7 @@ Moreover, he/she should specify the class-attribute, according to which the deci
 
 
 \subsection[/smpc/queue GET request]{\protect\icon{figures/get1.pdf}}\label{s:get1}
-The \texttt{/smpc/queue} GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
+The \texttt{/smpc/queue} GET request is for checking the status and\myslash or result of a specified computation request (the aforementioned POST requests).
 The status of an ongoing computation request can be accessed through the /smpc/queue GET request by specifying its id.
 \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
   \item[Request:] The only parameter this GET request accepts is the id of the desired computation request, as shown below.
@@ -602,10 +602,10 @@ Below you can find example responses for correct \texttt{/smpc/queue} GET reques
 \section{Data Providers' RESTful API}\label{s:data-providers-api}
 
 \subsection[/smpc/import/numerical POST request]{\protect\icon{figures/post4.pdf}}\label{s:post4}
-This POST request initiates a secure import for numerical/continuous values dataset.
+This POST request initiates a secure import for numerical\myslash continuous values dataset.
 \begin{description}[labelwidth=5em, leftmargin=\dimexpr\labelwidth+\labelsep\relax]
 \item[Request:] Through the request's body, one can specify the desired attribute names (\textit{i.e.} columns of the dataset) to be imported.
-For instance, an example for the CVI dataset (see section \ref{c:datasets}) is shown in Code \ref{sc:smpc-import-cvi}, in which a user specifies that he/she wants to compute private analytics for attributes ``Patient Age'' and ``Heart rate''.
+For instance, an example for the CVI dataset (see section \ref{c:datasets}) is shown in Code \ref{sc:smpc-import-cvi}, in which a user specifies that he\myslash she wants to compute private analytics for attributes ``Patient Age'' and ``Heart rate''.
 
 The request's body is a JSON object of the following form.
 

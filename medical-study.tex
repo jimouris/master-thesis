@@ -4,20 +4,20 @@ In this thesis we primary focus to analyze medical data by using some of the afo
 More specifically we have developed a complete platform built around secure medical data analytics that could be beneficial to patients, doctors and researchers.
 
 The platform can provide insights about some medical datasets that are imported into the platform to anyone who wants to query them, without compromising individual patient's privacy.
-These analytics which include data aggregation / statistics and classification are implemented through privacy preserving algorithms under the secure multi-party computation scenario.
+These analytics which include data aggregation\myslash statistics and classification are implemented through privacy preserving algorithms under the secure multi-party computation scenario.
 
 The platform provides end to end work flow starting from the query selection from a user.
 Following is the secure data importing, the performing of privacy preserving data analytics algorithms upon those data and finally the visualization of the results to the end user through a friendly user interface (UI).
 
 \section{A Doctor's view}
 We consider the use case of a doctor working in a hospital that wants to examine the data stored in that hospital's datasets.
-He/She could possibly want to evaluate a treatment's outcome.
+He\myslash She could possibly want to evaluate a treatment's outcome.
 To achieve this, the doctor should have monitored some particular datasets in order to have an overall view of the patients' condition over time.
 This could allow a comparison between previously treated patients and enable data-driven cues for the treatment.
 For example, a drug's effect could be evaluated that way.
 
 The doctor could also compare aggregated results from datasets between different hospitals.
-That way he/she could get an insight of how each patients' condition varies between different hospitals, which could indicate the different effect that different treatments have on patients and identify patterns
+That way he\myslash she could get an insight of how each patients' condition varies between different hospitals, which could indicate the different effect that different treatments have on patients and identify patterns
 and differences in these treatments.
 
 Continuous monitoring of patient data is useful for any hospital.
@@ -29,15 +29,15 @@ Provided with usable and informative tools a doctor could potentially make bette
 An individual could also benefit from the insights provided by our platform.
 We consider the case in which an individual with a certain condition queries the available datasets looking for the same condition (patients\hyp like\hyp me).
 The individual could locate the hospitals in which patients with the same condition are treated.
-Also, he/she could identify which hospitals in his area have the best outcome for patients with conditions similar to his/hers.
+Also, he\myslash she could identify which hospitals in his area have the best outcome for patients with conditions similar to his\myslash hers.
 
 Another way an individual could be benefited from the privacy preserving medical data analytics is the use of a classification mechanism such as decision trees (section \ref{s:decision-trees}), using a model trained over patient data.
-This way one could classify himself to a condition / disease or another chosen attribute for that matter, based on his own data.
+This way one could classify himself to a condition\myslash disease or another chosen attribute for that matter, based on his own data.
 
 
 \section{A Researcher's view}
 We examine the case where an academic or industry researcher queries the datasets to see if they suit their research needs.
-They could discover if the datasets are providing enough utility / information and decide which ones to use for performing analysis on.
+They could discover if the datasets are providing enough utility\myslash information and decide which ones to use for performing analysis on.
 
 For example, studying aggregate statistical information of the datasets, one could find possible correlations of particular attributes or find patterns of treatments and conditions.
 
@@ -88,7 +88,7 @@ In the subsequent section we delve into the above end\hyp to\hyp end execution o
 
 \subsubsection{Query Initiation}\label{sss:query-initiation}
 First, a user sends a request to the \textit{coordinator} asking for a private computation.
-This user can be an analyst / researcher, a doctor, or a patient.
+This user can be an analyst\myslash researcher, a doctor, or a patient.
 This request can specify any one of the supported privacy preserving computations.
 
 Users get informed about the available privacy preserving analytics algorithms through the User Interface (UI).
@@ -119,10 +119,10 @@ One may wonder, \textit{since the medical data of each hospital are constantly c
 
 In our architecture, we have developed a mechanism for data importing \textit{on-the-fly}, as figure \ref{f:overview} portrays.
 More specifically, when a query is requested for private computation, the coordinator interacts with the hospitals' servers, initiating the data import procedure.
-Since the individual making the query also selects some specific attributes for data aggregation and/or classification, the importing of the data only happens for the selected attributes.
+Since the individual making the query also selects some specific attributes for data aggregation and\myslash or classification, the importing of the data only happens for the selected attributes.
 
 This importing on-the-fly is beneficial for many reasons.
-First and foremost, all private computations are evaluated over the most recent data, and not in a outdated / stale version of them.
+First and foremost, all private computations are evaluated over the most recent data, and not in a outdated\myslash stale version of them.
 As there are no data stored in the SMPC cluster, every computation is based on fresh data imported directly from the hospitals (data providers) at the time of computation.
 There is no need to keep redundant copies of the dataset in the SMPC cluster.
 This eliminates the need to keep the copies regularly updated and reduces the storage requirements.
@@ -166,12 +166,12 @@ The SMPC cluster needs to ensure that no party can learn anything from the infor
 Moreover, the final results must not reveal anything except for the actual results of the secure computation performed by the computing parties.
 Note, that depending on the algorithm and provided data, the output may leak the input of one or more input parties.
 For instance, without loss of generality let us suppose a SMPC setting with two parties.
-A malicious adversary can always alter his/her input and define it to be an empty database (or a database with null values).
+A malicious adversary can always alter his\myslash her input and define it to be an empty database (or a database with null values).
 This fact can be very damaging since the final output is the result of the algorithm on the other party’s database alone.
 
 In this work we assume that the adversary is \emph{semi\hyp honest} -- or similarly, \emph{rational, honest\hyp but\hyp curious}.
 That is, the adversary correctly follows the protocol specification, but has incentives to eavesdrop sensitive user data.
-He/She could also attempt to learn additional information by analyzing any data received during the execution, either unencrypted or encrypted.
+He\myslash She could also attempt to learn additional information by analyzing any data received during the execution, either unencrypted or encrypted.
 In our developed algorithms, we explicitly define which variables are sensitive and should remain encrypted throughout the whole execution to preserve data privacy.
 
 

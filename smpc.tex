@@ -86,7 +86,7 @@ Let's assume without loss of generality that Alice is the so called \textit{garb
 
 \begin{itemize}
   \item Alice ``hardwires'' her input into the circuit. Thus the circuit now computes $f(x, \cdot)$.
-  \item Alice assigns to each wire $i$ of the circuit two random string values $(W_i^0, W_i^1)$ which are called \textit{labels} that correspond to the Boolean values $0$ / \texttt{false} and $1$ / \texttt{true} respectively. These labels should be of adequate length (usually 128 bits) as they will be used as symmetric keys in an encryption scheme.
+  \item Alice assigns to each wire $i$ of the circuit two random string values $(W_i^0, W_i^1)$ which are called \textit{labels} that correspond to the Boolean values $0 /$ \texttt{false} and $1 /$ \texttt{true} respectively. These labels should be of adequate length (usually 128 bits) as they will be used as symmetric keys in an encryption scheme.
   \item For each gate $g$ in the circuit Alice prepares the truth table of $g$. In that truth table the values $0,1$ are replaced with the corresponding labels that were generated in the previous step. The output column is then encrypted \footnote{The notation $E_{K}(M)$ means an encryption of the value $M$ with key $K$.} using as keys the labels from the two input columns.
   For example the transformation of the truth table of an \texttt{AND} gate with input wires $A,B$ and output wire $C$ can be seen below.
 
@@ -147,7 +147,7 @@ Let's assume without loss of generality that Alice is the so called \textit{garb
 
 \subsubsection{Circuit Evaluation}\label{sss:circuit-evaluation}
 \begin{itemize}
-  \item Bob now has the garbled truth tables for each gate of the circuit as well as all input labels. Having one garbled value / label per input wire and the truth table, Bob will try to decrypt every value in the output column of the table, but will succeed only once.
+  \item Bob now has the garbled truth tables for each gate of the circuit as well as all input labels. Having one garbled value\myslash label per input wire and the truth table, Bob will try to decrypt every value in the output column of the table, but will succeed only once.
   The decryption will succeed only in the row for which Bob has the input labels so he can use them as keys in the decryption.
   The decryption result will be the output label of that gate (the garbled version of the gate's output value).
   This label will be used as an input for the next gate in the combinatorial circuit.

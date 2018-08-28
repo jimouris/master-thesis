@@ -29,7 +29,7 @@ In the 2\hyp dimensional histogram \ref{f:simple-2d-hist} since $y-axis$ corresp
 \begin{minipage}{.5\textwidth}
   \centering
   \includegraphics[width=\columnwidth]{figures/2d-simple-hist.png}
-  \captionof{figure}{A two-dimensional histogram / heatmap with $\beta = 4$}
+  \captionof{figure}{A two-dimensional histogram\myslash heatmap with $\beta = 4$}
   \label{f:simple-2d-hist}
 \end{minipage}
 \end{figure}
@@ -72,7 +72,7 @@ The range of each bucket is computed considering the $\beta$ parameter, as well 
 In this specific example, the minimum age is $18$, while the maximum is $83$.
 Having $\beta = 4$ results to bucket-range $(83 - 18) / 4 = 16.25$.
 Therefore, the ranges for attribute ``Patient Age" are formed as follows: $[18, 34.25),$ $[34.25, 50.50),$ $[50.50, 66.75),$ $[66.75, 83]$.
-Consecutively, for each patient in the dataset the algorithm calculates the number of bucket that the patient belongs by dividing his/her value with the bucket-range; however, this index is encrypted.
+Consecutively, for each patient in the dataset the algorithm calculates the number of bucket that the patient belongs by dividing his\myslash her value with the bucket-range; however, this index is encrypted.
 Finally, the algorithm iterates through all $\beta$ buckets and obliviously adding $\enc{1}$ if the bucket is the correct one, or $\enc{0}$ otherwise.
 
 The aforementioned algorithm works for numerical values; however, the one for categorical values is very similar.
@@ -85,7 +85,7 @@ As we mentioned in section \ref{s:two-types-of-data}, we have separated our algo
 The procedure described in \ref{ss:histogram-algos} is shown in algorithms \ref{a:1d-simple-histogram-categorical} and \ref{a:1d-simple-histogram-numerical}.
 These algorithms iterate through all $N$ items and check all possible cells for that item.
 When the correct cell is found, they increment the corresponding counter.
-The former is tailored to categorical datasets, while the latter is tailored to numerical/continuous values.
+The former is tailored to categorical datasets, while the latter is tailored to numerical\myslash continuous values.
 
 \import{./}{algorithms/hist_simple_categorical.tex}
 
@@ -99,7 +99,7 @@ In the following subsections we delve into details for the privacy preserving al
 \textbf{One-Dimensional Histograms}: In algorithm \ref{a:1d-histogram-categorical} we present the privacy preserving algorithm of an one-dimensional (1D) histogram for categorical values.
 In simple words, categorical data means that the values are discrete.
 Hence, the second parameter in the algorithm (dubbed $P$) is the number of possible choices that exist in $array[N]$.
-The input data is given in the form of a private array/vector.
+The input data is given in the form of a private array\myslash vector.
 
 The algorithm creates a boolean array of equal size as the input data, and then for each possible encrypted value of the dataset checks (line 3) and counts (line 4) its occurrences.
 Method {\fontfamily{lmss} $\textsc{Sum}$} is the same as in algorithm \ref{a:sum}.
@@ -134,9 +134,9 @@ Similarly to the 1D algorithm, the multi-dimensional one creates a boolean array
 \textbf{One-Dimensional Histograms}: In algorithm \ref{a:1d-histogram-numerical} we present the privacy preserving algorithm of one-dimensional (1D) histograms for numerical values.
 In contrast with the categorical data, numerical data are not discrete, which means that the buckets in which the histogram will separate the dataset should be fixed (the $\beta$ parameter, as mentioned in section \ref{s:histograms})
 
-First and foremost, the input data is given in the form of a private array/vector of $N$ positions.
-The second parameter is open (since the final results will eventually disclose it), and is the number of buckets/cells that the algorithm will create, namely the $\beta$ factor.
-The two last parameters are also encrypted and are the minimum and maximum values found in the dataset/array (first parameter of the algorithm).
+First and foremost, the input data is given in the form of a private array\myslash vector of $N$ positions.
+The second parameter is open (since the final results will eventually disclose it), and is the number of buckets\myslash cells that the algorithm will create, namely the $\beta$ factor.
+The two last parameters are also encrypted and are the minimum and maximum values found in the dataset\myslash array (first parameter of the algorithm).
 Those two parameters are necessary in order to determine for each element in the array in which cell should be placed.
 
 This algorithm is very similar and in accord with algorithm \ref{a:1d-histogram-categorical}, however does some extra steps.
@@ -170,7 +170,7 @@ However, adding more attributes to the computed histogram is not always an optio
 
 For all those reasons, we have implemented a \textit{filtering} technique in order to take more attributes into consideration for the secure computation.
 With filtering, the user is able to select a histogram computation over some attributes, and also specify some extra constraints over the same or different attributes.
-Each tuple from the dataset has to meet the specified criteria / filters in ordered to be counted in the resulting histogram.
+Each tuple from the dataset has to meet the specified criteria\myslash filters in ordered to be counted in the resulting histogram.
 
 The specified filters are represented as a list of constraints that should be met.
 Each constraint is defined by the corresponding attribute, an operator ( one of $\{<, >, =\}$ for continuous attributes, and just $=$ for categorical ones) and a value.

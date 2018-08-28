@@ -11,8 +11,8 @@ The code for the end\hyp to\hyp end architecture, which is deployed in \footnote
 The \textit{coordinator} handles all private computation requests, communicates with the data providers -- requesting them to securely import their data to the computing cluster, initiates the secure computation in the SMPC cluster, and finally returns to the user the requested analytics results.
 
 The coordinator server has been designed as a Representational State Transfer (REST) web service.
-This design helps decoupling server and client applications; the API that provides is cleaner and easier to understand / discover.
-It's standard format / usage makes it easy for new clients to use the application even if the application was not designed with these clients' use cases in mind.
+This design helps decoupling server and client applications; the API that provides is cleaner and easier to understand\myslash discover.
+It's standard format\myslash usage makes it easy for new clients to use the application even if the application was not designed with these clients' use cases in mind.
 
 We have implemented this web service using \texttt{Node.js} and more specifically the \texttt{Express server} minimal web framework.
 
@@ -37,7 +37,7 @@ The RESTful API provided by the coordinator server can be found in the following
 The RESTful API of the \textit{coordinator} is summarized in table \ref{t:coordinator-api}.
 The two first POST requests initiate a secure histogram computation for numerical and categorical values respectively.
 With the third POST request a user can request a secure decision tree computation for either numerical or categorical values, specifying in the request body one of ID3 and C4.5 classifiers.
-The \texttt{/smpc/queue} GET request is for checking the status and/or result of a specified computation request (the aforementioned POST requests).
+The \texttt{/smpc/queue} GET request is for checking the status and\myslash or result of a specified computation request (the aforementioned POST requests).
 In appendix \ref{s:coordinator-api} we explain in more detail each individual POST and GET request.
 
 
@@ -101,7 +101,7 @@ If a cache hit occurs, the secure computation is omitted and the results are imm
 Otherwise, if a cache miss occurs, the secure computation will normally continue as described in sections \ref{s:architecture} and \ref{ss:coordinator-sequence}.
 
 However, a proficient user may want to omit the already computed results, in case of a recent dataset modification.
-In this case, he/she can explicitly specify that the cache should not be used by adding a ``cache'': ``no'' option in the JSON request body.
+In this case, he\myslash she can explicitly specify that the cache should not be used by adding a ``cache'': ``no'' option in the JSON request body.
 For the average user, that would not be necessary, since our system invalidate cache results that are older than 1 month.
 
 
@@ -188,7 +188,7 @@ This should not be confused with trusted servers.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{User Interface}\label{s:impl-ui}
-Apart from the RESTful API, a user/researcher can initiate a secure computation through our user interface (UI), deployed in \href{https://mhmd.madgik.di.uoa.gr/}{https://mhmd.madgik.di.uoa.gr/}.
+Apart from the RESTful API, a user\myslash researcher can initiate a secure computation through our user interface (UI), deployed in \href{https://mhmd.madgik.di.uoa.gr/}{https://mhmd.madgik.di.uoa.gr/}.
 Our the goal was to design a simple and elegant user interface which is easy to use and in the same time enjoyable (user\hyp friendly).
 
 
