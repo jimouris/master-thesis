@@ -81,14 +81,17 @@ An overview of an end\hyp to\hyp end query execution can be found below.
     \item [Step 5:] Finally, the results are returned to the user through the \textit{coordinator}.
 \end{description}
 
-In the subsequent section we delve into the above end\hyp to\hyp end execution overview in more detail.
+All the aforementioned steps are depicted in figure \ref{f:overview}.
+In the subsequent sections we delve into the above end\hyp to\hyp end execution overview in more detail.
 
-\begin{figure}[t]
+\begin{figure}[H]
   \centering
   \includegraphics[width=\linewidth]{figures/overview.pdf}
   % \vspace{-0.2in}
   \caption{An overview of the architecture of our study}\label{f:overview}
 \end{figure}
+
+
 
 \subsubsection{Query Initiation}\label{sss:query-initiation}
 First, a user sends a request to the \textit{coordinator} asking for a private computation.
@@ -158,8 +161,6 @@ This thesis aims to investigate the secure computation part, which should not be
 
 Moreover, since some of the private computations may be repeated and also the privacy\hyp preserving algorithms are highly computational intensive, we have implemented a caching mechanism that stores the secure computation results so future requests for that data can be served faster.
 We elaborate more on the caching mechanism in section (\ref{ss:caching}).
-
-All the aforementioned steps are depicted in figure \ref{f:overview}.
 
 
 

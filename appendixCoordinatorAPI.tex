@@ -150,7 +150,7 @@ This POST request initiates a secure computation for categorical values dataset 
 Through the request's body, one can specify the desired MeSH terms.
 The values the count of which will be computed are the children of the specified MeSH term from the MeSH ontology.
 
-For example, if a user specifies that he\myslash she wants the counts for the MeSH term ``Age Groups" [M01.060], he\myslash she will get four counts back corresponding to the four children of ``Age Groups", namely ``Adolescent" [M01.060.057], ``Adult" [M01.060.116], ``Child" [M01.060.406] and ``Infant" [M01.060.703].
+For example, if a user specifies that he\myslash she wants the counts for the MeSH term ``Age Groups" [M01.060], he\myslash she will get four counts back corresponding to the four children of ``Age Groups", namely ``Adolescent" [M01.060.057], ``Adult" [M01.060.116], ``Child" [M01. 060.406] and ``Infant" [M01.060.703].
 If the specified MeSH terms are two, then the resulting counts will correspond to tuples of MeSH labels.
 If the specified MeSH terms are three, the result will be triples, etc.
 
@@ -238,7 +238,7 @@ If the specified MeSH terms are three, the result will be triples, etc.
 }
 \end{minipage}
 
-\item[Response:] The server's response for the \texttt{/smpc/histogram/categorical} POST request is identical to that of \texttt{/smpc/histogram/numerical}. The server returns \texttt{HTTP/1.1 202 Accepted} or \texttt{HTTP/1.1 400 Bad Request}. Examples for both cases can be seen in code snippets \ref{sc:histogram-numerical-response-1} and \ref{sc:histogram-numerical-response-2}.
+\item[Response:] The server's response for the \texttt{/smpc/histogram/categorical} POST request is identical to that of \texttt{/smpc/histogram/numerical}. The server returns \texttt{HTTP / 1.1 202 Accepted} or \texttt{HTTP/1.1 400 Bad Request}. Examples for both cases can be seen in code snippets \ref{sc:histogram-numerical-response-1} and \ref{sc:histogram-numerical-response-2}.
  \end{description}
 
 
