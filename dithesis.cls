@@ -179,7 +179,7 @@ headsep=0.5cm,footskip=0.75cm,
 % \counterwithout{table}{chapter}
 % \counterwithout{lstlisting}{chapter}
 
-
+\renewcommand{\footnotesep}{1\baselineskip}
 
 %
 % Set font mamily Aria
