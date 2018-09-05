@@ -448,6 +448,8 @@ publications}\gdef\@lopfileinternal{#1}}
             \@authorFirstEnsnd{} \@authorMiddleEnsnd{} \@authorLastEnsnd  & & {\bfseries R.N.:} {\normalfont \@authorSnsnd}  \\
           \end{tabular}
         \end{center}
+        \vspace{1cm}
+        {\normalfont \textit{Authors had equal contribution and are listed in alphabetical order.}}
       \else
         \begin{center}
           \begin{tabular}{@{}clc@{}}
@@ -456,6 +458,8 @@ publications}\gdef\@lopfileinternal{#1}}
               \@authorFirstGrsnd{} \@authorMiddleGrsnd{} \@authorLastGrsnd  & & {\bfseries Α.Μ.:} {\normalfont \@authorSnsnd}  \\
           \end{tabular}
         \end{center}
+        \vspace{1cm}
+        {\normalfont \textit{Οι συγγραφείς είχαν ίση συνεισφορά και τα ονόματά τους παρατίθενται σε αλφαβητική σειρά.}}
       \fi
       \vspace{8cm}
       }
