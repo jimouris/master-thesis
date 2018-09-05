@@ -783,7 +783,7 @@ publications}\gdef\@lopfileinternal{#1}}
 \else
 \fancyfoot[R]{{\fontsize{10pt}{10pt}\selectfont \thepage}}
 \fi
-\fancyfoot[L,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{}, \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
+\fancyfoot[L,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{} - \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
 
 % needed redefinition, because commands like \chapter call
 % \thispagestyle{plain} automatically
@@ -795,7 +795,7 @@ publications}\gdef\@lopfileinternal{#1}}
   \else
   \fancyfoot[R]{{\fontsize{10pt}{10pt}\selectfont \thepage}}
   \fi
-  \fancyfoot[L,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{}, \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
+  \fancyfoot[L,LO]{{\scriptsize \@authorFirstAbrEnfst{} \@authorLastEnfst{} - \@authorFirstAbrEnsnd{} \@authorLastEnsnd{}}}
 }
 \renewcommand{\headrulewidth}{0pt}
 
