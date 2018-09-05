@@ -719,7 +719,11 @@ publications}\gdef\@lopfileinternal{#1}}
     \renewcommand{\bibname}{References}
 
     \bibliographystyle{plain}
-    \bibliography{./references.bib}
+
+    % { \fontsize{10} \selectfont \bibliography{./references.bib} } % 10pt
+
+    { \footnotesize \bibliography{./references.bib} }
+
     % include it also in ToC (do sth on your own)
     \addcontentsline{toc}{chapter}{References}
 }
