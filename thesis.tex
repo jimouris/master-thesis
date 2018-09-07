@@ -40,6 +40,14 @@
 
 \usepackage{epigraph,varwidth}
 
+% Reduce space between bib items
+\let\OLDthebibliography\thebibliography
+\renewcommand\thebibliography[1]{
+  \OLDthebibliography{#1}
+  \setlength{\parskip}{0pt}
+  \setlength{\itemsep}{0pt plus 0.3ex}
+}
+
 \renewcommand{\epigraphsize}{\small}
 \setlength{\epigraphwidth}{0.6\textwidth}
 \renewcommand{\textflush}{flushright}
