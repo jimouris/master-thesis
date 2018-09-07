@@ -729,7 +729,7 @@ publications}\gdef\@lopfileinternal{#1}}
     { \footnotesize \bibliography{./references.bib} }
 
     % include it also in ToC (do sth on your own)
-    \addcontentsline{toc}{chapter}{REFRENCES}
+    \addcontentsline{toc}{chapter}{REFERENCES}
 }
 
 %
