@@ -31,6 +31,6 @@ Here we present the privacy\hyp preserving algorithms for \f{C45} and \f{Best} p
 As in section \ref{s:pp-id3} we face the same restrictions regarding the subset creation, for the same reasons as described before.
 We omit the rest procedures, as well as their textbook equivalents, as they are similar to the ones presented in sections \ref{s:id3} and \ref{s:pp-id3}.
 One difference for example is that the \f{InformationGain} procedure takes the disjoint subsets that occur from a split as an argument instead of taking the attribute and computing the subsets inside.
-
+Also, another argument is the current entropy of the dataset that gets computed once in the \f{Best} procedure for optimization purposes.
 
 \import{./}{algorithms/c45_best_pp.tex}

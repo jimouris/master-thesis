@@ -5,6 +5,7 @@
 \Require $classAttribute, categoricalAttributes$
 \Procedure{Best}{$\red{examples}, attributes$}
   \State $\red{bestSplitted} \gets \enc{\{\}}$,  $\red{maxGain} \gets \enc{-\infty}$, $\red{bestThreshold} \gets \enc{-1}$, $\red{bestAttribute} \gets \enc{-1}$
+  \State $\red{ent} \gets  \textsc{Entropy}(\red{examples})$
   \For{$attribute \in attributes$}
     \If {$attribute \in categoricalAttributes$}\Comment{{\small If attribute is categorical}}
       \State $\red{splitted} \gets \{\}$
@@ -13,7 +14,7 @@
         \State $\red{subset} \gets \red{examples} \hmul \red{eq} \hplus (\enc{1} \hminus \red{eq}) \hmul \enc{-1} $ \Comment{{\small $\texttt{SIMD};\red{subset}$ gets a copy of \par\hfill $\red{examples}$  at positions  where the equality holds, $\enc{-1}$ otherwise}}
           \State $\red{splitted} \gets \red{splitted} \cup \red{subset}$
         \EndFor
-        \State $\red{gain} \gets  \textsc{InformationGain}(\red{examples}, \red{splitted})$
+        \State $\red{gain} \gets  \textsc{InformationGain}(\red{ent}, \red{examples}, \red{splitted})$
         \State $\red{gt} \gets \red{gain} \hgt  \red{maxGain}$
         \State $\red{maxGain} \gets \red{gt} \hmul \red{gain} \hplus (\enc{1} \hminus \red{gt}) \hmul \red{maxGain}$ \Comment{{\small Obliviously choose max gain}}
         \State $\red{bestAttribute} \gets \red{gt} \hmul attribute \hplus (\enc{1} \hminus \red{gt}) \hmul \red{bestAttribute}$
@@ -31,7 +32,7 @@
           \State $\red{greater} \gets \red{examples} \hmul \red{gt} \hplus (\enc{1} \hminus \red{gt}) \hmul \enc{-1} $
 
           \State $\red{splitted} \gets \{\red{less}, \red{greater}\}$
-          \State $\red{gain} \gets  \textsc{InformationGain}(\red{examples}, splitted)$
+          \State $\red{gain} \gets  \textsc{InformationGain}(\red{ent}, \red{examples}, splitted)$
           \State $\red{gt} \gets \red{gain} \hgt  \red{maxGain}$
           \State $\red{maxGain} \gets \red{gt} \hmul \red{gain} \hplus (\enc{1} \hminus \red{gt}) \hmul \red{maxGain}$
           \State $\red{bestAttribute} \gets \red{gt} \hmul attribute \hplus (\enc{1} \hminus \red{gt}) \hmul \red{bestAttribute}$
