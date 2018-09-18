@@ -143,8 +143,9 @@ We can clearly see that as the dataset size grows, the number of filters does no
 \newpage
 \section{Decision Trees}\label{s:results-dtrees}
 Consecutively, we measured the privacy\hyp preserving classification algorithms.
-Figure \ref{chart:id3-patients} portrays how the ID3 algorithm scales as the dataset size grows, for a constant number (3) of classification attributes (``Heart rate'', ``Height (cm)'' and ``Patient Age''), as well as figure \ref{chart:c45-patients} does for C4.5 algorithm\footnote{For many classification attributes C4.5 has an unbearable runtime overhead, and for that reason we do not provide a corresponding chart as in the ID3 algorithm}.
-As one can notice, the two algorithms scale similarly with the latter being considerably more time consuming. 
+Figure \ref{chart:id3-patients} portrays how the ID3 algorithm scales as the dataset size grows, for a constant number (3) of classification attributes (``Heart rate'', ``Height (cm)'' and ``Patient Age'').
+C4.5 algorithm is more time consuming than ID3.
+For reference, the training of the classification algorithm for 50 patients took about $13 * 10^3$ seconds, while for 100 patients the algorithm executed for $41*10^3$ seconds\footnote{For many classification attributes C4.5 has an unbearable runtime overhead, and for that reason we do not provide a corresponding chart as in the ID3 algorithm}.
 
 \textit{Note:} both $x$ and $y$ axes are log\hyp scaled.
 
@@ -207,38 +208,38 @@ As one can notice, the two algorithms scale similarly with the latter being cons
 }
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-\begin{minipage}{.5\linewidth}
-  \centering
-\begin{tikzpicture}
-\begin{axis}[
-  legend pos=north west,
-  scale only axis,
-  enlarge x limits=-1,
-  width=\textwidth*0.75,
-  ymajorgrids=true,
-  xmode=log,
-  ymode=log,
-  log ticks with fixed point,
-  xlabel={Number of Patients},
-  ylabel={Time (s)},
-  xtick = {50, 100, 200, 400, 800, 1600},
-  ytick = {500, 600, 800, 1200, 1600, 2400, 3200, 4000, 5800},
-  ymax=6000,
-  grid style=dashed,
-  y tick label style={/pgf/number format/.cd,%
-        set thousands separator={}},
-    x tick label style={/pgf/number format/.cd,%
-        set thousands separator={}}%
-]
-\addplot
-  coordinates {(50, 847)(100, 1066)(200, 1369)(400, 1900)(800, 3162)(1600, 5642)};
-\end{axis}
-\end{tikzpicture}
-\caption{C4.5 decision tree classifier timings with variable number of patients}\label{chart:c45-patients}
-\end{minipage}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+% \begin{minipage}{.5\linewidth}
+%   \centering
+% \begin{tikzpicture}
+% \begin{axis}[
+%   legend pos=north west,
+%   scale only axis,
+%   enlarge x limits=-1,
+%   width=\textwidth*0.75,
+%   ymajorgrids=true,
+%   xmode=log,
+%   ymode=log,
+%   log ticks with fixed point,
+%   xlabel={Number of Patients},
+%   ylabel={Time (s)},
+%   xtick = {50, 100, 200, 400, 800, 1600},
+%   ytick = {13272, 41759, 800, 1200, 1600, 2400, 3200, 4000, 5800},
+%   ymax=6000,
+%   grid style=dashed,
+%   y tick label style={/pgf/number format/.cd,%
+%         set thousands separator={}},
+%     x tick label style={/pgf/number format/.cd,%
+%         set thousands separator={}}%
+% ]
+% \addplot
+%   coordinates {(50, 847)(100, 1066)(200, 1369)(400, 1900)(800, 3162)(1600, 5642)};
+% \end{axis}
+% \end{tikzpicture}
+% \caption{C4.5 decision tree classifier timings with variable number of patients}\label{chart:c45-patients}
+% \end{minipage}
+% \end{figure}
 
 Finally, an overview of the runtime performance of the ID3 algorithm for a constant number of patients and variable number of classification attributes is presented in figure \ref{chart:id3-attributes}.\\ \textit{Note:} $y$ axis is log\hyp scaled.
 
@@ -247,6 +248,3 @@ As we observe from our experiments, the number of attributes used for classifica
 The execution times for the privacy\hyp preserving creation of the decision trees is orders of magnitude greater than those of equivalent algorithms working on unencrypted data.
 However, this is the training part of the classification algorithm which is performed offline.
 For this reason, it does not affect the user experience, since training can happen non\hyp interactively at predefined periods of time (\textit{e.g.} every night or once a week).
-
-
-
