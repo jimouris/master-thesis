@@ -6,7 +6,7 @@ A. Giannopoulos, D. Mouris M.Sc. thesis for the National and Kapodistrian Univer
 
 Supervisors: Yannis E. Ioannidis, Minos N. Garofalakis
 
-The source code of this thesis is hosted in https://github.com/Athena-MHMD/smpc-analytics
+The source code of this thesis is hosted in https://github.com/athenarc/smpc-analytics
 
 ### Cite this work:
 [Author's version pdf](https://jimouris.github.io/publications/giannopoulosMouris2018thesis.pdf)
